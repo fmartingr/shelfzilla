@@ -49,8 +49,8 @@ INSTALLED_APPS = (
     'south',
 
     # Apps
+    'shelfzilla.apps.landing',
     'shelfzilla.apps.manga',
-
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -72,11 +72,13 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'shelfzilla.middleware.BetaMiddleware',
 )
 
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, "themes", "_base"),
-    os.path.join(BASE_DIR, "themes", "bootflat"),
+    os.path.join(BASE_DIR, "themes", "bootflat", "templates"),
 )
 
 ROOT_URLCONF = 'shelfzilla.urls'
@@ -115,3 +117,10 @@ STATIC_URL = '/static/'
 
 # Max username length (longerusername)
 MAX_USERNAME_LENGTH = 75
+
+# Beta settings
+BETA_ACCESS_GROUP_ID = 1
+BETA_ACCESS_ALLOW_URLS = (
+    '/landing/',
+    '/login/',
+)

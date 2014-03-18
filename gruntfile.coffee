@@ -9,12 +9,12 @@ module.exports = (grunt) ->
         compress: true
       development:
         files:
-          "shelfzilla/themes/default/static/css/style.css": "shelfzilla/themes/default/static/less/style.less"
+          "shelfzilla/themes/bootflat/static/css/style.css": "shelfzilla/themes/bootflat/static/less/style.less"
 
     coffee:
       development:
         files:
-          'shelfzilla/themes/default/static/js/main.full.js': 'shelfzilla/themes/default/static/coffee/main.coffee'
+          'shelfzilla/themes/bootflat/static/js/main.full.js': 'shelfzilla/themes/bootflat/static/coffee/main.coffee'
 
 
     concat:
@@ -22,42 +22,41 @@ module.exports = (grunt) ->
         separator: ';'
       base:
         src: [
-          "shelfzilla/themes/default/static/js/main.full.js",
+          "shelfzilla/themes/bootflat/static/js/main.full.js",
         ]
-        dest: "shelfzilla/themes/default/static/js/site.js"
+        dest: "shelfzilla/themes/bootflat/static/js/site.js"
 
     uglify:
       development:
         files:
-          'shelfzilla/themes/default/static/js/site.js': 'shelfzilla/themes/default/static/js/site.js'
+          'shelfzilla/themes/bootflat/static/js/site.js': 'shelfzilla/themes/bootflat/static/js/site.js'
 
     clean:
       development:
         src: [
-            "shelfzilla/themes/default/static/js/*.full.js",
+            "shelfzilla/themes/bootflat/static/js/*.full.js",
           ]
       production:
         src: [
-          "shelfzilla/themes/default/static/js/*.full.js",
+          "shelfzilla/themes/bootflat/static/js/*.full.js",
         ]
       release:
         src: [
-          "shelfzilla/themes/default/static/less",
-          "shelfzilla/themes/default/static/coffee",
-          "shelfzilla/themes/default/static/libs/kube*",
+          "shelfzilla/themes/bootflat/static/less",
+          "shelfzilla/themes/bootflat/static/coffee",
         ]
 
     watch:
       options:
         livereload: true
       layout:
-        files: ['shelfzilla/themes/default/templates/**/*.html', 'shelfzilla/themes/default/templates/**/*.jinja']
+        files: ['shelfzilla/themes/bootflat/templates/**/*.html', 'shelfzilla/themes/bootflat/templates/**/*.jinja']
         tasks: []
       less:
-        files: ['shelfzilla/themes/default/static/less/*.less']
+        files: ['shelfzilla/themes/bootflat/static/less/*.less']
         tasks: ['less']
       coffee:
-        files: ['shelfzilla/themes/default/static/coffee/*.coffee']
+        files: ['shelfzilla/themes/bootflat/static/coffee/*.coffee']
         tasks: ['coffee', 'concat', 'clean:development']
 
 
