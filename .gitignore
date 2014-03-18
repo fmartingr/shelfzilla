@@ -1,0 +1,12 @@
+# Front
+node_modules
+
+# Python
+*.pyc
+.virtualenv
+
+# OS X
+.DS_Store
+
+# Local
+db.sqlite3
