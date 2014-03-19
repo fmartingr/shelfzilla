@@ -6,5 +6,6 @@ admin.autodiscover()
 urlpatterns = patterns(
     '',
     url(r'^', include('shelfzilla.apps.landing.urls')),
+    url(r'^', include('shelfzilla.apps.users.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )
