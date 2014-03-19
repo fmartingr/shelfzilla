@@ -10,3 +10,8 @@ node_modules
 
 # Local
 db.sqlite3
+
+# Themes
+# Bootflat
+shelfzilla/themes/bootflat/static/css/*.css
+shelfzilla/themes/bootflat/static/js/*.js
