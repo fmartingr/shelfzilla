@@ -2,10 +2,21 @@
 <html>
 <head>
     <title>{% block page_title %}{% endblock %}</title>
+    <link rel="stylesheet" href="/static/css/style.css" />
     {% block extra_css %}{% endblock %}
 </head>
 <body>
+
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
     {% block main_content %}{% endblock %}
     {% block extra_js %}{% endblock %}
+    <script src="/static/js/site.js"></script>
 </body>
 </html>

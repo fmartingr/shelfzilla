@@ -22,6 +22,7 @@ module.exports = (grunt) ->
         separator: ';'
       base:
         src: [
+          "shelfzilla/themes/bootflat/static/libs/bootflat/js/icheck.min.js",
           "shelfzilla/themes/bootflat/static/js/main.full.js",
         ]
         dest: "shelfzilla/themes/bootflat/static/js/site.js"
