@@ -15,3 +15,7 @@ db.sqlite3
 # Bootflat
 shelfzilla/themes/bootflat/static/css/*.css
 shelfzilla/themes/bootflat/static/js/*.js
+
+# Bower
+bower_components
+static_components

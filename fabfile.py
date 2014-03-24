@@ -209,7 +209,7 @@ def rungrunt():
     """
     Executes grunt
     """
-    run('grunt watch')
+    run('grunt --force')
 
 
 #
