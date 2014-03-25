@@ -210,37 +210,3 @@ def rungrunt():
     Executes grunt
     """
     run('grunt --force')
-
-
-#
-#   SETUP
-#
-@task_environment
-@task
-@hosts(['local'])
-def setup():
-    execute(setup_virtualenv)
-    print(yellow('Creating project based on template'))
-    project_name = prompt('Project name? (lowercase, a-z or _)')
-    with virtualenv():
-        run('django-admin.py startproject '
-            '--template=$PWD/template {} .'.format(project_name)
-            )
-
-    # Find and replace {{ project_name }} inside gruntfile
-    run(
-        "sed -i -e 's/{{ project_name }}/%s/g' ./gruntfile.coffee" %
-        project_name
-    )
-    # Find and replace {{ project_name }} inside package.json
-    run(
-        "sed -i -e 's/{{ project_name }}/%s/g' ./package.json" %
-        project_name
-    )
-
-    # Remove sed backup files
-    run("rm *-e")
-
-    print(yellow('Finished!'))
-
-    print('If youre ready to work, run fab doctor & fab setup_environment')
