@@ -38,6 +38,7 @@ module.exports = (grunt) ->
       js:
         src: [
           "static_components/js/jquery.js",
+          "static_components/js/vegas.js",
           "static_components/js/icheck.min.js",
           "shelfzilla/themes/bootflat/static/js/main.full.js",
         ]
