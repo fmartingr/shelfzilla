@@ -14,6 +14,9 @@ class LoginView(View):
     template = 'users/login.html'
 
     def get(self, request):
+        if request.user.is_authenticated():
+            return HttpResponseRedirect('/')
+
         context = {
             'login_form': LoginForm()
         }
@@ -22,6 +25,9 @@ class LoginView(View):
         return render_to_response(self.template, context_instance=ctx)
 
     def post(self, request):
+        if request.user.is_authenticated():
+            return HttpResponseRedirect('/')
+
         login_form = LoginForm(request.POST)
 
         if login_form.is_valid():

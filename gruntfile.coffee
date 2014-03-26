@@ -44,9 +44,9 @@ module.exports = (grunt) ->
         dest: "shelfzilla/themes/bootflat/static/js/site.js"
       css:
         src: [
+          "shelfzilla/themes/bootflat/static/css/app.css",
           "static_components/css/bootstrap.min.css",
           "static_components/css/bootflat.min.css",
-          "shelfzilla/themes/bootflat/static/css/app.css",
         ]
         dest: "shelfzilla/themes/bootflat/static/css/style.css"
 
@@ -78,10 +78,10 @@ module.exports = (grunt) ->
         tasks: []
       less:
         files: ['shelfzilla/themes/bootflat/static/less/*.less']
-        tasks: ['less']
+        tasks: ['less', 'concat:css']
       coffee:
         files: ['shelfzilla/themes/bootflat/static/coffee/*.coffee']
-        tasks: ['coffee', 'concat', 'clean:development']
+        tasks: ['coffee', 'concat:js', 'clean:development']
 
 
     # Modules
