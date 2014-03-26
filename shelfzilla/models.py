@@ -4,6 +4,8 @@ from django.utils.translation import ugettext_lazy as _
 
 class ReviewModel(models.Model):
     for_review = models.BooleanField(_('For review'), default=False)
+    for_review_comment = models.TextField(
+        _('Review comment'), null=True, blank=True)
 
     class Meta:
         abstract = True
