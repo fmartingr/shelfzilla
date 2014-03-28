@@ -49,6 +49,7 @@ INSTALLED_APPS = (
     'south',
 
     # Apps
+    'shelfzilla.apps.homepage',
     'shelfzilla.apps.landing',
     'shelfzilla.apps.manga',
 )

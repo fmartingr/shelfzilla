@@ -1,3 +1,4 @@
+{% load i18n %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,6 +7,48 @@
     <title>{% block page_title %}Shelfzilla{% endblock %}</title>
 </head>
 <body>
+    <div class="container">
+        <nav class="navbar navbar-inverse" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="{% url "homepage" %}">Shelfzilla</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li {% if navigation.section == "series" %}class="active"{% endif %}>
+                            <a href="#">{% trans "Series" %}</a>
+                        </li>
+                        <li {% if navigation.section == "publishers" %}class="active"{% endif %}>
+                            <a href="#">{% trans "Publishers" %}</a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if user.is_authenticated %}
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ user.username }} <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">{% trans "My collection" %}</a></li>
+                                <li><a href="#">{% trans "Profile" %}</a></li>
+                                </li>
+                            </ul>
+                            <li><a href="{% url "logout" %}"><i class="glyphicon glyphicon-log-out"></i> Logout</a>
+                        </li>
+                        {% else %}
+                        <li><a href="{% url "login" %}"><i class="glyphicon glyphicon-log-in"></i> {% trans "Log in" %}</a>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
 
     {% block messages %}
         {% if messages %}
@@ -18,6 +61,7 @@
     {% endblock %}
 
     {% block main_content %}{% endblock %}
+
     {% block extra_js %}{% endblock %}
     <script src="/static/js/site.js"></script>
 </body>
