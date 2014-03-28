@@ -24,7 +24,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li {% if navigation.section == "series" %}class="active"{% endif %}>
-                            <a href="#">{% trans "Series" %}</a>
+                            <a href="{% url "series.list" %}">{% trans "Series" %}</a>
                         </li>
                         <li {% if navigation.section == "publishers" %}class="active"{% endif %}>
                             <a href="#">{% trans "Publishers" %}</a>

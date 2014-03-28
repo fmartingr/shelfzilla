@@ -1,0 +1,41 @@
+{% extends "_layout.html" %}
+{% load webdesign %}
+
+{% block main_content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h1 class="panel-title panel-title-alt text-center">{{ item.name }}</h1>
+                </div>
+                <div class="panel-body text-center">
+                    <img src="http://placekitten.com/g/200/300/" />
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item">Detail 1</li>
+                    <li class="list-group-item">Detail 2</li>
+                    <li class="list-group-item">Detail 3</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="well">
+                {% lorem 2 p %}
+            </div>
+            <div class="row">
+                <div class="col-md-3"><div class="well text-center">Volume</div></div>
+                <div class="col-md-3"><div class="well text-center">Volume</div></div>
+                <div class="col-md-3"><div class="well text-center">Volume</div></div>
+                <div class="col-md-3"><div class="well text-center">Volume</div></div>
+            </div>
+            <div class="row">
+                <div class="col-md-4"><div class="well text-center">Volume</div></div>
+                <div class="col-md-4"><div class="well text-center">Volume</div></div>
+                <div class="col-md-4"><div class="well text-center">Volume</div></div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

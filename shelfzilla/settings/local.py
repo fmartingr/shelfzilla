@@ -13,3 +13,8 @@ DATABASES = {
 STATICFILES_DIRS += (
     os.path.join(BASE_DIR, "..", "static_components"),
 )
+
+# Apps
+INSTALLED_APPS += (
+    'django.contrib.webdesign',
+)

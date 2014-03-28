@@ -6,6 +6,7 @@ from shelfzilla.models import ReviewModel
 
 class Publisher(ReviewModel):
     name = models.CharField(_('Name'), max_length=40)
+    url = models.URLField(_('URL'), blank=True, null=True)
 
     def __unicode__(self):
         return u'{}'.format(self.name)
@@ -15,6 +16,7 @@ class Publisher(ReviewModel):
         return self.volumes.distinct('series')
 
     class Meta:
+        ordering = ['name']
         verbose_name = _('Publisher')
         verbose_name_plural = _('Publishers')
 
@@ -30,6 +32,7 @@ class Series(ReviewModel):
         return self.volumes.distinct('publisher')
 
     class Meta:
+        ordering = ['name']
         verbose_name = _('Series')
         verbose_name_plural = _('Series')
 
@@ -47,5 +50,6 @@ class Volume(ReviewModel):
         return u'{} #{}'.format(self.series.name, self.number)
 
     class Meta:
+        ordering = ['series__name', 'number']
         verbose_name = _('Volume')
         verbose_name_plural = _('Volumes')

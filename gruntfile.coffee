@@ -82,7 +82,7 @@ module.exports = (grunt) ->
       options:
         livereload: true
       layout:
-        files: ['shelfzilla/themes/bootflat/templates/**/*.html', 'shelfzilla/themes/bootflat/templates/**/*.jinja']
+        files: ['shelfzilla/themes/**/*.html', 'shelfzilla/themes/**/*.jinja']
         tasks: []
       less:
         files: ['shelfzilla/themes/bootflat/static/less/*.less']
