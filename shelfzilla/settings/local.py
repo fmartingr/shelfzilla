@@ -21,19 +21,19 @@ INSTALLED_APPS += (
 )
 
 # Filer
-FILER_STORAGES = {
+STORAGES = {
     'public': {
         'main': {
             'ENGINE': 'django.core.files.storage.FileSystemStorage',
             'OPTIONS': {},
-            'UPLOAD_TO': 'shelfzilla.utils.filer_generate_randomized',
-            'UPLOAD_TO_PREFIX': 'filer_public',
+            'UPLOAD_TO': 'shelfzilla.utils.generate_randomized',
+            'UPLOAD_TO_PREFIX': 'public',
         },
         'thumbnails': {
             'ENGINE': 'django.core.files.storage.FileSystemStorage',
             'OPTIONS': {},
             'THUMBNAIL_OPTIONS': {
-                'base_dir': 'filer_public_thumbnails',
+                'base_dir': 'public_thumbnails',
             },
         },
     },
@@ -41,17 +41,17 @@ FILER_STORAGES = {
         'main': {
             'ENGINE': 'filer.storage.PrivateFileSystemStorage',
             'OPTIONS': {
-                'location': os.path.abspath(os.path.join(MEDIA_ROOT, '../smedia/filer_private')),
-                'base_url': '/smedia/filer_private/',
+                'location': os.path.abspath(os.path.join(MEDIA_ROOT, '../smedia/private')),
+                'base_url': '/smedia/private/',
             },
-            'UPLOAD_TO': 'shelfzilla.utils.filer_generate_randomized',
+            'UPLOAD_TO': 'shelfzilla.utils.generate_randomized',
             'UPLOAD_TO_PREFIX': '',
         },
         'thumbnails': {
             'ENGINE': 'filer.storage.PrivateFileSystemStorage',
             'OPTIONS': {
-                'location': os.path.abspath(os.path.join(MEDIA_ROOT, '../smedia/filer_private_thumbnails')),
-                'base_url': '/smedia/filer_private_thumbnails/',
+                'location': os.path.abspath(os.path.join(MEDIA_ROOT, '../smedia/private_thumbnails')),
+                'base_url': '/smedia/private_thumbnails/',
             },
             'THUMBNAIL_OPTIONS': {},
         },
