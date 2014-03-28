@@ -8,3 +8,8 @@ TEMPLATE_DEBUG = True
 DATABASES = {
     'default': dj_database_url.parse('postgres:///shelfzilla')
 }
+
+# Bower
+STATICFILES_DIRS += (
+    os.path.join(BASE_DIR, "..", "static_components"),
+)

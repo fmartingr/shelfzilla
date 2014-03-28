@@ -11,11 +11,17 @@ module.exports = (grunt) ->
         options:
           packageSpecific:
             bootflatv2:
+              dest: 'static_components/fonts',
               files: [
                 'css/bootstrap.min.css',
                 'bootflat/css/bootflat.min.css',
                 'bootflat/img/check_flat/default.png',
-                'bootflat/js/icheck.min.js'
+                'bootflat/js/icheck.min.js',
+                'js/bootstrap.min.js',
+                'fonts/glyphicons-halflings-regular.eot',
+                'fonts/glyphicons-halflings-regular.svg',
+                'fonts/glyphicons-halflings-regular.ttf',
+                'fonts/glyphicons-halflings-regular.woff',
               ]
 
     less:
@@ -39,6 +45,7 @@ module.exports = (grunt) ->
         src: [
           "static_components/js/jquery.js",
           "static_components/js/vegas.js",
+          "static_components/js/bootstrap.min.js",
           "static_components/js/icheck.min.js",
           "shelfzilla/themes/bootflat/static/js/main.full.js",
         ]
