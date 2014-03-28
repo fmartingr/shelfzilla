@@ -26,6 +26,7 @@ class Series(ReviewModel):
     name = models.CharField(_('Name'), max_length=40)
     cover = FilerImageField(blank=True, null=True)
     summary = models.TextField(_('Summary'), blank=True, null=True)
+    finished = models.BooleanField(_('Finished'), default=False)
 
     # Cache
     _publishers = None
