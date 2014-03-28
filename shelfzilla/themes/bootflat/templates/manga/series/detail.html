@@ -1,5 +1,5 @@
 {% extends "_layout.html" %}
-{% load i18n webdesign %}
+{% load i18n thumbnail %}
 
 {% block main_content %}
 <div class="container">
@@ -36,20 +36,18 @@
             {% endif %}
         </div>
         <div class="col-md-8">
+            {% if item.summary %}
             <div class="well">
-                {% if item.summary %}
                 {{ item.summary|linebreaks }}
-                {% else %}
-                {% lorem 2 p %}
-                {% endif %}
             </div>
+            {% endif %}
             <div class="row">
                 {% for volume in item.volumes.all %}
                 <div class="col-sm-3">
                     <div class="well text-center">
                         <div class="text-center">
-                            <strong>{% trans "Volume" %} {{ volume.number }}</strong>
-                            <img src="{{ volume.cover.url }}" class="max-width-80" />
+                            <div><strong>{% trans "Volume" %} {{ volume.number }}</strong></div>
+                            <img src="{% thumbnail volume.cover 150x150 %}" class="max-width-80" />
                         </div>
                         <br />
                         <button class="btn btn-primary btn-xs">{% trans "I have it!" %}</button>
