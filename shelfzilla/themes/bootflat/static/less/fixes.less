@@ -12,3 +12,35 @@
 * > p:last-child {
     margin-bottom: 0 !important;
 }
+
+
+.volume-item {
+    &:not(.user-have-it) {
+        .badges { display: none; }
+
+        &:hover .badges {
+            display: block;
+        }
+    }
+
+    &
+
+    .badges {
+        position: absolute;
+        right: 10px;
+        top: -10px;
+        .badge {
+            @size: 34px;
+
+            border: #FFF 3px solid;
+            border-radius: 50%;
+            display: block;
+            font-size: @size/1.5;
+            height: @size;
+            line-height: (@size)-3px;
+            padding: 0;
+            text-align: center;
+            width: @size;
+        }
+    }
+}
