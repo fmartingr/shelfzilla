@@ -7,6 +7,7 @@
     <title>{% block page_title %}Shelfzilla{% endblock %}</title>
 </head>
 <body>
+    {% block navigation_bar %}
     <div class="container">
         <nav class="navbar navbar-inverse" role="navigation">
             <div class="container-fluid">
@@ -49,6 +50,7 @@
             </div>
         </nav>
     </div>
+    {% endblock %}
 
     {% block messages %}
         {% if messages %}

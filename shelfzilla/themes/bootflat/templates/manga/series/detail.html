@@ -1,5 +1,5 @@
 {% extends "_layout.html" %}
-{% load webdesign %}
+{% load i18n webdesign %}
 
 {% block main_content %}
 <div class="container">
@@ -9,32 +9,55 @@
                 <div class="panel-heading">
                     <h1 class="panel-title panel-title-alt text-center">{{ item.name }}</h1>
                 </div>
+                {% if item.cover %}
                 <div class="panel-body text-center">
-                    <img src="http://placekitten.com/g/200/300/" />
+                    <img src="{{ item.cover.url }}" class="max-width-80" />
                 </div>
-                <ul class="list-group">
+                {% endif %}
+                <!-- <ul class="list-group">
                     <li class="list-group-item">Detail 1</li>
                     <li class="list-group-item">Detail 2</li>
                     <li class="list-group-item">Detail 3</li>
+                </ul> -->
+            </div>
+            {% if item.publishers %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title text-center">{% trans "Publishers" %}</h2>
+                </div>
+                <ul class="list-group">
+                    {% for publisher in item.publishers %}
+                    <li class="list-group-item">
+                        <a href="{% if publisher.url %}{{ publisher.url }}{% else %}#{% endif %}" target="_blank">{{ publisher.name }}</a>
+                    </li>
+                    {% endfor %}
                 </ul>
             </div>
+            {% endif %}
         </div>
         <div class="col-md-8">
             <div class="well">
+                {% if item.summary %}
+                {{ item.summary|linebreaks }}
+                {% else %}
                 {% lorem 2 p %}
+                {% endif %}
             </div>
             <div class="row">
-                <div class="col-md-3"><div class="well text-center">Volume</div></div>
-                <div class="col-md-3"><div class="well text-center">Volume</div></div>
-                <div class="col-md-3"><div class="well text-center">Volume</div></div>
-                <div class="col-md-3"><div class="well text-center">Volume</div></div>
+                {% for volume in item.volumes.all %}
+                <div class="col-sm-3">
+                    <div class="well text-center">
+                        <div class="text-center">
+                            <strong>{% trans "Volume" %} {{ volume.number }}</strong>
+                            <img src="{{ volume.cover.url }}" class="max-width-80" />
+                        </div>
+                        <br />
+                        <button class="btn btn-primary btn-xs">{% trans "I have it!" %}</button>
+                        <button class="btn btn-warning btn-xs">{% trans "I want it!" %}</button>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
-            <div class="row">
-                <div class="col-md-4"><div class="well text-center">Volume</div></div>
-                <div class="col-md-4"><div class="well text-center">Volume</div></div>
-                <div class="col-md-4"><div class="well text-center">Volume</div></div>
-            </div>
-
         </div>
     </div>
 </div>

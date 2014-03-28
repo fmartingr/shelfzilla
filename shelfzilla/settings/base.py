@@ -44,6 +44,11 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # Files
+    "filer",
+    "mptt",
+    "easy_thumbnails",
+
     # DDBB
     'reversion',
     'south',
@@ -117,6 +122,9 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = "/static/"
 
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = '/media/'
+
 # Additional locations of static files
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "themes", "bootflat", "static"),
@@ -130,4 +138,13 @@ BETA_ACCESS_GROUP_ID = 1
 BETA_ACCESS_ALLOW_URLS = (
     '/landing/',
     '/login/',
+)
+
+# filer
+THUMBNAIL_PROCESSORS = (
+    'easy_thumbnails.processors.colorspace',
+    'easy_thumbnails.processors.autocrop',
+    #'easy_thumbnails.processors.scale_and_crop',
+    'filer.thumbnail_processors.scale_and_crop_with_subject_location',
+    'easy_thumbnails.processors.filters',
 )

@@ -19,3 +19,6 @@ shelfzilla/themes/bootflat/static/js/*.js
 # Bower
 bower_components
 static_components
+
+# Media
+shelfzilla/media/

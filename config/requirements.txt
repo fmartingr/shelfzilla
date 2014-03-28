@@ -11,3 +11,6 @@ longerusername==0.4
 # DDBB
 dj-database-url==0.3.0
 psycopg2==2.5.2
+
+# Files
+django-filer==0.9.5
