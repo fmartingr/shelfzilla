@@ -1,5 +1,7 @@
-{% extends "_layout.html" %}
+{% extends extends_template %}
 {% load i18n %}
+
+{% block page_title %}{{ block.super }} | {{ item.name }}{% endblock %}
 
 {% block main_content %}
 <div class="container">

@@ -23,6 +23,10 @@ module.exports = (grunt) ->
                 'fonts/glyphicons-halflings-regular.ttf',
                 'fonts/glyphicons-halflings-regular.woff',
               ]
+            nprogress:
+              files: [
+                'nprogress.css',
+              ]
 
     less:
       options:
@@ -47,6 +51,8 @@ module.exports = (grunt) ->
           "static_components/js/vegas.js",
           "static_components/js/bootstrap.min.js",
           "static_components/js/icheck.min.js",
+          "static_components/js/jquery-pjax.js",
+          "static_components/js/nprogress.js",
           "shelfzilla/themes/bootflat/static/js/main.full.js",
         ]
         dest: "shelfzilla/themes/bootflat/static/js/site.js"
@@ -55,6 +61,7 @@ module.exports = (grunt) ->
           "shelfzilla/themes/bootflat/static/css/app.css",
           "static_components/css/bootstrap.min.css",
           "static_components/css/bootflat.min.css",
+          "static_components/css/nprogress.css",
         ]
         dest: "shelfzilla/themes/bootflat/static/css/style.css"
 
