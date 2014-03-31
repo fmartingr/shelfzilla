@@ -70,6 +70,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
 
     'shelfzilla.context_processors.pjax',
+    'shelfzilla.apps.manga.context_processors.user_have_volumes',
+    'shelfzilla.apps.manga.context_processors.user_wishlisted_volumes',
 )
 
 MIDDLEWARE_CLASSES = (

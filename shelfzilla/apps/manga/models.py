@@ -80,7 +80,7 @@ class UserHaveVolume(models.Model):
 
     def __unicode__(self):
         return "{} {} {}".format(
-            self.user.name,
+            self.user.username,
             _('have'),
             self.volume
         )
@@ -93,7 +93,7 @@ class UserWishlistVolume(models.Model):
 
     def __unicode__(self):
         return "{} {} {}".format(
-            self.user.name,
+            self.user.username,
             _('wants'),
             self.volume
         )
