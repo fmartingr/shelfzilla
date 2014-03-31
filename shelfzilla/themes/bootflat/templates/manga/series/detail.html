@@ -1,5 +1,5 @@
 {% extends "_layout.html" %}
-{% load i18n thumbnail %}
+{% load i18n %}
 
 {% block main_content %}
 <div class="container">
@@ -44,41 +44,12 @@
             <div class="row">
                 {% for volume in item.volumes.all %}
                 <div class="col-sm-3">
-                    <div class="well text-center volume-item user-have-it">
-                        <div class="badges">
-                            <span class="badge badge-success">
-                                <i class="glyphicon glyphicon-ok"></i>
-                            </span>
-                            <span class="badge badge-warning">
-                                <i class="glyphicon glyphicon-star"></i>
-                            </span>
-                        </div>
-                        <div class="text-center">
-                            <div><strong>{% trans "Volume" %} {{ volume.number }}</strong></div>
-                            <img src="{% thumbnail volume.cover 150x150 %}" class="max-width-80" />
-                            <button class="btn btn-primary btn-xs">{% trans "Details" %}</button>
-                        </div>
-                    </div>
+                    {% include "manga/series/includes/volume.html" with volume=volume user=user %}
                 </div>
-                {% endfor %}
-                {% for volume in item.volumes.all %}
-                <div class="col-sm-3">
-                    <div class="well text-center volume-item">
-                        <div class="badges">
-                            <span class="badge">
-                                <i class="glyphicon glyphicon-ok"></i>
-                            </span>
-                            <span class="badge">
-                                <i class="glyphicon glyphicon-star"></i>
-                            </span>
-                        </div>
-                        <div class="text-center">
-                            <div><strong>{% trans "Volume" %} {{ volume.number }}</strong></div>
-                            <img src="{% thumbnail volume.cover 150x150 %}" class="max-width-80" />
-                            <button class="btn btn-primary btn-xs">{% trans "Details" %}</button>
-                        </div>
-                    </div>
+                {% if forloop.counter|divisibleby:4 %}
                 </div>
+                <div class="row">
+                {% endif %}
                 {% endfor %}
             </div>
         </div>

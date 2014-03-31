@@ -1,0 +1,24 @@
+{% load i18n thumbnail %}
+<div class="well text-center volume-item">
+    <div class="badges {% if volume in user.have_volumes %}user-have-it{% endif %}">
+        {% if volume in user.have_volumes %}
+        <span class="badge">
+            <i class="glyphicon glyphicon-ok"></i>
+        </span>
+        {% else %}
+        <a href="#">
+            <span class="badge">
+                <i class="glyphicon glyphicon-ok"></i>
+            </span>
+        </a>
+        <span class="badge {% if volime in user.whislisted_volumes %}badge-warning{% endif %}">
+            <i class="glyphicon glyphicon-star"></i>
+        </span>
+        {% endif %}
+    </div>
+    <div class="text-center">
+        <div><strong>{% trans "Volume" %} {{ volume.number }}</strong></div>
+        <img src="{% thumbnail volume.cover 150x150 %}" class="max-width-80" />
+        <button class="btn btn-primary btn-xs">{% trans "Details" %}</button>
+    </div>
+</div>

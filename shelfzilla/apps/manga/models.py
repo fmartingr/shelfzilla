@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.conf import settings
 from filer.fields.image import FilerImageField
 
 from shelfzilla.models import ReviewModel
@@ -70,3 +71,29 @@ class Volume(ReviewModel):
         ordering = ['series__name', 'number']
         verbose_name = _('Volume')
         verbose_name_plural = _('Volumes')
+
+
+class UserHaveVolume(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             related_name='have_volumes')
+    volume = models.ForeignKey(Volume, related_name='owned_by')
+
+    def __unicode__(self):
+        return "{} {} {}".format(
+            self.user.name,
+            _('have'),
+            self.volume
+        )
+
+
+class UserWishlistVolume(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             related_name='want_volumes')
+    volume = models.ForeignKey(Volume, related_name='wishlisted_by')
+
+    def __unicode__(self):
+        return "{} {} {}".format(
+            self.user.name,
+            _('wants'),
+            self.volume
+        )

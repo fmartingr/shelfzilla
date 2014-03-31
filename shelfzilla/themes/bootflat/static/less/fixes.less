@@ -29,6 +29,7 @@
         position: absolute;
         right: 10px;
         top: -10px;
+
         .badge {
             @size: 34px;
 
@@ -41,6 +42,24 @@
             padding: 0;
             text-align: center;
             width: @size;
+        }
+
+        .badge-haveit, .badge-wishlist {
+            &:hover {
+                & > span {
+                    display: block;
+                }
+            }
+        }
+    }
+}
+
+.navbar-nav {
+    &> li {
+        &:hover, &:focus {
+            &> a {
+                color: black !important;
+            }
         }
     }
 }
