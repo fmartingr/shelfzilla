@@ -88,7 +88,7 @@ class UserHaveVolume(models.Model):
 
 class UserWishlistVolume(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
-                             related_name='want_volumes')
+                             related_name='wishlisted_volumes')
     volume = models.ForeignKey(Volume, related_name='wishlisted_by')
 
     def __unicode__(self):

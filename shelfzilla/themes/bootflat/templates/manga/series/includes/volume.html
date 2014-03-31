@@ -2,18 +2,22 @@
 <div class="well text-center volume-item">
     <div class="badges {% if volume in user.have_volumes %}user-have-it{% endif %}">
         {% if volume in user.have_volumes %}
-        <span class="badge">
-            <i class="glyphicon glyphicon-ok"></i>
-        </span>
+        <a href="{% url "volume.have_it" volume.pk %}" data-pjax="v{{ volume.pk }}" pjax-nopush pjax-messages>
+            <span class="badge badge-success">
+                <i class="glyphicon glyphicon-ok"></i>
+            </span>
+        </a>
         {% else %}
-        <a href="#">
+        <a href="{% url "volume.have_it" volume.pk %}" data-pjax="v{{ volume.pk }}" pjax-nopush pjax-messages>
             <span class="badge">
                 <i class="glyphicon glyphicon-ok"></i>
             </span>
         </a>
-        <span class="badge {% if volime in user.whislisted_volumes %}badge-warning{% endif %}">
-            <i class="glyphicon glyphicon-star"></i>
-        </span>
+        <a href="{% url "volume.wishlist" volume.pk %}" data-pjax="v{{ volume.pk }}" pjax-messages pjax-nopush>
+            <span class="badge {% if volime in user.whislisted_volumes %}badge-warning{% endif %}">
+                <i class="glyphicon glyphicon-star"></i>
+            </span>
+        </a>
         {% endif %}
     </div>
     <div class="text-center">

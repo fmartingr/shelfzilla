@@ -45,7 +45,7 @@
             {% endif %}
             <div class="row">
                 {% for volume in item.volumes.all %}
-                <div class="col-sm-3">
+                <div class="col-sm-3" data-pjax-container="v{{ volume.pk }}">
                     {% include "manga/series/includes/volume.html" with volume=volume user=user %}
                 </div>
                 {% if forloop.counter|divisibleby:4 %}
