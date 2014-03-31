@@ -4,8 +4,11 @@ from django.conf import settings
 from django.contrib import admin
 admin.autodiscover()
 
+from .views import MessagesView
+
 urlpatterns = patterns(
     '',
+    url(r'^messages/$', MessagesView.as_view(), name="contrib.messages"),
     url(r'^', include('shelfzilla.apps.landing.urls')),
     url(r'^', include('shelfzilla.apps.users.urls')),
     url(r'^series/', include('shelfzilla.apps.manga.urls.series')),

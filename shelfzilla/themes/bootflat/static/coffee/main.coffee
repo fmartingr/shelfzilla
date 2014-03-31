@@ -1,8 +1,18 @@
-# Background
+NProgress.start()
+
+window.updateMessages = ->
+    jQuery.pjax
+        url: '/messages/'
+        container: '[data-pjax-container="messages"]'
+        push: false
+
 jQuery ->
+    NProgress.inc(0.3)
+    # Background
     jQuery.vegas
         src: '/static/backgrounds/shelves.jpg'
         fade: 1200
+        complete: -> NProgress.done()
 
     # PJAX
     if jQuery.support.pjax
@@ -24,8 +34,6 @@ jQuery ->
 # Tooltips
 jQuery('[data-toggle="tooltip"]').tooltip();
 
-
 # Nprogress
 jQuery(document).on 'pjax:start', -> NProgress.start()
 jQuery(document).on 'pjax:end', -> NProgress.done()
-#jQuery(document).on 'page:restore', -> NProgress.remove()

@@ -4,7 +4,7 @@
 <head>
     <link rel="stylesheet" href="/static/css/style.css" />
     {% block extra_css %}{% endblock %}
-    <title>{% block page_title %}Shelfzilla{% endblock %}</title>
+    <title>{% block page_title %}ShelfZilla{% endblock %}</title>
 </head>
 <body>
     {% block navigation_bar %}
@@ -53,16 +53,11 @@
     {% endblock %}
 
     {% block messages %}
+        <div class="messages container" data-pjax-container="messages">
         {% if messages %}
-        <div class="messages container">
-            {% for message in messages %}
-            <div{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                {{ message }}
-            </div>
-            {% endfor %}
-        </div>
+            {% include "contrib/messages.html" %}
         {% endif %}
+        </div>
     {% endblock %}
     <div id="main_content" data-pjax-container="main">
     {% block main_content %}{% endblock %}
