@@ -1,5 +1,7 @@
 {% extends "_pjax.html" %}
 
+{% block page_title %}{{ block.super }} | {{ volume.series.name }}{% endblock %}
+
 {% block main_content %}
 {% include "manga/series/includes/volume.html" %}
 {% endblock %}
