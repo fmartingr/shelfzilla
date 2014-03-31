@@ -1,39 +1,51 @@
 NProgress.start()
 
+window._updateMessages = false
 window.updateMessages = ->
-    jQuery.pjax
+    $.pjax
         url: '/messages/'
         container: '[data-pjax-container="messages"]'
         push: false
+    window._updateMessages = false
 
-jQuery ->
+$ ->
     NProgress.inc(0.3)
     # Background
-    jQuery.vegas
+    $.vegas
         src: '/static/backgrounds/shelves.jpg'
         fade: 1200
         complete: -> NProgress.done()
 
     # PJAX
-    if jQuery.support.pjax
-        jQuery(document).on 'click', 'a[data-pjax]', (event) ->
-            elem = jQuery(@)
-            container = elem.data('container')
-            if not container
-                container = jQuery('[data-pjax-container="main"]')
-            if container == 'closest'
-                container = jQuery(@).closest('[data-pjax-container]')
+    if $.support.pjax
+        $(document).on 'click', 'a[data-pjax]', (event) ->
+            elem = $(@)
+            pjax = elem.data('pjax')
+            push = true
+            if elem.is('[pjax-nopush]')
+                push = false
+            if not pjax
+                container = $('[data-pjax-container="main"]')
+            else if pjax == 'closest'
+                container = elem.closest('[data-pjax-container]')
             else
-                container = jQuery(container)
+                container = $("[data-pjax-container='#{pjax}']")
 
-            jQuery.pjax.click event, {
+            $.pjax.click event, {
                 container: container,
-                timeout: 1000
+                timeout: 1000,
+                push: push
             }
 
+            if elem.is('[pjax-messages]')
+                window._updateMessages = true
+
 # Tooltips
-jQuery('[data-toggle="tooltip"]').tooltip();
+$('[data-toggle="tooltip"]').tooltip();
 
 # Nprogress
-jQuery(document).on 'pjax:start', -> NProgress.start()
-jQuery(document).on 'pjax:end', -> NProgress.done()
+$(document).on 'pjax:start', -> NProgress.start()
+$(document).on 'pjax:end', ->
+    NProgress.done()
+    if window._updateMessages
+        window.updateMessages()
