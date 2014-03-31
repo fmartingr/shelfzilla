@@ -6,21 +6,26 @@
 {% block main_content %}
 <div class="container">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="panel panel-primary">
+                <!--
                 <div class="panel-heading">
                     <h1 class="panel-title panel-title-alt text-center">{{ item.name }}</h1>
                 </div>
+                -->
                 {% if item.cover %}
                 <div class="panel-body text-center">
                     <img src="{{ item.cover.url }}" class="max-width-80" />
                 </div>
                 {% endif %}
-                <!-- <ul class="list-group">
-                    <li class="list-group-item">Detail 1</li>
-                    <li class="list-group-item">Detail 2</li>
-                    <li class="list-group-item">Detail 3</li>
-                </ul> -->
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <strong>{% trans "Volumes" %}</strong>: {{ item.volumes.count }}
+                    </li>
+                    <li class="list-group-item">
+                        <strong>{% trans "Finished" %}</strong>: {{ item.finished|yesno|capfirst }}
+                    </li>
+                </ul>
             </div>
             {% if item.publishers %}
             <div class="panel panel-default">
@@ -37,7 +42,12 @@
             </div>
             {% endif %}
         </div>
-        <div class="col-md-8">
+        <div class="col-md-9">
+           <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h1 class="panel-title panel-title-alt text-center">{{ item.name }}</h1>
+                </div>
+            </div>
             {% if item.summary %}
             <div class="well">
                 {{ item.summary|linebreaks }}
@@ -45,7 +55,7 @@
             {% endif %}
             <div class="row">
                 {% for volume in item.volumes.all %}
-                <div class="col-sm-3" data-pjax-container="v{{ volume.pk }}">
+                <div class="col-sm-2" data-pjax-container="v{{ volume.pk }}">
                     {% include "manga/series/includes/volume.html" with volume=volume user=user %}
                 </div>
                 {% if forloop.counter|divisibleby:4 %}
