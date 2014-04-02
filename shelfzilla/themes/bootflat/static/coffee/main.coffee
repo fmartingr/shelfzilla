@@ -1,13 +1,20 @@
 NProgress.start()
 
 window._updateMessages = false
-window.updateMessages = ->
+window.updateMessagesHtml = ->
     $.pjax
         url: '/messages/'
         container: '[data-pjax-container="messages"]'
         push: false
     window._updateMessages = false
 
+window.updateMessages = ->
+    $.getJSON "/messages/?format=json", (data) ->
+        for message in data
+            toastr[message.extra_tags](message.message)
+    window._updateMessages = false
+
+# Document ready
 $ ->
     NProgress.inc(0.3)
     # Background
@@ -39,6 +46,9 @@ $ ->
 
             if elem.is('[pjax-messages]')
                 window._updateMessages = true
+
+    # Update messages
+    window.updateMessages()
 
 # Tooltips
 $('[data-toggle="tooltip"]').tooltip();

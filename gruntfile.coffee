@@ -53,6 +53,7 @@ module.exports = (grunt) ->
           "static_components/js/icheck.min.js",
           "static_components/js/jquery-pjax.js",
           "static_components/js/nprogress.js",
+          "static_components/js/toastr.js",
           "shelfzilla/themes/bootflat/static/js/main.full.js",
         ]
         dest: "shelfzilla/themes/bootflat/static/js/site.js"
@@ -62,6 +63,7 @@ module.exports = (grunt) ->
           "static_components/css/bootstrap.min.css",
           "static_components/css/bootflat.min.css",
           "static_components/css/nprogress.css",
+          "static_components/css/toastr.css",
         ]
         dest: "shelfzilla/themes/bootflat/static/css/style.css"
 
