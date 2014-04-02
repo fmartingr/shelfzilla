@@ -1,0 +1,164 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-04-02 17:01+0200\n"
+"PO-Revision-Date: 2014-04-02 17:05+0200\n"
+"Last-Translator:   <fmartingr@me.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Translated-Using: django-rosetta 0.7.4\n"
+
+#: models.py:6
+msgid "For review"
+msgstr "Para revisión"
+
+#: models.py:8
+msgid "Review comment"
+msgstr "Comentario de revisión"
+
+#: apps/manga/admin.py:13 apps/manga/models.py:68 apps/manga/models.py:69
+#: themes/bootflat/templates/_layout.html:28
+#: themes/bootflat/templates/manga/publishers/detail.html:13
+#: themes/bootflat/templates/manga/series/list.html:4
+msgid "Series"
+msgstr "Series"
+
+#: apps/manga/admin.py:24 apps/manga/models.py:88
+#: themes/bootflat/templates/manga/publishers/detail.html:16
+#: themes/bootflat/templates/manga/publishers/detail.html:36
+#: themes/bootflat/templates/manga/series/detail.html:23
+msgid "Volumes"
+msgstr "Volúmenes"
+
+#: apps/manga/models.py:10 apps/manga/models.py:41
+#: themes/bootflat/templates/manga/publishers/detail.html:35
+msgid "Name"
+msgstr "Nombre"
+
+#: apps/manga/models.py:11 apps/manga/models.py:42
+msgid "Slug"
+msgstr "Álias"
+
+#: apps/manga/models.py:12
+msgid "URL"
+msgstr "URL"
+
+#: apps/manga/models.py:36
+msgid "Publisher"
+msgstr "Editorial"
+
+#: apps/manga/models.py:37 themes/bootflat/templates/_layout.html:31
+#: themes/bootflat/templates/manga/publishers/list.html:4
+#: themes/bootflat/templates/manga/series/detail.html:33
+msgid "Publishers"
+msgstr "Editoriales"
+
+#: apps/manga/models.py:44
+msgid "Summary"
+msgstr "Resumen"
+
+#: apps/manga/models.py:45
+#: themes/bootflat/templates/manga/publishers/detail.html:37
+#: themes/bootflat/templates/manga/series/detail.html:26
+msgid "Finished"
+msgstr "Finalizado"
+
+#: apps/manga/models.py:73
+msgid "Number"
+msgstr "Número"
+
+#: apps/manga/models.py:78
+msgid "ISBN-10"
+msgstr "ISBN-10"
+
+#: apps/manga/models.py:80
+msgid "ISBN-13"
+msgstr "ISBN-13"
+
+#: apps/manga/models.py:87
+#: themes/bootflat/templates/manga/series/includes/volume.html:24
+msgid "Volume"
+msgstr "Volumen"
+
+#: apps/manga/models.py:99
+msgid "have"
+msgstr "tiene"
+
+#: apps/manga/models.py:112
+msgid "wants"
+msgstr "quiere"
+
+#: apps/manga/views/volumes.py:23
+msgid "{} is already on your collection!"
+msgstr "¡{} ya está en tu colección!"
+
+#: apps/manga/views/volumes.py:32
+msgid "{} removed from wishlist"
+msgstr "{} eliminado de la lista de deseados"
+
+#: apps/manga/views/volumes.py:38
+msgid "{} wishlisted!"
+msgstr "¡{} añadido a la lista de deseados!"
+
+#: apps/manga/views/volumes.py:61
+msgid "{} removed from collection."
+msgstr "{} eliminado de tu colección."
+
+#: apps/manga/views/volumes.py:66
+msgid "{} added to collection!"
+msgstr "¡{} añadido a tu colección!"
+
+#: apps/users/forms.py:31
+msgid "This account is disabled."
+msgstr "Esta cuenta está desactivada."
+
+#: apps/users/forms.py:35
+msgid "User with those credentials was not found."
+msgstr "No se ha encontrado un usuario con esos credenciales."
+
+#: apps/users/views.py:39
+msgid "Logged in successfully."
+msgstr "Has accedido correctamente."
+
+#: apps/users/views.py:58
+msgid "Logged out successfully"
+msgstr "Sesión finalizada."
+
+#: settings/base.py:116
+msgid "Spanish"
+msgstr "Español"
+
+#: themes/bootflat/templates/_layout.html:39
+msgid "My collection"
+msgstr "Mi colección"
+
+#: themes/bootflat/templates/_layout.html:40
+msgid "Profile"
+msgstr "Perfil"
+
+#: themes/bootflat/templates/_layout.html:46
+msgid "Log in"
+msgstr "Entrar"
+
+#: themes/bootflat/templates/manga/publishers/detail.html:20
+msgid "Homepage"
+msgstr "Página principal"
+
+#: themes/bootflat/templates/users/login.html:10
+msgid "Access the site"
+msgstr "Accede al sitio"
+
+#: themes/bootflat/templates/users/login.html:23
+msgid "Login"
+msgstr "Entrar"

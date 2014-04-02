@@ -22,3 +22,6 @@ static_components
 
 # Media
 shelfzilla/media/
+
+# i18n
+django.pot

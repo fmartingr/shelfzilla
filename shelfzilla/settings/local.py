@@ -18,6 +18,7 @@ STATICFILES_DIRS += (
 # Apps
 INSTALLED_APPS += (
     'django.contrib.webdesign',
+    'rosetta',
 )
 
 # Filer

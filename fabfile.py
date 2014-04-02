@@ -2,7 +2,7 @@ from __future__ import with_statement, print_function
 from os.path import dirname, abspath, join
 
 from fabric.api import *
-from fabric.context_managers import settings
+from fabric.context_managers import settings, cd
 from fabric.contrib.files import exists
 from fabric.colors import yellow, red, white, green
 
@@ -76,7 +76,11 @@ def virtualenv():
     """
     Activates virtualenv first
     """
-    return prefix('source .virtualenv/bin/activate')
+    return prefix(
+        'source {}/.virtualenv/bin/activate'.format(
+            env.host_config['path']
+        )
+    )
 
 
 #
@@ -210,3 +214,27 @@ def rungrunt():
     Executes grunt
     """
     run('grunt --force')
+
+
+@task_environment
+@task
+@hosts(['local'])
+def makemessages():
+    """
+    Executes django-admin makemessages where needed
+    """
+    with cd('shelfzilla'):
+        if not exists('locale'):
+            run('mkdir locale')
+        with virtualenv():
+            run('django-admin.py makemessages -l es', quiet=True)
+
+    """
+    apps = ['homepage', 'landing', 'manga', 'users']
+    for app in apps:
+        with cd('shelfzilla/apps/{}'.format(app)):
+            if not exists('locale'):
+                run('mkdir locale')
+            with virtualenv():
+                run('django-admin.py makemessages -l es', quiet=True)
+    """

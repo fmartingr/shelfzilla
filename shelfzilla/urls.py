@@ -1,10 +1,11 @@
 from django.conf.urls import patterns, include, url
 from django.conf import settings
-
 from django.contrib import admin
-admin.autodiscover()
 
 from .views import MessagesView
+
+
+admin.autodiscover()
 
 urlpatterns = patterns(
     '',
@@ -27,3 +28,9 @@ if settings.DEBUG:
             {'document_root': settings.MEDIA_ROOT}
         ),
     )
+
+    if 'rosetta' in settings.INSTALLED_APPS:
+        urlpatterns += patterns(
+            '',
+            url(r'^rosetta/', include('rosetta.urls')),
+        )
