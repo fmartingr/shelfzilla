@@ -19,6 +19,7 @@ fab runserver
 - Nodejs
 - Python 2.7 with virtualenv and pip
 - grunt-cli installed as global resource
+- bower installed as a global resource
 
 # First install
 

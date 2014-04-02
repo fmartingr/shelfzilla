@@ -32,7 +32,7 @@ if not env.hosts:
 
 # Doctor checkups
 DOCTOR = {
-    'apps': ['virtualenv', 'python', 'npm', 'grunt']
+    'apps': ['virtualenv', 'python', 'npm', 'grunt', 'bower']
 }
 
 
