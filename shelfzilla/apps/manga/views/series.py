@@ -24,8 +24,11 @@ class SeriesListView(SeriesView):
 class SeriesDetailView(SeriesView):
     template = 'manga/series/detail.html'
 
-    def get(self, request, sid):
-        item = get_object_or_404(Series, pk=sid)
+    def get(self, request, sid, slug=None):
+        if slug:
+            item = get_object_or_404(Series, pk=sid, slug=slug)
+        else:
+            item = get_object_or_404(Series, pk=sid)
 
         context = {
             'item': item

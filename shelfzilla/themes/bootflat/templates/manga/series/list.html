@@ -24,7 +24,11 @@
         <ul class="list-group">
             {% for item in letter.list %}
             <li class="list-group-item">
+                {% if item.slug %}
+                <a href="{% url "series.detail" item.pk item.slug %}" data-pjax>{{ item.name }}</a>
+                {% else %}
                 <a href="{% url "series.detail" item.pk %}" data-pjax>{{ item.name }}</a>
+                {% endif %}
             </li>
             {% endfor %}
         </ul>

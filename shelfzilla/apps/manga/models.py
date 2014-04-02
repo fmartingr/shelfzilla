@@ -25,6 +25,7 @@ class Publisher(ReviewModel):
 
 class Series(ReviewModel):
     name = models.CharField(_('Name'), max_length=40)
+    slug = models.SlugField(_('Slug'), blank=True, null=True)
     cover = FilerImageField(blank=True, null=True)
     summary = models.TextField(_('Summary'), blank=True, null=True)
     finished = models.BooleanField(_('Finished'), default=False)

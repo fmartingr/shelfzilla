@@ -16,6 +16,7 @@ admin.site.register(Publisher, PublisherAdmin)
 
 class SeriesAdmin(reversion.VersionAdmin):
     list_display = ['name', 'volumes_count']
+    prepopulated_fields = {"slug": ("name",)}
 
     def volumes_count(self, obj):
         return obj.volumes.distinct('number').count()
