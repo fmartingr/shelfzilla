@@ -51,13 +51,8 @@
         </nav>
     </div>
     {% endblock %}
-
     {% block messages %}
-        <div class="messages container" data-pjax-container="messages">
-        {% if messages %}
-            {% include "contrib/messages.html" %}
-        {% endif %}
-        </div>
+        <div class="messages container" data-pjax-container="messages"></div>
     {% endblock %}
     <div id="main_content" data-pjax-container="main">
     {% block main_content %}{% endblock %}

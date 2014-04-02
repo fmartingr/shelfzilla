@@ -153,6 +153,7 @@ BETA_ACCESS_GROUP_ID = 1
 BETA_ACCESS_ALLOW_URLS = (
     '/landing/',
     '/login/',
+    '/messages/',
 )
 
 # filer

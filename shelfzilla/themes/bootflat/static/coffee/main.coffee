@@ -1,7 +1,7 @@
 NProgress.start()
 
 window._updateMessages = false
-window.updateMessagesHtml = ->
+window.updateMessagesHTML = ->
     $.pjax
         url: '/messages/'
         container: '[data-pjax-container="messages"]'
@@ -16,6 +16,9 @@ window.updateMessages = ->
 
 # Document ready
 $ ->
+    # Update messages
+    window.updateMessages()
+    # Increment for document loaded
     NProgress.inc(0.3)
     # Background
     $.vegas
@@ -46,9 +49,6 @@ $ ->
 
             if elem.is('[pjax-messages]')
                 window._updateMessages = true
-
-    # Update messages
-    window.updateMessages()
 
 # Tooltips
 $('[data-toggle="tooltip"]').tooltip();

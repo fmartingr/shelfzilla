@@ -2,7 +2,7 @@ from django.views.generic import View
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.contrib.auth import logout
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext as _
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth import login
