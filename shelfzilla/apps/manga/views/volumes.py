@@ -20,7 +20,7 @@ class WishlistVolumeView(SeriesView):
             UserHaveVolume.objects.get(volume=volume, user=request.user)
             messages.error(
                 request,
-                _('{} is already on your collection!'.format(volume))
+                _('{} is already on your collection!').format(volume)
             )
         except UserHaveVolume.DoesNotExist:
             # Try to add to the wishlist...
@@ -29,13 +29,13 @@ class WishlistVolumeView(SeriesView):
                     volume=volume, user=request.user)
                 user_wish.delete()
                 messages.info(request,
-                              _('{} removed from wishlist'.format(volume)))
+                              _('{} removed from wishlist').format(volume))
             except UserWishlistVolume.DoesNotExist:
                 # Or remove it if already in it!
                 user_wish = UserWishlistVolume(
                     volume=volume, user=request.user)
                 user_wish.save()
-                messages.success(request, _('{} wishlisted!'.format(volume)))
+                messages.success(request, _('{} wishlisted!').format(volume))
 
         context = RequestContext(request, {'volume': volume})
 
@@ -58,12 +58,12 @@ class HaveVolumeView(SeriesView):
                 volume=volume, user=request.user)
             user_have.delete()
             messages.info(request,
-                          _('{} removed from collection.'.format(volume)))
+                          _('{} removed from collection.').format(volume))
         except UserHaveVolume.DoesNotExist:
             user_have = UserHaveVolume(volume=volume, user=request.user)
             user_have.save()
             messages.success(request,
-                             _('{} added to collection!'.format(volume)))
+                             _('{} added to collection!').format(volume))
 
             # Remove from wishlist if it exists
             try:
