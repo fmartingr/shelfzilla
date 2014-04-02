@@ -8,14 +8,28 @@ from shelfzilla.models import ReviewModel
 
 class Publisher(ReviewModel):
     name = models.CharField(_('Name'), max_length=40)
+    slug = models.SlugField(_('Slug'), blank=True, null=True)
     url = models.URLField(_('URL'), blank=True, null=True)
+
+    # Cache
+    _series = None
+    _volumes = None
 
     def __unicode__(self):
         return u'{}'.format(self.name)
 
     @property
     def series(self):
-        return self.volumes.distinct('series')
+        result = []
+        if not self._series:
+            queryset = self.volumes.order_by('series__id')\
+                .distinct('series').values_list('series')
+
+            if queryset:
+                result = Series.objects.filter(pk__in=queryset)
+
+            self._series = result
+        return self._series
 
     class Meta:
         ordering = ['name']

@@ -1,0 +1,38 @@
+{% extends extends_template %}
+{% load i18n %}
+
+{% block page_title %}{{ block.super }} | {% trans "Publishers" %}{% endblock %}
+
+{% block main_content %}
+{% regroup items by first_letter as letter_list %}
+<div class="container">
+    <div class="pull-right">
+        <ul class="pagination">
+        {% for letter in letter_list %}
+            <li>
+                <a href="#{{ letter.grouper }}">{{ letter.grouper }}</a>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+    <div class="clearfix"></div>
+    {% for letter in letter_list %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title" id="{{ letter.grouper }}">{{ letter.grouper }}</h3>
+        </div>
+        <ul class="list-group">
+            {% for item in letter.list %}
+            <li class="list-group-item">
+                {% if item.slug %}
+                <a href="{% url "publishers.detail" item.pk item.slug %}" data-pjax>{{ item.name }}</a>
+                {% else %}
+                <a href="{% url "publishers.detail" item.pk %}" data-pjax>{{ item.name }}</a>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

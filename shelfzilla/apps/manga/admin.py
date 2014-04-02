@@ -6,6 +6,7 @@ from .models import Publisher, Series, Volume
 
 class PublisherAdmin(reversion.VersionAdmin):
     list_display = ['name', 'series_count']
+    prepopulated_fields = {"slug": ("name",)}
 
     def series_count(self, obj):
         return obj.series.count()

@@ -1,0 +1,57 @@
+{% extends extends_template %}
+{% load i18n %}
+
+{% block page_title %}{{ block.super }} | {{ item.name }}{% endblock %}
+
+{% block main_content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="panel panel-primary">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <strong>{% trans "Series" %}</strong>: {{ item.series.count }}
+                    </li>
+                    <li class="list-group-item">
+                        <strong>{% trans "Volumes" %}</strong>: {{ item.volumes.count }}
+                    </li>
+                    {% if item.url %}
+                    <li class="list-group-item text-center">
+                        <a href="{{ item.url }}"><i class="glyphicon glyphicon-home"></i> {% trans "Homepage" %}</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-9">
+           <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h1 class="panel-title panel-title-alt text-center">{{ item.name }}</h1>
+                </div>
+            </div>
+            <div class="series-list panel">
+                <table class="table table-bordered">
+                    <thead>
+                        <th>{% trans "Name" %}</th>
+                        <th>{% trans "Volumes" %}</th>
+                        <th>{% trans "Finished" %}</th>
+                    </thead>
+                    <tbody>
+                        {% for series in item.series %}
+                        <td>
+                            {% if series.slug %}
+                            <a href="{% url 'series.detail' series.pk series.slug %}">{{ series.name }}</a>
+                            {% else %}
+                            <a href="{% url 'series.detail' series.pk %}">{{ series.name }}</a>
+                            {% endif %}
+                        </td>
+                        <td>{{ series.volumes.count }}</td>
+                        <td>{{ series.finished|yesno|capfirst }}</td>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

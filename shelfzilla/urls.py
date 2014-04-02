@@ -13,6 +13,7 @@ urlpatterns = patterns(
     url(r'^', include('shelfzilla.apps.users.urls')),
     url(r'^series/', include('shelfzilla.apps.manga.urls.series')),
     url(r'^volumes/', include('shelfzilla.apps.manga.urls.volumes')),
+    url(r'^publishers/', include('shelfzilla.apps.manga.urls.publishers')),
     url(r'^$', include('shelfzilla.apps.homepage.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )

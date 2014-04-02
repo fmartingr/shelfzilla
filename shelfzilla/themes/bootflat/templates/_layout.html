@@ -28,7 +28,7 @@
                             <a data-pjax href="{% url "series.list" %}">{% trans "Series" %}</a>
                         </li>
                         <li {% if navigation.section == "publishers" %}class="active"{% endif %}>
-                            <a data-pjax href="#">{% trans "Publishers" %}</a>
+                            <a data-pjax href="{% url 'publishers.list' %}">{% trans "Publishers" %}</a>
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
