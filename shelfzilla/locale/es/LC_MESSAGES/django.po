@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-02 17:01+0200\n"
-"PO-Revision-Date: 2014-04-02 17:05+0200\n"
+"POT-Creation-Date: 2014-04-02 17:09+0200\n"
+"PO-Revision-Date: 2014-04-02 17:09+0200\n"
 "Last-Translator:   <fmartingr@me.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -146,6 +146,10 @@ msgstr "Mi colección"
 #: themes/bootflat/templates/_layout.html:40
 msgid "Profile"
 msgstr "Perfil"
+
+#: themes/bootflat/templates/_layout.html:43
+msgid "Logout"
+msgstr "Cerrar sesión"
 
 #: themes/bootflat/templates/_layout.html:46
 msgid "Log in"
