@@ -36,9 +36,9 @@
                     {% for publisher in item.publishers %}
                     <li class="list-group-item">
                         {% if publisher.slug %}
-                        <a href="{% url 'publishers.detail' publisher.pk publisher.slug %}">{{ publisher.name }}</a>
+                        <a href="{% url 'publishers.detail' publisher.pk publisher.slug %}" data-pjax>{{ publisher.name }}</a>
                         {% else %}
-                        <a href="{% url 'publishers.detail' publisher.pk %}">{{ publisher.name }}</a>
+                        <a href="{% url 'publishers.detail' publisher.pk %}" data-pajax>{{ publisher.name }}</a>
                         {% endif %}
                     </li>
                     {% endfor %}

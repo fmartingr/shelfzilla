@@ -17,7 +17,7 @@
                     </li>
                     {% if item.url %}
                     <li class="list-group-item text-center">
-                        <a href="{{ item.url }}"><i class="glyphicon glyphicon-home"></i> {% trans "Homepage" %}</a>
+                        <a href="{{ item.url }}" target="_blank"><i class="glyphicon glyphicon-home"></i> {% trans "Homepage" %}</a>
                     </li>
                     {% endif %}
                 </ul>
@@ -40,9 +40,9 @@
                         {% for series in item.series %}
                         <td>
                             {% if series.slug %}
-                            <a href="{% url 'series.detail' series.pk series.slug %}">{{ series.name }}</a>
+                            <a href="{% url 'series.detail' series.pk series.slug %}" data-pjax>{{ series.name }}</a>
                             {% else %}
-                            <a href="{% url 'series.detail' series.pk %}">{{ series.name }}</a>
+                            <a href="{% url 'series.detail' series.pk %}" data-pjax>{{ series.name }}</a>
                             {% endif %}
                         </td>
                         <td>{{ series.volumes.count }}</td>
