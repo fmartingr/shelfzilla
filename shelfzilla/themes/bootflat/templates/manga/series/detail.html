@@ -35,7 +35,11 @@
                 <ul class="list-group">
                     {% for publisher in item.publishers %}
                     <li class="list-group-item">
-                        <a href="{% if publisher.url %}{{ publisher.url }}{% else %}#{% endif %}" target="_blank">{{ publisher.name }}</a>
+                        {% if publisher.slug %}
+                        <a href="{% url 'publishers.detail' publisher.pk publisher.slug %}">{{ publisher.name }}</a>
+                        {% else %}
+                        <a href="{% url 'publishers.detail' publisher.pk %}">{{ publisher.name }}</a>
+                        {% endif %}
                     </li>
                     {% endfor %}
                 </ul>
