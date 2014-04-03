@@ -1,7 +1,9 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
+from django.db.models.signals import post_save
 from filer.fields.image import FilerImageField
+from filer.models.foldermodels import Folder
 
 from shelfzilla.models import ReviewModel
 
@@ -43,6 +45,8 @@ class Series(ReviewModel):
     cover = FilerImageField(blank=True, null=True)
     summary = models.TextField(_('Summary'), blank=True, null=True)
     finished = models.BooleanField(_('Finished'), default=False)
+
+    folder = models.ForeignKey(Folder, null=True, blank=True)
 
     # Cache
     _publishers = None
@@ -112,3 +116,53 @@ class UserWishlistVolume(models.Model):
             _('wants'),
             self.volume
         )
+
+
+# Signals
+def series_check_filer(sender, instance, created, **kwargs):
+    field = 'folder'
+    name = instance.name
+
+    # Check folder
+    if not instance.folder:
+        folder = Folder(
+            name=name,
+            parent_id=settings.COVER_FOLDER_PK,
+            owner_id=settings.COVER_FOLDER_OWNER_PK,
+        )
+        folder.save()
+        instance.folder = folder
+        instance.save()
+    else:
+        # Check for name change
+        if instance.folder.name != name:
+            instance.folder.name = name
+            instance.folder.save()
+
+    # Check file name
+    if instance.cover:
+        if instance.cover.name != 'Cover':
+            instance.cover.name = 'Cover'
+            instance.cover.save()
+
+        if instance.cover.folder != instance.folder:
+            instance.cover.folder = instance.folder
+            instance.cover.save()
+
+
+def volume_check_filer(sender, instance, created, **kwargs):
+    if instance.cover:
+        # Check cover to be in series folder
+        if instance.cover.folder != instance.series.folder:
+            instance.cover.folder = instance.series.folder
+            instance.cover.save()
+
+        # Check filename
+        cover_name = '{:03}'.format(instance.number)
+        if instance.cover.name != cover_name:
+            instance.cover.name = cover_name
+            instance.cover.save()
+
+
+post_save.connect(series_check_filer, sender=Series)
+post_save.connect(volume_check_filer, sender=Volume)

@@ -164,3 +164,6 @@ THUMBNAIL_PROCESSORS = (
     'filer.thumbnail_processors.scale_and_crop_with_subject_location',
     'easy_thumbnails.processors.filters',
 )
+
+COVER_FOLDER_PK = 1
+COVER_FOLDER_OWNER_PK = 1
