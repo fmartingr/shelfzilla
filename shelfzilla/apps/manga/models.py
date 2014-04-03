@@ -40,7 +40,7 @@ class Publisher(ReviewModel):
 
 
 class Series(ReviewModel):
-    name = models.CharField(_('Name'), max_length=40)
+    name = models.CharField(_('Name'), max_length=256)
     slug = models.SlugField(_('Slug'), blank=True, null=True)
     cover = FilerImageField(blank=True, null=True)
     summary = models.TextField(_('Summary'), blank=True, null=True)
@@ -120,17 +120,15 @@ class UserWishlistVolume(models.Model):
 
 # Signals
 def series_check_filer(sender, instance, created, **kwargs):
-    field = 'folder'
     name = instance.name
 
     # Check folder
     if not instance.folder:
-        folder = Folder(
+        folder, is_new = Folder.objects.get_or_create(
             name=name,
             parent_id=settings.COVER_FOLDER_PK,
             owner_id=settings.COVER_FOLDER_OWNER_PK,
         )
-        folder.save()
         instance.folder = folder
         instance.save()
     else:
