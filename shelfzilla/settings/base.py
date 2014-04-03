@@ -59,6 +59,7 @@ INSTALLED_APPS = (
     'shelfzilla.apps.homepage',
     'shelfzilla.apps.landing',
     'shelfzilla.apps.manga',
+    'shelfzilla.apps.pjax',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -71,7 +72,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.messages.context_processors.messages',
     'django.core.context_processors.request',
 
-    'shelfzilla.context_processors.pjax',
+    'shelfzilla.apps.pjax.context_processors.pjax',
     'shelfzilla.apps.manga.context_processors.user_have_volumes',
     'shelfzilla.apps.manga.context_processors.user_wishlisted_volumes',
 )
