@@ -1,0 +1,8 @@
+{% extends '_layout.html'|pjax:request %}
+{% load i18n %}
+
+{% block page_title %}{{ block.super }} | {% trans "Profile" %}{% endblock %}
+
+{% block main_content %}
+{% block profile_content %}{% endblock %}
+{% endblock %}

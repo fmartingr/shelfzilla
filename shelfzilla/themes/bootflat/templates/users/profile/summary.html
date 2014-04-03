@@ -1,0 +1,10 @@
+{% extends 'users/profile.html'|pjax:request %}
+{% load i18n %}
+
+{% block page_title %}{{ block.super }}{% endblock %}
+
+{% block profile_content %}
+<div class="well">
+    Bio
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends '_layout.html'|pjax:request %}
+{% load i18n %}
+
+{% block page_title %}{{ block.super }} | {% trans "Profile" %}{% endblock %}
+
+{% block main_content %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3 profile-sidebar">
+            <div class="panel panel-primary">
+                <div class="panel-heading text-center">
+                    <h1 class="panel-title">{{ item.username }}</h1>
+                </div>
+                <div class="avatar">
+                    <div class="badges">
+                        {% if item.is_staff %}
+                        <span class="label label-warning">
+                            <i class="glyphicon glyphicon-star"></i>
+                            STAFF
+                        </span>
+                        {% endif %}
+                    </div>
+                    <img src="{{ item.avatar }}" class="max-width-100" />
+                </div>
+                <div class="list-group">
+                    <a href="{% url 'profile' %}" data-pjax="profile" class="list-group-item active">
+                        {% trans "Summary" %}</a>
+                    <a href="{% url 'profile' 'collection' %}" data-pjax="profile" class="list-group-item">
+                        {% trans "Collection" %}</a>
+                    <a href="{% url 'profile' 'wishlist' %}" data-pjax="profile" class="list-group-item">
+                        {% trans "Wishlist" %}</a>
+                    <a href="{% url 'profile' 'achievements' %}" data-pjax="profile" class="list-group-item">
+                        {% trans "Achievements" %}</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-9" data-pjax-container="profile">
+            {% block profile_content %}{% endblock %}
+        </div>
+    </div>
+</div>
+{% endblock %}

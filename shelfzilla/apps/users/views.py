@@ -3,11 +3,12 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.contrib.auth import logout
 from django.utils.translation import ugettext as _
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.contrib import messages
 from django.contrib.auth import login
 
 from .forms import LoginForm
+from .models import User
 
 
 class LoginView(View):
@@ -59,3 +60,33 @@ class LogoutView(View):
         )
 
         return HttpResponseRedirect('/')
+
+
+class ProfileView(View):
+    template = 'users/profile/{}.html'
+
+    def get(self, request, section='summary'):
+        if request.user.is_authenticated():
+            data = {
+                'item': User.objects.get(pk=request.user.pk)
+            }
+
+            template = self.template.format(section)
+            data = self.get_context_from_section(request, section, data)
+
+            ctx = RequestContext(request, data)
+            return render_to_response(template, context_instance=ctx)
+        else:
+            raise Http404
+
+    def get_summary(self, request, context):
+        context['SUMMARY'] = 'Y'
+        return context
+
+    def get_context_from_section(self, request, section, context):
+        method = getattr(self, 'get_{}'.format(section), None)
+
+        if method:
+            context = method(request, context)
+
+        return context

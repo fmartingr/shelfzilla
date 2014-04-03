@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/static/css/style.css" />
     {% block extra_css %}{% endblock %}
     <title>{% block page_title %}ShelfZilla{% endblock %}</title>
@@ -36,16 +37,30 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ user.username }} <b class="caret"></b></a>
                             <ul class="dropdown-menu">
+                                <li><a href="{% url 'profile' %}" data-pjax>{% trans "Profile" %}</a></li>
+                                <li class="divider"></li>
                                 <li><a href="#">{% trans "My collection" %}</a></li>
-                                <li><a href="#">{% trans "Profile" %}</a></li>
-                                </li>
+                                <li><a href="#">{% trans "My wishlist" %}</a></li>
+                                <li class="divider"></li>
+                                <li><a href="{% url "logout" %}">{% trans "Logout" %}</a></li>
                             </ul>
-                            <li><a href="{% url "logout" %}"><i class="glyphicon glyphicon-log-out"></i> {% trans "Logout" %}</a>
                         </li>
                         {% else %}
-                        <li><a href="{% url "login" %}"><i class="glyphicon glyphicon-log-in"></i> {% trans "Log in" %}</a>
+                        <li>
+                            <a href="{% url "login" %}">
+                                <i class="glyphicon glyphicon-log-in"></i> {% trans "Log in" %}
+                            </a>
+                        </li>
                         {% endif %}
                     </ul>
+                    <!--
+                    <form class="navbar-form navbar-right" role="search">
+                        <div class="form-search search-only">
+                            <i class="search-icon glyphicon glyphicon-search"></i>
+                            <input type="text" class="form-control search-query" placeholder="{% trans 'Search' %}">
+                        </div>
+                    </form>
+                    -->
                 </div>
             </div>
         </nav>
@@ -57,7 +72,7 @@
     <div id="main_content" data-pjax-container="main">
     {% block main_content %}{% endblock %}
     </div>
- 
+
     <script src="/static/js/site.js"></script>
     {% block extra_js %}{% endblock %}
 </body>
