@@ -8,6 +8,7 @@ class BetaMiddleware(object):
     """
     def process_request(self, request):
         beta_group_id = settings.BETA_ACCESS_GROUP_ID
-        if request.user and not request.user.groups.filter(pk=beta_group_id):
-            if request.path not in settings.BETA_ACCESS_ALLOW_URLS:
-                return HttpResponseRedirect('/landing/')
+        if request.user and not request.user.is_superuser:
+            if not request.user.groups.filter(pk=beta_group_id):
+                if request.path not in settings.BETA_ACCESS_ALLOW_URLS:
+                    return HttpResponseRedirect('/landing/')
