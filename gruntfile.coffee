@@ -119,9 +119,11 @@ module.exports = (grunt) ->
     ]
 
     grunt.registerTask 'compile', [
+      "bower",
       "less", "coffee", "concat", 'uglify', "clean:development"
     ]
 
     grunt.registerTask 'build', [
+      "bower",
       "less", "coffee", "concat", "uglify", 'clean:production'
     ]
