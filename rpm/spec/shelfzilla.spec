@@ -6,7 +6,7 @@ BuildRoot: %{_topdir}/BUILD/%{name}
 BuildArch: noarch
 Provides: shelfzilla
 Requires: python27
-License:  
+License:  Comercial
 Group: FDB
 Distribution: FDB Global Services
 Vendor: FDB 
@@ -27,14 +27,24 @@ Shelfzilla is a website which save all your Manga
 %prep
 rm -rf  $RPM_BUILD_ROOT*
 [ -d $RPM_BUILD_ROOT%{_app_dir} ] || mkdir -p $RPM_BUILD_ROOT%{_app_dir}
+[ -d $RPM_BUILD_ROOT%{_app_dir}/config ] || mkdir -p $RPM_BUILD_ROOT%{_app_dir}/config
 
+# clean up development-only files
+find %{_gitdir} -depth -name .git -exec rm -rf {} \;
 
 # -------------------------------------------------------------------------------------------- #
 # install section:
 # -------------------------------------------------------------------------------------------- #
 %install
 # Copy Source Code
-cp -r %{_gitdir}/* $RPM_BUILD_ROOT%{_app_dir} 
+cp -r %{_gitdir}/shelfzilla $RPM_BUILD_ROOT%{_app_dir}
+cp -r %{_gitdir}/config/production $RPM_BUILD_ROOT%{_app_dir}/config
+cp -r %{_gitdir}/config/requirements.txt $RPM_BUILD_ROOT%{_app_dir}/config
+cp -r %{_gitdir}/*.json $RPM_BUILD_ROOT%{_app_dir}/
+cp -r %{_gitdir}/*.py $RPM_BUILD_ROOT%{_app_dir}/
+cp -r %{_gitdir}/gruntfile.coffee $RPM_BUILD_ROOT%{_app_dir}/
+
+
 
 
 # -------------------------------------------------------------------------------------------- #
@@ -42,17 +52,22 @@ cp -r %{_gitdir}/* $RPM_BUILD_ROOT%{_app_dir}
 # -------------------------------------------------------------------------------------------- #
 %post
 ## Npm install
+cd %{_app_dir} && npm install
+
 ## pip install
+pip install -r %{_app_dir}/config/production/requirements.ttx
+
 ## Syncdb dir manage
-## migrate
-## grunt compile
-## python2.7 manage.py collectstatic
+python2.7 %{_app_dir}/manage.py syncdb
 
- 
+## Migrate
+python2.7 %{_app_dir}/manage.py migrate
 
+## Grunt compile
+cd %{_app_dir} && grunt compile
 
-
-
+## Collect static
+python2.7 manage.py collectstatic
 
 # -------------------------------------------------------------------------------------------- #
 # pre-uninstall section:
