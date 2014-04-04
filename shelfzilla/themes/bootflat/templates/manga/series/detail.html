@@ -62,7 +62,7 @@
                 <div class="col-sm-2" data-pjax-container="v{{ volume.pk }}">
                     {% include "manga/series/includes/volume.html" with volume=volume user=user %}
                 </div>
-                {% if forloop.counter|divisibleby:5 %}
+                {% if forloop.counter|divisibleby:6 %}
                 </div>
                 <div class="row">
                 {% endif %}
