@@ -44,9 +44,6 @@ cp -r %{_gitdir}/*.json $RPM_BUILD_ROOT%{_app_dir}/
 cp -r %{_gitdir}/*.py $RPM_BUILD_ROOT%{_app_dir}/
 cp -r %{_gitdir}/gruntfile.coffee $RPM_BUILD_ROOT%{_app_dir}/
 
-
-
-
 # -------------------------------------------------------------------------------------------- #
 # post-install section:
 # -------------------------------------------------------------------------------------------- #
