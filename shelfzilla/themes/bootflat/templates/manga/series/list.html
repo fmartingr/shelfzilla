@@ -8,22 +8,22 @@
 <div class="container">
     <div class="pull-right">
         <ul class="pagination">
-        {% for letter in letter_list %}
-            <li>
-                <a href="#{{ letter.grouper }}">{{ letter.grouper }}</a>
+        {% for letter in letters %}
+            <li {% if current_letter == letter %}class="active"{% endif %}>
+                <a href="{% url 'series.list' %}?letter={{ letter }}" data-pjax pjax-nopush>{{ letter }}</a>
             </li>
         {% endfor %}
         </ul>
     </div>
     <div class="clearfix"></div>
     <div class="column-list">
-        {% for letter in letter_list %}
+        {% if current_letter != 'all' %}
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title" id="{{ letter.grouper }}">{{ letter.grouper }}</h3>
+                <h3 class="panel-title" id="{{ current_letter }}">{{ current_letter }}</h3>
             </div>
             <ul class="list-group">
-                {% for item in letter.list %}
+                {% for item in items %}
                 <li class="list-group-item">
                     {% if item.slug %}
                     <a href="{% url "series.detail" item.pk item.slug %}" data-pjax>{{ item.name }}</a>
@@ -31,10 +31,33 @@
                     <a href="{% url "series.detail" item.pk %}" data-pjax>{{ item.name }}</a>
                     {% endif %}
                 </li>
+                {% empty %}
+                <li class="list-group-item">{% trans "No results" %}</li>
                 {% endfor %}
             </ul>
         </div>
-        {% endfor %}
+        {% else %}
+            {% for letter in letter_list %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="{{ letter.grouper }}">{{ letter.grouper }}</h3>
+                </div>
+                <ul class="list-group">
+                    {% for item in letter.list %}
+                    <li class="list-group-item">
+                        {% if item.slug %}
+                        <a href="{% url "series.detail" item.pk item.slug %}" data-pjax>{{ item.name }}</a>
+                        {% else %}
+                        <a href="{% url "series.detail" item.pk %}" data-pjax>{{ item.name }}</a>
+                        {% endif %}
+                    </li>
+                    {% empty %}
+                    <li class="list-group-item">{% trans "No results" %}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endfor %}
+        {% endif %}
     </div>
 </div>
 {% endblock %}
