@@ -63,15 +63,18 @@ class LogoutView(View):
 
 
 class ProfileView(View):
-    template = 'users/profile/{}.html'
+    tempalte = 'users/profile.html'
+    template_section = 'users/profile/{}.html'
 
     def get(self, request, section='summary'):
         if request.user.is_authenticated():
             data = {
                 'item': User.objects.get(pk=request.user.pk)
             }
-
-            template = self.template.format(section)
+            if section != 'summary':
+                template = self.template_section.format(section)
+            else:
+                template = self.tempalte
             data = self.get_context_from_section(request, section, data)
 
             ctx = RequestContext(request, data)

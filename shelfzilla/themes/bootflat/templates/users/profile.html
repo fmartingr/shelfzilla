@@ -23,7 +23,7 @@
                     <img src="{{ item.avatar }}" class="max-width-100" />
                 </div>
                 <div class="list-group">
-                    <a href="{% url 'profile' %}" data-pjax="profile" class="list-group-item active">
+                    <a href="{% url 'profile' %}" data-pjax class="list-group-item active">
                         {% trans "Summary" %}</a>
                     <a href="{% url 'profile' 'collection' %}" data-pjax="profile" class="list-group-item">
                         {% trans "Collection" %}</a>
@@ -35,7 +35,9 @@
             </div>
         </div>
         <div class="col-sm-9" data-pjax-container="profile">
-            {% block profile_content %}{% endblock %}
+            {% block profile_content %}
+                {% include "users/profile/summary.html" %}
+            {% endblock %}
         </div>
     </div>
 </div>
