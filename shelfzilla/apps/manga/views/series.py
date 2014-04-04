@@ -38,8 +38,7 @@ class SeriesListView(SeriesView):
         elif letter == 'all':
             result = Series.objects.all()
         elif letter == 'other':
-            # result = Series.objects.filter(name__regex=r'')
-            result = []
+            result = Series.objects.exclude(name__regex=r'^[a-zA-Z]')
 
         return result
 
