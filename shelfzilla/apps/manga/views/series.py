@@ -1,5 +1,7 @@
+import string
 from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404
+from django.utils.translation import ugettext as _
 
 from shelfzilla.views import View
 from ..models import Series
@@ -11,14 +13,35 @@ class SeriesView(View):
 
 class SeriesListView(SeriesView):
     template = 'manga/series/list.html'
+    filters = ['other', 'all']
 
     def get(self, request):
-        items = Series.objects.all()
+        letters = list(string.ascii_uppercase)
+        letters.append(_('other'))
+        letters.append(_('all'))
+        current_letter = request.GET.get('letter', 'A')
+
+        items = self.get_items(current_letter)
+
         context = {
-            'items': items
+            'items': items,
+            'letters': letters,
+            'current_letter': current_letter
         }
         ctx = RequestContext(request, self.get_context(context))
         return render_to_response(self.template, context_instance=ctx)
+
+    def get_items(self, letter):
+        result = Series.objects.all()
+        if len(letter) == 1:
+            result = Series.objects.filter(name__istartswith=letter)
+        elif letter == 'all':
+            result = Series.objects.all()
+        elif letter == 'other':
+            # result = Series.objects.filter(name__regex=r'')
+            result = []
+
+        return result
 
 
 class SeriesDetailView(SeriesView):
