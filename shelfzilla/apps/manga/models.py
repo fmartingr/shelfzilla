@@ -27,8 +27,7 @@ class Publisher(Model):
             queryset = self.volumes.order_by('series__id')\
                 .distinct('series').values_list('series')
 
-            if queryset:
-                result = Series.objects.filter(pk__in=queryset)
+            result = Series.objects.filter(pk__in=queryset)
 
             self._series = result
         return self._series
@@ -68,8 +67,7 @@ class Series(Model):
             result = []
             queryset = self.volumes.order_by('publisher__id')\
                 .distinct('publisher').values_list('publisher')
-            if queryset:
-                result = Publisher.objects.filter(pk__in=queryset)
+            result = Publisher.objects.filter(pk__in=queryset)
 
             self._publishers = result
 
