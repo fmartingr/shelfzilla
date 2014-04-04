@@ -3,10 +3,12 @@ from django.utils.translation import ugettext_lazy as _
 from django.template.defaultfilters import slugify
 
 
-class ReviewModel(models.Model):
+class Model(models.Model):
     for_review = models.BooleanField(_('For review'), default=False)
     for_review_comment = models.TextField(
         _('Review comment'), null=True, blank=True)
+
+    hidden = models.BooleanField(_('Hidden'), default=False)
 
     def first_letter(self):
         if hasattr(self, 'name'):
@@ -17,7 +19,7 @@ class ReviewModel(models.Model):
         # TODO set a model field to custom field name for slug creation
         if not getattr(self, 'slug', None) and getattr(self, 'name', None):
             self.slug = slugify(self.name)
-        return super(ReviewModel, self).save(*args, **kwargs)
+        return super(Model, self).save(*args, **kwargs)
 
     class Meta:
         abstract = True

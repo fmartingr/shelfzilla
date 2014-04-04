@@ -5,10 +5,10 @@ from django.db.models.signals import post_save
 from filer.fields.image import FilerImageField
 from filer.models.foldermodels import Folder
 
-from shelfzilla.models import ReviewModel
+from shelfzilla.models import Model
 
 
-class Publisher(ReviewModel):
+class Publisher(Model):
     name = models.CharField(_('Name'), max_length=40)
     slug = models.SlugField(_('Slug'), blank=True, null=True)
     url = models.URLField(_('URL'), blank=True, null=True)
@@ -39,12 +39,20 @@ class Publisher(ReviewModel):
         verbose_name_plural = _('Publishers')
 
 
-class Series(ReviewModel):
+class Series(Model):
     name = models.CharField(_('Name'), max_length=256)
     slug = models.SlugField(_('Slug'), blank=True, null=True)
     cover = FilerImageField(blank=True, null=True)
     summary = models.TextField(_('Summary'), blank=True, null=True)
     finished = models.BooleanField(_('Finished'), default=False)
+
+    original_publisher = models.ForeignKey(
+        Publisher, related_name='original_series', null=True)
+
+    art = models.ForeignKey(
+        'Person', related_name='artist_of', null=True)
+    story = models.ForeignKey(
+        'Person', related_name='scriptwriter_of', null=True)
 
     folder = models.ForeignKey(Folder, null=True, blank=True)
 
@@ -73,7 +81,7 @@ class Series(ReviewModel):
         verbose_name_plural = _('Series')
 
 
-class Volume(ReviewModel):
+class Volume(Model):
     number = models.IntegerField(_('Number'))
     series = models.ForeignKey(Series, related_name="volumes")
     publisher = models.ForeignKey(Publisher, related_name="volumes")
@@ -82,6 +90,11 @@ class Volume(ReviewModel):
         _('ISBN-10'), max_length=10, blank=True, null=True)
     isbn_13 = models.CharField(
         _('ISBN-13'), max_length=13, blank=True, null=True)
+
+    retail_price = models.DecimalField(
+        _('Retail price'), max_digits=5, decimal_places=2, null=True)
+    pages = models.IntegerField(_('Pages'), null=True)
+    release_date = models.DateField(_('Release date'), null=True)
 
     def __unicode__(self):
         return u'{} #{}'.format(self.series.name, self.number)
@@ -92,6 +105,19 @@ class Volume(ReviewModel):
         verbose_name_plural = _('Volumes')
 
 
+class Person(Model):
+    name = models.CharField(_('Name'), max_length=256)
+    slug = models.SlugField(_('Slug'), blank=True, null=True)
+
+    class Meta:
+        ordering = ['name']
+        verbose_name = _('Person')
+        verbose_name_plural = _('Persons')
+
+
+#
+# RELATIONS
+#
 class UserHaveVolume(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              related_name='have_volumes')
@@ -117,8 +143,9 @@ class UserWishlistVolume(models.Model):
             self.volume
         )
 
-
-# Signals
+#
+# SIGNALS
+#
 def series_check_filer(sender, instance, created, **kwargs):
     name = instance.name
 
