@@ -1,22 +1,20 @@
-Summary: M2M Global Service - Portal Common
-Name: %{_gs_prefix}portal-common
+Summary: Shelfzilla
+Name: Shelfzilla
 Version: %{_gs_version}
 Release: %{_gs_revision}
-License: TID
 BuildRoot: %{_topdir}/BUILD/%{name}
 BuildArch: noarch
-Provides:  %{_gs_prefix}portal-common
-Requires: %{_gs_prefix}kermit
-Group: M2M Global Services
-Distribution: Global Services
-Vendor: Telefónica I+D
-
+Provides: shelfzilla
+Requires: python27
+License:  
+Group: FDB
+Distribution: FDB Global Services
+Vendor: FDB 
 
 %description
-M2M Portal Common files between initiatives DCA and SmartM2M 
+Shelfzilla is a website which save all your Manga
 
-%define _packages_dir /opt/globsrv/apps/m2m-kermit/packages
-%define _app_dir %{_packages_dir}/m2m-portal
+%defina _app_dir /opt/shelfzilla
 %define _binaries_in_noarch_packages_terminate_build 0
 
 # Do not check unpackaged files
@@ -30,23 +28,31 @@ M2M Portal Common files between initiatives DCA and SmartM2M
 rm -rf  $RPM_BUILD_ROOT*
 [ -d $RPM_BUILD_ROOT%{_app_dir} ] || mkdir -p $RPM_BUILD_ROOT%{_app_dir}
 
-# clean up development-only files
-find %{_gitdir}/src/ -depth -name .git -exec rm -rf {} \;
 
 # -------------------------------------------------------------------------------------------- #
 # install section:
 # -------------------------------------------------------------------------------------------- #
 %install
 # Copy Source Code
-cp -r %{_gitdir}/src/* $RPM_BUILD_ROOT%{_app_dir} 
-[ -h $RPM_BUILD_ROOT%{_app_dir}/dmm  ] && unlink $RPM_BUILD_ROOT%{_app_dir}/dmm
-[ -h $RPM_BUILD_ROOT%{_app_dir}/mc  ] && unlink $RPM_BUILD_ROOT%{_app_dir}/mc
+cp -r %{_gitdir}/* $RPM_BUILD_ROOT%{_app_dir} 
+
 
 # -------------------------------------------------------------------------------------------- #
 # post-install section:
 # -------------------------------------------------------------------------------------------- #
 %post
-chmod -R 775 %{_packages_dir}
+## Npm install
+## pip install
+## Syncdb dir manage
+## migrate
+## grunt compile
+## python2.7 manage.py collectstatic
+
+ 
+
+
+
+
 
 # -------------------------------------------------------------------------------------------- #
 # pre-uninstall section:
