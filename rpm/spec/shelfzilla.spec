@@ -1,5 +1,5 @@
 Summary: Shelfzilla
-Name: Shelfzilla
+Name: shelfzilla
 Version: %{_gs_version}
 Release: %{_gs_revision}
 BuildRoot: %{_topdir}/BUILD/%{name}
