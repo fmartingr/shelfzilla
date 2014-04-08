@@ -3,7 +3,7 @@ Name: Shelfzilla
 Version: %{_gs_version}
 Release: %{_gs_revision}
 BuildRoot: %{_topdir}/BUILD/%{name}
-BuildArch: noarch
+BuildArch: x86_64
 Provides: shelfzilla
 Requires: python27
 License:  Comercial
@@ -14,7 +14,7 @@ Vendor: FDB
 %description
 Shelfzilla is a website which save all your Manga
 
-%defina _app_dir /opt/shelfzilla
+%define _app_dir /opt/shelfzilla
 %define _binaries_in_noarch_packages_terminate_build 0
 
 # Do not check unpackaged files
