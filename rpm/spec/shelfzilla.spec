@@ -26,8 +26,6 @@ Shelfzilla is a website which save all your Manga
 # Remove previous build files
 %prep
 rm -rf  $RPM_BUILD_ROOT*
-[ -d $RPM_BUILD_ROOT%{_app_dir} ] || mkdir -p $RPM_BUILD_ROOT%{_app_dir}
-[ -d $RPM_BUILD_ROOT%{_app_dir}/config ] || mkdir -p $RPM_BUILD_ROOT%{_app_dir}/config
 
 # clean up development-only files
 find %{_gitdir} -depth -name .git -exec rm -rf {} \;
@@ -36,6 +34,10 @@ find %{_gitdir} -depth -name .git -exec rm -rf {} \;
 # install section:
 # -------------------------------------------------------------------------------------------- #
 %install
+# Make structure
+[ -d $RPM_BUILD_ROOT%{_app_dir} ] || mkdir -p $RPM_BUILD_ROOT%{_app_dir}
+[ -d $RPM_BUILD_ROOT%{_app_dir}/config ] || mkdir -p $RPM_BUILD_ROOT%{_app_dir}/config
+
 # Copy Source Code
 cp -r %{_gitdir}/shelfzilla $RPM_BUILD_ROOT%{_app_dir}
 cp -r %{_gitdir}/config/production $RPM_BUILD_ROOT%{_app_dir}/config
