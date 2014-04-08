@@ -9,7 +9,7 @@ from shelfzilla.models import Model
 
 
 class Publisher(Model):
-    name = models.CharField(_('Name'), max_length=40)
+    name = models.CharField(_('Name'), max_length=50)
     slug = models.SlugField(_('Slug'), blank=True, null=True)
     url = models.URLField(_('URL'), blank=True, null=True)
 
@@ -27,8 +27,7 @@ class Publisher(Model):
             queryset = self.volumes.order_by('series__id')\
                 .distinct('series').values_list('series')
 
-            if queryset:
-                result = Series.objects.filter(pk__in=queryset)
+            result = Series.objects.filter(pk__in=queryset)
 
             self._series = result
         return self._series
@@ -41,7 +40,7 @@ class Publisher(Model):
 
 class Series(Model):
     name = models.CharField(_('Name'), max_length=256)
-    slug = models.SlugField(_('Slug'), blank=True, null=True)
+    slug = models.SlugField(_('Slug'), blank=True, null=True, max_length=256)
     cover = FilerImageField(blank=True, null=True)
     summary = models.TextField(_('Summary'), blank=True, null=True)
     finished = models.BooleanField(_('Finished'), default=False)
@@ -68,8 +67,7 @@ class Series(Model):
             result = []
             queryset = self.volumes.order_by('publisher__id')\
                 .distinct('publisher').values_list('publisher')
-            if queryset:
-                result = Publisher.objects.filter(pk__in=queryset)
+            result = Publisher.objects.filter(pk__in=queryset)
 
             self._publishers = result
 

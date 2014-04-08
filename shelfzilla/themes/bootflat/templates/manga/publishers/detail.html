@@ -38,15 +38,17 @@
                     </thead>
                     <tbody>
                         {% for series in item.series %}
-                        <td>
-                            {% if series.slug %}
-                            <a href="{% url 'series.detail' series.pk series.slug %}" data-pjax>{{ series.name }}</a>
-                            {% else %}
-                            <a href="{% url 'series.detail' series.pk %}" data-pjax>{{ series.name }}</a>
-                            {% endif %}
-                        </td>
-                        <td>{{ series.volumes.count }}</td>
-                        <td>{{ series.finished|yesno|capfirst }}</td>
+                        <tr>
+                            <td>
+                                {% if series.slug %}
+                                <a href="{% url 'series.detail' series.pk series.slug %}" data-pjax>{{ series.name }}</a>
+                                {% else %}
+                                <a href="{% url 'series.detail' series.pk %}" data-pjax>{{ series.name }}</a>
+                                {% endif %}
+                            </td>
+                            <td>{{ series.volumes.count }}</td>
+                            <td>{{ series.finished|yesno|capfirst }}</td>
+                        </tr>
                         {% endfor %}
                     </tbody>
                 </table>

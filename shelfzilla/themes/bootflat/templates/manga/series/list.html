@@ -10,7 +10,7 @@
         <ul class="pagination">
         {% for letter in letters %}
             <li {% if current_letter == letter %}class="active"{% endif %}>
-                <a href="{% url 'series.list' %}?letter={{ letter }}" data-pjax pjax-nopush>{{ letter }}</a>
+                <a href="{% url 'series.list' %}?letter={{ letter }}" data-pjax>{{ letter }}</a>
             </li>
         {% endfor %}
         </ul>

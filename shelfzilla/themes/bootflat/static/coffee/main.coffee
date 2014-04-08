@@ -55,7 +55,9 @@ $('[data-toggle="tooltip"]').tooltip();
 
 # Nprogress
 $(document).on 'pjax:start', -> NProgress.start()
-$(document).on 'pjax:end', ->
-    NProgress.done()
+$(document).on 'pjax:end', (event) ->
+    $(event.target).imagesLoaded ->
+        NProgress.done()
+
     if window._updateMessages
         window.updateMessages()
