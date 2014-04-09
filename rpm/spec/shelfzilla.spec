@@ -54,7 +54,7 @@ cp -r %{_gitdir}/gruntfile.coffee $RPM_BUILD_ROOT%{_app_dir}/
 cd %{_app_dir} && npm install
 
 ## pip install
-pip install -r %{_app_dir}/config/production/requirements.ttx
+pip install -r %{_app_dir}/config/production/requirements.txt
 
 ## Syncdb dir manage
 python2.7 %{_app_dir}/manage.py syncdb
