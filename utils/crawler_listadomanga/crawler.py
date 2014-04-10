@@ -37,8 +37,6 @@ class ListadoManga(Crawler):
 
         return ids
 
-
-
     def action_get_manga(self, data, **kwargs):
         obj = {}
 
@@ -46,54 +44,112 @@ class ListadoManga(Crawler):
             StringIO(data),
             etree.HTMLParser(encoding='utf-8')
         )
+
         root = document.getroot()
 
-        ''' Get Info '''
         try:
-            obj['title'] = root.xpath('//td[@class="izq"]/h2/text()')[0].strip()
-            obj['dash'] = root.xpath('//td[@class="izq"]/a/text()')[0]
-            obj['cartoonist'] = root.xpath('//td[@class="izq"]/a/text()')[1]
-            obj['src_editorial'] = root.xpath('//td[@class="izq"]/a/text()')[2]
-            obj['src_ed_website'] = root.xpath('//td[@class="izq"]/a/@href')[3]
-            obj['editorial'] = root.xpath('//td[@class="izq"]/a/text()')[4]
-            obj['ed_website'] = root.xpath('//td[@class="izq"]/a/@href')[5]
-            obj['ed_collection'] = root.xpath('//td[@class="izq"]/a/text()')[6]
-            obj['sinopsis'] = root.xpath("//h2[contains(., 'Sinopsis')]/../text()")
-            
-        
+            # Details TD
+            keys = [
+                ('original', 'original_title'),
+                ('Gui', 'story'),
+                ('Dibujo', 'art'),
+                ('Editorial japonesa', 'japanese_publisher'),
+                ('Editorial espa', 'spanish_publisher'),
+                ('Colecci', 'collection'),
+                ('Formato', 'format'),
+                ('Sentido de lectura', 'read_direction'),
+                ('meros en japo', 'japanese_numbers'),
+                ('meros en espa', 'spanish_numbers'),
+                ('Nota', 'note'),
+            ]
+            td = root.xpath('//table//td[@class="izq"][contains(.,"original")]')
+            first = True
+            td_contains = {}
+            last = None
+            for t in td[0].itertext():
+                text = t.strip()
+                if t.strip():
+                    if first:
+                        first = False
+                        obj['name'] = text
+                    else:
+                        if ':' in text:
+                            last = text.split(':')[0]
+                            td_contains[last] = u''
+                        else:
+                            td_contains[last] += text
 
-            ''' Get Image link and info'''
-            # Edited numbers
-            obj['zz_data_sets_published'] = []
-            obj['zz_data_sets_unpublished'] = []
-            package = {}
-            data = root.xpath('/html/body/center/center[1]/table[3]/tr/td//text()')
-            links = root.xpath('/html/body/center/center[1]/table[3]//@src')
+            for tdkey, row in td_contains.iteritems():
+                for key in keys:
+                    if key[0] in tdkey:
+                        obj[key[1]] = row.split('(web oficial)')[0]
 
-            for element in links:
-                package['edited_image_link'] = self.base + "/" +element
-                package['title'] = data.pop(0)
-                package['pages'] = data.pop(0)
-                package['price'] = data.pop(0)
-                package['date'] = data.pop(0)
-                obj['zz_data_sets_published'].append(package.copy())
-                
-            package = {}
-            check = root.xpath('/html/body/center/center[1]/table[4]//text()')
-            if u'N\xfameros en preparaci\xf3n:' in check:
-                links = root.xpath('/html/body/center/center[1]/table[5]//@src')
-                titles = root.xpath('/html/body/center/center[1]/table[5]//text()')
-                for element in links:
-                    package['no_edited_image_link'] = self.base + element
-                    package['title'] = titles.pop(0)
-                    obj['zz_data_sets_unpublished'].append(package.copy())
+            # Japanese publisher URL
+            try:
+                jap = root.xpath("//td[contains(., 'Editorial jap')]//text()[contains(., 'Editorial jap')]/following::a")[1]
+                obj['japanese_publisher_url'] = jap.attrib['href']
+            except:
+                obj['japanese_publisher_url'] = ''
 
-            return obj
+            # Spanish publisher URL
+            try:
+                esp = root.xpath("//td[contains(., 'Editorial esp')]//text()[contains(., 'Editorial esp')]/following::a")[1]
+                obj['japanese_publisher_url'] = esp.attrib['href']
+            except:
+                obj['japanese_publisher_url'] = ''
 
-        except:
-            return "Error"
+            # Un/Published volumes
+            obj['published_volumes'] = []
+            obj['unpublished_volumes'] = []
+            vols = root.xpath("//table[contains(., 'editados')]/following-sibling::table//td[not(contains(@class, 'separacion'))]//table//td[@class='cen']")
+            for vol in vols:
+                published = False
+                volume = {}
+                image = vol.find('img')
+                volume['cover'] = "{}/{}".format(self.base, image.attrib['src'])
 
-        
-                    
+                text = []
 
+                if vol.find('hr') is not None:
+                    for dom in vol.iterchildren():
+                        if dom.tag == 'hr':
+                            break
+                        else:
+                            if dom.text:
+                                text.append(dom.text)
+                            elif dom.tail:
+                                text.append(dom.tail)
+                else:
+                    text = list(vol.itertext())
 
+                if len(text) >= 4:
+                    volume['date'] = text.pop(-1).strip()
+
+                    price = text.pop(-1)
+                    if 'ratuito' in price:
+                        volume['price'] = 0
+                    else:
+                        volume['price'] = float(price.split(' ')[0].replace(',', '.'))
+                    volume['pages'] = text.pop(-1).strip()
+                    published = True
+
+                volume['name'] = ("".join(text)).strip()
+
+                if published:
+                    obj['published_volumes'].append(volume)
+                else:
+                    obj['unpublished_volumes'].append(volume)
+
+            # Description
+            try:
+                obj['summary'] = root.xpath("//h2[contains(., 'Sinopsis')]/../text()")[0].strip()
+            except:
+                obj['summary'] = ''
+        except Exception as error:
+            print("Error with: {}".format(obj['name'].encode('utf-8')))
+            print("---------- {}".format(error))
+            obj = 'Error'
+
+        # pprint(obj)
+
+        return obj
