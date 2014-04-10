@@ -67,7 +67,7 @@ python2.7 %{_app_dir}/manage.py migrate
 cd %{_app_dir} && grunt compile
 
 ## Collect static
-python2.7 manage.py collectstatic
+python2.7 manage.py collectstatic --clear --noinput
 
 # -------------------------------------------------------------------------------------------- #
 # pre-uninstall section:
