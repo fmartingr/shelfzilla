@@ -37,6 +37,7 @@ find %{_gitdir} -depth -name .git -exec rm -rf {} \;
 # Make structure
 [ -d $RPM_BUILD_ROOT%{_app_dir} ] || mkdir -p $RPM_BUILD_ROOT%{_app_dir}
 [ -d $RPM_BUILD_ROOT%{_app_dir}/config ] || mkdir -p $RPM_BUILD_ROOT%{_app_dir}/config
+[ -d $RPM_BUILD_ROOT%{_app_dir}/static_components ] || mkdir -p $RPM_BUILD_ROOT%{_app_dir}/static_components
 
 # Copy Source Code
 cp -r %{_gitdir}/shelfzilla $RPM_BUILD_ROOT%{_app_dir}
