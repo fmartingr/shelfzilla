@@ -14,17 +14,29 @@ window.updateMessages = ->
             toastr[message.extra_tags](message.message)
     window._updateMessages = false
 
+window.imageLoad = (element) ->
+    imgLoad = imagesLoaded(element)
+
+    imgLoad.on 'done', (event) ->
+        NProgress.done()
+
+    imgLoad.on 'progress', (instance, image) ->
+        inc = instance.images.length/1000
+        NProgress.inc(inc)
+
 # Document ready
 $ ->
     # Update messages
     window.updateMessages()
-    # Increment for document loaded
-    NProgress.inc(0.3)
+
+    # Document load progress bar
+    window.imageLoad(document)
+
     # Background
     $.vegas
         src: '/static/backgrounds/shelves.jpg'
         fade: 1200
-        complete: -> NProgress.done()
+        #complete: -> NProgress.done()
 
     # PJAX
     if $.support.pjax
@@ -43,7 +55,7 @@ $ ->
 
             $.pjax.click event, {
                 container: container,
-                timeout: 1000,
+                timeout: 5000,
                 push: push
             }
 
@@ -56,8 +68,7 @@ $('[data-toggle="tooltip"]').tooltip();
 # Nprogress
 $(document).on 'pjax:start', -> NProgress.start()
 $(document).on 'pjax:end', (event) ->
-    $(event.target).imagesLoaded ->
-        NProgress.done()
+    window.imageLoad(event.target)
 
     if window._updateMessages
         window.updateMessages()
