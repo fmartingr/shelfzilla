@@ -15,5 +15,5 @@ MEDIA_ROOT = os.environ['APP_MEDIA_ROOT']
 
 SECRET_KEY = os.environ['APP_SECRET_KEY']
 
-INTERNAL_IPS = environ['APP_INTERNAL_IPS'].split(',')
-ALLOWED_HOSTS = environ['APP_ALLOWED_HOSTS'].split(',')
+INTERNAL_IPS = os.environ['APP_INTERNAL_IPS'].split(',')
+ALLOWED_HOSTS = os.environ['APP_ALLOWED_HOSTS'].split(',')
