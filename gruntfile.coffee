@@ -54,7 +54,7 @@ module.exports = (grunt) ->
           "static_components/js/jquery-pjax.js",
           "static_components/js/nprogress.js",
           "static_components/js/toastr.js",
-          "static_components/js/eventemitter.js",
+          "static_components/js/eventEmitter.js",
           "static_components/js/eventie.js",
           "static_components/js/imagesloaded.js",
           "shelfzilla/themes/bootflat/static/js/main.full.js",
