@@ -94,9 +94,9 @@ class ListadoManga(Crawler):
             # Spanish publisher URL
             try:
                 esp = root.xpath("//td[contains(., 'Editorial esp')]//text()[contains(., 'Editorial esp')]/following::a")[1]
-                obj['japanese_publisher_url'] = esp.attrib['href']
+                obj['spanish_publisher_url'] = esp.attrib['href']
             except:
-                obj['japanese_publisher_url'] = ''
+                obj['spanish_publisher_url'] = ''
 
             # Un/Published volumes
             obj['published_volumes'] = []

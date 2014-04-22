@@ -9,6 +9,14 @@ datcrawl = datCrawl()
 datcrawl.register_downloader(DefaultDownloader)
 datcrawl.register_crawler(ListadoManga)
 
+# datcrawl.run('http://www.listadomanga.es/coleccion.php?id=60')
+# datcrawl.run('http://www.listadomanga.es/coleccion.php?id=561')
+# datcrawl.run('http://www.listadomanga.es/coleccion.php?id=1037')
+# datcrawl.run('http://www.listadomanga.es/coleccion.php?id=1410')
+# datcrawl.run('http://www.listadomanga.es/coleccion.php?id=98')
+
+# exit
+
 ids = datcrawl.run("http://www.listadomanga.es/lista.php")
 _list = []
 errors = 0
@@ -25,10 +33,8 @@ f = open('data.json', 'w')
 
 
 p = ProgressBar(**custom_options)
-print "Crawling process in progress..."
+print("Crawling process in progress...")
 for _id in ids:
-    #print("ID: %d" % _id)
-    
     value = datcrawl.run("http://www.listadomanga.es/coleccion.php?id=%d" % _id)
     if value is "Error":
         errors += 1
