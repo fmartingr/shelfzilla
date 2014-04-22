@@ -63,6 +63,9 @@ python2.7 %{_app_dir}/manage.py syncdb
 ## Migrate
 python2.7 %{_app_dir}/manage.py migrate
 
+## Bower
+bower install --allow-root
+
 ## Grunt compile
 cd %{_app_dir} && grunt compile
 
