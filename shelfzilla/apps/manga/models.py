@@ -9,7 +9,7 @@ from shelfzilla.models import Model
 
 
 class Publisher(Model):
-    name = models.CharField(_('Name'), max_length=50)
+    name = models.CharField(_('Name'), max_length=128)
     slug = models.SlugField(_('Slug'), blank=True, null=True)
     url = models.URLField(_('URL'), blank=True, null=True)
 
@@ -48,9 +48,9 @@ class Series(Model):
     original_publisher = models.ForeignKey(
         Publisher, related_name='original_series', null=True)
 
-    art = models.ForeignKey(
+    art = models.ManyToManyField(
         'Person', related_name='artist_of', null=True)
-    story = models.ForeignKey(
+    story = models.ManyToManyField(
         'Person', related_name='scriptwriter_of', null=True)
 
     folder = models.ForeignKey(Folder, null=True, blank=True)
@@ -106,6 +106,9 @@ class Volume(Model):
 class Person(Model):
     name = models.CharField(_('Name'), max_length=256)
     slug = models.SlugField(_('Slug'), blank=True, null=True)
+
+    def __unicode__(self):
+        return u'{}'.format(self.name)
 
     class Meta:
         ordering = ['name']

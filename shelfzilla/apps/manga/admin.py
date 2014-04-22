@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 import reversion
-from .models import Publisher, Series, Volume
+from .models import Publisher, Series, Volume, Person
 
 
 class PublisherAdmin(reversion.VersionAdmin):
@@ -18,6 +18,8 @@ admin.site.register(Publisher, PublisherAdmin)
 class SeriesAdmin(reversion.VersionAdmin):
     list_display = ['name', 'volumes_count']
     prepopulated_fields = {"slug": ("name",)}
+    search_fields = ('name', )
+    search_filters = ('hidden', )
 
     def volumes_count(self, obj):
         return obj.volumes.distinct('number').count()
@@ -31,3 +33,9 @@ class VolumeAdmin(reversion.VersionAdmin):
     pass
 
 admin.site.register(Volume, VolumeAdmin)
+
+
+class PersonAdmin(reversion.VersionAdmin):
+    pass
+
+admin.site.register(Person, PersonAdmin)
