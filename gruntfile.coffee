@@ -10,7 +10,7 @@ module.exports = (grunt) ->
         css_dest: 'static_components/css'
         options:
           packageSpecific:
-            bootflatv2:
+            Bootflat:
               dest: 'static_components/fonts',
               files: [
                 'css/bootstrap.min.css',
