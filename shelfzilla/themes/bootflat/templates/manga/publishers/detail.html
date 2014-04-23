@@ -50,6 +50,23 @@
                             <td>{{ series.finished|yesno|capfirst }}</td>
                         </tr>
                         {% endfor %}
+                        <tr>
+                            <td colspan="4"><strong>{% trans "Original series" %}</strong></td>
+                        </tr>
+                        {% for series in item.original_series.all %}
+                        <tr>
+                            <td>
+                                {% if series.slug %}
+                                <a href="{% url 'series.detail' series.pk series.slug %}" data-pjax>{{ series.name }}</a>
+                                {% else %}
+                                <a href="{% url 'series.detail' series.pk %}" data-pjax>{{ series.name }}</a>
+                                {% endif %}
+                            </td>
+                            <td>{{ series.volumes.count }}</td>
+                            <td>{{ series.finished|yesno|capfirst }}</td>
+                        </tr>
+                        {% endfor %}
+
                     </tbody>
                 </table>
             </div>

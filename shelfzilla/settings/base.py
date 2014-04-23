@@ -170,20 +170,29 @@ THUMBNAIL_PROCESSORS = (
 COVER_FOLDER_PK = 1
 COVER_FOLDER_OWNER_PK = 1
 
-STORAGES = {
+FILER_STORAGES = {
     'public': {
         'main': {
             'ENGINE': 'django.core.files.storage.FileSystemStorage',
-            'OPTIONS': {},
-            'UPLOAD_TO': 'shelfzilla.utils.generate_randomized',
-            'UPLOAD_TO_PREFIX': 'public',
+            'OPTIONS': {
+                'location': os.path.abspath(
+                    os.path.join(MEDIA_ROOT, 'filer/public/')),
+                'base_url': '/files/',
+            },
+            'UPLOAD_TO': 'shelfzilla.utils.filer_generate_randomized',
+            'UPLOAD_TO_PREFIX': '',
         },
         'thumbnails': {
             'ENGINE': 'django.core.files.storage.FileSystemStorage',
-            'OPTIONS': {},
-            'THUMBNAIL_OPTIONS': {
-                'base_dir': 'public_thumbnails',
+            'OPTIONS': {
+                'location': os.path.abspath(
+                    os.path.join(MEDIA_ROOT, 'filer/public/')),
+                'base_url': '/files/',
             },
+            'THUMBNAIL_OPTIONS': {
+                'base_dir': 'thumbnails',
+            },
+            'UPLOAD_TO_PREFIX': '',
         },
     },
     'private': {
@@ -191,17 +200,17 @@ STORAGES = {
             'ENGINE': 'filer.storage.PrivateFileSystemStorage',
             'OPTIONS': {
                 'location': os.path.abspath(
-                    os.path.join(MEDIA_ROOT, '../smedia/private')),
+                    os.path.join(MEDIA_ROOT, 'filer/private')),
                 'base_url': '/smedia/private/',
             },
-            'UPLOAD_TO': 'shelfzilla.utils.generate_randomized',
+            'UPLOAD_TO': 'shelfzilla.utils.filer_generate_randomized',
             'UPLOAD_TO_PREFIX': '',
         },
         'thumbnails': {
             'ENGINE': 'filer.storage.PrivateFileSystemStorage',
             'OPTIONS': {
                 'location': os.path.abspath(
-                    os.path.join(MEDIA_ROOT, '../smedia/private_thumbnails')),
+                    os.path.join(MEDIA_ROOT, 'filer/private_thumbnails')),
                 'base_url': '/smedia/private_thumbnails/',
             },
             'THUMBNAIL_OPTIONS': {},

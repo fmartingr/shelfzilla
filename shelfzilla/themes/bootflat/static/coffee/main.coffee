@@ -33,10 +33,10 @@ $ ->
     window.imageLoad(document)
 
     # Background
-    $.vegas
-        src: '/static/backgrounds/shelves.jpg'
-        fade: 1200
-        #complete: -> NProgress.done()
+    #$.vegas
+    #    src: '/static/backgrounds/shelves.jpg'
+    #    fade: 1200
+    #    #complete: -> NProgress.done()
 
     # PJAX
     if $.support.pjax
@@ -44,6 +44,13 @@ $ ->
             elem = $(@)
             pjax = elem.data('pjax')
             push = true
+
+            nav_element = elem.closest('[data-pjax-nav]')
+
+            console.log nav_element
+            nav_element.siblings('.active').removeClass('active')
+            nav_element.addClass('active')
+
             if elem.is('[pjax-nopush]')
                 push = false
             if not pjax

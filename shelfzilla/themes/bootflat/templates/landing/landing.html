@@ -7,3 +7,21 @@
     <h1>ShelfZilla</h1>
 </div>
 {% endblock %}
+
+{% block extra_css %}
+<style type="text/css">
+body { background-image: none !important; }
+</style>
+{% endblock %}
+
+
+{% block extra_js %}
+<script type="text/javascript">
+    $(function() {
+        $.vegas({
+            src: '/static/backgrounds/shelves.jpg',
+            fade: 1200
+        })
+    });
+</script>
+{% endblock %}

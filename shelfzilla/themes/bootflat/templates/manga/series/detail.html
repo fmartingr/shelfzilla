@@ -13,38 +13,81 @@
                     <h1 class="panel-title panel-title-alt text-center">{{ item.name }}</h1>
                 </div>
                 -->
-                {% if item.cover %}
+                {% if item.last_volume_cover %}
                 <div class="panel-body text-center">
-                    <img src="{{ item.cover.url }}" class="max-width-80" />
+                    <img src="{{ item.last_volume_cover.url }}" class="max-width-80" />
                 </div>
                 {% endif %}
                 <ul class="list-group">
                     <li class="list-group-item">
-                        <strong>{% trans "Volumes" %}</strong>: {{ item.volumes.count }}
-                    </li>
-                    <li class="list-group-item">
-                        <strong>{% trans "Finished" %}</strong>: {{ item.finished|yesno|capfirst }}
+                        <strong>{% trans "Status" %}</strong>
+                        {% if item.finished %}
+                        <span class="badge badge-success">{% trans "Finished" %}
+                        {% else %}
+                        <span class="badge badge-warning">{% trans "Open" %}
+                        {% endif %}
                     </li>
                 </ul>
             </div>
-            {% if item.publishers %}
+            {% if item.art.count %}
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h2 class="panel-title text-center">{% trans "Publishers" %}</h2>
+                    <h2 class="panel-title text-center">{% trans "Art" %}</h2>
                 </div>
                 <ul class="list-group">
-                    {% for publisher in item.publishers %}
+                    {% for person in item.art.all %}
                     <li class="list-group-item">
-                        {% if publisher.slug %}
-                        <a href="{% url 'publishers.detail' publisher.pk publisher.slug %}" data-pjax>{{ publisher.name }}</a>
-                        {% else %}
-                        <a href="{% url 'publishers.detail' publisher.pk %}" data-pajax>{{ publisher.name }}</a>
-                        {% endif %}
+                        {{ person.name }}
                     </li>
                     {% endfor %}
                 </ul>
             </div>
             {% endif %}
+
+            {% if item.story.count %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title text-center">{% trans "Story" %}</h2>
+                </div>
+                <ul class="list-group">
+                    {% for person in item.story.all %}
+                    <li class="list-group-item">
+                        {{ person.name }}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title text-center">{% trans "Publishers" %}</h2>
+                </div>
+                <ul class="list-group">
+                    {% if item.original_publisher %}
+                    <li class="list-group-item">
+                        {% trans "Original publisher" %}:
+                        {% if publisher.slug %}
+                        <a href="{% url 'publishers.detail' item.original_publisher.pk item.original_publisher.slug %}" data-pjax>{{ item.original_publisher.name }}</a>
+                        {% else %}
+                        <a href="{% url 'publishers.detail' item.original_publisher.pk %}" data-pajax>{{ item.original_publisher.name }}</a>
+                        {% endif %}
+                    </li>
+                    {% endif %}
+                    {% if item.publishers %}
+                        {% for publisher in item.publishers %}
+                        <li class="list-group-item">
+                            <span class="badge badge-default">{{ publisher.series_volumes.count }}</span>
+                            {% if publisher.slug %}
+                            <a href="{% url 'publishers.detail' publisher.pk publisher.slug %}" data-pjax>{{ publisher.name }}</a>
+                            {% else %}
+                            <a href="{% url 'publishers.detail' publisher.pk %}" data-pajax>{{ publisher.name }}</a>
+                            {% endif %}
+                        </li>
+                        {% endfor %}
+                    {% endif %}
+                </ul>
+            </div>
         </div>
         <div class="col-md-9">
            <div class="panel panel-primary">
@@ -58,7 +101,7 @@
             </div>
             {% endif %}
             <div class="row">
-                {% for volume in item.volumes.all %}
+                {% for volume in item.volumes_by_publisher.all %}
                 <div class="col-sm-2" data-pjax-container="v{{ volume.pk }}">
                     {% include "manga/series/includes/volume.html" with volume=volume user=user %}
                 </div>

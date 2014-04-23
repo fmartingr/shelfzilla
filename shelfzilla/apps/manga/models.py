@@ -20,6 +20,13 @@ class Publisher(Model):
     def __unicode__(self):
         return u'{}'.format(self.name)
 
+    def get_series_volumes(self, series):
+        try:
+            series = self.series.get(pk=series.pk)
+            return series.volumes.filter(publisher=self)
+        except Series.DoesNotExist:
+            return []
+
     @property
     def series(self):
         result = []
@@ -60,6 +67,14 @@ class Series(Model):
 
     def __unicode__(self):
         return u'{}'.format(self.name)
+
+    @property
+    def volumes_by_publisher(self):
+        return self.volumes.order_by('publisher__name', 'number')
+
+    @property
+    def last_volume_cover(self):
+        return self.volumes.filter(cover__isnull=False).last().cover
 
     @property
     def publishers(self):

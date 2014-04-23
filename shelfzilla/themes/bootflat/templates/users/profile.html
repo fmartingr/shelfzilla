@@ -23,13 +23,13 @@
                     <img src="{{ item.avatar }}" class="max-width-100" />
                 </div>
                 <div class="list-group">
-                    <a href="{% url 'profile' %}" data-pjax class="list-group-item active">
+                    <a data-pjax-nav href="{% url 'profile' %}" data-pjax class="list-group-item active">
                         {% trans "Summary" %}</a>
-                    <a href="{% url 'profile' 'collection' %}" data-pjax="profile" class="list-group-item">
+                    <a data-pjax-nav href="{% url 'profile' 'collection' %}" data-pjax="profile" class="list-group-item">
                         {% trans "Collection" %}</a>
-                    <a href="{% url 'profile' 'wishlist' %}" data-pjax="profile" class="list-group-item">
+                    <a data-pjax-nav href="{% url 'profile' 'wishlist' %}" data-pjax="profile" class="list-group-item">
                         {% trans "Wishlist" %}</a>
-                    <a href="{% url 'profile' 'achievements' %}" data-pjax="profile" class="list-group-item">
+                    <a data-pjax-nav href="{% url 'profile' 'achievements' %}" data-pjax="profile" class="list-group-item">
                         {% trans "Achievements" %}</a>
                 </div>
             </div>

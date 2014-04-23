@@ -27,6 +27,22 @@ if settings.DEBUG:
             'django.views.static.serve',
             {'document_root': settings.MEDIA_ROOT}
         ),
+        (
+            r'^files/(?P<path>.*)$',
+            'django.views.static.serve',
+            {
+                'document_root': settings.FILER_STORAGES['public']['main']['OPTIONS']['location']
+            }
+        ),
+        (
+            r'^files/thumbnails/(?P<path>.*)$',
+            'django.views.static.serve',
+            {
+                'document_root': settings.FILER_STORAGES['public']['thumbnails']['OPTIONS']['location']
+            }
+        ),
+
+
     )
 
     if 'rosetta' in settings.INSTALLED_APPS:
