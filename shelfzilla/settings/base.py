@@ -32,7 +32,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
-    # Longer username to use the email!
     'longerusername',
 
     # Admin

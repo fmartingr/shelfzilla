@@ -4,18 +4,18 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class LoginForm(forms.Form):
-    email = forms.EmailField(max_length=75)
+    username = forms.CharField(max_length=75, label=_('Username'))
     password = forms.CharField(
-        max_length=255, widget=forms.PasswordInput)
+        max_length=255, widget=forms.PasswordInput, label=_('Password'))
 
     def authenticate(self):
         result = None
 
         if self.cleaned_data:
-            email = self.cleaned_data['email']
+            username = self.cleaned_data['username']
             password = self.cleaned_data['password']
 
-            result = authenticate(username=email, password=password)
+            result = authenticate(username=username, password=password)
 
         return result
 

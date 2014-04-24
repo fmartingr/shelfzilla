@@ -24,21 +24,19 @@ $(function(){
         <h3 class="panel-title">{% trans "Access the site" %}</h3>
     </div>
     <div class="panel-body">
-        <form method="post" class="form form-horizontal">
+        <form method="post" class="form">
             {% csrf_token %}
             {% for field in login_form %}
-            <div class="form-group {% if field.errors %}has-error has-feedback{% endif %} form-horizontal">
                 {% for error in field.errors %}
                 <p><span class="label label-danger">{{ error|striptags }}</span></p>
                 {% endfor %}
-                <label class="col-sm-2 control-label">{{ field.label }}</label>
-                <div class="col-sm-offset-2 col-sm-8 field-{{ field.html_name }}">
+                <div class="form-group {% if field.errors %}has-error has-feedback{% endif %}">
+                    <label class="control-label">{{ field.label }}</label>
                     <input type="{{ field.field.widget.input_type }}" name="{{ field.html_name }}" class="form-control {{ field.classes }}" />
                     {% if field.errors %}
                     <span class="glyphicon glyphicon-remove form-control-feedback"></span>
                     {% endif %}
                 </div>
-            </div>
             {% endfor %}
             <button class="btn btn-primary" type="submit">{% trans "Login" %}</button>
         </form>

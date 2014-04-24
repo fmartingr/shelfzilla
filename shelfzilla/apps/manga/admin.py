@@ -30,11 +30,11 @@ admin.site.register(Series, SeriesAdmin)
 
 
 class VolumeAdmin(reversion.VersionAdmin):
-    list_display_links = ('number', )
-    list_display = ('series', 'number', )
+    # list_display_links = ('number', )
+    list_display = ('series', 'number', 'release_date',)
     search_fields = ('number', 'series__name', )
-    list_filter = ('series', )
-    list_editable = ('series', )
+    # list_filter = ('series', )
+    # list_editable = ('series', )
 
 admin.site.register(Volume, VolumeAdmin)
 
