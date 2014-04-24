@@ -1,4 +1,6 @@
-{% load i18n %}
+{% load i18n solo_tags %}
+{% get_solo 'config.SiteConfiguration' as site_config %}
+{% get_solo 'config.SocialConfiguration' as social_config %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -78,5 +80,9 @@
 
     <script src="/static/js/site.js"></script>
     {% block extra_js %}{% endblock %}
+
+    {% if social_config.google_analytics %}
+    {% include "_includes/google_analytics.html" %}
+    {% endif %}
 </body>
 </html>

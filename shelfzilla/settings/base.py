@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     # Admin
     'suit',
     'django.contrib.admin',
+    'solo',
 
     # Django
     'django.contrib.auth',
@@ -56,6 +57,7 @@ INSTALLED_APPS = (
     'south',
 
     # Apps
+    'shelfzilla.apps.config',
     'shelfzilla.apps.users',
     'shelfzilla.apps.homepage',
     'shelfzilla.apps.landing',
