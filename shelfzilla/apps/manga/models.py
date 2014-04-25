@@ -123,7 +123,10 @@ class Volume(Model):
     release_date = models.DateField(_('Release date'), null=True)
 
     def __unicode__(self):
-        return u'{} #{}'.format(self.series.name, self.number)
+        if self.name:
+            return u'{} {}'.format(self.series.name, self.name)
+        else:
+            return u'{} #{}'.format(self.series.name, self.number)
 
     class Meta:
         ordering = ['series__name', 'number']

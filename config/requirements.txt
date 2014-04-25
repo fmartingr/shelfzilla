@@ -3,7 +3,7 @@ Django==1.6.2
 South==0.8.4
 
 # Admin
-django-suit==0.2.6
+django-suit==0.2.8
 django-reversion==1.8.0
 django-solo==1.0.4
 

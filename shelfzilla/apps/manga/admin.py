@@ -24,6 +24,27 @@ class PublisherAdmin(reversion.VersionAdmin):
     prepopulated_fields = {"slug": ("name",)}
     actions = (mark_for_review, unmark_for_review, )
 
+    suit_form_tabs = (
+        ('general', _('General')),
+        ('review', _('Review')),
+        ('advanced', _('Advanced')),
+    )
+
+    fieldsets = [
+        (None, {
+            'classes': ('suit-tab suit-tab-general',),
+            'fields': ('name', 'slug', 'url')
+        }),
+        (None, {
+            'classes': ('suit-tab suit-tab-review',),
+            'fields': ('for_review', 'for_review_comment')
+        }),
+        (None, {
+            'classes': ('suit-tab suit-tab-advanced',),
+            'fields': ('hidden', )
+        }),
+    ]
+
     def series_count(self, obj):
         return obj.series.count()
     series_count.short_description = _('Series')
@@ -37,6 +58,33 @@ class SeriesAdmin(reversion.VersionAdmin):
     search_fields = ('name', )
     search_filters = ('hidden', )
     actions = (mark_for_review, unmark_for_review, )
+
+    suit_form_tabs = (
+        ('general', _('General')),
+        ('volumes', _('Volumes')),
+        ('review', _('Review')),
+        ('advanced', _('Advanced')),
+    )
+
+    fieldsets = [
+        (None, {
+            'classes': ('suit-tab suit-tab-general',),
+            'fields': ('name', 'slug', 'cover', 'summary', 'finished',
+                       'original_publisher', 'art', 'story', )
+        }),
+        (None, {
+            'classes': ('suit-tab suit-tab-review',),
+            'fields': ('for_review', 'for_review_comment')
+        }),
+        (None, {
+            'classes': ('suit-tab suit-tab-advanced',),
+            'fields': ('hidden', 'folder')
+        }),
+    ]
+
+    suit_form_includes = (
+        ('_admin/manga/series/includes/volumes.html', 'top', 'volumes'),
+    )
 
     def volumes_count(self, obj):
         return obj.volumes.count()
@@ -53,6 +101,29 @@ class VolumeAdmin(reversion.VersionAdmin):
     # list_editable = ('series', )
     actions = ('change_series', mark_for_review, unmark_for_review, )
 
+    suit_form_tabs = (
+        ('general', _('General')),
+        ('review', _('Review')),
+        ('advanced', _('Advanced')),
+    )
+
+    fieldsets = [
+        (None, {
+            'classes': ('suit-tab suit-tab-general',),
+            'fields': ('series', 'publisher', 'number', 'name', 'cover',
+                       'isbn_10', 'isbn_13', 'retail_price', 'pages',
+                       'release_date', )
+        }),
+        (None, {
+            'classes': ('suit-tab suit-tab-review',),
+            'fields': ('for_review', 'for_review_comment')
+        }),
+        (None, {
+            'classes': ('suit-tab suit-tab-advanced',),
+            'fields': ('hidden', )
+        }),
+    ]
+
     def change_series(self, request, queryset):
         selected = request.POST.getlist(admin.ACTION_CHECKBOX_NAME)
         return HttpResponseRedirect(
@@ -67,6 +138,25 @@ admin.site.register(Volume, VolumeAdmin)
 
 
 class PersonAdmin(reversion.VersionAdmin):
-    pass
+    suit_form_tabs = (
+        ('general', _('General')),
+        ('review', _('Review')),
+        ('advanced', _('Advanced')),
+    )
+
+    fieldsets = [
+        (None, {
+            'classes': ('suit-tab suit-tab-general',),
+            'fields': ('name', )
+        }),
+        (None, {
+            'classes': ('suit-tab suit-tab-review',),
+            'fields': ('for_review', 'for_review_comment')
+        }),
+        (None, {
+            'classes': ('suit-tab suit-tab-advanced',),
+            'fields': ('hidden', )
+        }),
+    ]
 
 admin.site.register(Person, PersonAdmin)
