@@ -1,15 +1,28 @@
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
-from django.contrib.contenttypes.models import ContentType
 from django.http import HttpResponseRedirect
+from django.contrib import messages
+
 import reversion
 from .models import Publisher, Series, Volume, Person
 
 
+# Actions
+def mark_for_review(self, request, queryset):
+    queryset.update(for_review=True)
+    messages.success(request, _('Items marked for review'))
+
+def unmark_for_review(self, request, queryset):
+    queryset.update(for_review=False)
+    messages.success(request, _('Items unmarked for review'))
+
+
+# Modeladmin
 class PublisherAdmin(reversion.VersionAdmin):
     list_display = ['name', 'series_count']
     prepopulated_fields = {"slug": ("name",)}
+    actions = (mark_for_review, unmark_for_review, )
 
     def series_count(self, obj):
         return obj.series.count()
@@ -23,6 +36,7 @@ class SeriesAdmin(reversion.VersionAdmin):
     prepopulated_fields = {"slug": ("name",)}
     search_fields = ('name', )
     search_filters = ('hidden', )
+    actions = (mark_for_review, unmark_for_review, )
 
     def volumes_count(self, obj):
         return obj.volumes.count()
@@ -37,7 +51,7 @@ class VolumeAdmin(reversion.VersionAdmin):
     search_fields = ('number', 'series__name', )
     list_filter = ('series', 'for_review', )
     # list_editable = ('series', )
-    actions = ['change_series']
+    actions = ('change_series', mark_for_review, unmark_for_review, )
 
     def change_series(self, request, queryset):
         selected = request.POST.getlist(admin.ACTION_CHECKBOX_NAME)

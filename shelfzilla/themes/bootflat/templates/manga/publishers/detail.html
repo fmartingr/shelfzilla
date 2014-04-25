@@ -1,5 +1,5 @@
 {% extends '_layout.html'|pjax:request %}
-{% load i18n %}
+{% load i18n thumbnail %}
 
 {% block page_title %}{{ block.super }} | {{ item.name }}{% endblock %}
 
@@ -9,6 +9,11 @@
         <div class="col-md-3">
             <div class="panel panel-primary">
                 <ul class="list-group">
+                    {% if item.for_review and user.is_staff %}
+                    <a class="list-group-item list-group-item-warning text-center">
+                        {% trans "Requires review" %}
+                    </a>
+                    {% endif %}
                     <li class="list-group-item">
                         <strong>{% trans "Series" %}</strong>: {{ item.series.count }}
                     </li>
@@ -29,46 +34,24 @@
                     <h1 class="panel-title panel-title-alt text-center">{{ item.name }}</h1>
                 </div>
             </div>
-            <div class="series-list panel">
-                <table class="table table-bordered">
-                    <thead>
-                        <th>{% trans "Name" %}</th>
-                        <th>{% trans "Volumes" %}</th>
-                        <th>{% trans "Finished" %}</th>
-                    </thead>
-                    <tbody>
-                        {% for series in item.series %}
-                        <tr>
-                            <td>
-                                {% if series.slug %}
-                                <a href="{% url 'series.detail' series.pk series.slug %}" data-pjax>{{ series.name }}</a>
-                                {% else %}
-                                <a href="{% url 'series.detail' series.pk %}" data-pjax>{{ series.name }}</a>
-                                {% endif %}
-                            </td>
-                            <td>{{ series.volumes.count }}</td>
-                            <td>{{ series.finished|yesno|capfirst }}</td>
-                        </tr>
-                        {% endfor %}
-                        <tr>
-                            <td colspan="4"><strong>{% trans "Original series" %}</strong></td>
-                        </tr>
-                        {% for series in item.original_series.all %}
-                        <tr>
-                            <td>
-                                {% if series.slug %}
-                                <a href="{% url 'series.detail' series.pk series.slug %}" data-pjax>{{ series.name }}</a>
-                                {% else %}
-                                <a href="{% url 'series.detail' series.pk %}" data-pjax>{{ series.name }}</a>
-                                {% endif %}
-                            </td>
-                            <td>{{ series.volumes.count }}</td>
-                            <td>{{ series.finished|yesno|capfirst }}</td>
-                        </tr>
-                        {% endfor %}
-
-                    </tbody>
-                </table>
+            <div class="series-list">
+                <div class="row">
+                    {% for series in item.series %}
+                    <div class="col-sm-3">
+                        <div class="well text-center">
+                            {% if series.for_review and user.is_staff %}
+                            <span class="label label-warning">{% trans "Requires review" %}</span>
+                            {% endif %}
+                            <h4><a href="{% url 'series.detail' series.pk series.slug %}">{{ series.name }}</a></h4>
+                            <img class="volume-cover" src="{% thumbnail series.last_volume_cover 200x200 %}" />
+                        </div>
+                    </div>
+                    {% if forloop.counter|divisibleby:4 %}
+                    </div>
+                    <div class="row">
+                    {% endif %}
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>
