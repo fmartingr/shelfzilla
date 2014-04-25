@@ -50,6 +50,9 @@ $ ->
             nav_element.siblings('.active').removeClass('active')
             nav_element.addClass('active')
 
+            if elem.is('[data-pjax-unnav]')
+                $('[data-pjax-nav].active').removeClass('active')
+
             if elem.is('[pjax-nopush]')
                 push = false
             if not pjax
