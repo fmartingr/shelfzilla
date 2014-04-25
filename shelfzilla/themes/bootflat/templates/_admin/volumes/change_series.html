@@ -1,0 +1,31 @@
+{% extends "admin/base_site.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Change volume series" %} | {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="alert alert-block alert-info">
+    <h4>{% trans "Change volume series" %}</h4>
+    <p>{% trans "You are about to change the series of this volumes:" %}</p>
+    <ul>
+        {% for volume in volumes %}
+        <li><a href="/admin/manga/volume/{{ volume.pk }}/">{{ volume.series }} {% if volume.number %}#{{ volume.number }}{% endif %}
+            {% if volume.name %}- {{ volume.name }}{% endif %}</a></li>
+        {% endfor %}
+    </ul>
+    <br />
+    <form method="post" class="form">
+        {% csrf_token %}
+        <div class="form-control">
+            <label>{% trans "Change to: " %}</label>
+            <select name="series_pk">
+                {% for s in series %}
+                <option value="{{ s.pk }}">{{ s.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <br />
+        <button class="btn btn-info" type="submit">{% trans "Change" %}</button>
+    </form>
+</div>
+{% endblock %}

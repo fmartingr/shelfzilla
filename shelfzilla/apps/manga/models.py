@@ -1,7 +1,8 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, post_delete
+from django.utils.text import slugify
 from filer.fields.image import FilerImageField
 from filer.models.foldermodels import Folder
 
@@ -95,7 +96,8 @@ class Series(Model):
 
 
 class Volume(Model):
-    number = models.IntegerField(_('Number'))
+    number = models.IntegerField(_('Number'), null=True, blank=True)
+    name = models.CharField(_('Name'), max_length=64, null=True, blank=True)
     series = models.ForeignKey(Series, related_name="volumes")
     publisher = models.ForeignKey(Publisher, related_name="volumes")
     cover = FilerImageField(null=True, blank=True)
@@ -105,8 +107,9 @@ class Volume(Model):
         _('ISBN-13'), max_length=13, blank=True, null=True)
 
     retail_price = models.DecimalField(
-        _('Retail price'), max_digits=5, decimal_places=2, null=True)
-    pages = models.IntegerField(_('Pages'), null=True)
+        _('Retail price'), max_digits=5, decimal_places=2,
+        null=True, blank=True)
+    pages = models.IntegerField(_('Pages'), null=True, blank=True)
     release_date = models.DateField(_('Release date'), null=True)
 
     def __unicode__(self):
@@ -199,11 +202,25 @@ def volume_check_filer(sender, instance, created, **kwargs):
             instance.cover.save()
 
         # Check filename
-        cover_name = '{:03}'.format(instance.number)
+        if instance.name:
+            cover_name = slugify(instance.name)
+        elif instance.number:
+            cover_name = '{:03}'.format(instance.number)
         if instance.cover.name != cover_name:
             instance.cover.name = cover_name
             instance.cover.save()
 
 
+def series_delete_folder(sender, instance, using, **kwargs):
+    if instance.folder:
+        instance.folder.delete()
+
+
+def volume_delete_cover(sender, instance, **kwargs):
+    if instance.cover:
+        instance.cover.delete()
+
 post_save.connect(series_check_filer, sender=Series)
 post_save.connect(volume_check_filer, sender=Volume)
+post_delete.connect(series_delete_folder, sender=Series)
+post_delete.connect(volume_delete_cover, sender=Volume)

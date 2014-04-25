@@ -56,6 +56,7 @@ INSTALLED_APPS = (
     'south',
 
     # Apps
+    'shelfzilla.apps._admin',
     'shelfzilla.apps.config',
     'shelfzilla.apps.users',
     'shelfzilla.apps.homepage',
