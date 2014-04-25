@@ -69,6 +69,16 @@ class Series(Model):
     def __unicode__(self):
         return u'{}'.format(self.name)
 
+    def have_review_pending(self):
+        if self.for_review:
+            return True
+
+        for vol in self.volumes.all():
+            if vol.for_review:
+                return True
+
+        return False
+
     @property
     def volumes_by_publisher(self):
         return self.volumes.order_by('publisher__name', 'number')

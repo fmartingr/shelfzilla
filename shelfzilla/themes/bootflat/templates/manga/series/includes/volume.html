@@ -20,13 +20,16 @@
         </a>
         {% endif %}
     </div>
-    <div class="text-center">
+    <div class="text-center volume-content">
+        {% if volume.for_review and user.is_staff %}
+        <span class="label label-warning">{% trans "Requires review" %}</span>
+        {% endif %}
         {% if volume.number %}
         <div><strong>#{{ volume.number }}</strong></div>
         {% endif %}
         {% if volume.name %}
         <div><strong>{{ volume.name }}</strong></div>
         {% endif %}
-        <img src="{% thumbnail volume.cover 150x150 %}" class="max-width-80" />
     </div>
+    <img src="{% thumbnail volume.cover 150x150 %}" class="volume-cover max-width-80" />
 </div>

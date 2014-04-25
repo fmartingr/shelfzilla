@@ -7,18 +7,18 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3">
-            <div class="panel panel-primary">
-                <!--
-                <div class="panel-heading">
-                    <h1 class="panel-title panel-title-alt text-center">{{ item.name }}</h1>
-                </div>
-                -->
+            <div class="panel panel-warning">
                 {% if item.last_volume_cover %}
                 <div class="panel-body text-center">
                     <img src="{{ item.last_volume_cover.url }}" class="max-width-80" />
                 </div>
                 {% endif %}
                 <ul class="list-group">
+                    {% if item.for_review and user.is_staff %}
+                    <a class="list-group-item list-group-item-warning text-center">
+                        {% trans "Requires review" %}
+                    </a>
+                    {% endif %}
                     <li class="list-group-item">
                         <strong>{% trans "Status" %}</strong>
                         {% if item.finished %}
@@ -90,7 +90,7 @@
             </div>
         </div>
         <div class="col-md-9">
-           <div class="panel panel-primary">
+            <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h1 class="panel-title panel-title-alt text-center">{{ item.name }}</h1>
                 </div>
