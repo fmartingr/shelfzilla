@@ -47,7 +47,6 @@ $ ->
 
             nav_element = elem.closest('[data-pjax-nav]')
 
-            console.log nav_element
             nav_element.siblings('.active').removeClass('active')
             nav_element.addClass('active')
 
@@ -76,6 +75,9 @@ $('[data-toggle="tooltip"]').tooltip();
 $(document).on 'pjax:start', -> NProgress.start()
 $(document).on 'pjax:end', (event) ->
     window.imageLoad(event.target)
+
+    if ga?
+        ga('send', 'pageview')
 
     if window._updateMessages
         window.updateMessages()
