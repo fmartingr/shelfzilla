@@ -1,0 +1,93 @@
+#!/bin/sh
+#
+# Shefzilla Init script Adapted
+## Nginx   
+## FactCGI 
+#
+# chkconfig:   - 85 15
+# 
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+function check ()
+{
+    error=`echo -e "[\e[0;31mError\e[0m]"`
+    ok=`echo -e "[\e[0;32mOk\e[0m]"`
+
+    if [ $1 != 0 ];then
+        echo $2": "$error
+    else
+        echo $2": "$ok
+    fi  
+}
+
+function validations() {
+    ## Variables
+    INSTANCE=shelfzilla
+    BASE_PATH="/opt/shelfzilla"
+    PID_PATH=/var/run/shelfzilla
+    PID_FILE=${PID_PATH}/${INSTANCE}.pid
+    P_USER="shelfzilla"
+    LOG_PATH=/var/log/shefzilla
+    LOG_FILE=shelfzilla.log
+    FCGI_PORT=8080
+    FCGI_IP=127.0.0.1
+
+    ## Folders
+    [ -d "${PID_PATH}" ] || mkdir -p "${PID_PATH}"
+    [ -d "${LOG_PATH}" ] || mkdir -p "${LOG_PATH}"
+
+    chown -R "${P_USER}:${P_USER}" $LOG_PATH
+
+}
+
+function status(){
+    if [ "$1" == "start" ];then
+        [ -z "`pidof nginx`" ] && service nginx start
+        #[ -z "`pidof python2.7`" ] && runuser -l shelfzilla -c "python2.7 ${BASE_PATH}/manage.py runfcgi host=${FCGI_IP} port=${FCGI_PORT}"
+        [ -z "`pidof python2.7`" ] && python2.7 ${BASE_PATH}/manage.py runfcgi host=${FCGI_IP} port=${FCGI_PORT}
+        check $? "FCGI"
+
+    elif [ "$1" == "stop" ];then
+        [ -z "`pidof nginx`" ] || service nginx stop
+        [ -z "`pidof python2.7`" ] || pkill python2.7
+        check $? "FCGI"
+
+    else
+        service nginx status
+        FCGI=`pidof python2.7`
+        if [ -z "${FCGI}" ];then
+            echo -n "FCGI Server is down"
+            echo ""
+        else
+            echo -n "FCGI Server is up (${FCGI})"
+            echo ""
+        fi
+    fi
+
+}
+
+function restart() {
+    status "stop"
+    status "start"
+}
+
+validations
+case "$1" in
+    start)
+        status "start" 
+        ;;
+    stop)
+        status "stop"
+        ;;
+    restart)
+        restart
+        ;;
+    status)
+        status
+        ;;
+    *)
+        echo $"Usage: $0 {start|stop|restart|status}"
+        exit 2
+esac
