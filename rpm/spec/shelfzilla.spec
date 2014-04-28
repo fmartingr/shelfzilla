@@ -38,7 +38,7 @@ find %{_gitdir} -depth -name .git -exec rm -rf {} \;
 # Make structure
 [ -d $RPM_BUILD_ROOT%{_app_dir} ] || mkdir -p $RPM_BUILD_ROOT%{_app_dir}
 [ -d $RPM_BUILD_ROOT%{_app_dir}/config ] || mkdir -p $RPM_BUILD_ROOT%{_app_dir}/config
-[ -d $RPM_BUILD_ROOT%{_init_path} ] || mkdir -p $RPM_BUILD_ROOT%{_init_path}
+[ -d $RPM_BUILD_ROOT%{_app_dir}/init ] || mkdir -p $RPM_BUILD_ROOT%{_app_dir}/init
 
 # Copy Source Code
 cp -r %{_gitdir}/shelfzilla $RPM_BUILD_ROOT%{_app_dir}
@@ -47,12 +47,15 @@ cp -r %{_gitdir}/config/requirements.txt $RPM_BUILD_ROOT%{_app_dir}/config
 cp -r %{_gitdir}/*.json $RPM_BUILD_ROOT%{_app_dir}/
 cp -r %{_gitdir}/*.py $RPM_BUILD_ROOT%{_app_dir}/
 cp -r %{_gitdir}/gruntfile.coffee $RPM_BUILD_ROOT%{_app_dir}/
-cp -r %{_gitdir}/rpm/scripts/shelfzilla $RPM_BUILD_ROOT%{_init_path}
+cp -r %{_gitdir}/rpm/scripts/shelfzilla $RPM_BUILD_ROOT%{_app_dir}/init/
 
 # -------------------------------------------------------------------------------------------- #
 # post-install section:
 # -------------------------------------------------------------------------------------------- #
 %post
+## Install init script
+mv %{_app_dir}/init/shelfzilla %{_init_path}/
+
 ## Npm install
 cd %{_app_dir} && npm install
 
