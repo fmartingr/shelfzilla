@@ -15,6 +15,7 @@ Vendor: FDB
 Shelfzilla is a website which save all your Manga
 
 %define _app_dir /opt/shelfzilla
+%define _init_path /etc/init.d
 %define _binaries_in_noarch_packages_terminate_build 0
 
 # Do not check unpackaged files
@@ -37,7 +38,7 @@ find %{_gitdir} -depth -name .git -exec rm -rf {} \;
 # Make structure
 [ -d $RPM_BUILD_ROOT%{_app_dir} ] || mkdir -p $RPM_BUILD_ROOT%{_app_dir}
 [ -d $RPM_BUILD_ROOT%{_app_dir}/config ] || mkdir -p $RPM_BUILD_ROOT%{_app_dir}/config
-[ -d $RPM_BUILD_ROOT%{_app_dir}/static_components ] || mkdir -p $RPM_BUILD_ROOT%{_app_dir}/static_components
+[ -d $RPM_BUILD_ROOT%{_init_path} ] || mkdir -p $RPM_BUILD_ROOT%{_init_path}
 
 # Copy Source Code
 cp -r %{_gitdir}/shelfzilla $RPM_BUILD_ROOT%{_app_dir}
@@ -46,6 +47,7 @@ cp -r %{_gitdir}/config/requirements.txt $RPM_BUILD_ROOT%{_app_dir}/config
 cp -r %{_gitdir}/*.json $RPM_BUILD_ROOT%{_app_dir}/
 cp -r %{_gitdir}/*.py $RPM_BUILD_ROOT%{_app_dir}/
 cp -r %{_gitdir}/gruntfile.coffee $RPM_BUILD_ROOT%{_app_dir}/
+cp -r %{_gitdir}/rpm/scripts/shelfzilla $RPM_BUILD_ROOT%{_init_path}
 
 # -------------------------------------------------------------------------------------------- #
 # post-install section:
@@ -76,6 +78,13 @@ python2.7 manage.py collectstatic --clear --noinput
 # pre-uninstall section:
 # -------------------------------------------------------------------------------------------- #
 %preun
+if [ $1 == 0 ]; then
+echo "Cleaning application files"
+[ -e /etc/logrotate.d/shelzilla ] && rm -fv /etc/logrotate.d/shelfzilla
+[ -e %{_init_path}/shelfzilla ] && rm -fv ∞{_init_path}/shelfzilla
+echo "Uninstall finished"
+
+fi
 
 
 # -------------------------------------------------------------------------------------------- #
@@ -88,5 +97,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %{_app_dir}/*
+%{_init_path/shelfzilla
 
 
