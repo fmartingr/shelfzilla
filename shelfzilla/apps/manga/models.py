@@ -1,3 +1,4 @@
+from uuid import uuid4
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
@@ -215,6 +216,7 @@ def volume_check_filer(sender, instance, created, **kwargs):
             instance.cover.save()
 
         # Check filename
+        cover_name = uuid4()
         if instance.name:
             cover_name = slugify(instance.name)
         elif instance.number:
