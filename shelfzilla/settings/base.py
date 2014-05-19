@@ -54,6 +54,7 @@ INSTALLED_APPS = (
     # DDBB
     'reversion',
     'south',
+    'import_export',
 
     # Apps
     'shelfzilla.apps._admin',

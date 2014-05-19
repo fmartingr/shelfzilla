@@ -21,40 +21,4 @@ INSTALLED_APPS += (
     'rosetta',
 )
 
-# Filer
-STORAGES = {
-    'public': {
-        'main': {
-            'ENGINE': 'django.core.files.storage.FileSystemStorage',
-            'OPTIONS': {},
-            'UPLOAD_TO': 'shelfzilla.utils.generate_randomized',
-            'UPLOAD_TO_PREFIX': 'public',
-        },
-        'thumbnails': {
-            'ENGINE': 'django.core.files.storage.FileSystemStorage',
-            'OPTIONS': {},
-            'THUMBNAIL_OPTIONS': {
-                'base_dir': 'public_thumbnails',
-            },
-        },
-    },
-    'private': {
-        'main': {
-            'ENGINE': 'filer.storage.PrivateFileSystemStorage',
-            'OPTIONS': {
-                'location': os.path.abspath(os.path.join(MEDIA_ROOT, '../smedia/private')),
-                'base_url': '/smedia/private/',
-            },
-            'UPLOAD_TO': 'shelfzilla.utils.generate_randomized',
-            'UPLOAD_TO_PREFIX': '',
-        },
-        'thumbnails': {
-            'ENGINE': 'filer.storage.PrivateFileSystemStorage',
-            'OPTIONS': {
-                'location': os.path.abspath(os.path.join(MEDIA_ROOT, '../smedia/private_thumbnails')),
-                'base_url': '/smedia/private_thumbnails/',
-            },
-            'THUMBNAIL_OPTIONS': {},
-        },
-    },
-}
+FILER_DUMP_PAYLOAD = True

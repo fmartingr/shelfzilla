@@ -3,9 +3,35 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.contrib import messages
-
+from import_export import resources
+from import_export.admin import ImportExportModelAdmin
 import reversion
+
+
 from .models import Publisher, Series, Volume, Person
+
+
+###
+# IMPORT EXPORT RESOURCES
+###
+class PublisherResource(resources.ModelResource):
+    class Meta:
+        model = Publisher
+
+
+class SeriesResource(resources.ModelResource):
+    class Meta:
+        model = Series
+
+
+class VolumeResource(resources.ModelResource):
+    class Meta:
+        model = Volume
+
+
+class PersonResource(resources.ModelResource):
+    class Meta:
+        model = Person
 
 
 # Actions
@@ -13,13 +39,15 @@ def mark_for_review(self, request, queryset):
     queryset.update(for_review=True)
     messages.success(request, _('Items marked for review'))
 
+
 def unmark_for_review(self, request, queryset):
     queryset.update(for_review=False)
     messages.success(request, _('Items unmarked for review'))
 
 
 # Modeladmin
-class PublisherAdmin(reversion.VersionAdmin):
+class PublisherAdmin(ImportExportModelAdmin, reversion.VersionAdmin):
+    resource_class = PublisherResource
     list_display = ['name', 'series_count']
     prepopulated_fields = {"slug": ("name",)}
     actions = (mark_for_review, unmark_for_review, )
@@ -52,7 +80,8 @@ class PublisherAdmin(reversion.VersionAdmin):
 admin.site.register(Publisher, PublisherAdmin)
 
 
-class SeriesAdmin(reversion.VersionAdmin):
+class SeriesAdmin(ImportExportModelAdmin, reversion.VersionAdmin):
+    resource_class = SeriesResource
     list_display = ['name', 'volumes_count']
     prepopulated_fields = {"slug": ("name",)}
     search_fields = ('name', )
@@ -93,7 +122,8 @@ class SeriesAdmin(reversion.VersionAdmin):
 admin.site.register(Series, SeriesAdmin)
 
 
-class VolumeAdmin(reversion.VersionAdmin):
+class VolumeAdmin(ImportExportModelAdmin, reversion.VersionAdmin):
+    resource_class = VolumeResource
     # list_display_links = ('number', )
     list_display = ('series', 'publisher', 'number', 'name', 'release_date',)
     search_fields = ('number', 'series__name', )
@@ -137,7 +167,8 @@ class VolumeAdmin(reversion.VersionAdmin):
 admin.site.register(Volume, VolumeAdmin)
 
 
-class PersonAdmin(reversion.VersionAdmin):
+class PersonAdmin(ImportExportModelAdmin, reversion.VersionAdmin):
+    resource_class = PersonResource
     suit_form_tabs = (
         ('general', _('General')),
         ('review', _('Review')),
