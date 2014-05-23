@@ -10,6 +10,10 @@ DATABASES = {
     'default': dj_database_url.parse(os.environ['APP_DATABASE_URL'])
 }
 
+INSTALLED_APPS = (
+    'gunicorn',
+)
+
 STATIC_ROOT = os.environ['APP_STATIC_ROOT']
 MEDIA_ROOT = os.environ['APP_MEDIA_ROOT']
 
