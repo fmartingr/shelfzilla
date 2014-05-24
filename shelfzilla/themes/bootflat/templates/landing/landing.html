@@ -1,10 +1,34 @@
 {% extends "_layout.html" %}
 
-{% block navigation_bar %}{% endblock %}
-
 {% block main_content %}
-<div class="text-center">
-    <h1>ShelfZilla</h1>
+<div class="container">
+    <h2 class="text-center">Tus colecciones como nunca las habías visto.</h2>
+    <div class="alert alert-info text-center">
+        <p>Actualmente nos encontramos en fase de populación y pruebas internas, pero no te preocupes, pronto empezaremos a dejar acceso a un selecto grupo de personas.</p>
+        <p>Puedes mantenerte al tanto de nuestras mejoras en las redes sociales, quien sabe... igual hasta consigas acceso a la beta cuando llegue el momento.</p>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="well">
+                <h3 class="no-margin-top text-center">¿Qué ofrecemos?</h3>
+                <ul>
+                    <li>Mantén tus colecciones al día.</li>
+                    <li>¿No encuentras el comic que tienes? ¡háznoslo saber! Estarémos encantados de mejorar la plataforma con tu ayuda.</li>
+                    <li>Participa en una comunidad creciente y colaborativa.</li>
+                    <li>¿Echas algo en falta? Contacta con nosotros.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="well text-center">
+                <h3 class="no-margin-top">Contacta con nosotros</h3>
+                <a href="http://twitter.com/shelfzilla">Twitter</a><br />
+                <a href="https://www.facebook.com/ShelfZilla">Facebook</a><br />
+                <a href="https://plus.google.com/103983689195834857040">Google+</a><br />
+                <a href="mailto:shelfzilla@gmail.com">E-Mail</a><br />
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
 
@@ -13,7 +37,6 @@
 body { background-image: none !important; }
 </style>
 {% endblock %}
-
 
 {% block extra_js %}
 <script type="text/javascript">
