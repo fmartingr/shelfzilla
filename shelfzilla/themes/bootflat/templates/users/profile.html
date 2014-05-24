@@ -29,8 +29,10 @@
                         {% trans "Collection" %}</a>
                     <a data-pjax-nav href="{% url 'profile' 'wishlist' %}" data-pjax="profile" class="list-group-item">
                         {% trans "Wishlist" %}</a>
+                    {% comment %}
                     <a data-pjax-nav href="{% url 'profile' 'achievements' %}" data-pjax="profile" class="list-group-item">
                         {% trans "Achievements" %}</a>
+                    {% endcomment %}
                 </div>
             </div>
         </div>

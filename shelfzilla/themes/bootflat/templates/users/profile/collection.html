@@ -4,7 +4,30 @@
 {% block page_title %}{{ block.super }} | {% trans "Collection" %}{% endblock %}
 
 {% block profile_content %}
-<div class="well">
-    Collection
+<div class="row text-center">
+    <div class="col-sm-3">
+        <div class="well">
+            <h2 class="no-margin-top">{{ user.have_volumes.count }}</h2>
+            {% trans "Volumes owned" %}
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="well">
+            <h2 class="no-margin-top">{{ user.wishlisted_volumes.count }}</h2>
+            {% trans "Volumes wishlisted" %}
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="well">
+            <h2 class="no-margin-top">--</h2>
+            Other
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="well">
+            <h2 class="no-margin-top">--</h2>
+            Other
+        </div>
+    </div>
 </div>
 {% endblock %}
