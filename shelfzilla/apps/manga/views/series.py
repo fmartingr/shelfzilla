@@ -13,12 +13,10 @@ class SeriesView(View):
 
 class SeriesListView(SeriesView):
     template = 'manga/series/list.html'
-    filters = ['other', 'all']
+    filters = ['other']
 
     def get(self, request):
         letters = list(string.ascii_uppercase)
-        letters.append(_('other'))
-        letters.append(_('all'))
         current_letter = request.GET.get('letter', 'A')
 
         items = self.get_items(current_letter)

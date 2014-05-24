@@ -9,10 +9,13 @@
     <div class="pull-right">
         <ul class="pagination">
         {% for letter in letters %}
-            <li {% if current_letter == letter %}class="active"{% endif %}>
-                <a href="{% url 'series.list' %}?letter={{ letter }}" data-pjax>{{ letter }}</a>
+            <li {% if current_letter == letter|lower %}class="active"{% endif %}>
+                <a href="{% url 'series.list' %}?letter={{ letter|lower }}" data-pjax>{{ letter }}</a>
             </li>
         {% endfor %}
+            <li {% if current_letter == 'other' %}class="active"{% endif %}>
+                <a href="{% url 'series.list' %}?letter=other" data-pjax>{% trans "other" %}</a>
+            </li>
         </ul>
     </div>
     <div class="clearfix"></div>
