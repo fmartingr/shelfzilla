@@ -3,7 +3,8 @@ node_modules
 
 # Python
 *.pyc
-.virtualenv
+.virtualenv*
+.tox
 
 # OS X
 .DS_Store
