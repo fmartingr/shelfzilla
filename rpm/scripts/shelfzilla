@@ -31,7 +31,7 @@ function validations() {
     P_USER="shelfzilla"
     LOG_PATH=/var/log/shefzilla
     LOG_FILE=shelfzilla.log
-    FCGI_PORT=8080
+    FCGI_PORT=8000
     FCGI_IP=127.0.0.1
     MOD=shelfzilla.settings.configfile
     SZ_CONFIG_FILE=/opt/shelfzilla.toml
@@ -52,7 +52,7 @@ function status(){
 
     elif [ "$1" == "stop" ];then
         [ -z "`pidof nginx`" ] || service nginx stop
-        [ -z "`pidof python2.7`" ] || pkill python2.7
+        [ -z "`pidof python2.7`" ] || pkill gunicorn
         check $? "Gunicorn"
 
     else
