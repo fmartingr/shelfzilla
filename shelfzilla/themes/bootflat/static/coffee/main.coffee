@@ -41,8 +41,6 @@ $ ->
     # PJAX
     if $.support.pjax
         $(document).on 'click', 'a[data-pjax]', (event) ->
-            event.preventDefault()
-
             elem = $(@)
             pjax = elem.data('pjax')
             push = true
@@ -73,8 +71,6 @@ $ ->
 
             if elem.is('[pjax-messages]')
                 window._updateMessages = true
-
-            false
 
 # Tooltips
 $('[data-toggle="tooltip"]').tooltip();
