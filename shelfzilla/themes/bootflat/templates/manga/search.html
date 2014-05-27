@@ -1,0 +1,25 @@
+{% extends '_layout.html'|pjax:request %}
+{% load i18n %}
+
+{% block main_content %}
+<div class="container">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">{% trans "Looking for..." %} "<strong>{{ search_query }}</strong>"</h3>
+        </div>
+        <ul class="list-group">
+            {% for item in items %}
+            <li class="list-group-item">
+                {% if item.slug %}
+                <a href="{% url "series.detail" item.pk item.slug %}" data-pjax>{{ item.name }}</a>
+                {% else %}
+                <a href="{% url "series.detail" item.pk %}" data-pjax>{{ item.name }}</a>
+                {% endif %}
+            </li>
+            {% empty %}
+            <li class="list-group-item">{% trans "No results" %}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

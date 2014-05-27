@@ -1,11 +1,11 @@
-{% load i18n solo_tags %}
+{% load i18n solo_tags staticfiles %}
 {% get_solo 'config.SiteConfiguration' as site_config %}
 {% get_solo 'config.SocialConfiguration' as social_config %}
 <!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{{ STATIC_URL }}/css/style.css" />
+    <link rel="stylesheet" href="{% static "css/style.css" %}" />
     {% block extra_css %}{% endblock %}
     <title>{% block page_title %}ShelfZilla{% endblock %}</title>
 </head>
@@ -60,14 +60,13 @@
                         </li>
                         {% endif %}
                     </ul>
-                    <!--
-                    <form class="navbar-form navbar-right" role="search">
+                    <form class="navbar-form navbar-right" role="search" method="post" action="{% url "search" %}">
+                        {% csrf_token %}
                         <div class="form-search search-only">
                             <i class="search-icon glyphicon glyphicon-search"></i>
-                            <input type="text" class="form-control search-query" placeholder="{% trans 'Search' %}">
+                            <input type="text" value="{{ search_query }}" name="q" class="form-control search-query" placeholder="{% trans 'Search' %}">
                         </div>
                     </form>
-                    -->
                 </div>
             </div>
         </nav>
@@ -82,7 +81,7 @@
 
     {% block footer %}{% endblock %}
 
-    <script src="{{ STATIC_URL }}/js/site.js"></script>
+    <script src="{% static "js/site.js" %}"></script>
     {% block extra_js %}{% endblock %}
 
     {% if social_config.google_analytics %}
