@@ -2,20 +2,20 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-27 22:21+0200\n"
-"PO-Revision-Date: 2014-05-27 22:22+0200\n"
+"POT-Creation-Date: 2014-05-27 23:20+0200\n"
+"PO-Revision-Date: 2014-05-27 23:20+0200\n"
 "Last-Translator:   <fmartingr@me.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.7.4\n"
 
@@ -39,7 +39,7 @@ msgstr "Serie de los volúmenes cambiada"
 msgid "Site Configuration"
 msgstr "Configuración del sitio"
 
-#: apps/config/models.py:24 apps/config/models.py:27 apps/config/models.py:28
+#: apps/config/models.py:32 apps/config/models.py:35 apps/config/models.py:36
 msgid "Social Configuration"
 msgstr "Configuración social"
 
@@ -67,7 +67,7 @@ msgid "Advanced"
 msgstr "Avanzado"
 
 #: apps/manga/admin.py:78 apps/manga/models.py:105 apps/manga/models.py:106
-#: themes/bootflat/templates/_layout.html:32
+#: themes/bootflat/templates/_layout.html:33
 #: themes/bootflat/templates/manga/publishers/detail.html:18
 #: themes/bootflat/templates/manga/series/list.html:4
 msgid "Series"
@@ -101,7 +101,7 @@ msgstr "URL"
 msgid "Publisher"
 msgstr "Editorial"
 
-#: apps/manga/models.py:47 themes/bootflat/templates/_layout.html:35
+#: apps/manga/models.py:47 themes/bootflat/templates/_layout.html:36
 #: themes/bootflat/templates/manga/publishers/list.html:4
 #: themes/bootflat/templates/manga/series/detail.html:64
 msgid "Publishers"
@@ -161,7 +161,7 @@ msgid "wants"
 msgstr "quiere"
 
 #: apps/manga/views/search.py:11 apps/manga/views/search.py:13
-#: themes/bootflat/templates/_layout.html:69
+#: themes/bootflat/templates/_layout.html:71
 msgid "Search"
 msgstr "Buscar"
 
@@ -213,29 +213,29 @@ msgstr "Sesión finalizada."
 msgid "Spanish"
 msgstr "Español"
 
-#: themes/bootflat/templates/_layout.html:19
+#: themes/bootflat/templates/_layout.html:20
 msgid "Toggle navigation"
 msgstr "Mostrar/Ocultar navegación"
 
-#: themes/bootflat/templates/_layout.html:47
+#: themes/bootflat/templates/_layout.html:48
 #: themes/bootflat/templates/users/profile-pjax.html:4
 #: themes/bootflat/templates/users/profile.html:4
 msgid "Profile"
 msgstr "Perfil"
 
-#: themes/bootflat/templates/_layout.html:50
+#: themes/bootflat/templates/_layout.html:51
 msgid "My collection"
 msgstr "Mi colección"
 
-#: themes/bootflat/templates/_layout.html:51
+#: themes/bootflat/templates/_layout.html:52
 msgid "My wishlist"
 msgstr "Mi lista de deseados"
 
-#: themes/bootflat/templates/_layout.html:54
+#: themes/bootflat/templates/_layout.html:55
 msgid "Logout"
 msgstr "Cerrar sesión"
 
-#: themes/bootflat/templates/_layout.html:60
+#: themes/bootflat/templates/_layout.html:61
 msgid "Log in"
 msgstr "Entrar"
 
@@ -332,7 +332,7 @@ msgstr "Volúmenes"
 
 #: themes/bootflat/templates/users/profile/summary.html:19
 msgid "Volumes wishlisted"
-msgstr "¡{} añadido a la lista de deseados!"
+msgstr "Deseados"
 
 #~ msgid "all"
 #~ msgstr "todos"
