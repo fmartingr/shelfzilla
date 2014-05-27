@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-25 17:15+0200\n"
-"PO-Revision-Date: 2014-04-25 17:15+0200\n"
+"POT-Creation-Date: 2014-05-27 22:21+0200\n"
+"PO-Revision-Date: 2014-05-27 22:22+0200\n"
 "Last-Translator:   <fmartingr@me.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -43,115 +43,127 @@ msgstr "Configuración del sitio"
 msgid "Social Configuration"
 msgstr "Configuración social"
 
-#: apps/manga/admin.py:14
+#: apps/manga/admin.py:40
 msgid "Items marked for review"
 msgstr "Marcar items para revisión"
 
-#: apps/manga/admin.py:18
+#: apps/manga/admin.py:45
 msgid "Items unmarked for review"
 msgstr "Desmarcar items para revisión"
 
-#: apps/manga/admin.py:29 apps/manga/models.py:104 apps/manga/models.py:105
-#: themes/bootflat/templates/_layout.html:31
+#: apps/manga/admin.py:56 apps/manga/admin.py:92 apps/manga/admin.py:135
+#: apps/manga/admin.py:173
+msgid "General"
+msgstr "General"
+
+#: apps/manga/admin.py:57 apps/manga/admin.py:94 apps/manga/admin.py:136
+#: apps/manga/admin.py:174
+msgid "Review"
+msgstr "Para revisión"
+
+#: apps/manga/admin.py:58 apps/manga/admin.py:95 apps/manga/admin.py:137
+#: apps/manga/admin.py:175
+msgid "Advanced"
+msgstr "Avanzado"
+
+#: apps/manga/admin.py:78 apps/manga/models.py:105 apps/manga/models.py:106
+#: themes/bootflat/templates/_layout.html:32
 #: themes/bootflat/templates/manga/publishers/detail.html:18
 #: themes/bootflat/templates/manga/series/list.html:4
 msgid "Series"
 msgstr "Series"
 
-#: apps/manga/admin.py:43 apps/manga/models.py:131
+#: apps/manga/admin.py:93 apps/manga/admin.py:120 apps/manga/models.py:135
 #: themes/bootflat/templates/manga/publishers/detail.html:21
 msgid "Volumes"
 msgstr "Volúmenes"
 
-#: apps/manga/admin.py:64
+#: apps/manga/admin.py:165
 #: themes/bootflat/templates/_admin/volumes/change_series.html:4
 #: themes/bootflat/templates/_admin/volumes/change_series.html:8
 msgid "Change volume series"
 msgstr "Cambiar serie de los volúmenes"
 
-#: apps/manga/models.py:13 apps/manga/models.py:50 apps/manga/models.py:110
-#: apps/manga/models.py:135
+#: apps/manga/models.py:14 apps/manga/models.py:51 apps/manga/models.py:111
+#: apps/manga/models.py:139
 msgid "Name"
 msgstr "Nombre"
 
-#: apps/manga/models.py:14 apps/manga/models.py:51 apps/manga/models.py:136
+#: apps/manga/models.py:15 apps/manga/models.py:52 apps/manga/models.py:140
 msgid "Slug"
 msgstr "Álias"
 
-#: apps/manga/models.py:15
+#: apps/manga/models.py:16
 msgid "URL"
 msgstr "URL"
 
-#: apps/manga/models.py:45
+#: apps/manga/models.py:46
 msgid "Publisher"
 msgstr "Editorial"
 
-#: apps/manga/models.py:46 themes/bootflat/templates/_layout.html:34
+#: apps/manga/models.py:47 themes/bootflat/templates/_layout.html:35
 #: themes/bootflat/templates/manga/publishers/list.html:4
 #: themes/bootflat/templates/manga/series/detail.html:64
 msgid "Publishers"
 msgstr "Editoriales"
 
-#: apps/manga/models.py:53 themes/bootflat/templates/users/profile.html:27
+#: apps/manga/models.py:54 themes/bootflat/templates/users/profile.html:27
 msgid "Summary"
 msgstr "Resumen"
 
-#: apps/manga/models.py:54
+#: apps/manga/models.py:55
 #: themes/bootflat/templates/manga/series/detail.html:25
 msgid "Finished"
 msgstr "Finalizado"
 
-#: apps/manga/models.py:109
+#: apps/manga/models.py:110
 msgid "Number"
 msgstr "Número"
 
-#: apps/manga/models.py:115
+#: apps/manga/models.py:116
 msgid "ISBN-10"
 msgstr "ISBN-10"
 
-#: apps/manga/models.py:117
+#: apps/manga/models.py:118
 msgid "ISBN-13"
 msgstr "ISBN-13"
 
-#: apps/manga/models.py:120
+#: apps/manga/models.py:121
 msgid "Retail price"
 msgstr "Precio recomendado"
 
-#: apps/manga/models.py:122
+#: apps/manga/models.py:123
 msgid "Pages"
 msgstr "Páginas"
 
-#: apps/manga/models.py:123
+#: apps/manga/models.py:124
 msgid "Release date"
 msgstr "Fecha de lanzamiento"
 
-#: apps/manga/models.py:130
+#: apps/manga/models.py:134
 msgid "Volume"
 msgstr "Volumen"
 
-#: apps/manga/models.py:143
+#: apps/manga/models.py:147
 msgid "Person"
 msgstr "Persona"
 
-#: apps/manga/models.py:144
+#: apps/manga/models.py:148
 msgid "Persons"
 msgstr "Personas"
 
-#: apps/manga/models.py:158
+#: apps/manga/models.py:162
 msgid "have"
 msgstr "tiene"
 
-#: apps/manga/models.py:171
+#: apps/manga/models.py:178
 msgid "wants"
 msgstr "quiere"
 
-#: apps/manga/views/series.py:20
-msgid "other"
-msgstr "otros"
-
-#: apps/manga/views/series.py:21
-msgid "all"
-msgstr "todos"
+#: apps/manga/views/search.py:11 apps/manga/views/search.py:13
+#: themes/bootflat/templates/_layout.html:69
+msgid "Search"
+msgstr "Buscar"
 
 #: apps/manga/views/volumes.py:23
 msgid "{} is already on your collection!"
@@ -197,7 +209,7 @@ msgstr "Has accedido correctamente."
 msgid "Logged out successfully"
 msgstr "Sesión finalizada."
 
-#: settings/base.py:120
+#: settings/base.py:121
 msgid "Spanish"
 msgstr "Español"
 
@@ -205,31 +217,31 @@ msgstr "Español"
 msgid "Toggle navigation"
 msgstr "Mostrar/Ocultar navegación"
 
-#: themes/bootflat/templates/_layout.html:45
+#: themes/bootflat/templates/_layout.html:47
 #: themes/bootflat/templates/users/profile-pjax.html:4
 #: themes/bootflat/templates/users/profile.html:4
 msgid "Profile"
 msgstr "Perfil"
 
-#: themes/bootflat/templates/_layout.html:47
+#: themes/bootflat/templates/_layout.html:50
 msgid "My collection"
 msgstr "Mi colección"
 
-#: themes/bootflat/templates/_layout.html:48
+#: themes/bootflat/templates/_layout.html:51
 msgid "My wishlist"
 msgstr "Mi lista de deseados"
 
-#: themes/bootflat/templates/_layout.html:50
+#: themes/bootflat/templates/_layout.html:54
 msgid "Logout"
 msgstr "Cerrar sesión"
 
-#: themes/bootflat/templates/_layout.html:56
+#: themes/bootflat/templates/_layout.html:60
 msgid "Log in"
 msgstr "Entrar"
 
-#: themes/bootflat/templates/_layout.html:65
-msgid "Search"
-msgstr "Buscar"
+#: themes/bootflat/templates/_admin/manga/series/includes/volumes.html:13
+msgid "Edit"
+msgstr "Editar"
 
 #: themes/bootflat/templates/_admin/volumes/change_series.html:9
 msgid "You are about to change the series of this volumes:"
@@ -242,6 +254,16 @@ msgstr "Cambiar a:"
 #: themes/bootflat/templates/_admin/volumes/change_series.html:28
 msgid "Change"
 msgstr "Cambiar"
+
+#: themes/bootflat/templates/manga/search.html:8
+msgid "Looking for..."
+msgstr "Buscando..."
+
+#: themes/bootflat/templates/manga/search.html:20
+#: themes/bootflat/templates/manga/series/list.html:38
+#: themes/bootflat/templates/manga/series/list.html:58
+msgid "No results"
+msgstr "Sin resultados"
 
 #: themes/bootflat/templates/manga/publishers/detail.html:14
 #: themes/bootflat/templates/manga/publishers/detail.html:43
@@ -274,10 +296,9 @@ msgstr "Historia"
 msgid "Original publisher"
 msgstr "Editorial original"
 
-#: themes/bootflat/templates/manga/series/list.html:35
-#: themes/bootflat/templates/manga/series/list.html:55
-msgid "No results"
-msgstr "Sin resultados"
+#: themes/bootflat/templates/manga/series/list.html:17
+msgid "other"
+msgstr "otros"
 
 #: themes/bootflat/templates/users/login.html:24
 msgid "Access the site"
@@ -287,20 +308,34 @@ msgstr "Accede al sitio"
 msgid "Login"
 msgstr "Entrar"
 
-#: themes/bootflat/templates/users/profile.html:29
+#: themes/bootflat/templates/users/profile.html:30
 #: themes/bootflat/templates/users/profile/collection.html:4
 msgid "Collection"
 msgstr "Mi colección"
 
-#: themes/bootflat/templates/users/profile.html:31
+#: themes/bootflat/templates/users/profile.html:34
 #: themes/bootflat/templates/users/profile/wishlist.html:4
 msgid "Wishlist"
 msgstr "Lista de deseados"
 
-#: themes/bootflat/templates/users/profile.html:33
+#: themes/bootflat/templates/users/profile.html:44
+msgid "Edit my profile"
+msgstr "Editar mi perfil"
+
 #: themes/bootflat/templates/users/profile/achievements.html:4
 msgid "Achievements"
 msgstr "Logros"
+
+#: themes/bootflat/templates/users/profile/summary.html:13
+msgid "Volumes owned"
+msgstr "Volúmenes"
+
+#: themes/bootflat/templates/users/profile/summary.html:19
+msgid "Volumes wishlisted"
+msgstr "¡{} añadido a la lista de deseados!"
+
+#~ msgid "all"
+#~ msgstr "todos"
 
 #~ msgid "Original series"
 #~ msgstr "Series originales"
