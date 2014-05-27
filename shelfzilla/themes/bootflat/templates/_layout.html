@@ -62,6 +62,7 @@
                         </li>
                         {% endif %}
                     </ul>
+                    {% if user.is_authenticated %}
                     <form class="navbar-form navbar-right" role="search" method="post" action="{% url "search" %}">
                         {% csrf_token %}
                         <div class="form-search search-only">
@@ -69,6 +70,7 @@
                             <input type="text" value="{{ search_query }}" name="q" class="form-control search-query" placeholder="{% trans 'Search' %}">
                         </div>
                     </form>
+                    {% endif %}
                 </div>
             </div>
         </nav>
