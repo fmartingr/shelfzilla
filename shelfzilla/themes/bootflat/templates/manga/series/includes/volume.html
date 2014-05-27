@@ -3,7 +3,7 @@
     <div class="badges">
         {% if volume.pk in user_have_volumes %}
         <a href="{% url "volume.have_it" volume.pk %}" data-pjax="v{{ volume.pk }}" pjax-nopush pjax-messages>
-            <span class="badge badge-success">
+            <span class="badge badge-success badge-have-it">
                 <i class="glyphicon glyphicon-ok"></i>
             </span>
         </a>
