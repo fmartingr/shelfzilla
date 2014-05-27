@@ -25,10 +25,14 @@
                 <div class="list-group">
                     <a data-pjax-nav href="{% url 'profile' %}" data-pjax class="list-group-item active">
                         {% trans "Summary" %}</a>
+                    {% if user.have_volumes.count > 0 %}
                     <a data-pjax-nav href="{% url 'profile' 'collection' %}" data-pjax="profile" class="list-group-item">
                         {% trans "Collection" %}</a>
+                    {% endif %}
+                    {% if user.wishlisted_volumes.count > 0 %}
                     <a data-pjax-nav href="{% url 'profile' 'wishlist' %}" data-pjax="profile" class="list-group-item">
                         {% trans "Wishlist" %}</a>
+                    {% endif %}
                     {% comment %}
                     <a data-pjax-nav href="{% url 'profile' 'achievements' %}" data-pjax="profile" class="list-group-item">
                         {% trans "Achievements" %}</a>
