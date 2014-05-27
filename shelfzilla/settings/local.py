@@ -22,3 +22,7 @@ INSTALLED_APPS += (
 )
 
 FILER_DUMP_PAYLOAD = True
+
+
+MEDIA_URL = '/media/'
+STATIC_URL = '/static/'

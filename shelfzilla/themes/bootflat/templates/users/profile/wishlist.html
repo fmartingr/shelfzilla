@@ -4,7 +4,15 @@
 {% block page_title %}{{ block.super }} | {% trans "Wishlist" %}{% endblock %}
 
 {% block profile_content %}
-<div class="well">
-    Wishlist
+<div class="row">
+    {% for wishlisted_volume in user.wishlisted_volumes.all %}
+    <div class="col-sm-3" data-pjax-container="v{{ volume.pk }}">
+        {% include "manga/series/includes/volume.html" with volume=wishlisted_volume.volume user=user %}
+    </div>
+    {% if forloop.counter|divisibleby:4 %}
+    </div>
+    <div class="row">
+    {% endif %}
+    {% endfor %}
 </div>
 {% endblock %}

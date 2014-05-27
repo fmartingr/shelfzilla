@@ -17,7 +17,15 @@ class SiteConfiguration(SingletonModel):
 
 
 class SocialConfiguration(SingletonModel):
+    # Social accounts
     twitter_account = models.CharField(max_length=64, blank=True, null=True)
+    facebook_url = models.URLField(blank=True, null=True)
+    google_plus_url = models.URLField(blank=True, null=True)
+
+    # Contact
+    contact_email = models.EmailField(blank=True, null=True)
+
+    # Analytics
     google_analytics = models.CharField(max_length=16, blank=True, null=True)
 
     def __unicode__(self):

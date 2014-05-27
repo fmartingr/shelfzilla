@@ -1,0 +1,17 @@
+{% load staticfiles solo_tags %}
+{% get_solo 'config.SocialConfiguration' as social %}
+
+<div class="social-bar">
+    {% if social.twitter_account %}
+    <a href="https://twitter.com/{{ social.twitter_account }}" target="_blank"><img src="{% static "icons/twitter.png" %}" /></a>
+    {% endif %}
+    {% if social.facebook_url %}
+    <a href="{{ social.facebook_url }}" target="_blank"><img src="{% static "icons/facebook.png" %}" /></a>
+    {% endif %}
+    {% if social.google_plus_url %}
+    <a href="{{ social.google_plus_url }}" target="_blank"><img src="{% static "icons/googleplus.png" %}" /></a>
+    {% endif %}
+    {% if social.contact_email %}
+    <a href="mailto:{{ social.contact_email }}"><img src="{% static "icons/email.png" %}" /></a>
+    {% endif %}
+</div>

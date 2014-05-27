@@ -13,17 +13,26 @@
     margin-bottom: 0 !important;
 }
 
+.social-bar {
+    margin-top: 10px;
+    margin-bottom: -10px;
+    text-align: right;
+}
 
 .volume-item {
     &:not(.user-have-it) {
-        .badges { display: none; }
-
-        &:hover .badges {
+        &:hover .badges .badge {
             display: block;
         }
     }
 
-    &
+    &.user-wishlisted-it .badge-wishlist-it {
+        display: block !important;
+    }
+
+    &.user-have-it .badge-have-it {
+        display: block !important;
+    }
 
     .badges {
         position: absolute;
@@ -35,21 +44,13 @@
 
             border: #FFF 3px solid;
             border-radius: 50%;
-            display: block;
+            display: none;
             font-size: @size/1.5;
             height: @size;
             line-height: (@size)-3px;
             padding: 0;
             text-align: center;
             width: @size;
-        }
-
-        .badge-haveit, .badge-wishlist {
-            &:hover {
-                & > span {
-                    display: block;
-                }
-            }
         }
     }
 }

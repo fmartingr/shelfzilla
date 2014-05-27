@@ -1,20 +1,20 @@
 {% load i18n thumbnail %}
-<div class="well text-center volume-item {% if volume.pk in user_have_volumes %}user-have-it{% endif %}">
+<div class="well text-center volume-item {% if volume.pk in user_have_volumes %}user-have-it{% endif %} {% if volume.pk in user_wishlisted_volumes %}user-wishlisted-it{% endif %}">
     <div class="badges">
         {% if volume.pk in user_have_volumes %}
         <a href="{% url "volume.have_it" volume.pk %}" data-pjax="v{{ volume.pk }}" pjax-nopush pjax-messages>
-            <span class="badge badge-success">
+            <span class="badge badge-success badge-have-it">
                 <i class="glyphicon glyphicon-ok"></i>
             </span>
         </a>
         {% else %}
         <a href="{% url "volume.have_it" volume.pk %}" data-pjax="v{{ volume.pk }}" pjax-nopush pjax-messages>
-            <span class="badge">
+            <span class="badge badge-have-it">
                 <i class="glyphicon glyphicon-ok"></i>
             </span>
         </a>
         <a href="{% url "volume.wishlist" volume.pk %}" data-pjax="v{{ volume.pk }}" pjax-messages pjax-nopush>
-            <span class="badge {% if volume.pk in user_wishlisted_volumes %}badge-warning{% endif %}">
+            <span class="badge badge-wishlist-it {% if volume.pk in user_wishlisted_volumes %}badge-warning{% endif %}">
                 <i class="glyphicon glyphicon-star"></i>
             </span>
         </a>
