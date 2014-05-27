@@ -47,8 +47,7 @@ function validations() {
 function status(){
     if [ "$1" == "start" ];then
         [ -z "`pidof nginx`" ] && service nginx start
-        #[ -z "`pidof python2.7`" ] && runuser -l shelfzilla -c "python2.7 ${BASE_PATH}/manage.py runfcgi host=${FCGI_IP} port=${FCGI_PORT}"
-        [ -z "`pidof python2.7`" ] && python2.7 ${BASE_PATH}/manage.py run_gunicorn -b ${FCGI_IP}:${FCGI_PORT} -e DJANGO_SETTINGS_MODULE=${MOD} -e APP_CONFIGFILE=${SZ_CONFIG_FILE}
+        [ -z "`pidof python2.7`" ] && gunicorn_django -b ${FCGI_IP}:${FCGI_PORT} -e DJANGO_SETTINGS_MODULE=${MOD} -e APP_CONFIGFILE=${SZ_CONFIG_FILE} --pythonpath=${BASE_PATH} shelfzilla.wsgi:application
         check $? "Gunicorn"
 
     elif [ "$1" == "stop" ];then
