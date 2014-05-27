@@ -1,11 +1,11 @@
 #!/bin/sh
 #
 # Shefzilla Init script Adapted
-## Nginx   
-## FactCGI 
+## Nginx
+## FactCGI
 #
 # chkconfig:   - 85 15
-# 
+#
 
 # Source function library.
 . /etc/rc.d/init.d/functions
@@ -19,7 +19,7 @@ function check ()
         echo $2": "$error
     else
         echo $2": "$ok
-    fi  
+    fi
 }
 
 function validations() {
@@ -33,6 +33,8 @@ function validations() {
     LOG_FILE=shelfzilla.log
     FCGI_PORT=8080
     FCGI_IP=127.0.0.1
+    MOD=shelfzilla.settings.configfile
+    SZ_CONFIG_FILE=/opt/shelfzilla.toml
 
     ## Folders
     [ -d "${PID_PATH}" ] || mkdir -p "${PID_PATH}"
@@ -46,22 +48,22 @@ function status(){
     if [ "$1" == "start" ];then
         [ -z "`pidof nginx`" ] && service nginx start
         #[ -z "`pidof python2.7`" ] && runuser -l shelfzilla -c "python2.7 ${BASE_PATH}/manage.py runfcgi host=${FCGI_IP} port=${FCGI_PORT}"
-        [ -z "`pidof python2.7`" ] && python2.7 ${BASE_PATH}/manage.py runfcgi host=${FCGI_IP} port=${FCGI_PORT}
-        check $? "FCGI"
+        [ -z "`pidof python2.7`" ] && python2.7 ${BASE_PATH}/manage.py run_gunicorn -b ${FCGI_IP}:${FCGI_PORT} -e DJANGO_SETTINGS_MODULE=${MOD} -e APP_CONFIGFILE=${SZ_CONFIG_FILE}
+        check $? "Gunicorn"
 
     elif [ "$1" == "stop" ];then
         [ -z "`pidof nginx`" ] || service nginx stop
         [ -z "`pidof python2.7`" ] || pkill python2.7
-        check $? "FCGI"
+        check $? "Gunicorn"
 
     else
         service nginx status
         FCGI=`pidof python2.7`
         if [ -z "${FCGI}" ];then
-            echo -n "FCGI Server is down"
+            echo -n "Gunicorn Server is down"
             echo ""
         else
-            echo -n "FCGI Server is up (${FCGI})"
+            echo -n "Gunicorn Server is up (${FCGI})"
             echo ""
         fi
     fi
@@ -76,7 +78,7 @@ function restart() {
 validations
 case "$1" in
     start)
-        status "start" 
+        status "start"
         ;;
     stop)
         status "stop"
