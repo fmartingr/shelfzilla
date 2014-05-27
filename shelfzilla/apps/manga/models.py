@@ -163,6 +163,9 @@ class UserHaveVolume(models.Model):
             self.volume
         )
 
+    class Meta:
+        ordering = ('volume__series__name', 'volume__number', )
+
 
 class UserWishlistVolume(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
@@ -175,6 +178,9 @@ class UserWishlistVolume(models.Model):
             _('wants'),
             self.volume
         )
+
+    class Meta:
+        ordering = ('volume__series__name', 'volume__number', )
 
 #
 # SIGNALS
