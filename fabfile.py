@@ -246,7 +246,7 @@ def clean_backups(BCK_BASE_PATH='/backups/sql', DAYS='30'):
     """
     This function clean old backups from backup base path
     """
-    print(white("\tCleanning oldest backups..."))
+    print(white("\tCleaning oldest backups..."))
     with settings(hide('warnings', 'running', 'stdout', 'stderr')):
         local('find %s -mtime +%s -exec rm -rf {} \;' % (BCK_BASE_PATH, DAYS))
 
