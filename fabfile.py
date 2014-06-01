@@ -1,10 +1,12 @@
 from __future__ import with_statement, print_function
 from os.path import dirname, abspath, join
+from os.path import exists as os_exists
 
 from fabric.api import *
 from fabric.context_managers import settings, cd
 from fabric.contrib.files import exists
 from fabric.colors import yellow, red, white, green
+from fabric.operations import local
 
 
 #
@@ -238,3 +240,32 @@ def makemessages():
             with virtualenv():
                 run('django-admin.py makemessages -l es', quiet=True)
     """
+
+@task
+def clean_backups(BCK_BASE_PATH='/backups/sql', DAYS='30'):
+    """
+    This function clean old backups from backup base path
+    """
+    print(white("\tCleanning oldest backups..."))
+    with settings(hide('warnings', 'running', 'stdout', 'stderr')):
+        local('find %s -mtime +%s -exec rm -rf {} \;' % (BCK_BASE_PATH, DAYS))
+
+@task
+def backup():
+    """
+    This function makes a PostgreSQL Backup and put it in backup base path
+    """
+    import time
+
+    BCK_BASE_PATH = '/backups/sql'
+    DATABASE = "shelfzilla"
+    print(white("\n\tMaking backup of [%s] database" % DATABASE))
+    with settings(hide('running')):
+        if not os_exists(BCK_BASE_PATH + '/' + time.strftime("%d_%m_%Y")):
+            local('mkdir -p %s' % BCK_BASE_PATH + '/' + time.strftime("%d_%m_%Y"))
+
+        with lcd(BCK_BASE_PATH + '/' + time.strftime("%d_%m_%Y")):
+            local('pg_dump %s | gzip > %s.gz' %
+                (DATABASE, "shelfzilla_" + time.strftime("%H:%M_%d_%m_%Y")) )
+
+    clean_backups()
