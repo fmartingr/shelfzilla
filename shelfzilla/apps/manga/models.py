@@ -155,6 +155,7 @@ class UserHaveVolume(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              related_name='have_volumes')
     volume = models.ForeignKey(Volume, related_name='owned_by')
+    date = models.DateTimeField(_('Date'), auto_now_add=True)
 
     def __unicode__(self):
         return "{} {} {}".format(
@@ -171,6 +172,7 @@ class UserWishlistVolume(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              related_name='wishlisted_volumes')
     volume = models.ForeignKey(Volume, related_name='wishlisted_by')
+    date = models.DateTimeField(_('Date'), auto_now_add=True)
 
     def __unicode__(self):
         return "{} {} {}".format(
