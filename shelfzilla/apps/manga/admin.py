@@ -91,7 +91,6 @@ class SeriesAdmin(ImportExportModelAdmin, reversion.VersionAdmin):
     suit_form_tabs = (
         ('general', _('General')),
         ('volumes', _('Volumes')),
-        ('cover', _('Cover')),
         ('review', _('Review')),
         ('advanced', _('Advanced')),
     )
