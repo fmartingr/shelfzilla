@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-24 18:02+0200\n"
-"PO-Revision-Date: 2014-08-24 18:02+0200\n"
+"POT-Creation-Date: 2014-08-24 22:20+0200\n"
+"PO-Revision-Date: 2014-08-24 22:27+0200\n"
 "Last-Translator: Felipe Martin <fmartingr@me.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -59,18 +59,18 @@ msgstr "Marcar items para revisión"
 msgid "Items unmarked for review"
 msgstr "Desmarcar items para revisión"
 
-#: apps/manga/admin.py:56 apps/manga/admin.py:92 apps/manga/admin.py:136
-#: apps/manga/admin.py:179
+#: apps/manga/admin.py:56 apps/manga/admin.py:92 apps/manga/admin.py:135
+#: apps/manga/admin.py:178
 msgid "General"
 msgstr "General"
 
-#: apps/manga/admin.py:57 apps/manga/admin.py:95 apps/manga/admin.py:138
-#: apps/manga/admin.py:180
+#: apps/manga/admin.py:57 apps/manga/admin.py:94 apps/manga/admin.py:137
+#: apps/manga/admin.py:179
 msgid "Review"
 msgstr "Para revisión"
 
-#: apps/manga/admin.py:58 apps/manga/admin.py:96 apps/manga/admin.py:139
-#: apps/manga/admin.py:181
+#: apps/manga/admin.py:58 apps/manga/admin.py:95 apps/manga/admin.py:138
+#: apps/manga/admin.py:180
 msgid "Advanced"
 msgstr "Avanzado"
 
@@ -81,16 +81,16 @@ msgstr "Avanzado"
 msgid "Series"
 msgstr "Series"
 
-#: apps/manga/admin.py:93 apps/manga/admin.py:121 apps/manga/models.py:150
+#: apps/manga/admin.py:93 apps/manga/admin.py:120 apps/manga/models.py:150
 #: themes/bootflat/templates/manga/publishers/detail.html:27
 msgid "Volumes"
 msgstr "Volúmenes"
 
-#: apps/manga/admin.py:94 apps/manga/admin.py:137
+#: apps/manga/admin.py:136
 msgid "Cover"
 msgstr "Carátula"
 
-#: apps/manga/admin.py:171
+#: apps/manga/admin.py:170
 #: themes/bootflat/templates/_admin/volumes/change_series.html:4
 #: themes/bootflat/templates/_admin/volumes/change_series.html:8
 msgid "Change volume series"
@@ -319,14 +319,13 @@ msgstr "Sin resultados"
 
 #: themes/bootflat/templates/manga/publishers/detail.html:10
 #: themes/bootflat/templates/manga/series/detail.html:10
-#: themes/bootflat/templates/manga/series/includes/volume.html:42
+#: themes/bootflat/templates/manga/series/includes/volume.html:45
 msgid "Edit in admin"
 msgstr "Editar en el admin"
 
 #: themes/bootflat/templates/manga/publishers/detail.html:20
-#: themes/bootflat/templates/manga/publishers/detail.html:49
 #: themes/bootflat/templates/manga/series/detail.html:25
-#: themes/bootflat/templates/manga/series/includes/volume.html:25
+#: themes/bootflat/templates/manga/series/includes/volume.html:38
 msgid "Requires review"
 msgstr "Requiere revisión"
 
@@ -357,6 +356,11 @@ msgstr "Editorial original"
 #: themes/bootflat/templates/manga/series/list.html:17
 msgid "other"
 msgstr "otros"
+
+#: themes/bootflat/templates/manga/series/includes/volume.html:35
+#, python-format
+msgid "%(pages)s pages"
+msgstr "%(pages)s páginas"
 
 #: themes/bootflat/templates/users/login.html:24
 msgid "Access the site"
