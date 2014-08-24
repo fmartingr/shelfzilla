@@ -17,10 +17,16 @@ class HomepageView(View):
             .annotate(num_volumes=Count('have_volumes'))\
             .order_by('-num_volumes')[:5]
 
-        # Latest manga added
+        # Latest manga
         data['LATEST_MANGA_ADDED'] = Volume.objects\
             .filter(release_date__lte=datetime.now())\
-            .order_by('-release_date')[:12]
+            .order_by('-release_date')[:6]
+
+        # Future releases
+        data['FUTURE_RELEASES'] = Volume.objects\
+            .filter(release_date__gt=datetime.now())\
+            .order_by('release_date')[:6]
+
 
         ctx = RequestContext(request, data)
         return render_to_response(self.template, context_instance=ctx)

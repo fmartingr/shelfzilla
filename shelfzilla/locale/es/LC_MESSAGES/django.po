@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-24 15:03+0200\n"
-"PO-Revision-Date: 2014-08-24 15:06+0200\n"
+"POT-Creation-Date: 2014-08-24 17:04+0200\n"
+"PO-Revision-Date: 2014-08-24 17:04+0200\n"
 "Last-Translator: Felipe Martin <fmartingr@me.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -74,14 +74,14 @@ msgstr "Para revisión"
 msgid "Advanced"
 msgstr "Avanzado"
 
-#: apps/manga/admin.py:78 apps/manga/models.py:105 apps/manga/models.py:106
+#: apps/manga/admin.py:78 apps/manga/models.py:118 apps/manga/models.py:119
 #: themes/bootflat/templates/_layout.html:33
 #: themes/bootflat/templates/manga/publishers/detail.html:18
 #: themes/bootflat/templates/manga/series/list.html:4
 msgid "Series"
 msgstr "Series"
 
-#: apps/manga/admin.py:93 apps/manga/admin.py:121 apps/manga/models.py:135
+#: apps/manga/admin.py:93 apps/manga/admin.py:121 apps/manga/models.py:150
 #: themes/bootflat/templates/manga/publishers/detail.html:21
 msgid "Volumes"
 msgstr "Volúmenes"
@@ -96,83 +96,83 @@ msgstr "Carátula"
 msgid "Change volume series"
 msgstr "Cambiar serie de los volúmenes"
 
-#: apps/manga/models.py:14 apps/manga/models.py:51 apps/manga/models.py:111
-#: apps/manga/models.py:139
+#: apps/manga/models.py:15 apps/manga/models.py:58 apps/manga/models.py:124
+#: apps/manga/models.py:154
 msgid "Name"
 msgstr "Nombre"
 
-#: apps/manga/models.py:15 apps/manga/models.py:52 apps/manga/models.py:140
+#: apps/manga/models.py:16 apps/manga/models.py:59 apps/manga/models.py:155
 msgid "Slug"
 msgstr "Álias"
 
-#: apps/manga/models.py:16
+#: apps/manga/models.py:17
 msgid "URL"
 msgstr "URL"
 
-#: apps/manga/models.py:46
+#: apps/manga/models.py:53
 msgid "Publisher"
 msgstr "Editorial"
 
-#: apps/manga/models.py:47 themes/bootflat/templates/_layout.html:36
+#: apps/manga/models.py:54 themes/bootflat/templates/_layout.html:36
 #: themes/bootflat/templates/manga/publishers/list.html:4
 #: themes/bootflat/templates/manga/series/detail.html:64
 msgid "Publishers"
 msgstr "Editoriales"
 
-#: apps/manga/models.py:54 themes/bootflat/templates/users/profile.html:27
+#: apps/manga/models.py:61 themes/bootflat/templates/users/profile.html:27
 msgid "Summary"
 msgstr "Resumen"
 
-#: apps/manga/models.py:55
+#: apps/manga/models.py:62
 #: themes/bootflat/templates/manga/series/detail.html:25
 msgid "Finished"
 msgstr "Finalizado"
 
-#: apps/manga/models.py:110
+#: apps/manga/models.py:123
 msgid "Number"
 msgstr "Número"
 
-#: apps/manga/models.py:116
+#: apps/manga/models.py:129
 msgid "ISBN-10"
 msgstr "ISBN-10"
 
-#: apps/manga/models.py:118
+#: apps/manga/models.py:131
 msgid "ISBN-13"
 msgstr "ISBN-13"
 
-#: apps/manga/models.py:121
+#: apps/manga/models.py:134
 msgid "Retail price"
 msgstr "Precio recomendado"
 
-#: apps/manga/models.py:123
+#: apps/manga/models.py:136
 msgid "Pages"
 msgstr "Páginas"
 
-#: apps/manga/models.py:124
+#: apps/manga/models.py:137
 msgid "Release date"
 msgstr "Fecha de lanzamiento"
 
-#: apps/manga/models.py:134
+#: apps/manga/models.py:149
 msgid "Volume"
 msgstr "Volumen"
 
-#: apps/manga/models.py:147
+#: apps/manga/models.py:162
 msgid "Person"
 msgstr "Persona"
 
-#: apps/manga/models.py:148
+#: apps/manga/models.py:163
 msgid "Persons"
 msgstr "Personas"
 
-#: apps/manga/models.py:158 apps/manga/models.py:175
+#: apps/manga/models.py:173 apps/manga/models.py:190
 msgid "Date"
 msgstr "Fecha"
 
-#: apps/manga/models.py:163
+#: apps/manga/models.py:178
 msgid "have"
 msgstr "tiene"
 
-#: apps/manga/models.py:180
+#: apps/manga/models.py:195
 msgid "wants"
 msgstr "quiere"
 
@@ -297,11 +297,19 @@ msgstr "Carátula actual:"
 msgid "Update with this"
 msgstr "Actualizar con esta"
 
-#: themes/bootflat/templates/homepage/home.html:32
+#: themes/bootflat/templates/homepage/home.html:10
+msgid "Upcoming volumes"
+msgstr "Futuros lanzamientos"
+
+#: themes/bootflat/templates/homepage/home.html:36
+msgid "Latest releases"
+msgstr "Últimos lanzamientos"
+
+#: themes/bootflat/templates/homepage/home.html:66
 msgid "Biggest collections"
 msgstr "Mayores colecciones"
 
-#: themes/bootflat/templates/homepage/home.html:41
+#: themes/bootflat/templates/homepage/home.html:75
 #, python-format
 msgid "%(count)s volumes"
 msgstr "%(count)s volumenes"
