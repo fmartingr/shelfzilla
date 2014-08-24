@@ -10,9 +10,11 @@
                 <div class="col-sm-6 latest-manga">
                     <div class="well text-right item" style="background: white url({% thumbnail volume.cover 80x120 crop %}) top left no-repeat;">
                         <div class="content">
-                            <h4 class="media-heading">{{ volume }}</h4>
+                            <a href="{{ volume.series.get_absolute_url }}" data-pjax>
+                                <h4 class="media-heading">{{ volume }}</h4>
+                            </a>
                             <p>
-                                {{ volume.publisher }}<br />
+                                <a href="{{ volume.publisher.get_absolute_url }}" data-pjax>{{ volume.publisher }}</a><br />
                                 {{ volume.release_date }}
                             </p>
                         </div>

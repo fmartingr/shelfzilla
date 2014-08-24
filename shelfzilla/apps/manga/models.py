@@ -4,6 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
 from django.db.models.signals import post_save, post_delete
 from django.utils.text import slugify
+from django.core.urlresolvers import reverse
 from filer.fields.image import FilerImageField
 from filer.models.foldermodels import Folder
 
@@ -28,6 +29,12 @@ class Publisher(Model):
             return series.volumes.filter(publisher=self)
         except Series.DoesNotExist:
             return []
+
+    def get_absolute_url(self):
+        args = [self.pk]
+        if self.slug:
+            args.append(self.slug)
+        return reverse('publishers.detail', args=args)
 
     @property
     def series(self):
@@ -79,6 +86,12 @@ class Series(Model):
                 return True
 
         return False
+
+    def get_absolute_url(self):
+        args = [self.pk]
+        if self.slug:
+            args.append(self.slug)
+        return reverse('series.detail', args=args)
 
     @property
     def volumes_by_publisher(self):
