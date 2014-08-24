@@ -22,7 +22,10 @@ bower_components
 static_components
 
 # Media
-shelfzilla/media/
+shelfzilla/media*
 
 # i18n
 django.pot
+
+# Fixtures
+fixtures/
