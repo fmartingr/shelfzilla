@@ -7,18 +7,19 @@
 
 {% block profile_content %}
 <div class="row text-center">
-    <div class="col-sm-3">
+    <div class="col-sm-6">
         <div class="well">
             <h2 class="no-margin-top">{{ user.have_volumes.count }}</h2>
             {% trans "Volumes owned" %}
         </div>
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-6">
         <div class="well">
             <h2 class="no-margin-top">{{ user.wishlisted_volumes.count }}</h2>
             {% trans "Volumes wishlisted" %}
         </div>
     </div>
+    {% comment %}
     <div class="col-sm-3">
         <div class="well">
             <h2 class="no-margin-top">--</h2>
@@ -31,6 +32,7 @@
             Other
         </div>
     </div>
+    {% endcomment %}
 </div>
 <div class="well">
     <p>Interesting. No, wait, the other thing: tedious. What are you hacking off? Is it my torso?! 'It is!' My precious torso! Yes, if you make it look like an electrical fire. When you do things right, people won't be sure you've done anything at all. Take me to your leader! Ven ve voke up, ve had zese wodies.</p>

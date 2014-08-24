@@ -241,6 +241,7 @@ def makemessages():
                 run('django-admin.py makemessages -l es', quiet=True)
     """
 
+@task_environment
 @task
 def clean_backups(BCK_BASE_PATH='/backups/sql', DAYS='30'):
     """
@@ -250,6 +251,7 @@ def clean_backups(BCK_BASE_PATH='/backups/sql', DAYS='30'):
     with settings(hide('warnings', 'running', 'stdout', 'stderr')):
         local('find %s -mtime +%s -exec rm -rf {} \;' % (BCK_BASE_PATH, DAYS))
 
+@task_environment
 @task
 def backup():
     """

@@ -35,4 +35,11 @@
         {% endif %}
     </div>
     <img src="{% thumbnail volume.cover 150x150 %}" class="volume-cover max-width-80" />
+    {% if USER_IS_STAFF and USER_CONFIG.show_admin_links %}
+        <div class="admin">
+            <a class="btn btn-info btn-xs"
+               href="{% url 'admin:manga_volume_change' volume.pk %}">
+               {% trans "Edit in admin" %}</a>
+        </div>
+    {% endif %}
 </div>

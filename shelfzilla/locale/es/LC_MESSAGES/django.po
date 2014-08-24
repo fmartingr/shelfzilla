@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-24 17:04+0200\n"
-"PO-Revision-Date: 2014-08-24 17:04+0200\n"
+"POT-Creation-Date: 2014-08-24 17:18+0200\n"
+"PO-Revision-Date: 2014-08-24 17:18+0200\n"
 "Last-Translator: Felipe Martin <fmartingr@me.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -115,7 +115,7 @@ msgstr "Editorial"
 
 #: apps/manga/models.py:54 themes/bootflat/templates/_layout.html:36
 #: themes/bootflat/templates/manga/publishers/list.html:4
-#: themes/bootflat/templates/manga/series/detail.html:64
+#: themes/bootflat/templates/manga/series/detail.html:70
 msgid "Publishers"
 msgstr "Editoriales"
 
@@ -124,7 +124,7 @@ msgid "Summary"
 msgstr "Resumen"
 
 #: apps/manga/models.py:62
-#: themes/bootflat/templates/manga/series/detail.html:25
+#: themes/bootflat/templates/manga/series/detail.html:31
 msgid "Finished"
 msgstr "Finalizado"
 
@@ -326,7 +326,7 @@ msgstr "Sin resultados"
 
 #: themes/bootflat/templates/manga/publishers/detail.html:14
 #: themes/bootflat/templates/manga/publishers/detail.html:43
-#: themes/bootflat/templates/manga/series/detail.html:19
+#: themes/bootflat/templates/manga/series/detail.html:25
 #: themes/bootflat/templates/manga/series/includes/volume.html:25
 msgid "Requires review"
 msgstr "Requiere revisión"
@@ -335,23 +335,28 @@ msgstr "Requiere revisión"
 msgid "Homepage"
 msgstr "Página principal"
 
-#: themes/bootflat/templates/manga/series/detail.html:23
+#: themes/bootflat/templates/manga/series/detail.html:10
+#: themes/bootflat/templates/manga/series/includes/volume.html:42
+msgid "Edit in admin"
+msgstr "Editar en el admin"
+
+#: themes/bootflat/templates/manga/series/detail.html:29
 msgid "Status"
 msgstr "Estado"
 
-#: themes/bootflat/templates/manga/series/detail.html:27
+#: themes/bootflat/templates/manga/series/detail.html:33
 msgid "Open"
 msgstr "Abierta"
 
-#: themes/bootflat/templates/manga/series/detail.html:35
+#: themes/bootflat/templates/manga/series/detail.html:41
 msgid "Art"
 msgstr "Arte"
 
-#: themes/bootflat/templates/manga/series/detail.html:50
+#: themes/bootflat/templates/manga/series/detail.html:56
 msgid "Story"
 msgstr "Historia"
 
-#: themes/bootflat/templates/manga/series/detail.html:69
+#: themes/bootflat/templates/manga/series/detail.html:75
 msgid "Original publisher"
 msgstr "Editorial original"
 

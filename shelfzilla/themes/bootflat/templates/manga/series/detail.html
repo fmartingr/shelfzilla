@@ -5,6 +5,12 @@
 
 {% block main_content %}
 <div class="container">
+    {% if USER_IS_STAFF and USER_CONFIG.show_admin_links %}
+    <div class="text-right">
+        <a class="btn btn-info" href="{% url 'admin:manga_series_change' item.pk %}">{% trans "Edit in admin" %}</a>
+    </div>
+    <br />
+    {% endif %}
     <div class="row">
         <div class="col-md-3">
             <div class="panel panel-warning">
