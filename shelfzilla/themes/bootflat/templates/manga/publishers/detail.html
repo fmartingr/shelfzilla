@@ -43,16 +43,14 @@
             <div class="series-list">
                 <div class="row">
                     {% for series in item.series %}
-                    <div class="col-sm-3">
-                        <div class="well text-center">
-                            {% if series.for_review and user.is_staff %}
-                            <span class="label label-warning">{% trans "Requires review" %}</span>
-                            {% endif %}
-                            <h4><a href="{% url 'series.detail' series.pk series.slug %}">{{ series.name }}</a></h4>
-                            <img class="volume-cover" src="{% thumbnail series.last_volume_cover 200x200 %}" />
+                    <div class="col-sm-4">
+                        <div class="well text-right series-item" style="background: white url({% thumbnail series.last_volume_cover 120x160 %}) center left no-repeat;">
+                            <div class="content">
+                                <div class="name"><a href="{% url 'series.detail' series.pk series.slug %}">{{ series.name }}</a></div>
+                            </div>
                         </div>
                     </div>
-                    {% if forloop.counter|divisibleby:4 %}
+                    {% if forloop.counter|divisibleby:3 %}
                     </div>
                     <div class="row">
                     {% endif %}
