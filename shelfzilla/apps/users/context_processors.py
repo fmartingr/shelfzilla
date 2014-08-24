@@ -16,7 +16,7 @@ def user_configuration(request):
 
 def auth(request):
     result = {}
-    if request.user.is_authenticated:
+    if request.user.is_authenticated():
         result['user'] = User.objects.get(pk=request.user.pk)
 
     return result
