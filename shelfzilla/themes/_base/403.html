@@ -1,0 +1,15 @@
+{% extends "_layout.html" %}
+{% load i18n %}
+
+{% block main_content %}
+<div class="container">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">403</h3>
+        </div>
+        <div class="panel-content">
+            {% trans "You don't have permission to access this page." %}
+        </div>
+    </div>
+</div>
+{% endblock %}

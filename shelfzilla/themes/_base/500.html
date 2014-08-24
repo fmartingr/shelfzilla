@@ -1,0 +1,15 @@
+{% extends "_layout.html" %}
+{% load i18n %}
+
+{% block main_content %}
+<div class="container">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">500</h3>
+        </div>
+        <div class="panel-content">
+            {% trans "There was an internal error. It may be temporal, if the problem persists, contact us!" %}
+        </div>
+    </div>
+</div>
+{% endblock %}
