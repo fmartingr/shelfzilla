@@ -1,5 +1,5 @@
 {% load i18n thumbnail %}
-<div class="well text-center volume-item {% if volume.pk in user_have_volumes %}user-have-it{% endif %} {% if volume.pk in user_wishlisted_volumes %}user-wishlisted-it{% endif %}">
+<div class="well text-center volume-item {% if volume.pk in user_have_volumes %}user-have-it{% endif %} {% if volume.pk in user_wishlisted_volumes %}user-wishlisted-it{% endif %}" style="background: white url({% thumbnail volume.cover 120x150 %}) center left no-repeat;">
     <div class="badges">
         {% if volume.pk in user_have_volumes %}
         <a href="{% url "volume.have_it" volume.pk %}" data-pjax="v{{ volume.pk }}" pjax-nopush pjax-messages>
@@ -21,20 +21,23 @@
         {% endif %}
     </div>
     <div class="text-center volume-content">
-        {% if volume.for_review and user.is_staff %}
-        <span class="label label-warning">{% trans "Requires review" %}</span>
-        {% endif %}
-        {% if volume.number %}
-        <div><strong>#{{ volume.number }}</strong></div>
-        {% endif %}
-        {% if volume.name %}
-        <div><strong>{{ volume.name }}</strong></div>
+        <div class="volume-number">
+            {% if volume.number %}#{{ volume.number }}{% endif %}
+            {% if volume.name %}{{ volume.name }}{% endif %}
+        </div>
+        {% if show_publisher %}
+        <div><a href="{{ volume.publisher.get_absolute_url }}" data-pjax>{{ volume.publisher }}</a></div>
         {% endif %}
         {% if volume.release_date %}
         <div>{{ volume.release_date|date:"F Y" }}</div>
         {% endif %}
+        {% if volume.pages %}
+        <div>{% blocktrans with pages=volume.pages %}{{ pages }} pages{% endblocktrans %}</div>
+        {% endif %}
+        {% if volume.for_review and user.is_staff %}
+        <span class="label label-warning">{% trans "Requires review" %}</span>
+        {% endif %}
     </div>
-    <img src="{% thumbnail volume.cover 150x150 %}" class="volume-cover max-width-80" />
     {% if USER_IS_STAFF and USER_CONFIG.show_admin_links %}
         <div class="admin">
             <a class="btn btn-info btn-xs"

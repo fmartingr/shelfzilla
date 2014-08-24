@@ -108,10 +108,10 @@
             {% endif %}
             <div class="row">
                 {% for volume in item.volumes_by_publisher.all %}
-                <div class="col-sm-3" data-pjax-container="v{{ volume.pk }}">
+                <div class="col-sm-4" data-pjax-container="v{{ volume.pk }}">
                     {% include "manga/series/includes/volume.html" with volume=volume user=user %}
                 </div>
-                {% if forloop.counter|divisibleby:4 %}
+                {% if forloop.counter|divisibleby:3 %}
                 </div>
                 <div class="row">
                 {% endif %}

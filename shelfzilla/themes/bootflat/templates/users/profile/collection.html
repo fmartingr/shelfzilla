@@ -6,10 +6,10 @@
 {% block profile_content %}
 <div class="row">
     {% for owned_volume in item.have_volumes.all %}
-    <div class="col-sm-3" data-pjax-container="v{{ owned_volume.volume.pk }}">
-        {% include "manga/series/includes/volume.html" with volume=owned_volume.volume user=item %}
+    <div class="col-sm-4" data-pjax-container="v{{ owned_volume.volume.pk }}">
+        {% include "manga/series/includes/volume.html" with volume=owned_volume.volume user=item show_publisher=True %}
     </div>
-    {% if forloop.counter|divisibleby:4 %}
+    {% if forloop.counter|divisibleby:3 %}
     </div>
     <div class="row">
     {% endif %}

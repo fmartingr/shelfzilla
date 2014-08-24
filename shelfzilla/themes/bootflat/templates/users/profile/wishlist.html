@@ -6,10 +6,10 @@
 {% block profile_content %}
 <div class="row">
     {% for wishlisted_volume in item.wishlisted_volumes.all %}
-    <div class="col-sm-3" data-pjax-container="v{{ wishlisted_volume.volume.pk }}">
-        {% include "manga/series/includes/volume.html" with volume=wishlisted_volume.volume user=item %}
+    <div class="col-sm-4" data-pjax-container="v{{ wishlisted_volume.volume.pk }}">
+        {% include "manga/series/includes/volume.html" with volume=wishlisted_volume.volume user=item show_publisher=True %}
     </div>
-    {% if forloop.counter|divisibleby:4 %}
+    {% if forloop.counter|divisibleby:3 %}
     </div>
     <div class="row">
     {% endif %}
