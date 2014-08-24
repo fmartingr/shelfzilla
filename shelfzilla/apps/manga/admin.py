@@ -91,6 +91,7 @@ class SeriesAdmin(ImportExportModelAdmin, reversion.VersionAdmin):
     suit_form_tabs = (
         ('general', _('General')),
         ('volumes', _('Volumes')),
+        ('cover', _('Cover')),
         ('review', _('Review')),
         ('advanced', _('Advanced')),
     )
@@ -133,6 +134,7 @@ class VolumeAdmin(ImportExportModelAdmin, reversion.VersionAdmin):
 
     suit_form_tabs = (
         ('general', _('General')),
+        ('cover', _('Cover')),
         ('review', _('Review')),
         ('advanced', _('Advanced')),
     )
@@ -153,6 +155,10 @@ class VolumeAdmin(ImportExportModelAdmin, reversion.VersionAdmin):
             'fields': ('hidden', )
         }),
     ]
+
+    suit_form_includes = (
+        ('_admin/volumes/includes/cover.html', 'top', 'cover'),
+    )
 
     def change_series(self, request, queryset):
         selected = request.POST.getlist(admin.ACTION_CHECKBOX_NAME)

@@ -1,0 +1,84 @@
+{% load i18n %}
+<table class="table table-striped table-bordered table-hover table-condensed">
+    <thead>
+        <tr>
+            <td>{% trans "Actual cover:" %}</td>
+            <td>{% trans "Search" %}</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td width="50%" align="center"><img src="{{ original.cover.url }}" /></td>
+            <td>
+                <input type="text" id="GIMG-query" value="{{ original.series.name }} {{ original.publisher.name }} tomo {{ original.number }} {{ original.name }}" />
+                <input type="text" id="GIMG-limit" value="5" maxlength="2" size="2" style="width: 30px;" />
+                <button class="btn btn-info" id="GIMG-submit" type="button">{% trans "Search" %}</button>
+            </td>
+        </tr>
+        <tr>
+            <td id="GIMG-results" colspan="2"></td>
+        </tr>
+    </tbody>
+</table>
+
+<script type="text/javascript">
+    $(function() {
+        var submitButton = $('#GIMG-submit');
+        var results = $('#GIMG-results');
+        var searchQuery = function() { return $('#GIMG-query').val(); };
+        var searchLimit = function() { return $('#GIMG-limit').val(); };
+        $('#GIMG-query').keypress(function(event) {
+            if (event.keyCode == 13) {
+                event.preventDefault();
+                submitButton.click()
+            };
+        });
+
+        submitButton.on('click', function() {
+            $.getJSON(
+                'http://google-images-api.eu01.aws.af.cm/',
+                { q: searchQuery(), limit: searchLimit() },
+                function(data) {
+                    results.html('');
+                    console.log(data.items);
+                    for (var i = 0; i < data.items.length; i++) {
+                        var image = data.items[i];
+
+                        var containerElement = $('<div />');
+                        containerElement.css('text-align', 'center')
+                                        .css('width', '25%')
+                                        .css('float', 'left');
+
+                        var imageElement = $('<img />');
+                        imageElement.attr('src', image);
+                        /* imageElement.on('error', function(e) {
+                            $(this).remove();
+                        })*/
+
+                        var formElement = $('<form />');
+                        formElement.attr('action', '/_admin/manga/volume/cover/{{ original.pk }}/');
+                        formElement.attr('method', 'post');
+
+                        var buttonElement = $('<button />');
+                        buttonElement.attr('type', 'submit');
+                        buttonElement.addClass('btn');
+                        buttonElement.text('{% trans "Update with this" %}')
+
+                        var urlElement = $('<input />');
+                        urlElement.attr('type', 'hidden');
+                        urlElement.attr('name', 'cover_url');
+                        urlElement.val(image);
+
+                        formElement.append(buttonElement);
+                        formElement.append(urlElement);
+
+                        containerElement.append(formElement);
+                        containerElement.append(imageElement);
+
+                        results.append(containerElement);
+                    }
+                }
+            );
+        });
+    })
+</script>

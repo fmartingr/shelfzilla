@@ -240,8 +240,11 @@ def series_delete_folder(sender, instance, using, **kwargs):
 
 
 def volume_delete_cover(sender, instance, **kwargs):
-    if instance.cover:
-        instance.cover.delete()
+    try:
+        if instance.cover:
+            instance.cover.delete()
+    except:
+        pass
 
 post_save.connect(series_check_filer, sender=Series)
 post_save.connect(volume_check_filer, sender=Volume)
