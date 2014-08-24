@@ -5,9 +5,9 @@
 
 {% block profile_content %}
 <div class="row">
-    {% for owned_volume in user.have_volumes.all %}
+    {% for owned_volume in item.have_volumes.all %}
     <div class="col-sm-3" data-pjax-container="v{{ volume.pk }}">
-        {% include "manga/series/includes/volume.html" with volume=owned_volume.volume user=user %}
+        {% include "manga/series/includes/volume.html" with volume=owned_volume.volume user=item %}
     </div>
     {% if forloop.counter|divisibleby:4 %}
     </div>

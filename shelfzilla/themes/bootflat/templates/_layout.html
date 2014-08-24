@@ -39,18 +39,18 @@
                     {% endif %}
                     <ul class="nav navbar-nav navbar-right">
                         {% if user.is_authenticated %}
-                        <li><a href="{% url 'profile' %}" title="{% trans "Profile" %}">
+                        <li><a href="{% url 'profile' user.username %}" title="{% trans "Profile" %}">
                             <img src="{{ user.avatar }}" class="avatar img-rounded"/>
                              {{ user.username }}</a>
                          </li>
                         {% if user.is_superuser %}
                         <li><a data-pjax-unnav href="/admin/" title="Admin"><i class="glyphicon glyphicon-tower"></i></a></li>
                         {% endif %}
-                        <li><a data-pjax-unnav href="{% url 'profile' %}" data-pjax
+<!--                         <li><a data-pjax-unnav href="{% url 'profile' user.username %}" data-pjax
                                title="{% trans "Profile" %}">
                                <i class="glyphicon glyphicon-user"></i>
                             </a>
-                       </li>
+                        </li> -->
                         <li><a data-pjax-unnav href="{% url "logout" %}"
                                title="{% trans "Logout" %}">
                                <i class="glyphicon glyphicon-off"></i>

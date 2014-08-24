@@ -69,8 +69,8 @@
                     {% for user in TOP_5_COLLECTORS %}
                     <li class="list-group-item list-group-users">
                         <strong>#{{ forloop.counter }}</strong>
-                        <img src="{{ user.avatar }}" class="avatar img-rounded"/>
-                        {{ user.username }}
+                        <a href="{% url 'profile' user.username %}"><img src="{{ user.avatar }}" class="avatar img-rounded"/>
+                        {{ user.username }}</a>
                         <span class="pull-right">
                             <i>{% blocktrans with count=user.have_volumes.count %}{{ count }} volumes{% endblocktrans %}</i>
                         </span>

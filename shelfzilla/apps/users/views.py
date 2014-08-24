@@ -1,6 +1,6 @@
 from django.views.generic import View
 from django.template import RequestContext
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.auth import logout
 from django.utils.translation import ugettext as _
 from django.http import HttpResponseRedirect, Http404
@@ -62,25 +62,22 @@ class LogoutView(View):
         return HttpResponseRedirect('/')
 
 
-class ProfileView(View):
+class UserProfileView(View):
     tempalte = 'users/profile.html'
     template_section = 'users/profile/{}.html'
 
-    def get(self, request, section='summary'):
-        if request.user.is_authenticated():
-            data = {
-                'item': User.objects.get(pk=request.user.pk)
-            }
-            if section != 'summary':
-                template = self.template_section.format(section)
-            else:
-                template = self.tempalte
-            data = self.get_context_from_section(request, section, data)
-
-            ctx = RequestContext(request, data)
-            return render_to_response(template, context_instance=ctx)
+    def get(self, request, username, section='summary'):
+        data = {
+            'item': get_object_or_404(User, username=username)
+        }
+        if section != 'summary':
+            template = self.template_section.format(section)
         else:
-            raise Http404
+            template = self.tempalte
+        data = self.get_context_from_section(request, section, data)
+
+        ctx = RequestContext(request, data)
+        return render_to_response(template, context_instance=ctx)
 
     def get_summary(self, request, context):
         context['SUMMARY'] = 'Y'

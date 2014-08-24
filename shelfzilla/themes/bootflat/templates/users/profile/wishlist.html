@@ -5,9 +5,9 @@
 
 {% block profile_content %}
 <div class="row">
-    {% for wishlisted_volume in user.wishlisted_volumes.all %}
+    {% for wishlisted_volume in item.wishlisted_volumes.all %}
     <div class="col-sm-3" data-pjax-container="v{{ wishlisted_volume.volume.pk }}">
-        {% include "manga/series/includes/volume.html" with volume=wishlisted_volume.volume user=user %}
+        {% include "manga/series/includes/volume.html" with volume=wishlisted_volume.volume user=item %}
     </div>
     {% if forloop.counter|divisibleby:4 %}
     </div>
