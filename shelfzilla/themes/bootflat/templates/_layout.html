@@ -39,21 +39,22 @@
                     {% endif %}
                     <ul class="nav navbar-nav navbar-right">
                         {% if user.is_authenticated %}
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ user.username }} <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                {% if user.is_superuser %}
-                                <li><a data-pjax-unnav href="/admin/">Admin</a></li>
-                                {% endif %}
-                                <li><a data-pjax-unnav href="{% url 'profile' %}" data-pjax>{% trans "Profile" %}</a></li>
-                                <!--
-                                <li class="divider"></li>
-                                <li><a data-pjax-unnav href="#">{% trans "My collection" %}</a></li>
-                                <li><a data-pjax-unnav href="#">{% trans "My wishlist" %}</a></li>
-                                -->
-                                <li class="divider"></li>
-                                <li><a data-pjax-unnav href="{% url "logout" %}">{% trans "Logout" %}</a></li>
-                            </ul>
+                        <li><a href="{% url 'profile' %}" title="{% trans "Profile" %}">
+                            <img src="{{ user.avatar }}" class="avatar img-rounded"/>
+                             {{ user.username }}</a>
+                         </li>
+                        {% if user.is_superuser %}
+                        <li><a data-pjax-unnav href="/admin/" title="Admin"><i class="glyphicon glyphicon-tower"></i></a></li>
+                        {% endif %}
+                        <li><a data-pjax-unnav href="{% url 'profile' %}" data-pjax
+                               title="{% trans "Profile" %}">
+                               <i class="glyphicon glyphicon-user"></i>
+                            </a>
+                       </li>
+                        <li><a data-pjax-unnav href="{% url "logout" %}"
+                               title="{% trans "Logout" %}">
+                               <i class="glyphicon glyphicon-off"></i>
+                            </a>
                         </li>
                         {% else %}
                         <li>

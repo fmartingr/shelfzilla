@@ -79,6 +79,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'shelfzilla.apps.pjax.context_processors.pjax',
     'shelfzilla.apps.manga.context_processors.user_have_volumes',
     'shelfzilla.apps.manga.context_processors.user_wishlisted_volumes',
+    'shelfzilla.apps.users.context_processors.auth',
     'shelfzilla.apps.users.context_processors.user_is_staff',
     'shelfzilla.apps.users.context_processors.user_configuration',
 )
