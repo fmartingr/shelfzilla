@@ -2,20 +2,20 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-27 23:20+0200\n"
-"PO-Revision-Date: 2014-05-27 23:20+0200\n"
-"Last-Translator:   <fmartingr@me.com>\n"
+"POT-Creation-Date: 2014-08-24 15:03+0200\n"
+"PO-Revision-Date: 2014-08-24 15:06+0200\n"
+"Last-Translator: Felipe Martin <fmartingr@me.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.7.4\n"
 
@@ -31,15 +31,23 @@ msgstr "Comentario de revisión"
 msgid "Hidden"
 msgstr "Oculto"
 
-#: apps/_admin/views.py:42
+#: apps/_admin/views.py:44 apps/_admin/views.py:81
 msgid "Volume series changed"
 msgstr "Serie de los volúmenes cambiada"
 
-#: apps/config/models.py:12 apps/config/models.py:15 apps/config/models.py:16
+#: apps/_admin/views.py:83
+msgid "Cover url to update not found."
+msgstr "No se encontró la URL de la carátula para actualizar."
+
+#: apps/_admin/views.py:85
+msgid "Volume not found."
+msgstr "Volumen no encontrado."
+
+#: apps/config/models.py:13 apps/config/models.py:16 apps/config/models.py:17
 msgid "Site Configuration"
 msgstr "Configuración del sitio"
 
-#: apps/config/models.py:32 apps/config/models.py:35 apps/config/models.py:36
+#: apps/config/models.py:33 apps/config/models.py:36 apps/config/models.py:37
 msgid "Social Configuration"
 msgstr "Configuración social"
 
@@ -51,18 +59,18 @@ msgstr "Marcar items para revisión"
 msgid "Items unmarked for review"
 msgstr "Desmarcar items para revisión"
 
-#: apps/manga/admin.py:56 apps/manga/admin.py:92 apps/manga/admin.py:135
-#: apps/manga/admin.py:173
+#: apps/manga/admin.py:56 apps/manga/admin.py:92 apps/manga/admin.py:136
+#: apps/manga/admin.py:179
 msgid "General"
 msgstr "General"
 
-#: apps/manga/admin.py:57 apps/manga/admin.py:94 apps/manga/admin.py:136
-#: apps/manga/admin.py:174
+#: apps/manga/admin.py:57 apps/manga/admin.py:95 apps/manga/admin.py:138
+#: apps/manga/admin.py:180
 msgid "Review"
 msgstr "Para revisión"
 
-#: apps/manga/admin.py:58 apps/manga/admin.py:95 apps/manga/admin.py:137
-#: apps/manga/admin.py:175
+#: apps/manga/admin.py:58 apps/manga/admin.py:96 apps/manga/admin.py:139
+#: apps/manga/admin.py:181
 msgid "Advanced"
 msgstr "Avanzado"
 
@@ -73,12 +81,16 @@ msgstr "Avanzado"
 msgid "Series"
 msgstr "Series"
 
-#: apps/manga/admin.py:93 apps/manga/admin.py:120 apps/manga/models.py:135
+#: apps/manga/admin.py:93 apps/manga/admin.py:121 apps/manga/models.py:135
 #: themes/bootflat/templates/manga/publishers/detail.html:21
 msgid "Volumes"
 msgstr "Volúmenes"
 
-#: apps/manga/admin.py:165
+#: apps/manga/admin.py:94 apps/manga/admin.py:137
+msgid "Cover"
+msgstr "Carátula"
+
+#: apps/manga/admin.py:171
 #: themes/bootflat/templates/_admin/volumes/change_series.html:4
 #: themes/bootflat/templates/_admin/volumes/change_series.html:8
 msgid "Change volume series"
@@ -152,16 +164,22 @@ msgstr "Persona"
 msgid "Persons"
 msgstr "Personas"
 
-#: apps/manga/models.py:162
+#: apps/manga/models.py:158 apps/manga/models.py:175
+msgid "Date"
+msgstr "Fecha"
+
+#: apps/manga/models.py:163
 msgid "have"
 msgstr "tiene"
 
-#: apps/manga/models.py:178
+#: apps/manga/models.py:180
 msgid "wants"
 msgstr "quiere"
 
 #: apps/manga/views/search.py:11 apps/manga/views/search.py:13
 #: themes/bootflat/templates/_layout.html:71
+#: themes/bootflat/templates/_admin/volumes/includes/cover.html:6
+#: themes/bootflat/templates/_admin/volumes/includes/cover.html:15
 msgid "Search"
 msgstr "Buscar"
 
@@ -213,6 +231,22 @@ msgstr "Sesión finalizada."
 msgid "Spanish"
 msgstr "Español"
 
+#: themes/_base/403.html:11
+msgid "You don't have permission to access this page."
+msgstr "No tienes permiso para acceder a esta página."
+
+#: themes/_base/404.html:11
+msgid "The page you are looking for is nowhere to be found!"
+msgstr "¡La página que buscas no existe!"
+
+#: themes/_base/500.html:11
+msgid ""
+"There was an internal error. It may be temporal, if the problem persists, "
+"contact us!"
+msgstr ""
+"Hubo un error interno del servidor. Puede ser temporal, pero si el problema "
+"persiste, contacta con nosotros."
+
 #: themes/bootflat/templates/_layout.html:20
 msgid "Toggle navigation"
 msgstr "Mostrar/Ocultar navegación"
@@ -254,6 +288,23 @@ msgstr "Cambiar a:"
 #: themes/bootflat/templates/_admin/volumes/change_series.html:28
 msgid "Change"
 msgstr "Cambiar"
+
+#: themes/bootflat/templates/_admin/volumes/includes/cover.html:5
+msgid "Actual cover:"
+msgstr "Carátula actual:"
+
+#: themes/bootflat/templates/_admin/volumes/includes/cover.html:65
+msgid "Update with this"
+msgstr "Actualizar con esta"
+
+#: themes/bootflat/templates/homepage/home.html:32
+msgid "Biggest collections"
+msgstr "Mayores colecciones"
+
+#: themes/bootflat/templates/homepage/home.html:41
+#, python-format
+msgid "%(count)s volumes"
+msgstr "%(count)s volumenes"
 
 #: themes/bootflat/templates/manga/search.html:8
 msgid "Looking for..."
