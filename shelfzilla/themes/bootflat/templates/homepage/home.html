@@ -1,3 +1,50 @@
 {% extends '_layout.html'|pjax:request %}
+{% load i18n thumbnail %}
 
-{% block content %}asd{% endblock %}
+{% block main_content %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="row">
+                {% for volume in LATEST_MANGA_ADDED %}
+                <div class="col-sm-6 latest-manga">
+                    <div class="well text-right item" style="background: white url({% thumbnail volume.cover 80x120 crop %}) top left no-repeat;">
+                        <div class="content">
+                            <h4 class="media-heading">{{ volume }}</h4>
+                            <p>
+                                {{ volume.publisher }}<br />
+                                {{ volume.release_date }}
+                            </p>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:2 %}
+                </div><div class="row">
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-4">
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{% trans "Biggest collections" %}</h3>
+                </div>
+                <ul class="list-group">
+                    {% for user in TOP_5_COLLECTORS %}
+                    <li class="list-group-item list-group-users">
+                        <strong>#{{ forloop.counter }}</strong>
+                        <img src="{{ user.avatar }}" class="avatar img-rounded"/>
+                        {{ user.username }}
+                        <span class="pull-right">
+                            <i>{% blocktrans with count=user.have_volumes.count %}{{ count }} volumes{% endblocktrans %}</i>
+                        </span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

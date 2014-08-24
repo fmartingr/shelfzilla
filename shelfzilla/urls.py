@@ -10,13 +10,13 @@ admin.autodiscover()
 urlpatterns = patterns(
     '',
     url(r'^messages/$', MessagesView.as_view(), name="contrib.messages"),
+    url(r'^$', include('shelfzilla.apps.homepage.urls')),
     url(r'^', include('shelfzilla.apps.landing.urls')),
     url(r'^', include('shelfzilla.apps.users.urls')),
     url(r'^series/', include('shelfzilla.apps.manga.urls.series')),
     url(r'^volumes/', include('shelfzilla.apps.manga.urls.volumes')),
     url(r'^publishers/', include('shelfzilla.apps.manga.urls.publishers')),
     url(r'^search/', include('shelfzilla.apps.manga.urls.search')),
-    url(r'^$', include('shelfzilla.apps.homepage.urls')),
     url(r'^_admin/', include('shelfzilla.apps._admin.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )
