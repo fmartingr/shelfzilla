@@ -224,3 +224,34 @@ FILER_STORAGES = {
 SOUTH_MIGRATION_MODULES = {
     'easy_thumbnails': 'easy_thumbnails.south_migrations',
 }
+
+#
+#   ADMIN
+#
+SUIT_CONFIG = {
+    'ADMIN_NAME': 'Shelfzilla',
+    'SEARCH_URL': '',
+    'MENU': (
+        {
+            'app': 'auth',
+            'label': 'Authorization',
+            'icon': 'icon-lock',
+            'models': ('user', 'group')
+        },
+        {
+            'app': 'config',
+            'label': 'Settings',
+            'icon': 'icon-cog',
+        },
+        {
+            'app': 'manga',
+            'label': 'Manga',
+            'icon': 'icon-book',
+        },
+        {
+            'label': 'Files',
+            'icon': 'icon-file',
+            'app': 'filer',
+        },
+    ),
+}
