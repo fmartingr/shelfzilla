@@ -7,6 +7,7 @@ from solo.models import SingletonModel
 class SiteConfiguration(SingletonModel):
     site_name = models.CharField(max_length=255, null=True, blank=True)
     maintenance_mode = models.BooleanField(default=False)
+    use_pjax = models.BooleanField(default=True)
 
     def __unicode__(self):
         return _("Site Configuration")

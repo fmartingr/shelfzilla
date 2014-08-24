@@ -85,7 +85,9 @@
     </div>
 
     {% block footer %}{% endblock %}
-
+    <script type="text/javascript">
+    var USE_PJAX = {{ site_config.use_pjax|lower }};
+    </script>
     <script src="{% static "js/site.js" %}"></script>
     {% block extra_js %}{% endblock %}
 
