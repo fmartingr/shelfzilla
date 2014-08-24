@@ -10,7 +10,7 @@
         <tr>
             <td width="50%" align="center"><img src="{{ original.cover.url }}" /></td>
             <td>
-                <input type="text" id="GIMG-query" value="{{ original.series.name }} {{ original.publisher.name }} tomo {{ original.number }} {{ original.name }}" />
+                <input type="text" id="GIMG-query" value="{{ original.series.name }} {{ original.publisher.name }} tomo{% if original.number %} {{ original.number }}{% endif %}{% if original.name %} {{ original.name }}{% endif %}" />
                 <input type="text" id="GIMG-limit" value="5" maxlength="2" size="2" style="width: 30px;" />
                 <button class="btn btn-info" id="GIMG-submit" type="button">{% trans "Search" %}</button>
             </td>
