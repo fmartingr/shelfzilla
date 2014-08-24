@@ -139,8 +139,10 @@ class Volume(Model):
     def __unicode__(self):
         if self.name:
             return u'{} {}'.format(self.series.name, self.name)
-        else:
+        elif self.number:
             return u'{} #{}'.format(self.series.name, self.number)
+        else:
+            return u'{}'.format(self.series.name)
 
     class Meta:
         ordering = ['series__name', 'number']
