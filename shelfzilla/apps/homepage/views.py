@@ -13,7 +13,7 @@ class HomepageView(View):
         data = {}
         from datetime import datetime
         # TOP 5
-        data['TOP_5_COLLECTORS'] = User.objects.all()\
+        data['TOP_5_COLLECTORS'] = User.objects.filter(pk__gt=1)\
             .annotate(num_volumes=Count('have_volumes'))\
             .order_by('-num_volumes')[:5]
 
