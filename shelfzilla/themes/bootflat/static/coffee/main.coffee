@@ -1,19 +1,23 @@
+# Toastr config
+toastr.options =
+  "positionClass": "toast-top-left"
+
+window._updateMessages = false
+window.updateMessagesHTML = ->
+    $.pjax
+        url: '/messages/'
+        container: '[data-pjax-container="messages"]'
+        push: false
+    window._updateMessages = false
+
+window.updateMessages = ->
+    $.getJSON "/messages/?format=json", (data) ->
+        for message in data
+            toastr[message.extra_tags](message.message)
+    window._updateMessages = false
+
 if USE_PJAX
     NProgress.start()
-
-    window._updateMessages = false
-    window.updateMessagesHTML = ->
-        $.pjax
-            url: '/messages/'
-            container: '[data-pjax-container="messages"]'
-            push: false
-        window._updateMessages = false
-
-    window.updateMessages = ->
-        $.getJSON "/messages/?format=json", (data) ->
-            for message in data
-                toastr[message.extra_tags](message.message)
-        window._updateMessages = false
 
     window.imageLoad = (element) ->
         imgLoad = imagesLoaded(element)
