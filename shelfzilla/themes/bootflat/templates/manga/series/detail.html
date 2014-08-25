@@ -113,19 +113,21 @@
                         <div class="form-group">
                             <label class="" for="language">
                                 {% trans "Language" %}</label>
-                            <select name="language">
-                            {% for lang in item.languages.all %}
+                            <select name="language" class="form-control">
+                                <option value="0">{% trans "All" %}</option>
+                                {% for lang in item.languages.all %}
                                 <option value="{{ lang.pk }}">{{ lang.name }}</option>
-                            {% endfor %}
+                                {% endfor %}
                             </select>
                         </div>
                         <div class="form-group">
                             <label class="" for="language">
                                 {% trans "Publisher" %}</label>
-                            <select name="language">
-                            {% for pub in item.publishers.all %}
+                            <select name="language" class="form-control">
+                                <option value="0">{% trans "All" %}</option>
+                                {% for pub in item.publishers.all %}
                                 <option value="{{ pub.publisher.pk }}">{{ pub.publisher.name }}</option>
-                            {% endfor %}
+                                {% endfor %}
                             </select>
                         </div>
                     </form>

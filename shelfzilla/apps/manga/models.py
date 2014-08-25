@@ -56,10 +56,10 @@ class Publisher(Model):
 
 class Series(Model):
     SERIES_STATUS = (
-        ('open', _('Abierta')),
-        ('finished', _('Finalizada')),
-        ('cancelled', _('Cancelada')),
-        ('on-hold', _('Parada'))
+        ('open', _('Open')),
+        ('finished', _('Finished')),
+        ('cancelled', _('Cancelled')),
+        ('on-hold', _('On-hold'))
     )
 
     name = models.CharField(_('Name'), max_length=256)

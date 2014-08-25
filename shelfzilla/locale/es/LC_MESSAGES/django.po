@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-24 22:20+0200\n"
-"PO-Revision-Date: 2014-08-24 22:27+0200\n"
+"POT-Creation-Date: 2014-08-25 18:01+0200\n"
+"PO-Revision-Date: 2014-08-25 18:01+0200\n"
 "Last-Translator: Felipe Martin <fmartingr@me.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -51,57 +51,63 @@ msgstr "Configuración del sitio"
 msgid "Social Configuration"
 msgstr "Configuración social"
 
-#: apps/manga/admin.py:40
+#: apps/manga/admin.py:41
 msgid "Items marked for review"
 msgstr "Marcar items para revisión"
 
-#: apps/manga/admin.py:45
+#: apps/manga/admin.py:46
 msgid "Items unmarked for review"
 msgstr "Desmarcar items para revisión"
 
-#: apps/manga/admin.py:56 apps/manga/admin.py:92 apps/manga/admin.py:135
-#: apps/manga/admin.py:178
+#: apps/manga/admin.py:58 apps/manga/admin.py:94 apps/manga/admin.py:137
+#: apps/manga/admin.py:184
 msgid "General"
 msgstr "General"
 
-#: apps/manga/admin.py:57 apps/manga/admin.py:94 apps/manga/admin.py:137
-#: apps/manga/admin.py:179
+#: apps/manga/admin.py:59 apps/manga/admin.py:96 apps/manga/admin.py:139
+#: apps/manga/admin.py:185
 msgid "Review"
 msgstr "Para revisión"
 
-#: apps/manga/admin.py:58 apps/manga/admin.py:95 apps/manga/admin.py:138
-#: apps/manga/admin.py:180
+#: apps/manga/admin.py:60 apps/manga/admin.py:97 apps/manga/admin.py:140
+#: apps/manga/admin.py:186
 msgid "Advanced"
 msgstr "Avanzado"
 
-#: apps/manga/admin.py:78 apps/manga/models.py:118 apps/manga/models.py:119
-#: themes/bootflat/templates/_layout.html:33
+#: apps/manga/admin.py:80 apps/manga/models.py:134 apps/manga/models.py:135
+#: themes/bootflat/templates/_layout.html:40
+#: themes/bootflat/templates/homepage/home.html:94
 #: themes/bootflat/templates/manga/publishers/detail.html:24
 #: themes/bootflat/templates/manga/series/list.html:4
 msgid "Series"
 msgstr "Series"
 
-#: apps/manga/admin.py:93 apps/manga/admin.py:120 apps/manga/models.py:150
+#: apps/manga/admin.py:95 apps/manga/admin.py:122 apps/manga/models.py:198
+#: themes/bootflat/templates/homepage/home.html:97
 #: themes/bootflat/templates/manga/publishers/detail.html:27
 msgid "Volumes"
 msgstr "Volúmenes"
 
-#: apps/manga/admin.py:136
+#: apps/manga/admin.py:138
 msgid "Cover"
 msgstr "Carátula"
 
-#: apps/manga/admin.py:170
+#: apps/manga/admin.py:176
 #: themes/bootflat/templates/_admin/volumes/change_series.html:4
 #: themes/bootflat/templates/_admin/volumes/change_series.html:8
 msgid "Change volume series"
 msgstr "Cambiar serie de los volúmenes"
 
-#: apps/manga/models.py:15 apps/manga/models.py:58 apps/manga/models.py:124
-#: apps/manga/models.py:154
+#: apps/manga/admin.py:214
+msgid "Flag"
+msgstr "Bandera"
+
+#: apps/manga/models.py:15 apps/manga/models.py:65 apps/manga/models.py:170
+#: apps/manga/models.py:202 apps/manga/models.py:215
 msgid "Name"
 msgstr "Nombre"
 
-#: apps/manga/models.py:16 apps/manga/models.py:59 apps/manga/models.py:155
+#: apps/manga/models.py:16 apps/manga/models.py:66 apps/manga/models.py:203
 msgid "Slug"
 msgstr "Álias"
 
@@ -110,74 +116,109 @@ msgid "URL"
 msgstr "URL"
 
 #: apps/manga/models.py:53
+#: themes/bootflat/templates/manga/series/detail.html:126
 msgid "Publisher"
 msgstr "Editorial"
 
-#: apps/manga/models.py:54 themes/bootflat/templates/_layout.html:36
+#: apps/manga/models.py:54 themes/bootflat/templates/_layout.html:43
 #: themes/bootflat/templates/manga/publishers/list.html:4
-#: themes/bootflat/templates/manga/series/detail.html:70
+#: themes/bootflat/templates/manga/series/detail.html:66
 msgid "Publishers"
 msgstr "Editoriales"
 
-#: apps/manga/models.py:61 themes/bootflat/templates/users/profile.html:27
-msgid "Summary"
-msgstr "Resumen"
+#: apps/manga/models.py:59
+msgid "Open"
+msgstr "Abierta"
 
-#: apps/manga/models.py:62
-#: themes/bootflat/templates/manga/series/detail.html:31
+#: apps/manga/models.py:60 apps/manga/models.py:69
 msgid "Finished"
 msgstr "Finalizado"
 
-#: apps/manga/models.py:123
+#: apps/manga/models.py:61
+msgid "Cancelled"
+msgstr "Cancelada"
+
+#: apps/manga/models.py:62
+msgid "On-hold"
+msgstr "Parada"
+
+#: apps/manga/models.py:68 apps/manga/models.py:141
+#: themes/bootflat/templates/users/profile.html:27
+msgid "Summary"
+msgstr "Resumen"
+
+#: apps/manga/models.py:70 apps/manga/models.py:150
+#: themes/bootflat/templates/manga/series/detail.html:29
+msgid "Status"
+msgstr "Estado"
+
+#: apps/manga/models.py:152
+msgid "Current publisher"
+msgstr "Editorial original"
+
+#: apps/manga/models.py:169
 msgid "Number"
 msgstr "Número"
 
-#: apps/manga/models.py:129
+#: apps/manga/models.py:175
 msgid "ISBN-10"
 msgstr "ISBN-10"
 
-#: apps/manga/models.py:131
+#: apps/manga/models.py:177
 msgid "ISBN-13"
 msgstr "ISBN-13"
 
-#: apps/manga/models.py:134
+#: apps/manga/models.py:182
 msgid "Retail price"
 msgstr "Precio recomendado"
 
-#: apps/manga/models.py:136
+#: apps/manga/models.py:184
 msgid "Pages"
 msgstr "Páginas"
 
-#: apps/manga/models.py:137
+#: apps/manga/models.py:185
 msgid "Release date"
 msgstr "Fecha de lanzamiento"
 
-#: apps/manga/models.py:149
+#: apps/manga/models.py:197
 msgid "Volume"
 msgstr "Volumen"
 
-#: apps/manga/models.py:162
+#: apps/manga/models.py:210
 msgid "Person"
 msgstr "Persona"
 
-#: apps/manga/models.py:163
+#: apps/manga/models.py:211
 msgid "Persons"
 msgstr "Personas"
 
-#: apps/manga/models.py:173 apps/manga/models.py:190
+#: apps/manga/models.py:216
+msgid "Code"
+msgstr "Código"
+
+#: apps/manga/models.py:223
+#: themes/bootflat/templates/manga/series/detail.html:116
+msgid "Language"
+msgstr "Idioma"
+
+#: apps/manga/models.py:224
+msgid "Languages"
+msgstr "Idiomas"
+
+#: apps/manga/models.py:233 apps/manga/models.py:250
 msgid "Date"
 msgstr "Fecha"
 
-#: apps/manga/models.py:178
+#: apps/manga/models.py:238
 msgid "have"
 msgstr "tiene"
 
-#: apps/manga/models.py:195
+#: apps/manga/models.py:255
 msgid "wants"
 msgstr "quiere"
 
 #: apps/manga/views/search.py:11 apps/manga/views/search.py:13
-#: themes/bootflat/templates/_layout.html:72
+#: themes/bootflat/templates/_layout.html:79
 #: themes/bootflat/templates/_admin/volumes/includes/cover.html:6
 #: themes/bootflat/templates/_admin/volumes/includes/cover.html:15
 msgid "Search"
@@ -227,7 +268,7 @@ msgstr "Has accedido correctamente."
 msgid "Logged out successfully"
 msgstr "Sesión finalizada."
 
-#: settings/base.py:124
+#: settings/base.py:127
 msgid "Spanish"
 msgstr "Español"
 
@@ -247,22 +288,22 @@ msgstr ""
 "Hubo un error interno del servidor. Puede ser temporal, pero si el problema "
 "persiste, contacta con nosotros."
 
-#: themes/bootflat/templates/_layout.html:20
+#: themes/bootflat/templates/_layout.html:27
 msgid "Toggle navigation"
 msgstr "Mostrar/Ocultar navegación"
 
-#: themes/bootflat/templates/_layout.html:42
-#: themes/bootflat/templates/_layout.html:50
+#: themes/bootflat/templates/_layout.html:49
+#: themes/bootflat/templates/_layout.html:57
 #: themes/bootflat/templates/users/profile-pjax.html:4
 #: themes/bootflat/templates/users/profile.html:4
 msgid "Profile"
 msgstr "Perfil"
 
-#: themes/bootflat/templates/_layout.html:55
+#: themes/bootflat/templates/_layout.html:62
 msgid "Logout"
 msgstr "Cerrar sesión"
 
-#: themes/bootflat/templates/_layout.html:62
+#: themes/bootflat/templates/_layout.html:69
 msgid "Log in"
 msgstr "Entrar"
 
@@ -298,14 +339,22 @@ msgstr "Futuros lanzamientos"
 msgid "Latest releases"
 msgstr "Últimos lanzamientos"
 
-#: themes/bootflat/templates/homepage/home.html:66
+#: themes/bootflat/templates/homepage/home.html:67
 msgid "Biggest collections"
 msgstr "Mayores colecciones"
 
-#: themes/bootflat/templates/homepage/home.html:75
+#: themes/bootflat/templates/homepage/home.html:76
 #, python-format
 msgid "%(count)s volumes"
 msgstr "%(count)s volumenes"
+
+#: themes/bootflat/templates/homepage/home.html:85
+msgid "Stats"
+msgstr "Estadísticas"
+
+#: themes/bootflat/templates/homepage/home.html:90
+msgid "Users"
+msgstr "Usuarios"
 
 #: themes/bootflat/templates/manga/search.html:8
 msgid "Looking for..."
@@ -319,13 +368,13 @@ msgstr "Sin resultados"
 
 #: themes/bootflat/templates/manga/publishers/detail.html:10
 #: themes/bootflat/templates/manga/series/detail.html:10
-#: themes/bootflat/templates/manga/series/includes/volume.html:45
+#: themes/bootflat/templates/manga/series/includes/volume.html:48
 msgid "Edit in admin"
 msgstr "Editar en el admin"
 
 #: themes/bootflat/templates/manga/publishers/detail.html:20
 #: themes/bootflat/templates/manga/series/detail.html:25
-#: themes/bootflat/templates/manga/series/includes/volume.html:38
+#: themes/bootflat/templates/manga/series/includes/volume.html:41
 msgid "Requires review"
 msgstr "Requiere revisión"
 
@@ -333,31 +382,32 @@ msgstr "Requiere revisión"
 msgid "Homepage"
 msgstr "Página principal"
 
-#: themes/bootflat/templates/manga/series/detail.html:29
-msgid "Status"
-msgstr "Estado"
-
-#: themes/bootflat/templates/manga/series/detail.html:33
-msgid "Open"
-msgstr "Abierta"
-
-#: themes/bootflat/templates/manga/series/detail.html:41
+#: themes/bootflat/templates/manga/series/detail.html:37
 msgid "Art"
 msgstr "Arte"
 
-#: themes/bootflat/templates/manga/series/detail.html:56
+#: themes/bootflat/templates/manga/series/detail.html:52
 msgid "Story"
 msgstr "Historia"
 
-#: themes/bootflat/templates/manga/series/detail.html:75
+#: themes/bootflat/templates/manga/series/detail.html:71
 msgid "Original publisher"
 msgstr "Editorial original"
+
+#: themes/bootflat/templates/manga/series/detail.html:85
+msgid "More info"
+msgstr "Más información"
+
+#: themes/bootflat/templates/manga/series/detail.html:118
+#: themes/bootflat/templates/manga/series/detail.html:128
+msgid "All"
+msgstr "Todos"
 
 #: themes/bootflat/templates/manga/series/list.html:17
 msgid "other"
 msgstr "otros"
 
-#: themes/bootflat/templates/manga/series/includes/volume.html:35
+#: themes/bootflat/templates/manga/series/includes/volume.html:38
 #, python-format
 msgid "%(pages)s pages"
 msgstr "%(pages)s páginas"
@@ -405,9 +455,6 @@ msgstr "Deseados"
 
 #~ msgid "My wishlist"
 #~ msgstr "Mi lista de deseados"
-
-#~ msgid "all"
-#~ msgstr "todos"
 
 #~ msgid "Original series"
 #~ msgstr "Series originales"
