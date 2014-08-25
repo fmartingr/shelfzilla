@@ -9,7 +9,7 @@ Requires: python27
 License:  Comercial
 Group: FDB
 Distribution: FDB Global Services
-Vendor: FDB 
+Vendor: FDB
 
 %description
 Shelfzilla is a website which save all your Manga
@@ -72,6 +72,7 @@ python2.7 %{_app_dir}/manage.py syncdb
 python2.7 %{_app_dir}/manage.py migrate
 
 ## Bower
+cd %{_app_dir}
 bower install --allow-root
 
 ## Collect static
