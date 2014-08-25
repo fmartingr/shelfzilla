@@ -217,7 +217,7 @@ class VolumeCollection(Model):
     default = models.BooleanField(_('Default'), default=True)
 
     def __unicode__(self):
-        return self.name
+        return u'{} - {}'.format(self.series, self.name)
 
     class Meta:
         ordering = ['name', ]

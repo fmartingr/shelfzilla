@@ -156,7 +156,8 @@ class VolumeAdmin(ImportExportModelAdmin, reversion.VersionAdmin):
     fieldsets = [
         (None, {
             'classes': ('suit-tab suit-tab-general',),
-            'fields': ('series', 'publisher', 'language', 'number', 'name',
+            'fields': ('series', 'collection', 'publisher', 'language',
+                       'number', 'name',
                        'isbn_10', 'isbn_13', 'retail_price', 'pages',
                        'release_date', )
         }),
