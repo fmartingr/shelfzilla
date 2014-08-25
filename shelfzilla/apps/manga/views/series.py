@@ -50,9 +50,6 @@ class SeriesDetailView(SeriesView):
         else:
             item = get_object_or_404(Series, pk=sid)
 
-        for pub in item.publishers:
-            pub.series_volumes = pub.get_series_volumes(item)
-
         context = {
             'item': item,
             # 'publisher_volumes': publisher_volumes

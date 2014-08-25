@@ -1,5 +1,5 @@
 {% extends '_layout.html'|pjax:request %}
-{% load i18n %}
+{% load i18n staticfiles %}
 
 {% block page_title %}{{ block.super }} | {{ item.name }}{% endblock %}
 
@@ -25,10 +25,10 @@
                         {% trans "Requires review" %}
                     </a>
                     {% endif %}
-                    <li class="list-group-item">
+                    <!--<li class="list-group-item">
                         <strong>{% trans "Status" %}</strong>
                         <span class="badge badge-{{ item.get_status_display_class }}">{{ item.get_status_display }}</span>
-                    </li>
+                    </li>-->
                 </ul>
             </div>
             {% if item.art.count %}
@@ -68,23 +68,20 @@
                 <ul class="list-group">
                     {% if item.original_publisher %}
                     <li class="list-group-item">
-                        {% trans "Original publisher" %}:
-                        {% if publisher.slug %}
-                        <a href="{% url 'publishers.detail' item.original_publisher.pk item.original_publisher.slug %}" data-pjax>{{ item.original_publisher.name }}</a>
-                        {% else %}
-                        <a href="{% url 'publishers.detail' item.original_publisher.pk %}" data-pajax>{{ item.original_publisher.name }}</a>
-                        {% endif %}
+                        <strong>{% trans "Original publisher" %}:</strong>
+                        {% comment %}
+                        <a href="{{ publisher.get_absolute_url }}" data-pajax>{{ item.original_publisher.name }}</a>
+                        {% endcomment %}
+                        <span class="pull-right"><i>{{ item.original_publisher.name }}</i></span>
                     </li>
                     {% endif %}
-                    {% if item.publishers %}
-                        {% for publisher in item.publishers %}
+                    {% if item.publishers.count > 0 %}
+                        {% for publisher in item.publishers.all %}
                         <li class="list-group-item">
-                            <span class="badge badge-default">{{ publisher.series_volumes.count }}</span>
-                            {% if publisher.slug %}
-                            <a href="{% url 'publishers.detail' publisher.pk publisher.slug %}" data-pjax>{{ publisher.name }}</a>
-                            {% else %}
-                            <a href="{% url 'publishers.detail' publisher.pk %}" data-pajax>{{ publisher.name }}</a>
-                            {% endif %}
+                            <h4 class="list-group-item-heading">{{ publisher.publisher.name }}</h4>
+                            <!--<span class="badge badge-default">{{ publisher.volumes.count }}</span> -->
+                            <span class="badge badge-{{ publisher.get_status_display_class }}">{{ publisher.get_status_display }}</span>
+                            <div><a href="{{ publisher.publisher.get_absolute_url }}" data-pajax>{% trans "More info" %} &raquo;</a></div>
                         </li>
                         {% endfor %}
                     {% endif %}
@@ -97,21 +94,32 @@
                     <h1 class="panel-title panel-title-alt text-center">{{ item.name }}</h1>
                 </div>
             </div>
-            {% if item.summary %}
+            {% if item.summaries.count > 0 %}
             <div class="well">
-                {{ item.summary|linebreaks }}
+            {% for summary in item.summaries.all %}
+                {% if item.summaries.count > 1 %}
+                <img src="{% static "images/flags/"|add:summary.language.code|add:'.gif' code %}"
+                    class="pull-left" />
+                {% endif %}
+                {{ summary.summary|linebreaks }}
+                <div class="clearfix"></div>
+            {% endfor %}
             </div>
             {% endif %}
-            <div class="row">
-                {% for volume in item.volumes_by_publisher.all %}
-                <div class="col-sm-4" data-pjax-container="v{{ volume.pk }}">
-                    {% include "manga/series/includes/volume.html" with volume=volume user=user %}
-                </div>
-                {% if forloop.counter|divisibleby:3 %}
-                </div>
+            <div data-pjax-container="volumes">
+                {% block volume_list %}
                 <div class="row">
-                {% endif %}
-                {% endfor %}
+                    {% for volume in item.volumes_by_publisher.all %}
+                    <div class="col-sm-4" data-pjax-container="v{{ volume.pk }}">
+                        {% include "manga/series/includes/volume.html" with volume=volume user=user show_publisher=True %}
+                    </div>
+                    {% if forloop.counter|divisibleby:3 %}
+                    </div>
+                    <div class="row">
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                {% endblock %}
             </div>
         </div>
     </div>

@@ -81,7 +81,7 @@ class Series(Model):
     folder = models.ForeignKey(Folder, null=True, blank=True)
 
     # Cache
-    _publishers = None
+    _languages = None
 
     def __unicode__(self):
         return u'{}'.format(self.name)
@@ -104,36 +104,65 @@ class Series(Model):
 
     def get_status_display_class(self):
         pairs = {
-            'open': 'warning', 'finished': 'success', 'cancelled': 'danger',
-            'on-hold': 'info'
+            'open': 'success', 'finished': 'success', 'cancelled': 'danger',
+            'on-hold': 'warning'
         }
 
         return pairs[self.status]
 
     @property
     def volumes_by_publisher(self):
-        return self.volumes.order_by('publisher__name', 'number')
+        return self.volumes.order_by('publisher__name', 'language', 'number')
 
     @property
     def last_volume_cover(self):
         return self.volumes.filter(cover__isnull=False).last().cover
 
-    @property
-    def publishers(self):
-        if not self._publishers:
+    def languages(self):
+        if not self._languages:
             result = []
-            queryset = self.volumes.order_by('publisher__id')\
-                .distinct('publisher').values_list('publisher')
-            result = Publisher.objects.filter(pk__in=queryset)
+            queryset = self.volumes.order_by('language__id')\
+                .distinct('language').values_list('language')
+            result = Language.objects.filter(pk__in=queryset)
 
-            self._publishers = result
+            self._languages = result
 
-        return self._publishers
+        return self._languages
 
     class Meta:
         ordering = ['name']
         verbose_name = _('Series')
         verbose_name_plural = _('Series')
+
+
+class SeriesSummary(Model):
+    series = models.ForeignKey('Series', related_name='summaries')
+    language = models.ForeignKey('Language')
+    summary = models.TextField(_('Summary'), null=True, blank=True)
+
+    class Meta:
+        unique_together = ('series', 'language', )
+
+
+class SeriesPublisher(Model):
+    series = models.ForeignKey('Series', related_name='publishers')
+    publisher = models.ForeignKey('Publisher', related_name='series_published')
+    status = models.CharField(_('Status'), choices=Series.SERIES_STATUS,
+                              default='open', max_length=16)
+    actual_publisher = models.BooleanField(_('Current publisher'),
+                                            default=True)
+
+    def get_status_display_class(self):
+        pairs = {
+            'open': 'success', 'finished': 'success', 'cancelled': 'danger',
+            'on-hold': 'warning'
+        }
+
+        return pairs[self.status]
+
+    @property
+    def volumes(self):
+        return self.series.volumes.filter(publisher=self.publisher)
 
 
 class Volume(Model):
@@ -164,7 +193,7 @@ class Volume(Model):
             return u'{}'.format(self.series.name)
 
     class Meta:
-        ordering = ['series__name', 'number']
+        ordering = ['series__name', 'language', 'number']
         verbose_name = _('Volume')
         verbose_name_plural = _('Volumes')
 
