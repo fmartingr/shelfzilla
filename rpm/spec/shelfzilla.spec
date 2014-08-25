@@ -46,6 +46,7 @@ cp -r %{_gitdir}/config/production $RPM_BUILD_ROOT%{_app_dir}/config
 cp -r %{_gitdir}/config/requirements.txt $RPM_BUILD_ROOT%{_app_dir}/config
 cp -r %{_gitdir}/*.json $RPM_BUILD_ROOT%{_app_dir}/
 cp -r %{_gitdir}/*.py $RPM_BUILD_ROOT%{_app_dir}/
+cp -r %{_gitdir}/.bowerrc $RPM_BUILD_ROOT%{_app_dir}/
 cp -r %{_gitdir}/gruntfile.coffee $RPM_BUILD_ROOT%{_app_dir}/
 cp -r %{_gitdir}/rpm/scripts/shelfzilla $RPM_BUILD_ROOT%{_app_dir}/init/
 
