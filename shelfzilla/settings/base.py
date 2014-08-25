@@ -56,6 +56,9 @@ INSTALLED_APPS = (
     'south',
     'import_export',
 
+    # Staticfiles
+    "compressor",
+
     # Apps
     'shelfzilla.apps._admin',
     'shelfzilla.apps.config',
@@ -151,6 +154,17 @@ MEDIA_URL = '/media/'
 # Additional locations of static files
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "themes", "bootflat", "static"),
+)
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+)
+
+COMPRESS_PRECOMPILERS = (
+    ('text/less', 'lessc {infile} {outfile}'),
+    ('text/coffeescript', 'coffee --compile --stdio --no-header'),
 )
 
 # Max username length (longerusername)

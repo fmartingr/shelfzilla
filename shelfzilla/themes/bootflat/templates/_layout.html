@@ -1,12 +1,19 @@
-{% load i18n solo_tags staticfiles %}
+{% load i18n solo_tags staticfiles compress %}
 {% get_solo 'config.SiteConfiguration' as site_config %}
 {% get_solo 'config.SocialConfiguration' as social_config %}
 <!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{% static "css/style.css" %}" />
-    {% block extra_css %}{% endblock %}
+    {% compress css %}
+    {% block stylesheets %}
+    <link rel="stylesheet" href="{% static "bower/Bootflat/css/bootstrap.min.css" %}" type="text/css" />
+    <link rel="stylesheet" href="{% static "bower/Bootflat/bootflat/css/bootflat.css" %}" type="text/css" />
+    <link rel="stylesheet" href="{% static "bower/nprogress/nprogress.css" %}" type="text/css" />
+    <link rel="stylesheet" href="{% static "bower/toastr/toastr.css" %}" type="text/css" />
+    <link rel="stylesheet" href="{% static "less/app.less" %}" type="text/less" />
+    {% endblock %}
+    {% endcompress %}
     <title>{% block page_title %}ShelfZilla{% endblock %}</title>
 </head>
 <body>
@@ -86,11 +93,22 @@
     </div>
 
     {% block footer %}{% endblock %}
+    {% compress js %}
+    {% block javascript %}
     <script type="text/javascript">
     var USE_PJAX = {{ site_config.use_pjax|lower }};
     </script>
-    <script src="{% static "js/site.js" %}"></script>
-    {% block extra_js %}{% endblock %}
+    <script type="text/javascript" src="{% static "bower/jquery/dist/jquery.js" %}"></script>
+    <script type="text/javascript" src="{% static "bower/Bootflat/js/bootstrap.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "bower/jquery-pjax/jquery.pjax.js" %}"></script>
+    <script type="text/javascript" src="{% static "bower/nprogress/nprogress.js" %}"></script>
+    <script type="text/javascript" src="{% static "bower/toastr/toastr.js" %}"></script>
+    <script type="text/javascript" src="{% static "bower/EventEmitter/EventEmitter.js" %}"></script>
+    <script type="text/javascript" src="{% static "bower/eventie/eventie.js" %}"></script>
+    <script type="text/javascript" src="{% static "bower/imagesloaded/imagesloaded.js" %}"></script>
+    <script type="text/coffeescript" src="{% static "coffee/main.coffee" %}"></script>
+    {% endblock %}
+    {% endcompress %}
 
     {% if social_config.google_analytics %}
     {% include "_includes/google_analytics.html" %}

@@ -11,6 +11,9 @@ django-import-export==0.2.2
 # Fixes
 longerusername==0.4
 
+# Statics
+django-compressor==1.4
+
 # DDBB
 dj-database-url==0.3.0
 psycopg2==2.5.2
