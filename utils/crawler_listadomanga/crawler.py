@@ -60,6 +60,7 @@ class ListadoManga(Crawler):
                 ('Sentido de lectura', 'read_direction'),
                 ('meros en japo', 'japanese_numbers'),
                 ('meros en espa', 'spanish_numbers'),
+                ('meros en cata', 'catala_numbers'),
                 ('Nota', 'note'),
             ]
             td = root.xpath('//table//td[@class="izq"][contains(.,"original")]')
