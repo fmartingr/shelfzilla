@@ -55,11 +55,20 @@ class Publisher(Model):
 
 
 class Series(Model):
+    SERIES_STATUS = (
+        ('open', _('Abierta')),
+        ('finished', _('Finalizada')),
+        ('cancelled', _('Cancelada')),
+        ('on-hold', _('Parada'))
+    )
+
     name = models.CharField(_('Name'), max_length=256)
     slug = models.SlugField(_('Slug'), blank=True, null=True, max_length=256)
     cover = FilerImageField(blank=True, null=True)
     summary = models.TextField(_('Summary'), blank=True, null=True)
     finished = models.BooleanField(_('Finished'), default=False)
+    status = models.CharField(_('Status'), choices=SERIES_STATUS,
+                              default='open', max_length=16)
 
     original_publisher = models.ForeignKey(
         Publisher, related_name='original_series', null=True)
@@ -92,6 +101,14 @@ class Series(Model):
         if self.slug:
             args.append(self.slug)
         return reverse('series.detail', args=args)
+
+    def get_status_display_class(self):
+        pairs = {
+            'open': 'warning', 'finished': 'success', 'cancelled': 'danger',
+            'on-hold': 'info'
+        }
+
+        return pairs[self.status]
 
     @property
     def volumes_by_publisher(self):
@@ -130,6 +147,8 @@ class Volume(Model):
     isbn_13 = models.CharField(
         _('ISBN-13'), max_length=13, blank=True, null=True)
 
+    language = models.ForeignKey('Language', null=True)
+
     retail_price = models.DecimalField(
         _('Retail price'), max_digits=5, decimal_places=2,
         null=True, blank=True)
@@ -162,6 +181,18 @@ class Person(Model):
         verbose_name = _('Person')
         verbose_name_plural = _('Persons')
 
+
+class Language(models.Model):
+    name = models.CharField(_('Name'), max_length=32)
+    code = models.CharField(_('Code'), max_length=5)
+
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        ordering = ['name']
+        verbose_name = _('Language')
+        verbose_name_plural = _('Languages')
 
 #
 # RELATIONS

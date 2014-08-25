@@ -40,8 +40,8 @@
                     <ul class="nav navbar-nav navbar-right">
                         {% if user.is_authenticated %}
                         <li><a href="{% url 'profile' user.username %}" title="{% trans "Profile" %}">
-                            <img src="{{ user.avatar }}" class="avatar img-rounded"/>
-                             {{ user.username }}</a>
+                            <img src="{{ user.avatar }}" class="avatar img-rounded pull-left "/>
+                             &nbsp;{{ user.username }}</a>
                          </li>
                         {% if user.is_superuser %}
                         <li><a data-pjax-unnav href="/admin/" title="Admin"><i class="glyphicon glyphicon-tower"></i></a></li>

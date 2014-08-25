@@ -3,12 +3,13 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.contrib import messages
+from django.templatetags.static import static
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 import reversion
 
 
-from .models import Publisher, Series, Volume, Person
+from .models import Publisher, Series, Volume, Person, Language
 
 
 ###
@@ -48,6 +49,7 @@ def unmark_for_review(self, request, queryset):
 # Modeladmin
 class PublisherAdmin(ImportExportModelAdmin, reversion.VersionAdmin):
     resource_class = PublisherResource
+    search_fields = ('name', 'url', )
     list_display = ['name', 'series_count']
     prepopulated_fields = {"slug": ("name",)}
     actions = (mark_for_review, unmark_for_review, )
@@ -141,7 +143,7 @@ class VolumeAdmin(ImportExportModelAdmin, reversion.VersionAdmin):
     fieldsets = [
         (None, {
             'classes': ('suit-tab suit-tab-general',),
-            'fields': ('series', 'publisher', 'number', 'name', 'cover',
+            'fields': ('series', 'publisher', 'language', 'number', 'name',
                        'isbn_10', 'isbn_13', 'retail_price', 'pages',
                        'release_date', )
         }),
@@ -153,10 +155,14 @@ class VolumeAdmin(ImportExportModelAdmin, reversion.VersionAdmin):
             'classes': ('suit-tab suit-tab-advanced',),
             'fields': ('hidden', )
         }),
+        (None, {
+            'classes': ('suit-tab suit-tab-cover'),
+            'fields': ('cover', )
+        }),
     ]
 
     suit_form_includes = (
-        ('_admin/volumes/includes/cover.html', 'top', 'cover'),
+        ('_admin/volumes/includes/cover.html', 'bottom', 'cover'),
     )
 
     def change_series(self, request, queryset):
@@ -196,3 +202,16 @@ class PersonAdmin(ImportExportModelAdmin, reversion.VersionAdmin):
     ]
 
 admin.site.register(Person, PersonAdmin)
+
+
+class LanguageAdmin(ImportExportModelAdmin, reversion.VersionAdmin):
+    list_display = ('name', 'code', 'flag_image', )
+
+    def flag_image(self, obj):
+        return u'<img src="{src}" />'.format(
+            src=static('images/flags/{}.gif'.format(obj.code))
+        )
+    flag_image.short_description = _('Flag')
+    flag_image.allow_tags = True
+
+admin.site.register(Language, LanguageAdmin)
