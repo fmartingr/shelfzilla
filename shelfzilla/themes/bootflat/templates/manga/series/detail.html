@@ -109,33 +109,57 @@
             <div data-pjax-container="volumes">
                 {% block volume_list %}
                 <div class="well" id="volume_filters">
-                    <form class="form-inline" role="form">
+                    <form class="form-inline" role="form" method="post">
+                        {% csrf_token %}
                         <div class="form-group">
                             <label class="" for="language">
                                 {% trans "Language" %}</label>
                             <select name="language" class="form-control">
                                 <option value="0">{% trans "All" %}</option>
                                 {% for lang in item.languages.all %}
-                                <option value="{{ lang.pk }}">{{ lang.name }}</option>
+                                <option value="{{ lang.pk }}"
+                                    {% if volume_filters.language_id == lang.pk %}
+                                    selected="selected"
+                                    {% endif %}
+                                >{{ lang.name }}</option>
                                 {% endfor %}
                             </select>
                         </div>
                         <div class="form-group">
-                            <label class="" for="language">
+                            <label class="" for="publisher">
                                 {% trans "Publisher" %}</label>
-                            <select name="language" class="form-control">
+                            <select name="publisher" class="form-control">
                                 <option value="0">{% trans "All" %}</option>
                                 {% for pub in item.publishers.all %}
-                                <option value="{{ pub.publisher.pk }}">{{ pub.publisher.name }}</option>
+                                <option value="{{ pub.publisher.pk }}"
+                                    {% if volume_filters.publisher_id == pub.publisher.pk %}
+                                    selected="selected"
+                                    {% endif %}
+                                    >{{ pub.publisher.name }}</option>
                                 {% endfor %}
                             </select>
                         </div>
+                        <div class="form-group">
+                            <label class="" for="collection">
+                                {% trans "Collection" %}</label>
+                            <select name="collection" class="form-control">
+                                <option value="0">{% trans "All" %}</option>
+                                {% for col in item.collections.all %}
+                                <option value="{{ col.pk }}"
+                                {% if volume_filters.collection_id == col.pk %}
+                                    selected="selected"
+                                    {% endif %}
+                                >{{ col.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">{% trans "Filter" %}</button>
                     </form>
                 </div>
                 <div class="row">
-                    {% for volume in item.volumes_by_publisher.all %}
+                    {% for volume in item_volumes %}
                     <div class="col-sm-4" data-pjax-container="v{{ volume.pk }}">
-                        {% include "manga/series/includes/volume.html" with volume=volume user=user show_publisher=True %}
+                        {% include "manga/series/includes/volume.html" with volume=volume user=user show_publisher=True show_details=True %}
                     </div>
                     {% if forloop.counter|divisibleby:3 %}
                     </div>

@@ -1,5 +1,5 @@
 {% load i18n thumbnail staticfiles %}
-<div class="well text-center volume-item {% if volume.pk in user_have_volumes %}user-have-it{% endif %} {% if volume.pk in user_wishlisted_volumes %}user-wishlisted-it{% endif %}" style="background: white url({% thumbnail volume.cover 120x150 %}) center left no-repeat;">
+<div class="well text-center volume-item {% if volume.pk in user_have_volumes %}user-have-it{% endif %} {% if volume.pk in user_wishlisted_volumes %}user-wishlisted-it{% endif %} {{ css_class }}" style="background: white url({% thumbnail volume.cover 120x150 %}) center left no-repeat;">
     <div class="badges">
         {% if volume.pk in user_have_volumes %}
         <a href="{% url "volume.have_it" volume.pk %}" data-pjax="v{{ volume.pk }}" pjax-nopush pjax-messages>
@@ -28,14 +28,19 @@
             {% if volume.number %}#{{ volume.number }}{% endif %}
             {% if volume.name %}{{ volume.name }}{% endif %}
         </div>
+        {% if volume.collection and not volume.collection.default %}
+        <div><span class="label label-primary">{{ volume.collection.name }}</span></div>
+        {% endif %}
         {% if show_publisher %}
         <div><a href="{{ volume.publisher.get_absolute_url }}" data-pjax>{{ volume.publisher }}</a></div>
         {% endif %}
         {% if volume.release_date %}
         <div>{{ volume.release_date|date:"F Y" }}</div>
         {% endif %}
-        {% if volume.pages %}
-        <div>{% blocktrans with pages=volume.pages %}{{ pages }} pages{% endblocktrans %}</div>
+        {% if show_details %}
+            {% if volume.pages %}
+            <div>{% blocktrans with pages=volume.pages %}{{ pages }} pages{% endblocktrans %}</div>
+            {% endif %}
         {% endif %}
         {% if volume.for_review and user.is_staff %}
         <span class="label label-warning">{% trans "Requires review" %}</span>

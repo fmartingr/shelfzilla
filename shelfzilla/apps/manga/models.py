@@ -71,12 +71,12 @@ class Series(Model):
                               default='open', max_length=16)
 
     original_publisher = models.ForeignKey(
-        Publisher, related_name='original_series', null=True)
+        Publisher, related_name='original_series', null=True, blank=True)
 
     art = models.ManyToManyField(
-        'Person', related_name='artist_of', null=True)
+        'Person', related_name='artist_of', null=True, blank=True)
     story = models.ManyToManyField(
-        'Person', related_name='scriptwriter_of', null=True)
+        'Person', related_name='scriptwriter_of', null=True, blank=True)
 
     folder = models.ForeignKey(Folder, null=True, blank=True)
 
@@ -129,6 +129,17 @@ class Series(Model):
 
         return self._languages
 
+    def collections(self):
+        if not self._collections:
+            result = []
+            queryset = self.volumes.order_by('collection__id')\
+                .distinct('collection').values_list('collection')
+            result = VolumeCollection.objects.filter(pk__in=queryset)
+
+            self._collections = result
+
+        return self._collections
+
     class Meta:
         ordering = ['name']
         verbose_name = _('Series')
@@ -166,6 +177,8 @@ class SeriesPublisher(Model):
 
 
 class Volume(Model):
+    collection = models.ForeignKey('VolumeCollection', null=True,
+        related_name='volumes')
     number = models.IntegerField(_('Number'), null=True, blank=True)
     name = models.CharField(_('Name'), max_length=64, null=True, blank=True)
     series = models.ForeignKey(Series, related_name="volumes")
@@ -198,6 +211,20 @@ class Volume(Model):
         verbose_name_plural = _('Volumes')
 
 
+class VolumeCollection(Model):
+    name = models.CharField(_('Name'), max_length=32)
+    series = models.ForeignKey('Series', related_name='collections')
+    default = models.BooleanField(_('Default'), default=True)
+
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        ordering = ['name', ]
+        verbose_name = _('Collection')
+        verbose_name_plural = _('Collections')
+
+
 class Person(Model):
     name = models.CharField(_('Name'), max_length=256)
     slug = models.SlugField(_('Slug'), blank=True, null=True)
@@ -222,6 +249,7 @@ class Language(models.Model):
         ordering = ['name']
         verbose_name = _('Language')
         verbose_name_plural = _('Languages')
+
 
 #
 # RELATIONS
@@ -266,6 +294,14 @@ def series_check_filer(sender, instance, created, **kwargs):
     name = instance.name
 
     # Check folder
+    # Fix for loaddata import
+    if instance.folder_id:
+        try:
+            Folder.objects.get(pk=instance.folder_id)
+        except Folder.DoesNotExist:
+            instance.folder_id = None
+            instance.folder = None
+
     if not instance.folder:
         folder, is_new = Folder.objects.get_or_create(
             name=name,

@@ -13,18 +13,7 @@
             <div class="row">
                 {% for volume in FUTURE_RELEASES %}
                 <div class="col-sm-6 latest-manga">
-                    <div class="well text-right item" style="background: white url({% thumbnail volume.cover 80x120 crop %}) top left no-repeat;">
-                        <div class="content">
-                            <a href="{{ volume.series.get_absolute_url }}" data-pjax>
-                                <h4 class="media-heading">{{ volume }}</h4>
-                            </a>
-                            <p>
-                                <a href="{{ volume.publisher.get_absolute_url }}" data-pjax>{{ volume.publisher }}</a><br />
-                                {{ volume.release_date|date:'F Y' }}
-                            </p>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
+                    {% include "manga/series/includes/volume_slim.html" with volume=volume user=user %}
                 </div>
                 {% if forloop.counter|divisibleby:2 %}
                 </div><div class="row">
@@ -39,18 +28,7 @@
             <div class="row">
                 {% for volume in LATEST_MANGA_ADDED %}
                 <div class="col-sm-6 latest-manga">
-                    <div class="well text-right item" style="background: white url({% thumbnail volume.cover 80x120 crop %}) top left no-repeat;">
-                        <div class="content">
-                            <a href="{{ volume.series.get_absolute_url }}" data-pjax>
-                                <h4 class="media-heading">{{ volume }}</h4>
-                            </a>
-                            <p>
-                                <a href="{{ volume.publisher.get_absolute_url }}" data-pjax>{{ volume.publisher }}</a><br />
-                                {{ volume.release_date|date:'F Y' }}
-                            </p>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
+                    {% include "manga/series/includes/volume_slim.html" with volume=volume user=user %}
                 </div>
                 {% if forloop.counter|divisibleby:2 %}
                 </div><div class="row">

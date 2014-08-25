@@ -43,8 +43,17 @@ class SeriesListView(SeriesView):
 
 class SeriesDetailView(SeriesView):
     template = 'manga/series/detail.html'
+    filters = ('language', 'publisher', 'collection')
 
     def get(self, request, sid, slug=None):
+        vol_filters = {}
+        for search_filter in self.filters:
+            if search_filter in request.POST and request.POST[search_filter] != "0":
+                vol_filters['{}_id'.format(search_filter)] = \
+                    int(request.POST[search_filter])
+
+        print(vol_filters)
+
         if slug:
             item = get_object_or_404(Series, pk=sid, slug=slug)
         else:
@@ -52,8 +61,12 @@ class SeriesDetailView(SeriesView):
 
         context = {
             'item': item,
-            # 'publisher_volumes': publisher_volumes
+            'item_volumes': item.volumes.filter(**vol_filters),
+            'volume_filters': vol_filters,
         }
 
         ctx = RequestContext(request, self.get_context(context))
         return render_to_response(self.template, context_instance=ctx)
+
+    def post(self, request, sid, slug=None):
+        return self.get(request, sid, slug)

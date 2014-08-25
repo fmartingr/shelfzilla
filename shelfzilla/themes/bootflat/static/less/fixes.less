@@ -22,6 +22,19 @@
 .volume-item {
     min-height: 150px !important;
 
+    &.slim {
+        min-height: 150px;
+
+        .volume-content {
+            padding-left: 130px;
+
+            .volume-number {
+                font-weight: bold;
+                font-size: 1.2em;
+            }
+        }
+    }
+
     // Badges
     &:not(.user-have-it) {
         &:hover .badges .badge {

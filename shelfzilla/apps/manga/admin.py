@@ -9,7 +9,10 @@ from import_export.admin import ImportExportModelAdmin
 import reversion
 
 
-from .models import Publisher, Series, Volume, Person, Language
+from .models import (
+    Publisher, Series, Volume, Person, Language, VolumeCollection,
+    SeriesSummary, SeriesPublisher
+)
 
 
 ###
@@ -82,6 +85,15 @@ class PublisherAdmin(ImportExportModelAdmin, reversion.VersionAdmin):
 admin.site.register(Publisher, PublisherAdmin)
 
 
+class SeriesSummaryInline(admin.TabularInline):
+    model = SeriesSummary
+    fields = ('summary', 'language', )
+
+
+class SeriesPublisherInline(admin.TabularInline):
+    model = SeriesPublisher
+    fields = ('publisher', 'status', 'actual_publisher')
+
 class SeriesAdmin(ImportExportModelAdmin, reversion.VersionAdmin):
     resource_class = SeriesResource
     list_display = ['name', 'volumes_count']
@@ -89,6 +101,7 @@ class SeriesAdmin(ImportExportModelAdmin, reversion.VersionAdmin):
     search_fields = ('name', )
     search_filters = ('hidden', )
     actions = (mark_for_review, unmark_for_review, )
+    inlines = (SeriesSummaryInline, SeriesPublisherInline)
 
     suit_form_tabs = (
         ('general', _('General')),
@@ -127,7 +140,7 @@ admin.site.register(Series, SeriesAdmin)
 class VolumeAdmin(ImportExportModelAdmin, reversion.VersionAdmin):
     resource_class = VolumeResource
     # list_display_links = ('number', )
-    list_display = ('series', 'publisher', 'number', 'name', 'release_date',)
+    list_display = ('series', 'collection', 'language', 'publisher', 'number', 'name', 'release_date',)
     search_fields = ('number', 'series__name', )
     list_filter = ('series', 'for_review', )
     # list_editable = ('series', )
@@ -207,6 +220,17 @@ admin.site.register(Person, PersonAdmin)
 class LanguageAdmin(ImportExportModelAdmin, reversion.VersionAdmin):
     list_display = ('name', 'code', 'flag_image', )
 
+    suit_form_tabs = (
+        ('general', _('General')),
+    )
+
+    fieldsets = [
+        (None, {
+            'classes': ('suit-tab suit-tab-general',),
+            'fields': ('name', 'code', )
+        })
+    ]
+
     def flag_image(self, obj):
         return u'<img src="{src}" />'.format(
             src=static('images/flags/{}.gif'.format(obj.code))
@@ -215,3 +239,31 @@ class LanguageAdmin(ImportExportModelAdmin, reversion.VersionAdmin):
     flag_image.allow_tags = True
 
 admin.site.register(Language, LanguageAdmin)
+
+
+class VolumeCollectionAdmin(ImportExportModelAdmin, reversion.VersionAdmin):
+    list_display = ('name', 'series', 'default', )
+    search_fields = ('name', 'series__name', )
+
+    suit_form_tabs = (
+        ('general', _('General')),
+        ('review', _('Review')),
+        ('advanced', _('Advanced')),
+    )
+
+    fieldsets = [
+        (None, {
+            'classes': ('suit-tab suit-tab-general',),
+            'fields': ('name', 'series', 'default')
+        }),
+        (None, {
+            'classes': ('suit-tab suit-tab-review',),
+            'fields': ('for_review', 'for_review_comment')
+        }),
+        (None, {
+            'classes': ('suit-tab suit-tab-advanced',),
+            'fields': ('hidden', )
+        }),
+    ]
+
+admin.site.register(VolumeCollection, VolumeCollectionAdmin)
