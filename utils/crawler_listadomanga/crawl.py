@@ -17,7 +17,9 @@ datcrawl.register_crawler(ListadoManga)
 
 # exit
 
-ids = datcrawl.run("http://www.listadomanga.es/lista.php")
+ids = []
+for i in range(1, 11):
+    ids.extend(datcrawl.run("http://www.listadomanga.es/lista.php?genero={}".format(i)))
 _list = []
 errors = 0
 success = 0

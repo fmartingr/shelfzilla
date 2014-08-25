@@ -8,7 +8,7 @@ from pprint import pprint
 class ListadoManga(Crawler):
     urls = [
         ('get_manga', '(?P<url>^http\:\/\/www\.listadomanga\.es\/coleccion\.php(.*)$)'),
-        ('get_links', '(?P<url>^http\:\/\/www\.listadomanga\.es\/lista\.php)'),
+        ('get_links', '(?P<url>^http\:\/\/www\.listadomanga\.es\/lista\.php\?genero=\d+)'),
     ]
     downloader = 'DefaultDownloader'
 
