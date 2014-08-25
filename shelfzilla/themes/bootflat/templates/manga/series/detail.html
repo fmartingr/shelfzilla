@@ -108,6 +108,28 @@
             {% endif %}
             <div data-pjax-container="volumes">
                 {% block volume_list %}
+                <div class="well" id="volume_filters">
+                    <form class="form-inline" role="form">
+                        <div class="form-group">
+                            <label class="" for="language">
+                                {% trans "Language" %}</label>
+                            <select name="language">
+                            {% for lang in item.languages.all %}
+                                <option value="{{ lang.pk }}">{{ lang.name }}</option>
+                            {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="" for="language">
+                                {% trans "Publisher" %}</label>
+                            <select name="language">
+                            {% for pub in item.publishers.all %}
+                                <option value="{{ pub.publisher.pk }}">{{ pub.publisher.name }}</option>
+                            {% endfor %}
+                            </select>
+                        </div>
+                    </form>
+                </div>
                 <div class="row">
                     {% for volume in item.volumes_by_publisher.all %}
                     <div class="col-sm-4" data-pjax-container="v{{ volume.pk }}">
