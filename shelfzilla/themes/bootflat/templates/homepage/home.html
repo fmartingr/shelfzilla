@@ -61,6 +61,7 @@
         </div>
         <div class="col-sm-2"></div>
         <div class="col-sm-4">
+            <!-- WIDGETS -->
             <div class="panel panel-warning">
                 <div class="panel-heading">
                     <h3 class="panel-title">{% trans "Biggest collections" %}</h3>
@@ -78,6 +79,27 @@
                     {% endfor %}
                 </ul>
             </div>
+
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{% trans "Stats" %}</h3>
+                </div>
+                <ul class="list-group">
+                    {% if STATS.users > 100 %}
+                    <li class="list-group-item ">
+                        {% trans "Users" %} <span class="pull-right badge badge-success">{{ STATS.users }}</span>
+                    </li>
+                    {% endif %}
+                    <li class="list-group-item ">
+                        {% trans "Series" %} <span class="pull-right badge badge-success">{{ STATS.series }}</span>
+                    </li>
+                    <li class="list-group-item ">
+                        {% trans "Volumes" %} <span class="pull-right badge badge-success">{{ STATS.volumes }}</span>
+                    </li>
+                </ul>
+            </div>
+
+
         </div>
     </div>
 </div>
