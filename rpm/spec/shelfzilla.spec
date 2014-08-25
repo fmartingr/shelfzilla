@@ -60,7 +60,7 @@ chkconfig --add shelfzilla
 rmdir %{_app_dir}/init/
 
 ## Npm install
-cd %{_app_dir} && npm install
+cd %{_app_dir} && npm install --production
 
 ## pip install
 pip install -r %{_app_dir}/config/production/requirements.txt
@@ -73,9 +73,6 @@ python2.7 %{_app_dir}/manage.py migrate
 
 ## Bower
 bower install --allow-root
-
-## Grunt compile
-cd %{_app_dir} && grunt compile
 
 ## Collect static
 python2.7 manage.py collectstatic --clear --noinput
