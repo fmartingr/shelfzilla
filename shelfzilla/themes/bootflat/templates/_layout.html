@@ -109,6 +109,9 @@
     <script type="text/coffeescript" src="{% static "coffee/main.coffee" %}"></script>
     {% endblock %}
     {% endcompress %}
+    {% if not USER_CONFIG.use_pjax %}
+    <script type="text/javascript">$(function() { window.updateMessages(); });</script>
+    {% endif %}
 
     {% if social_config.google_analytics %}
     {% include "_includes/google_analytics.html" %}

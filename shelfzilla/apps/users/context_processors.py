@@ -1,3 +1,4 @@
+from shelfzilla.apps.config.models import SiteConfiguration
 from .models import User
 
 
@@ -8,10 +9,17 @@ def user_is_staff(request):
 
 
 def user_configuration(request):
+    # TODO improve this shit
+    use_pjax = True
+    config = SiteConfiguration.objects.get()
+    if not config.use_pjax:
+        use_pjax = False
+
     return {
         'USER_CONFIG': {
-            'show_admin_links': False
-        }
+            'show_admin_links': False,
+            'use_pjax': use_pjax
+        },
     }
 
 def auth(request):
