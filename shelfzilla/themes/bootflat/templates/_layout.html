@@ -46,12 +46,12 @@
                     {% endif %}
                     <ul class="nav navbar-nav navbar-right">
                         {% if user.is_authenticated %}
-                        <li><a href="{% url 'profile' user.username %}" title="{% trans "Profile" %}">
+                        <li><a href="{% url 'profile' user.username %}" title="{% trans "Profile" %}" data-toggle="tooltip">
                             <img src="{{ user.avatar }}" class="avatar img-rounded pull-left "/>
                              &nbsp;{{ user.username }}</a>
                          </li>
                         {% if user.is_superuser %}
-                        <li><a data-pjax-unnav href="/admin/" title="Admin"><i class="glyphicon glyphicon-tower"></i></a></li>
+                        <li><a data-pjax-unnav href="/admin/" title="Admin" data-toggle="tooltip"><i class="glyphicon glyphicon-tower"></i></a></li>
                         {% endif %}
 <!--                         <li><a data-pjax-unnav href="{% url 'profile' user.username %}" data-pjax
                                title="{% trans "Profile" %}">
@@ -59,7 +59,7 @@
                             </a>
                         </li> -->
                         <li><a data-pjax-unnav href="{% url "logout" %}"
-                               title="{% trans "Logout" %}">
+                               title="{% trans "Logout" %}" data-toggle="tooltip">
                                <i class="glyphicon glyphicon-off"></i>
                             </a>
                         </li>
