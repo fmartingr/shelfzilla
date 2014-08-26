@@ -147,8 +147,8 @@
                 </div>
                 <div class="row">
                     {% for volume in item_volumes %}
-                    <div class="col-sm-4" data-pjax-container="v{{ volume.pk }}">
-                        {% include "manga/series/includes/volume.html" with volume=volume user=user show_publisher=True show_details=True %}
+                    <div class="col-sm-4">
+                        {% include "manga/series/includes/volume.html" with volume=volume user=user show_publisher=True show_details=True show_language=True %}
                     </div>
                     {% if forloop.counter|divisibleby:3 %}
                     </div>

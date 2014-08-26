@@ -13,7 +13,7 @@
             <div class="row">
                 {% for volume in FUTURE_RELEASES %}
                 <div class="col-sm-6 latest-manga">
-                    {% include "manga/series/includes/volume_slim.html" with volume=volume user=user %}
+                    {% include "manga/series/includes/volume.html" with volume=volume user=user show_publisher=True type='slim' %}
                 </div>
                 {% if forloop.counter|divisibleby:2 %}
                 </div><div class="row">
@@ -28,7 +28,7 @@
             <div class="row">
                 {% for volume in LATEST_MANGA_ADDED %}
                 <div class="col-sm-6 latest-manga">
-                    {% include "manga/series/includes/volume_slim.html" with volume=volume user=user %}
+                    {% include "manga/series/includes/volume.html" with volume=volume user=user show_publisher=True type='slim' %}
                 </div>
                 {% if forloop.counter|divisibleby:2 %}
                 </div><div class="row">

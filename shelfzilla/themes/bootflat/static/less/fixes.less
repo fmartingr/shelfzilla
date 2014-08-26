@@ -20,13 +20,13 @@
 }
 
 .volume-item {
-    min-height: 150px !important;
+    min-height: 150px;
 
-    &.slim {
-        min-height: 150px;
+    &.volume-slim {
+        min-height: 100px;
 
         .volume-content {
-            padding-left: 130px;
+            padding-left: 86px;
 
             .volume-number {
                 font-weight: bold;
@@ -35,25 +35,23 @@
         }
     }
 
+    &:hover .badge {
+        display: block !important;
+    }
+
     // Badges
-    &:not(.user-have-it) {
-        &:hover .badges .badge {
-            display: block;
-        }
-    }
-
-    &.user-wishlisted-it .badge-wishlist-it {
-        display: block !important;
-    }
-
-    &.user-have-it .badge-have-it {
-        display: block !important;
-    }
-
     .badges {
         position: absolute;
         left: 10px;
         top: -10px;
+
+        &.user-wishlisted-it .badge-wishlist-it {
+            display: block !important;
+        }
+
+        &.user-have-it .badge-have-it {
+            display: block !important;
+        }
 
         .badge {
             @size: 34px;
