@@ -94,6 +94,7 @@ class SeriesPublisherInline(admin.TabularInline):
     model = SeriesPublisher
     fields = ('publisher', 'status', 'actual_publisher')
 
+
 class SeriesAdmin(ImportExportModelAdmin, reversion.VersionAdmin):
     resource_class = SeriesResource
     list_display = ['name', 'volumes_count']
@@ -102,6 +103,7 @@ class SeriesAdmin(ImportExportModelAdmin, reversion.VersionAdmin):
     search_filters = ('hidden', )
     actions = (mark_for_review, unmark_for_review, )
     inlines = (SeriesSummaryInline, SeriesPublisherInline)
+    raw_id_fields = ('art', 'story', 'original_publisher', )
 
     suit_form_tabs = (
         ('general', _('General')),
@@ -140,11 +142,13 @@ admin.site.register(Series, SeriesAdmin)
 class VolumeAdmin(ImportExportModelAdmin, reversion.VersionAdmin):
     resource_class = VolumeResource
     # list_display_links = ('number', )
-    list_display = ('series', 'collection', 'language', 'publisher', 'number', 'name', 'release_date',)
+    list_display = ('series', 'collection', 'language', 'publisher', 'number',
+                    'name', 'release_date',)
     search_fields = ('number', 'series__name', )
     list_filter = ('series', 'for_review', )
     # list_editable = ('series', )
     actions = ('change_series', mark_for_review, unmark_for_review, )
+    raw_id_fields = ('series', 'collection', )
 
     suit_form_tabs = (
         ('general', _('General')),
