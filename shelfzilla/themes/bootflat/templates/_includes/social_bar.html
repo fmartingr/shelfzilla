@@ -9,7 +9,7 @@
     <a href="{{ social.facebook_url }}" target="_blank"><img src="{% static "icons/facebook.png" %}" /></a>
     {% endif %}
     {% if social.google_plus_url %}
-    <a href="{{ social.google_plus_url }}" target="_blank"><img src="{% static "icons/googleplus.png" %}" /></a>
+    <a href="{{ social.google_plus_url }}" target="_blank" rel="publisher"><img src="{% static "icons/googleplus.png" %}" /></a>
     {% endif %}
     {% if social.contact_email %}
     <a href="mailto:{{ social.contact_email }}"><img src="{% static "icons/email.png" %}" /></a>
