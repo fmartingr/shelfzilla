@@ -72,7 +72,8 @@
                         {% endif %}
                     </ul>
                     {% if user.is_authenticated %}
-                    <form class="navbar-form navbar-right" role="search" method="post" action="{% url "search" %}">
+                    <form class="navbar-form navbar-right" role="search"
+                          method="post" action="{% url "search" %}" data-pjax>
                         {% csrf_token %}
                         <div class="form-search search-only">
                             <i class="search-icon glyphicon glyphicon-search"></i>

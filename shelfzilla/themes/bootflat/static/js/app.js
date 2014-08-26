@@ -26,6 +26,18 @@ window.updateMessages = function() {
   return window._updateMessages = false;
 };
 
+var getContainerFor = function(elem) {
+  pjax = elem.data('pjax');
+  if (!pjax) {
+    container = $('[data-pjax-container="main"]');
+  } else if (pjax === 'closest') {
+    container = elem.closest('[data-pjax-container]');
+  } else {
+    container = $("[data-pjax-container='" + pjax + "']");
+  }
+  return container;
+}
+
 if (USE_PJAX) {
   NProgress.start();
   window.imageLoad = function(element) {
@@ -44,10 +56,10 @@ if (USE_PJAX) {
     window.updateMessages();
     window.imageLoad(document);
     if ($.support.pjax) {
-      return $(document).on('click', 'a[data-pjax]', function(event) {
+      $(document).on('click', 'a[data-pjax]', function(event) {
         var container, elem, nav_element, pjax, push;
         elem = $(this);
-        pjax = elem.data('pjax');
+        container = getContainerFor(elem)
         push = true;
         nav_element = elem.closest('[data-pjax-nav]');
         nav_element.siblings('.active').removeClass('active');
@@ -58,13 +70,7 @@ if (USE_PJAX) {
         if (elem.is('[pjax-nopush]')) {
           push = false;
         }
-        if (!pjax) {
-          container = $('[data-pjax-container="main"]');
-        } else if (pjax === 'closest') {
-          container = elem.closest('[data-pjax-container]');
-        } else {
-          container = $("[data-pjax-container='" + pjax + "']");
-        }
+
         $.pjax.click(event, {
           container: container,
           timeout: 5000,
@@ -75,6 +81,10 @@ if (USE_PJAX) {
           return window._updateMessages = true;
         }
       });
+      $(document).on('submit', 'form[data-pjax]', function(event) {
+        container = getContainerFor($(this));
+        $.pjax.submit(event, container)
+      })
     }
   });
   $(document).on('pjax:start', function() {
