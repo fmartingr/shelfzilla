@@ -95,11 +95,11 @@
                 </div>
             </div>
             {% if item.summaries.count > 0 %}
-            <div class="well">
+            <div class="well well-summary">
             {% for summary in item.summaries.all %}
                 {% if item.summaries.count > 1 %}
                 <img src="{% static "images/flags/"|add:summary.language.code|add:'.gif' code %}"
-                    class="pull-left" />
+                    class="pull-left summary-language" />
                 {% endif %}
                 {{ summary.summary|linebreaks }}
                 <div class="clearfix"></div>

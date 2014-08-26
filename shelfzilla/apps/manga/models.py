@@ -129,17 +129,6 @@ class Series(Model):
 
         return self._languages
 
-    def collections(self):
-        if not self._collections:
-            result = []
-            queryset = self.volumes.order_by('collection__id')\
-                .distinct('collection').values_list('collection')
-            result = VolumeCollection.objects.filter(pk__in=queryset)
-
-            self._collections = result
-
-        return self._collections
-
     class Meta:
         ordering = ['name']
         verbose_name = _('Series')
