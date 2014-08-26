@@ -23,18 +23,18 @@
                     <img src="{{ item.avatar }}" class="max-width-100" />
                 </div>
                 <div class="list-group">
-                    <a data-pjax-nav href="{% url 'profile' item.username %}" data-pjax class="list-group-item active">
+                    <a data-pjax-nav href="{% url 'profile' item.username %}" data-pjax class="list-group-item {% if section == 'summary' %}active{% endif %}">
                         {% trans "Summary" %}</a>
                     {% if user.have_volumes.count > 0 %}
-                    <a data-pjax-nav href="{% url 'profile' item.username 'collection' %}" data-pjax="profile" class="list-group-item">
+                    <a data-pjax-nav href="{% url 'profile' item.username 'collection' %}" data-pjax="profile" class="list-group-item {% if section == 'collection' %}active{% endif %}">
                         {% trans "Collection" %}</a>
                     {% endif %}
                     {% if user.wishlisted_volumes.count > 0 %}
-                    <a data-pjax-nav href="{% url 'profile' item.username 'wishlist' %}" data-pjax="profile" class="list-group-item">
+                    <a data-pjax-nav href="{% url 'profile' item.username 'wishlist' %}" data-pjax="profile" class="list-group-item {% if section == 'wishlist' %}active{% endif %}">
                         {% trans "Wishlist" %}</a>
                     {% endif %}
                     {% comment %}
-                    <a data-pjax-nav href="{% url 'profile' item.username 'achievements' %}" data-pjax="profile" class="list-group-item">
+                    <a data-pjax-nav href="{% url 'profile' item.username 'achievements' %}" data-pjax="profile" class="list-group-item {% if section == 'achievements' %}active{% endif %}">
                         {% trans "Achievements" %}</a>
                     {% endcomment %}
                 </div>

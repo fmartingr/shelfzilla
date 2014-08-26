@@ -68,7 +68,8 @@ class UserProfileView(View):
 
     def get(self, request, username, section='summary'):
         data = {
-            'item': get_object_or_404(User, username=username)
+            'item': get_object_or_404(User, username=username),
+            'section': section
         }
         if section != 'summary':
             template = self.template_section.format(section)
