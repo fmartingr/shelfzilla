@@ -43,7 +43,6 @@
             {% endif %}
         {% endif %}
         {% if volume.for_review and user.is_staff %}
-        <span class="label label-warning">{% trans "Requires review" %}</span>
         {% endif %}
     </div>
     {% if USER_IS_STAFF and USER_CONFIG.show_admin_links %}

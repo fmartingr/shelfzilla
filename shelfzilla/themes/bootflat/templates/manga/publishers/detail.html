@@ -15,11 +15,6 @@
         <div class="col-md-3">
             <div class="panel panel-primary">
                 <ul class="list-group">
-                    {% if item.for_review and user.is_staff %}
-                    <a class="list-group-item list-group-item-warning text-center">
-                        {% trans "Requires review" %}
-                    </a>
-                    {% endif %}
                     <li class="list-group-item">
                         <strong>{% trans "Series" %}</strong>: {{ item.series.count }}
                     </li>

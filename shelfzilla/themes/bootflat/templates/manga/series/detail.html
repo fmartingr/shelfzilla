@@ -19,17 +19,6 @@
                     <img src="{{ item.last_volume_cover.url }}" class="max-width-80" />
                 </div>
                 {% endif %}
-                <ul class="list-group">
-                    {% if item.for_review and user.is_staff %}
-                    <a class="list-group-item list-group-item-warning text-center">
-                        {% trans "Requires review" %}
-                    </a>
-                    {% endif %}
-                    <!--<li class="list-group-item">
-                        <strong>{% trans "Status" %}</strong>
-                        <span class="badge badge-{{ item.get_status_display_class }}">{{ item.get_status_display }}</span>
-                    </li>-->
-                </ul>
             </div>
             {% if item.art.count %}
             <div class="panel panel-default">
