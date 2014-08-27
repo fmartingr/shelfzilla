@@ -144,8 +144,8 @@ class VolumeAdmin(ImportExportModelAdmin, reversion.VersionAdmin):
     # list_display_links = ('number', )
     list_display = ('series', 'collection', 'language', 'publisher', 'number',
                     'name', 'release_date',)
-    search_fields = ('number', 'series__name', )
-    list_filter = ('series', 'for_review', )
+    search_fields = ('number', 'series__name', 'publisher__name', )
+    list_filter = ('series', 'publisher', 'for_review', )
     # list_editable = ('series', )
     actions = ('change_series', mark_for_review, unmark_for_review, )
     raw_id_fields = ('series', 'collection', )
