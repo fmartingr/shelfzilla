@@ -70,7 +70,7 @@ pip install -r %{_app_dir}/config/production/requirements.txt
 python2.7 %{_app_dir}/manage.py syncdb
 
 ## Migrate
-python2.7 %{_app_dir}/manage.py migrate
+python2.7 %{_app_dir}/manage.py migrate --no-initial-data
 
 ## Bower
 cd %{_app_dir}
