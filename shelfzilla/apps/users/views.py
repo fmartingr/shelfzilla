@@ -1,3 +1,4 @@
+from itertools import chain
 from django.views.generic import View
 from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404
@@ -9,7 +10,9 @@ from django.contrib.auth import login
 
 from .forms import LoginForm
 from .models import User
-from shelfzilla.apps.manga.models import UserReadVolume
+from shelfzilla.apps.manga.models import (
+    UserReadVolume, UserHaveVolume, UserWishlistVolume
+)
 
 
 class LoginView(View):
@@ -83,8 +86,16 @@ class UserProfileView(View):
         return render_to_response(template, context_instance=ctx)
 
     def get_summary(self, request, context, user):
-        context['timeline'] = UserReadVolume.objects.filter(user=user).\
-            order_by('-date')
+        owned_list = UserHaveVolume.objects.filter(user=user)
+        wishlisted_list = UserWishlistVolume.objects.filter(user=user)
+        read_list = UserReadVolume.objects.filter(user=user)
+
+        timeline = sorted(
+            chain(owned_list, wishlisted_list, read_list),
+            key=lambda model: model.date,
+            reverse=True
+        )[:20]
+        context['timeline'] = timeline
         return context
 
     def get_context_from_section(self, request, section, context, user):

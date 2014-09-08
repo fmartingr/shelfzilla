@@ -6,56 +6,56 @@
 {% endcomment %}
 
 {% block profile_content %}
-<div class="row text-center">
-    <div class="col-sm-6">
-        <div class="well">
-            <h2 class="no-margin-top">
-                {{ item.have_volumes.count }}
-                <small>{% blocktrans with count=item.read_volumes.count %}({{ count }} read){% endblocktrans %}</small>
-            </h2>
-            {% trans "Volumes owned" %}
-        </div>
-    </div>
-    <div class="col-sm-6">
-        <div class="well">
-            <h2 class="no-margin-top">{{ item.wishlisted_volumes.count }}</h2>
-            {% trans "Volumes wishlisted" %}
-        </div>
-    </div>
-    {% comment %}
-    <div class="col-sm-3">
-        <div class="well">
-            <h2 class="no-margin-top">--</h2>
-            Other
-        </div>
-    </div>
-    <div class="col-sm-3">
-        <div class="well">
-            <h2 class="no-margin-top">--</h2>
-            Other
-        </div>
-    </div>
-    {% endcomment %}
-</div>
-<div class="well">
-    <p>Interesting. No, wait, the other thing: tedious. What are you hacking off? Is it my torso?! 'It is!' My precious torso! Yes, if you make it look like an electrical fire. When you do things right, people won't be sure you've done anything at all. Take me to your leader! Ven ve voke up, ve had zese wodies.</p>
-</div>
-
 <div class="timeline">
-<dl>
-    {% for event in timeline %}
-    <dt>{{ event.date }}</dt>
-        <dd class="pos-right clearfix">
-        <div class="circ"></div>
-        <div class="time">Apr 14</div>
-        <div class="events">
-            <div class="events-body">
-                <h4 class="events-heading">Marked as read</h4>
-                {% include "manga/series/includes/volume.html" with volume=event.volume     user=user show_publisher=True type='slim' %}
+    <dl class="text-center">
+        <dt>{% trans "Today" %}</dt>
+        <dd class="pos-left">
+            <div class="circ"></div>
+            <div class="events">
+                <h2 class="no-margin-top">
+                    {{ item.have_volumes.count }}
+                    <small>{% blocktrans with count=item.read_volumes.count %}({{ count }} read){% endblocktrans %}</small>
+                </h2>
+                <p>{% trans "Volumes owned" %}</p>
             </div>
-        </div>
+        </dd>
+        <dd class="pos-right clearfix">
+            <div class="circ"></div>
+            <div class="events">
+                <h2 class="no-margin-top">{{ item.wishlisted_volumes.count }}</h2>
+                <p>{% trans "Volumes wishlisted" %}</p>
+            </div>
         </dd>
     </dl>
-    {% endfor %}
+    <dl>
+        {% regroup timeline by date|date:'F, Y' as timeline_dates %}
+        {% for dates in timeline_dates %}
+            <dt>{{ dates.grouper }}</dt>
+            {% regroup dates.list by date|date:'d' as month_events %}
+            {% for day in month_events %}
+            <dd class="pos-right clearfix">
+                <div class="circ"></div>
+                <div class="time">{{ day.grouper }}</div>
+                <div class="events">
+                    {% for event in day.list %}
+                    <div class="events-body">
+                        <h4 class="events-heading">
+                            {% if event.event_type == 'read' %}
+                                <i class="glyphicon glyphicon-eye-open"></i>
+                            {% elif event.event_type == 'have' %}
+                                <i class="glyphicon glyphicon-ok"></i>
+                            {% elif event.event_type == 'wishlist' %}
+                                <i class="glyphicon glyphicon-star"></i>
+                            {% endif %}
+                            {{ event.timeline_message }}
+                        </h4>
+                    </div>
+                    {% endfor %}
+                </div>
+            </dd>
+            {% endfor %}
+        {% endfor %}
+        <dt>...</dt>
+    </dl>
 </div>
 {% endblock %}

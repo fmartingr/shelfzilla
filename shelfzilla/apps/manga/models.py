@@ -249,6 +249,17 @@ class UserHaveVolume(models.Model):
     volume = models.ForeignKey(Volume, related_name='owned_by')
     date = models.DateTimeField(_('Date'), auto_now_add=True)
 
+    _timeline_message = _('%(volume)s added to collection')
+    _event_type = 'have'
+
+    @property
+    def event_type(self):
+        return self._event_type
+
+    @property
+    def timeline_message(self):
+        return self._timeline_message % {'volume': self.volume}
+
     def __unicode__(self):
         return "{} {} {}".format(
             self.user.username,
@@ -266,6 +277,17 @@ class UserWishlistVolume(models.Model):
     volume = models.ForeignKey(Volume, related_name='wishlisted_by')
     date = models.DateTimeField(_('Date'), auto_now_add=True)
 
+    _timeline_message = _('%(volume)s wishlisted')
+    _event_type = 'wishlist'
+
+    @property
+    def event_type(self):
+        return self._event_type
+
+    @property
+    def timeline_message(self):
+        return self._timeline_message % {'volume': self.volume}
+
     def __unicode__(self):
         return "{} {} {}".format(
             self.user.username,
@@ -282,6 +304,17 @@ class UserReadVolume(models.Model):
                              related_name='read_volumes')
     volume = models.ForeignKey(Volume, related_name='read_by')
     date = models.DateTimeField(_('Date'), auto_now_add=True)
+
+    _timeline_message = _('%(volume)s marked as read')
+    _event_type = 'read'
+
+    @property
+    def event_type(self):
+        return self._event_type
+
+    @property
+    def timeline_message(self):
+        return self._timeline_message % {'volume': self.volume}
 
     def __unicode__(self):
         return "{} {} {}".format(

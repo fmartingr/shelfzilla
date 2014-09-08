@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-08 17:46+0200\n"
-"PO-Revision-Date: 2014-09-08 17:46+0200\n"
+"POT-Creation-Date: 2014-09-09 01:10+0200\n"
+"PO-Revision-Date: 2014-09-09 01:11+0200\n"
 "Last-Translator: Felipe Martin <fmartingr@me.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -219,19 +219,34 @@ msgstr "Idioma"
 msgid "Languages"
 msgstr "Idiomas"
 
-#: apps/manga/models.py:250 apps/manga/models.py:267 apps/manga/models.py:284
+#: apps/manga/models.py:250 apps/manga/models.py:273 apps/manga/models.py:296
 msgid "Date"
 msgstr "Fecha"
 
-#: apps/manga/models.py:255
+#: apps/manga/models.py:252
+#, python-format
+msgid "%(volume)s added to collection"
+msgstr "%(volume)s añadido a la colección"
+
+#: apps/manga/models.py:261
 msgid "have"
 msgstr "tiene"
 
-#: apps/manga/models.py:272
+#: apps/manga/models.py:275
+#, python-format
+msgid "%(volume)s wishlisted"
+msgstr "%(volume)s añadido a deseados"
+
+#: apps/manga/models.py:284
 msgid "wants"
 msgstr "quiere"
 
-#: apps/manga/models.py:289
+#: apps/manga/models.py:298
+#, python-format
+msgid "%(volume)s marked as read"
+msgstr "%(volume)s marcado como leído"
+
+#: apps/manga/models.py:307
 msgid "have read"
 msgstr "ha leído"
 
@@ -286,11 +301,11 @@ msgstr "Esta cuenta está desactivada."
 msgid "User with those credentials was not found."
 msgstr "No se ha encontrado un usuario con esos credenciales."
 
-#: apps/users/views.py:40
+#: apps/users/views.py:44
 msgid "Logged in successfully."
 msgstr "Has accedido correctamente."
 
-#: apps/users/views.py:59
+#: apps/users/views.py:63
 msgid "Logged out successfully"
 msgstr "Sesión finalizada."
 
@@ -462,16 +477,20 @@ msgstr "Mis preferencias"
 msgid "Achievements"
 msgstr "Logros"
 
-#: themes/bootflat/templates/users/profile/summary.html:14
+#: themes/bootflat/templates/users/profile/summary.html:11
+msgid "Today"
+msgstr "Hoy"
+
+#: themes/bootflat/templates/users/profile/summary.html:17
 #, python-format
 msgid "(%(count)s read)"
 msgstr "(%(count)s leídos)"
 
-#: themes/bootflat/templates/users/profile/summary.html:16
+#: themes/bootflat/templates/users/profile/summary.html:19
 msgid "Volumes owned"
 msgstr "Volúmenes"
 
-#: themes/bootflat/templates/users/profile/summary.html:22
+#: themes/bootflat/templates/users/profile/summary.html:26
 msgid "Volumes wishlisted"
 msgstr "Deseados"
 
