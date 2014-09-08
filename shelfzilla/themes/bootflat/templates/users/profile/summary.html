@@ -9,7 +9,10 @@
 <div class="row text-center">
     <div class="col-sm-6">
         <div class="well">
-            <h2 class="no-margin-top">{{ item.have_volumes.count }}</h2>
+            <h2 class="no-margin-top">
+                {{ item.have_volumes.count }}
+                <small>{% blocktrans with count=item.read_volumes.count %}({{ count }} read){% endblocktrans %}</small>
+            </h2>
             {% trans "Volumes owned" %}
         </div>
     </div>

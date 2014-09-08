@@ -1,4 +1,6 @@
-<div class="badges {% if volume.pk in user_have_volumes %}user-have-it{% endif %} {% if volume.pk in user_wishlisted_volumes %}user-wishlisted-it{% endif %}">
+<div class="badges {% if volume.pk in user_have_volumes %}user-have-it{% endif %}
+                   {% if volume.pk in user_wishlisted_volumes %}user-wishlisted-it{% endif %}
+                   {% if volume.pk in user_read_volumes %}user-read-it{% endif %}">
     {% if volume.pk in user_have_volumes %}
     <a href="{% url "volume.have_it" volume.pk %}" data-pjax="v{{ volume.pk }}" pjax-nopush pjax-messages>
         <span class="badge badge-success badge-have-it">
@@ -17,4 +19,9 @@
         </span>
     </a>
     {% endif %}
+    <a href="{% url "volume.read_it" volume.pk %}" data-pjax="v{{ volume.pk }}" pjax-messages pjax-nopush>
+        <span class="badge badge-read-it {% if volume.pk in user_read_volumes %}badge-primary{% endif %}">
+            <i class="glyphicon glyphicon-eye-open"></i>
+        </span>
+    </a>
 </div>

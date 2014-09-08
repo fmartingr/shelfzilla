@@ -30,3 +30,5 @@ django.pot
 
 # Fixtures
 fixtures/
+
+tmp/

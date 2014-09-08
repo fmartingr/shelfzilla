@@ -276,6 +276,24 @@ class UserWishlistVolume(models.Model):
     class Meta:
         ordering = ('volume__series__name', 'volume__number', )
 
+
+class UserReadVolume(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             related_name='read_volumes')
+    volume = models.ForeignKey(Volume, related_name='read_by')
+    date = models.DateTimeField(_('Date'), auto_now_add=True)
+
+    def __unicode__(self):
+        return "{} {} {}".format(
+            self.user.username,
+            _('have read'),
+            self.volume
+        )
+
+    class Meta:
+        ordering = ('volume__series__name', 'volume__number', )
+
+
 #
 # SIGNALS
 #
