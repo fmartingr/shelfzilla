@@ -14,7 +14,7 @@
     "tests"
   ],
   "dependencies": {
-    "Bootflat": "~2.0.1",
+    "bootflatv2": "~2.0.4",
     "jquery": "~2.1.0",
     "vegas": "~1.3.4",
     "jquery-pjax": "~1.8.1",

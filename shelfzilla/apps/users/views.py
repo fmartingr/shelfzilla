@@ -9,6 +9,7 @@ from django.contrib.auth import login
 
 from .forms import LoginForm
 from .models import User
+from shelfzilla.apps.manga.models import UserReadVolume
 
 
 class LoginView(View):
@@ -67,27 +68,29 @@ class UserProfileView(View):
     template_section = 'users/profile/{}.html'
 
     def get(self, request, username, section='summary'):
+        user = get_object_or_404(User, username=username)
         data = {
-            'item': get_object_or_404(User, username=username),
+            'item': user,
             'section': section
         }
         if section != 'summary':
             template = self.template_section.format(section)
         else:
             template = self.tempalte
-        data = self.get_context_from_section(request, section, data)
+        data = self.get_context_from_section(request, section, data, user)
 
         ctx = RequestContext(request, data)
         return render_to_response(template, context_instance=ctx)
 
-    def get_summary(self, request, context):
-        context['SUMMARY'] = 'Y'
+    def get_summary(self, request, context, user):
+        context['timeline'] = UserReadVolume.objects.filter(user=user).\
+            order_by('-date')
         return context
 
-    def get_context_from_section(self, request, section, context):
+    def get_context_from_section(self, request, section, context, user):
         method = getattr(self, 'get_{}'.format(section), None)
 
         if method:
-            context = method(request, context)
+            context = method(request, context, user)
 
         return context
