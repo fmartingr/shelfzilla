@@ -58,6 +58,7 @@ INSTALLED_APPS = (
 
     # Staticfiles
     "compressor",
+    'ckeditor',
 
     # Apps
     'shelfzilla.apps._admin',
@@ -66,6 +67,7 @@ INSTALLED_APPS = (
     'shelfzilla.apps.homepage',
     'shelfzilla.apps.landing',
     'shelfzilla.apps.manga',
+    'shelfzilla.apps.blog',
     'shelfzilla.apps.pjax',
 )
 
@@ -262,6 +264,11 @@ SUIT_CONFIG = {
             'icon': 'icon-cog',
         },
         {
+            'app': 'blog',
+            'label': 'Blog',
+            'icon': 'icon-book',
+        },
+        {
             'app': 'manga',
             'label': 'Manga',
             'icon': 'icon-book',
@@ -272,4 +279,16 @@ SUIT_CONFIG = {
             'app': 'filer',
         },
     ),
+}
+
+#
+#   CKEDITOR
+#
+CKEDITOR_UPLOAD_PATH = 'ckeditor/'
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Standard',
+        'width': '100%',
+    },
 }

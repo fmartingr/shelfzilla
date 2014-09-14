@@ -20,3 +20,6 @@ psycopg2==2.5.2
 
 # Files
 django-filer==0.9.5
+
+# Blog
+django-ckeditor-updated==4.4.0

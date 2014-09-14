@@ -1,0 +1,24 @@
+{% extends "blog/_layout.html" %}
+{% load i18n %}
+
+{% block main_content %}
+<div class="container">
+    <ul class="media-list">
+    {% for item in page.object_list %}
+    <li class="media well {% if item.draft %}draft{% endif %}">
+        <a class="pull-left" href="#">
+            <!--<img class="media-object img-rounded" src="{{ item.author.avatar }}">-->
+        </a>
+        <div class="media-body">
+            <h2 class="media-heading">{{ item.title }}</h2>
+            <div>
+                Por <strong>{{ item.author.first_name }}</strong> el
+                <time datetime="{{ item.date }}" pubdate="" data-updated="true">{{ item.date }}</time>
+            </div>
+            <p>{{ item.content|safe }}</p>
+        </div>
+    </li>
+    {% endfor %}
+    </ul>
+</div>
+{% endblock %}
