@@ -1,0 +1,120 @@
+{% load i18n solo_tags staticfiles compress %}
+{% get_solo 'config.SiteConfiguration' as site_config %}
+{% get_solo 'config.SocialConfiguration' as social_config %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% compress css %}
+    {% block stylesheets %}
+    {% include "_css/purecss.html" %}
+    <link rel="stylesheet" href="{% static "less/style.less" %}" type="text/less" />
+    {% endblock %}
+    {% endcompress %}
+    <title>{% block page_title %}ShelfZilla{% endblock %}</title>
+</head>
+<body>
+    {% block navigation_bar %}
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+                        <span class="sr-only">{% trans "Toggle navigation" %}</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a data-pjax-unnav class="navbar-brand" data-pjax href="{% url "homepage" %}">Shelfzilla</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="navbar-collapse">
+                    {% if user.is_authenticated %}
+                    <ul class="nav navbar-nav">
+                        <li data-pjax-nav {% if navigation.section == "series" %}class="active"{% endif %}>
+                            <a data-pjax href="{% url "series.list" %}">{% trans "Series" %}</a>
+                        </li>
+                        <li data-pjax-nav {% if navigation.section == "publishers" %}class="active"{% endif %}>
+                            <a data-pjax href="{% url 'publishers.list' %}">{% trans "Publishers" %}</a>
+                        </li>
+                    </ul>
+                    {% endif %}
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if user.is_authenticated %}
+                        <li><a href="{% url 'profile' user.username %}" title="{% trans "Profile" %}" data-toggle="tooltip" data-placement="bottom">
+                            <img src="{{ user.avatar }}" class="avatar img-rounded pull-left "/>
+                             &nbsp;{{ user.username }}</a>
+                         </li>
+                        {% if user.is_superuser %}
+                        <li><a data-pjax-unnav href="/admin/" title="Admin" data-toggle="tooltip" data-placement="bottom"><i class="glyphicon glyphicon-tower"></i></a></li>
+                        {% endif %}
+    <!--                         <li><a data-pjax-unnav href="{% url 'profile' user.username %}" data-pjax
+                               title="{% trans "Profile" %}" data-toggle="tooltip" data-placement="bottom">
+                               <i class="glyphicon glyphicon-user"></i>
+                            </a>
+                        </li> -->
+                        <li><a data-pjax-unnav href="{% url "logout" %}"
+                               title="{% trans "Logout" %}" data-toggle="tooltip" data-placement="bottom">
+                               <i class="glyphicon glyphicon-off"></i>
+                            </a>
+                        </li>
+                        {% else %}
+                        <li>
+                            <a href="{% url "login" %}">
+                                <i class="glyphicon glyphicon-log-in"></i> {% trans "Log in" %}
+                            </a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                    {% if user.is_authenticated %}
+                    <form class="navbar-form navbar-right" role="search"
+                          method="post" action="{% url "search" %}" data-pjax>
+                        {% csrf_token %}
+                        <div class="form-search search-only">
+                            <i class="search-icon glyphicon glyphicon-search"></i>
+                            <input type="text" value="{{ search_query }}" name="q" class="form-control search-query" placeholder="{% trans 'Search' %}">
+                        </div>
+                    </form>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+    {% endblock %}
+
+    {% block messages %}
+        <div class="messages container" data-pjax-container="messages"></div>
+    {% endblock %}
+
+    <div id="main_content" data-pjax-container="main">
+    {% block main_content2 %}{% endblock %}
+    </div>
+
+    {% block footer %}{% endblock %}
+    {% compress js %}
+    {% block javascript %}
+    <!-- OLD -->
+    <script type="text/javascript">
+    var USE_PJAX = {{ site_config.use_pjax|lower }};
+    </script>
+    <script type="text/javascript" src="{% static "bower/jquery/dist/jquery.js" %}"></script>
+    <script type="text/javascript" src="{% static "bower/Bootflat/js/bootstrap.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "bower/jquery-pjax/jquery.pjax.js" %}"></script>
+    <script type="text/javascript" src="{% static "bower/nprogress/nprogress.js" %}"></script>
+    <script type="text/javascript" src="{% static "bower/toastr/toastr.js" %}"></script>
+    <script type="text/javascript" src="{% static "bower/eventEmitter/EventEmitter.js" %}"></script>
+    <script type="text/javascript" src="{% static "bower/eventie/eventie.js" %}"></script>
+    <script type="text/javascript" src="{% static "bower/imagesloaded/imagesloaded.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/app.js" %}"></script>
+    {% endblock %}
+    {% endcompress %}
+    {% if not USER_CONFIG.use_pjax %}
+    <script type="text/javascript">$(function() { window.updateMessages(); });</script>
+    {% endif %}
+
+    {% if social_config.google_analytics %}
+    {% include "_includes/google_analytics.html" %}
+    {% endif %}
+</body>
+</html>

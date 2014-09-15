@@ -105,6 +105,7 @@ MIDDLEWARE_CLASSES = (
 
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, "themes", "_base"),
+    os.path.join(BASE_DIR, "themes", "kurono", "templates"),
     os.path.join(BASE_DIR, "themes", "bootflat", "templates"),
 )
 
@@ -156,6 +157,7 @@ MEDIA_URL = '/media/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "themes", "kurono", "static"),
     os.path.join(BASE_DIR, "themes", "bootflat", "static"),
 )
 
