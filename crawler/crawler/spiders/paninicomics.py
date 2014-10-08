@@ -78,7 +78,6 @@ class PaninicomicsSpider(CrawlSpider):
         item['isbn_13'] = str(re.findall(r'\d{13}', str(numbers))).strip("\' [] ")
 
         print item
-        #response.xpath('//*[@id="shop"]/div[2]/div[3]/h3/text()').extract()
 
 
 
