@@ -5,8 +5,6 @@ from scrapy.contrib.spiders import CrawlSpider, Rule
 from scrapy.contrib.linkextractors import LinkExtractor
 from shelfzilla.items import VolumeItem
 
-
-
 class PaninicomicsSpider(CrawlSpider):
     name = "paninicomics"
     allowed_domains = ["www.paninicomics.es", "paninicomics.es"]
