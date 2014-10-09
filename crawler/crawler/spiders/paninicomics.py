@@ -54,7 +54,7 @@ class PaninicomicsSpider(CrawlSpider):
         item['url'] = response.url
         item['publisher_name'] = self._publisher_name
 
-        ## Serie Name and volume name
+        ## Serie Name and volume name 
         name_raw = response.xpath('//*[@class="title"]/h3/text()').extract()
         name = str(name_raw)[3:-2]
         cleaned_name = str(name).split(' ')[0:-1]
