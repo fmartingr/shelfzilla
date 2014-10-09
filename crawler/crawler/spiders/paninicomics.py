@@ -12,6 +12,8 @@ class PaninicomicsSpider(CrawlSpider):
     allowed_domains = ["www.paninicomics.es", "paninicomics.es"]
     start_urls = (
         'http://www.paninicomics.es/web/guest/manga/colecciones/',
+        'http://www.paninicomics.es/web/guest/comicsmarvel/colecciones',
+        'http://www.paninicomics.es/web/guest/comics/colecciones',
     )
 
     rules = (
@@ -58,7 +60,11 @@ class PaninicomicsSpider(CrawlSpider):
         cleaned_name = str(name).split(' ')[0:-1]
         item['series_name'] = ' '.join(cleaned_name)
         list_raw_name = response.xpath('//*[@class="title"]/h4//text()').extract()
-        item['name'] = str(list_raw_name[1]).strip("\n \' [ ]")
+        try:
+            item['name'] = str(list_raw_name[1]).strip("\n \' [ ]")
+
+        except:
+            item['name'] = list_raw_name[1]
 
         ## Tome number
         item['number'] = str(name).split(' ')[-1]
@@ -70,20 +76,26 @@ class PaninicomicsSpider(CrawlSpider):
         ## ISBN and Pages
         numbers = response.xpath('//*[@class="features"]/text()').extract()
         pages = re.findall(r'\d{3}', str(numbers))
-        if len(pages) > 3:
+        if len(pages) >= 2:
             item['pages'] = pages[-1]
 
         else:
-            item['pages'] = pages[0]            
+            try:
+                item['pages'] = pages[0]
+
+            except:
+                item['pages'] = 'unknown'
+
         item['isbn_13'] = str(re.findall(r'\d{13}', str(numbers))).strip("\' [] ")
+        item['price'] = str(response.xpath('//*[@class="price"]/h3/strong/text()').extract())[3:-2]
+        item['release_date'] = str(response.xpath('//*[@class="price"]/p/strong/text()').extract())[3:-2]
 
-        print item
+        sinopsis = response.xpath('//*[@class="desc"]/div/text()').extract()
+        item['picture'] = sinopsis[-1]
+        item['script'] = sinopsis[-2]
+        item['synopsis'] = sinopsis[0]
 
-
-
-
-
-
+        yield item
 
 
 
