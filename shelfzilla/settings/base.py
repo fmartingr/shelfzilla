@@ -53,7 +53,7 @@ INSTALLED_APPS = (
 
     # DDBB
     'reversion',
-    'south',
+    # 'south',
     'import_export',
 
     # Staticfiles
