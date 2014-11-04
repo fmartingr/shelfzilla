@@ -2,7 +2,7 @@ from django.views.generic import View
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.db.models import Count
-from shelfzilla.apps.users.models import User
+from django.contrib.auth import get_user_model
 from shelfzilla.apps.manga.models import Volume, Series
 
 
@@ -13,7 +13,7 @@ class HomepageView(View):
         data = {}
         from datetime import datetime
         # TOP 5
-        data['TOP_5_COLLECTORS'] = User.objects.filter(pk__gt=1)\
+        data['TOP_5_COLLECTORS'] = get_user_model().objects.filter(pk__gt=1)\
             .annotate(num_volumes=Count('have_volumes'))\
             .order_by('-num_volumes')[:5]
 
@@ -29,7 +29,7 @@ class HomepageView(View):
 
         # Stats
         data['STATS'] = {
-            'users': User.objects.count() - 1,
+            'users': get_user_model().objects.count() - 1,
             'series': Series.objects.count(),
             'series_review': Series.objects.filter(for_review=True).count(),
             'volumes': Volume.objects.count(),

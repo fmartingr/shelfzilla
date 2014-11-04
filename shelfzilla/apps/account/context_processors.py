@@ -22,6 +22,7 @@ def user_configuration(request):
         },
     }
 
+
 def auth(request):
     result = {}
     if request.user.is_authenticated():

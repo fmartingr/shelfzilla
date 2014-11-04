@@ -32,14 +32,13 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
-    'longerusername',
-
     # Admin
     'suit',
     'django.contrib.admin',
     'solo',
 
     # Django
+    'shelfzilla.apps.account',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -63,7 +62,6 @@ INSTALLED_APPS = (
     # Apps
     'shelfzilla.apps._admin',
     'shelfzilla.apps.config',
-    'shelfzilla.apps.users',
     'shelfzilla.apps.homepage',
     'shelfzilla.apps.landing',
     'shelfzilla.apps.manga',
@@ -85,9 +83,9 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'shelfzilla.apps.manga.context_processors.user_have_volumes',
     'shelfzilla.apps.manga.context_processors.user_wishlisted_volumes',
     'shelfzilla.apps.manga.context_processors.user_read_volumes',
-    'shelfzilla.apps.users.context_processors.auth',
-    'shelfzilla.apps.users.context_processors.user_is_staff',
-    'shelfzilla.apps.users.context_processors.user_configuration',
+    'shelfzilla.apps.account.context_processors.auth',
+    'shelfzilla.apps.account.context_processors.user_is_staff',
+    # 'shelfzilla.apps.account.context_processors.user_configuration',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -292,3 +290,8 @@ CKEDITOR_CONFIGS = {
         'width': '100%',
     },
 }
+
+#
+#   AUTH
+#
+AUTH_USER_MODEL = 'account.User'

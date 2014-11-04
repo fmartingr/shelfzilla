@@ -8,7 +8,6 @@ django-solo==1.1.0
 django-import-export==0.2.6
 
 # Fixes
-longerusername==0.4
 
 # Statics
 django-compressor==1.4
