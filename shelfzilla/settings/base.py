@@ -32,14 +32,16 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
+    # Auth
+    'shelfzilla.apps.account',
+    'django.contrib.auth',
+
     # Admin
     'suit',
     'django.contrib.admin',
     'solo',
 
     # Django
-    'shelfzilla.apps.account',
-    'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -98,7 +100,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    'shelfzilla.middleware.BetaMiddleware',
+    # 'shelfzilla.middleware.BetaMiddleware',
 )
 
 TEMPLATE_DIRS = (
@@ -172,12 +174,12 @@ COMPRESS_PRECOMPILERS = (
 MAX_USERNAME_LENGTH = 75
 
 # Beta settings
-BETA_ACCESS_GROUP_ID = 1
-BETA_ACCESS_ALLOW_URLS = (
-    '/landing/',
-    '/login/',
-    '/messages/',
-)
+# BETA_ACCESS_GROUP_ID = 1
+# BETA_ACCESS_ALLOW_URLS = (
+#     '/landing/',
+#     '/login/',
+#     '/messages/',
+# )
 
 # filer
 THUMBNAIL_PROCESSORS = (
@@ -251,10 +253,9 @@ SUIT_CONFIG = {
     'SEARCH_URL': '',
     'MENU': (
         {
-            'app': 'auth',
             'label': 'Authorization',
             'icon': 'icon-lock',
-            'models': ('user', 'group')
+            'models': ('account.user', 'auth.group')
         },
         {
             'app': 'config',
