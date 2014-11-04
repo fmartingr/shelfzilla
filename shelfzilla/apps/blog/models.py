@@ -4,7 +4,6 @@ from datetime import datetime
 from django.utils.timezone import utc
 from ckeditor.fields import RichTextField
 from django.core.urlresolvers import reverse
-from django.utils.translation import activate
 
 
 #
@@ -12,7 +11,7 @@ from django.utils.translation import activate
 #
 class Entry(models.Model):
     title = models.CharField(max_length=128)
-    date = models.DateTimeField(default=datetime.now(tz=utc))
+    date = models.DateTimeField(auto_now=True)
     content = RichTextField()
     slug = models.SlugField(max_length=128)
     draft = models.BooleanField(default=True)
@@ -67,5 +66,3 @@ class Tag(models.Model):
     class Meta:
         app_label = 'blog'
         ordering = ['name']
-
-
