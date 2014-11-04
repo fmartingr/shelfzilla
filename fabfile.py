@@ -53,21 +53,19 @@ def setup_virtualenv():
     """
     Creates or updates a virtualenv
     """
-    if not exists('.virtualenv'):
-        print(yellow('Create virtualenv'))
-        run('virtualenv-2.7 .virtualenv')
+    print(yellow('Create virtualenv'))
+    local('virtualenv-2.7 .virtualenv')
 
     with virtualenv():
         print(yellow('Installing requirements'))
-        run('pip install -r config/{}/requirements.txt --use-mirrors'.format(
-            env.appenv))
+        local('pip install -r config/local/requirements.txt')
 
 
 @task
 def setup_tools():
     # Setup frontend tools
     print(yellow('Installing npm dependencies'))
-    run('npm install')
+    local('npm install')
 
 
 @task
@@ -77,9 +75,9 @@ def setup_database():
     """
     with virtualenv():
         print(yellow('SyncDB'))
-        run('python manage.py syncdb')
-        print(yellow('Migrate'))
-        run('python manage.py migrate')
+        local('python manage.py syncdb')
+        # print(yellow('Migrate'))
+        # local('python manage.py migrate')
 
 
 @task
@@ -87,7 +85,7 @@ def doctor():
     print(yellow('Checking for software:'))
     for app in DOCTOR['apps']:
         print(white('{}'.format(app)), end=': ')
-        check = run('which {}'.format(app), quiet=True)
+        check = local('which {}'.format(app), quiet=True)
         if check.succeeded:
             print(green('present'))
         else:
