@@ -1,25 +1,23 @@
 # Base
-Django==1.6.2
-South==0.8.4
+Django==1.7.1
 
 # Admin
-django-suit==0.2.8
-django-reversion==1.8.0
-django-solo==1.0.4
-django-import-export==0.2.2
+django-suit==0.2.11
+django-reversion==1.8.5
+django-solo==1.1.0
+django-import-export==0.2.6
 
 # Fixes
-longerusername==0.4
 
 # Statics
 django-compressor==1.4
 
 # DDBB
 dj-database-url==0.3.0
-psycopg2==2.5.2
+psycopg2==2.5.4
 
 # Files
-django-filer==0.9.5
+django-filer==0.9.8
 
 # Blog
-django-ckeditor-updated==4.4.0
+django-ckeditor-updated==4.4.4

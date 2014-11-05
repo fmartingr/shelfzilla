@@ -32,7 +32,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
-    'longerusername',
+    # Auth
+    'shelfzilla.apps.account',
+    'django.contrib.auth',
 
     # Admin
     'suit',
@@ -40,7 +42,6 @@ INSTALLED_APPS = (
     'solo',
 
     # Django
-    'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -53,7 +54,7 @@ INSTALLED_APPS = (
 
     # DDBB
     'reversion',
-    'south',
+    # 'south',
     'import_export',
 
     # Staticfiles
@@ -63,7 +64,6 @@ INSTALLED_APPS = (
     # Apps
     'shelfzilla.apps._admin',
     'shelfzilla.apps.config',
-    'shelfzilla.apps.users',
     'shelfzilla.apps.homepage',
     'shelfzilla.apps.landing',
     'shelfzilla.apps.manga',
@@ -85,9 +85,9 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'shelfzilla.apps.manga.context_processors.user_have_volumes',
     'shelfzilla.apps.manga.context_processors.user_wishlisted_volumes',
     'shelfzilla.apps.manga.context_processors.user_read_volumes',
-    'shelfzilla.apps.users.context_processors.auth',
-    'shelfzilla.apps.users.context_processors.user_is_staff',
-    'shelfzilla.apps.users.context_processors.user_configuration',
+    'shelfzilla.apps.account.context_processors.auth',
+    'shelfzilla.apps.account.context_processors.user_is_staff',
+    # 'shelfzilla.apps.account.context_processors.user_configuration',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -100,7 +100,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    'shelfzilla.middleware.BetaMiddleware',
+    # 'shelfzilla.middleware.BetaMiddleware',
 )
 
 TEMPLATE_DIRS = (
@@ -176,12 +176,12 @@ COMPRESS_PRECOMPILERS = (
 MAX_USERNAME_LENGTH = 75
 
 # Beta settings
-BETA_ACCESS_GROUP_ID = 1
-BETA_ACCESS_ALLOW_URLS = (
-    '/landing/',
-    '/login/',
-    '/messages/',
-)
+# BETA_ACCESS_GROUP_ID = 1
+# BETA_ACCESS_ALLOW_URLS = (
+#     '/landing/',
+#     '/login/',
+#     '/messages/',
+# )
 
 # filer
 THUMBNAIL_PROCESSORS = (
@@ -255,10 +255,9 @@ SUIT_CONFIG = {
     'SEARCH_URL': '',
     'MENU': (
         {
-            'app': 'auth',
             'label': 'Authorization',
             'icon': 'icon-lock',
-            'models': ('user', 'group')
+            'models': ('account.user', 'auth.group')
         },
         {
             'app': 'config',
@@ -294,3 +293,8 @@ CKEDITOR_CONFIGS = {
         'width': '100%',
     },
 }
+
+#
+#   AUTH
+#
+AUTH_USER_MODEL = 'account.User'
