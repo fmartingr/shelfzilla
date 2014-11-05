@@ -3,12 +3,15 @@ from django.views.generic import View
 from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext as _
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth import login
+from django.core.urlresolvers import reverse
 
-from .forms import LoginForm
+from .forms import LoginForm, PasswordChangeForm
 from .models import User
 from shelfzilla.apps.manga.models import (
     UserReadVolume, UserHaveVolume, UserWishlistVolume
@@ -105,3 +108,35 @@ class UserProfileView(View):
             context = method(request, context, user)
 
         return context
+
+
+class AccountView(View):
+    template = 'account/main.html'
+
+    @method_decorator(login_required)
+    def get(self, request):
+        data = {
+            'item': request.user,
+            'form_password': PasswordChangeForm(request.user)
+        }
+
+        ctx = RequestContext(request, data)
+        return render_to_response(self.template, context_instance=ctx)
+
+    @method_decorator(login_required)
+    def post(self, request):
+        form_password = PasswordChangeForm(request.user, data=request.POST)
+
+        if form_password.is_valid():
+            # Do stuff
+            form_password.save()
+            messages.success(request, _('Password changed.'))
+            return HttpResponseRedirect(reverse('account'))
+
+        data = {
+            'item': request.user,
+            'form_password': form_password
+        }
+
+        ctx = RequestContext(request, data)
+        return render_to_response(self.template, context_instance=ctx)

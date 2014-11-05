@@ -1,5 +1,8 @@
 from django import forms
 from django.contrib.auth import authenticate
+from django.contrib.auth.forms import (
+    PasswordChangeForm as DjangoPasswordChangeForm
+)
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -36,3 +39,7 @@ class LoginForm(forms.Form):
                 )
 
         return data
+
+
+class PasswordChangeForm(DjangoPasswordChangeForm):
+    pass

@@ -41,13 +41,9 @@
             </div>
             <div>
                 {% if request.user.pk == item.pk %}
-                <button class="btn btn-info btn-block">
+                <a href="{% url 'account' %}" class="btn btn-info btn-block">
                     {% trans "Edit my profile" %}
-                </button>
-                <button class="btn btn-info btn-block">
-                    <i class="fa fa-cog"></i>
-                    {% trans "My preferences" %}
-                </button>
+                </a>
                 {% endif %}
             </div>
         </div>

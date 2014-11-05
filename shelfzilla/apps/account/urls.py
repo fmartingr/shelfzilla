@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, url
 
-from .views import LoginView, LogoutView, UserProfileView
+from .views import LoginView, LogoutView, UserProfileView, AccountView
 
 urlpatterns = patterns(
     '',
@@ -14,4 +14,5 @@ urlpatterns = patterns(
         r'^user/(?P<username>[\w\d\-\.]+)/(?P<section>\w+)/$',
         UserProfileView.as_view(),
         name="profile"),
+    url(r'^account/$', AccountView.as_view(), name='account'),
 )
