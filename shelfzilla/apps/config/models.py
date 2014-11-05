@@ -10,7 +10,7 @@ class SiteConfiguration(SingletonModel):
     use_pjax = models.BooleanField(default=True)
 
     def __unicode__(self):
-        return _("Site Configuration")
+        return u"{}".format(_("Site Configuration"))
 
     class Meta:
         verbose_name = _("Site Configuration")
@@ -30,7 +30,7 @@ class SocialConfiguration(SingletonModel):
     google_analytics = models.CharField(max_length=16, blank=True, null=True)
 
     def __unicode__(self):
-        return _("Social Configuration")
+        return u"{}".format(_("Social Configuration"))
 
     class Meta:
         verbose_name = _("Social Configuration")
