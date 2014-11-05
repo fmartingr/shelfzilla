@@ -102,7 +102,7 @@ def runserver():
     Executes local development server
     """
     with virtualenv():
-        local('python manage.py runserver 0.0.0.0:8000')
+        local('python manage.py runserver_plus 0.0.0.0:8000')
 
 
 @task

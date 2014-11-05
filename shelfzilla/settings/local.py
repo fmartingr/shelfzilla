@@ -22,6 +22,7 @@ STATICFILES_DIRS += (
 INSTALLED_APPS += (
     'django.contrib.webdesign',
     'rosetta',
+    'django_extensions',
 )
 
 FILER_DUMP_PAYLOAD = True

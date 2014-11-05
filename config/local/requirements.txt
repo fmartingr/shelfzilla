@@ -2,3 +2,5 @@
 
 # i18n
 django-rosetta==0.7.4
+django-extensions==1.4.5
+Werkzeug==0.9.6
