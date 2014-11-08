@@ -66,9 +66,6 @@ cd %{_app_dir} && npm install --production
 ## pip install
 pip install -r %{_app_dir}/config/production/requirements.txt
 
-## Syncdb dir manage
-python2.7 %{_app_dir}/manage.py syncdb
-
 ## Migrate
 python2.7 %{_app_dir}/manage.py migrate --no-initial-data
 
@@ -86,7 +83,7 @@ python2.7 manage.py collectstatic --clear --noinput
 if [ $1 == 0 ]; then
 echo "Cleaning application files"
 [ -e /etc/logrotate.d/shelzilla ] && rm -fv /etc/logrotate.d/shelfzilla
-[ -e %{_init_path}/shelfzilla ] && rm -fv ∞{_init_path}/shelfzilla
+[ -e %{_init_path}/shelfzilla ] && rm -fv %{_init_path}/shelfzilla
 echo "Uninstall finished"
 
 fi
