@@ -23,7 +23,7 @@ class User(AbstractBaseUser,
     @property
     def avatar(self):
         avatar = '{}{}?s=300'.format(
-            'http://www.gravatar.com/avatar/',
+            'https://www.gravatar.com/avatar/',
             md5(self.email.lower()).hexdigest()
         )
         return avatar
