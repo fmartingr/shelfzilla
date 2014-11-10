@@ -40,10 +40,7 @@ class User(AbstractBaseUser,
         verbose_name=_('Username'),
         max_length=128,
         unique=True,
-        blank=True,
-        null=True,
         db_index=True,
-        default=None,
     )
 
     # personal info
@@ -93,7 +90,7 @@ class User(AbstractBaseUser,
     )
 
     USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = ('email', )
+    REQUIRED_FIELDS = ('email',)
 
     objects = UserManager()
 
@@ -101,7 +98,7 @@ class User(AbstractBaseUser,
         verbose_name = _('User')
 
     def __unicode__(self):
-        return self.username
+        return unicode(self.username) or unicode(self.email)
 
     @property
     def is_confirmed(self):
