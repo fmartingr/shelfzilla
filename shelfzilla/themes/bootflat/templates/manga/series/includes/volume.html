@@ -14,6 +14,9 @@
         </div>
         {% endif %}
         <div class="text-center volume-content">
+            {% if show_name %}
+            <div><strong><a href="{{ volume.series.get_absolute_url }}">{{ volume.series.name }}</a></strong></div>
+            {% endif %}
             {% if type == 'slim' %}
             <a href="{{ volume.series.get_absolute_url }}" data-pjax>
                 <h4 class="media-heading">{{ volume }}</h4>
