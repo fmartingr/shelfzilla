@@ -8,9 +8,11 @@
 
 <div>
     <div class="well text-center volume-item volume-{{ type }}" style="background: white url({{ volume_thumb.url }}) center left no-repeat;">
+        {% if request.user.is_authenticated %}
         <div data-pjax-container="v{{ volume.pk }}">
             {% include "manga/series/includes/volume-badges.html" %}
         </div>
+        {% endif %}
         <div class="text-center volume-content">
             {% if type == 'slim' %}
             <a href="{{ volume.series.get_absolute_url }}" data-pjax>
