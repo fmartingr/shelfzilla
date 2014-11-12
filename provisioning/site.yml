@@ -1,0 +1,13 @@
+---
+-
+    name: Vagrant Task
+    hosts: vagrant
+    roles:
+        - role: common
+
+-
+    name: Production Task
+    hosts: production
+    roles:
+        - role: common
+

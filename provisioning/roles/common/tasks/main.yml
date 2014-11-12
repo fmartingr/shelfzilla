@@ -1,0 +1,26 @@
+---
+- name: be sure ntp is installed
+  yum: pkg=ntp state=installed
+  sudo: yes
+
+- name: Install libselinux python
+  yum: pkg=libselinux-python state=installed
+  sudo: yes
+
+- name: test to see if selinux is running
+  command: /usr/sbin/getenforce
+  register: sestatus
+
+- name: Selinux Down
+  command: setenforce 0
+  when: sestatus == 'Enforcing' 
+
+- name: be sure ntp is configured
+  template: src=ntp.conf.j2 dest=/etc/ntp.conf
+  notify:
+    - restart ntpd
+  sudo: yes
+
+- name: be sure ntpd is running and enabled
+  service: name=ntpd state=running enabled=yes
+  sudo: yes
