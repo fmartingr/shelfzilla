@@ -32,3 +32,6 @@ django.pot
 fixtures/
 
 tmp/
+
+# Vagrant
+.vagrant

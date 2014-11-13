@@ -1,0 +1,24 @@
+---
+-   name: Selinux module Dependecy
+    yum: name=libselinux-python state=latest
+    sudo: yes
+
+-   selinux: policy=targeted state=permissive
+    sudo: yes
+
+-   name: Clean iptables
+    shell: /sbin/iptables -F
+    sudo: yes
+
+-   stat: path=/etc/sysconfig/iptables
+    register: st
+
+-   name: Install Iptables statements
+    file: 
+        src=iptables
+        dest=/etc/sysconfig/iptables
+    sudo: yes
+    when: local_environment and st.stat.exists
+    notify: 
+        - iptables
+

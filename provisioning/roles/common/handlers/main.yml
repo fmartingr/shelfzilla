@@ -1,4 +1,8 @@
 ---
-- name: restart ntpd
-  service: name=ntpd state=restarted
-  sudo: yes
+-   name: Clean yum packages
+    command: /usr/bin/yum clean all
+    sudo: yes
+
+-   service: name=iptables pattern=/sbin/iptables state=restarted
+    sudo: yes
+    when: local_environment is true
