@@ -12,16 +12,10 @@
 -A RH-Firewall-1-INPUT -m state --state NEW,ESTABLISHED -p tcp -d 198.211.124.169 --dport 443 -j ACCEPT
 # JP house
 -A RH-Firewall-1-INPUT -m state --state NEW,ESTABLISHED -m tcp -p tcp -s 213.37.133.114 -d 198.211.124.169 --sport 513:65535 --dport 22  -j ACCEPT
-#-A RH-Firewall-1-INPUT -m state --state NEW,ESTABLISHED -m tcp -p tcp -s 213.37.133.114 -d 198.211.124.169 --dport 80 -j ACCEPT
-#-A RH-Firewall-1-INPUT -m state --state NEW,ESTABLISHED -m tcp -p tcp -s 213.37.133.114 -d 198.211.124.169 --sport 80 -j ACCEPT
-# Felipe´s Office
--A RH-Firewall-1-INPUT -m state --state NEW,ESTABLISHED -m tcp -p tcp -s 2.139.188.200 -d 198.211.124.169 --sport 513:65535 --dport 22  -j ACCEPT
-#-A RH-Firewall-1-INPUT -m state --state NEW,ESTABLISHED -m tcp -p tcp -s 2.139.188.200 -d 198.211.124.169 --dport 80 -j ACCEPT
-#-A RH-Firewall-1-INPUT -m state --state NEW,ESTABLISHED -m tcp -p tcp -s 2.139.188.200 -d 198.211.124.169 --sport 80 -j ACCEPT
+# Felipe´s VPN
+-A RH-Firewall-1-INPUT -m state --state NEW,ESTABLISHED -m tcp -p tcp -s 80.240.138.199 -d 198.211.124.169 --sport 513:65535 --dport 22  -j ACCEPT
 # Felipe´s house
 -A RH-Firewall-1-INPUT -m state --state NEW,ESTABLISHED -m tcp -p tcp -s 88.26.241.211 -d 198.211.124.169 --sport 513:65535 --dport 22  -j ACCEPT
-#-A RH-Firewall-1-INPUT -m state --state NEW,ESTABLISHED -m tcp -p tcp -s 88.26.241.211 -d 198.211.124.169 --dport 80 -j ACCEPT
-#-A RH-Firewall-1-INPUT -m state --state NEW,ESTABLISHED -m tcp -p tcp -s 88.26.241.211 -d 198.211.124.169 --sport 80 -j ACCEPT
 # Moriarti CI
 -A RH-Firewall-1-INPUT -m state --state NEW,ESTABLISHED -m tcp -p tcp -s 37.139.15.172 -d 198.211.124.169 --sport 513:65535 --dport 22  -j ACCEPT
 -A RH-Firewall-1-INPUT -j REJECT --reject-with icmp-host-prohibited
