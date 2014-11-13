@@ -36,7 +36,7 @@
 
         submitButton.on('click', function() {
             $.getJSON(
-                'http://google-images-api.eu01.aws.af.cm/',
+                'https://google-images-api.eu01.aws.af.cm/',
                 { q: searchQuery(), limit: searchLimit() },
                 function(data) {
                     results.html('');
