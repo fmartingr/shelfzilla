@@ -25,9 +25,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |shelfzilla|
     shelfzilla.vm.network "forwarded_port", guest: 80, host: 8080
     shelfzilla.vm.network "private_network", ip: "192.168.33.10"
     shelfzilla.vm.provision "ansible" do |ansible|
-        ansible.playbook = "site.yml"
+        ansible.playbook = "provisioning/site.yml"
         ansible.limit = "vagrant"
-        ansible.inventory_path = "hosts"
+        ansible.inventory_path = "provisioning/hosts"
         #ansible.verbose = "vvv"
     end
 end
