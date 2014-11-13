@@ -1,0 +1,41 @@
+---
+-   name: Install PostgreSQL packages
+    yum: pkg={{item}} state=installed
+    sudo: yes
+    with_items:
+        - postgresql
+        - postgresql-server
+        - python-psycopg2
+        - postgresql-contrib
+        - postgresql-libs
+        - postgresql-devel
+
+-   name: Initiate PostgreSQL database
+    action: shell /sbin/service postgresql initdb 
+        creates=/var/lib/pgsql/data/postgresql.conf
+    sudo: yes
+    notify: 
+        - restart postgresql
+
+-   meta: flush_handlers
+
+-   lineinfile: "dest=/etc/sudoers  regexp='^%vagrant' state=present line='%vagrant ALL = (postgres) NOPASSWD: ALL'"
+    sudo: yes
+    when: local_environment
+
+-   name: ensure database is created
+    postgresql_db: name={{dbname}}
+    sudo: yes
+    sudo_user: postgres
+
+-   name: ensure user has access to database
+    postgresql_user: db={{dbname}} name={{dbuser}} priv=ALL
+    sudo_user: postgres
+    sudo: yes
+
+-   name: ensure user does not have unnecessary privilege
+    postgresql_user: name={{dbuser}} role_attr_flags=NOSUPERUSER,NOCREATEDB
+    sudo_user: postgres
+    sudo: yes
+
+

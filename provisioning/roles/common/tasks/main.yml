@@ -1,4 +1,3 @@
 ---
-- debug: msg="Starting Common module"
-- include: base_repositories.yml
-- include: security.yml
+-   include: base_repositories.yml
+-   include: security.yml

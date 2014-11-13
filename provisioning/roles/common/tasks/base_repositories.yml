@@ -4,11 +4,13 @@
         url=http://springdale.math.ias.edu/data/puias/6/x86_64/os/RPM-GPG-KEY-puias 
         dest=/etc/pki/rpm-gpg/RPM-GPG-KEY-puias 
         mode=0644
-
--   name: Install Puias Repo
-    template: 
-        src=Puias_6_compu.repo
-        dest=/etc/yum.repos.d/Puias_6_compu.repo
     sudo: yes
-    notify:
-        - Clean yum packages
+
+-   name: Install Puias Repository
+    template: src=Puias_6_compu.repo dest=/etc/yum.repos.d/Puias_6_compu.repo
+    notify: 
+        - clean packages
+    sudo: yes
+
+-   meta: flush_handlers
+

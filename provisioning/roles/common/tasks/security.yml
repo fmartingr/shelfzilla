@@ -19,6 +19,7 @@
         dest=/etc/sysconfig/iptables
     sudo: yes
     when: local_environment and st.stat.exists
-    notify: 
-        - iptables
+    notify: restart iptables
+
+-   meta: flush_handlers
 

@@ -1,0 +1,4 @@
+---
+## PostgreSQL Variables
+dbname: shelfzilla
+dbuser: shelfzilla

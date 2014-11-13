@@ -16,11 +16,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |shelfzilla|
     shelfzilla.vm.box = BOX_NAME
     shelfzilla.vm.box_url = BOX_URI
     shelfzilla.vm.provider "virtualbox" do |v|
-      v.customize ["modifyvm", :id, "--memory", BOX_MEM]
-      v.customize ["modifyvm", :id, "--ioapic", "on"]
-      v.customize ["modifyvm", :id, "--cpus", BOX_CORE]
-      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
-      v.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+        v.customize ["modifyvm", :id, "--memory", BOX_MEM]
+        v.customize ["modifyvm", :id, "--ioapic", "on"]
+        v.customize ["modifyvm", :id, "--cpus", BOX_CORE]
+        v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+        v.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
     end
     shelfzilla.vm.network "forwarded_port", guest: 80, host: 8080
     shelfzilla.vm.network "private_network", ip: "192.168.33.10"

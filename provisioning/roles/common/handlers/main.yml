@@ -1,8 +1,8 @@
----
--   name: Clean yum packages
-    command: /usr/bin/yum clean all
+-   name: clean packages
+    action: shell /usr/bin/yum clean all
     sudo: yes
 
--   service: name=iptables pattern=/sbin/iptables state=restarted
+-   name: restart iptables
+    service: name=iptables pattern=/sbin/iptables state=restarted
     sudo: yes
     when: local_environment is true

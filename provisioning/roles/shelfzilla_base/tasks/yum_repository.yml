@@ -1,0 +1,6 @@
+---
+-   name: Install Shelfzilla Repository
+    template: 
+        src=shelfzilla.repo
+        dest=/etc/yum.repos.d/shelfzilla.repo
+    sudo: yes

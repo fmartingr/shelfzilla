@@ -1,0 +1,6 @@
+-   name: Install NodeJS and NPM packages
+    yum: pkg={{item}} state=installed
+    sudo: yes
+    with_items:
+        - nodejs
+        - npm

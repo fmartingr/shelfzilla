@@ -1,13 +1,12 @@
 ---
--
-    name: Vagrant Task
+-   name: Vagrant Task
     hosts: vagrant
     roles:
         - role: common
+        - role: shelfzilla_base
 
--
-    name: Production Task
+-   name: Production Task
     hosts: production
     roles:
         - role: common
-
+        - role: shelfzilla_base

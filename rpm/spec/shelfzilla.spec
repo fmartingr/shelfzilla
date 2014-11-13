@@ -100,6 +100,6 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %{_app_dir}/*
 %{_app_dir}/.bowerrc
-%{_init_path/shelfzilla
+%{_init_path}/shelfzilla
 
 
