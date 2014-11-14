@@ -3,12 +3,17 @@
     yum: pkg=shelfzilla state=installed
     sudo: yes
 
+-   stat: path="{{shelfzilla_base_path}}/init/shelfzilla"
+    register: st
+
 -   name: Move Shelfzilla init script
-    command: mv {{shelfzilla_base_path}}/init/shelfzilla {{system_init_path}}/shelfzilla
+    ## Use mv instead copy because Ansible use local path as src
+    command: mv "{{shelfzilla_base_path}}/init/shelfzilla" "{{system_init_path}}/shelfzilla"
     sudo: yes
+    when: st.stat.exists
 
 -   name: Change Permission of init script
-    file: path={{system_init_path}}/shelfzilla
+    file: path="{{system_init_path}}/shelfzilla"
         owner=root
         group=root
         mode=0755
@@ -16,13 +21,16 @@
 
 -   name: Load Shelfzilla service in boot
     service: name=shelfzilla 
-        pattern={{system_init_path}}/shelfzilla
+        pattern="{{system_init_path}}/shelfzilla"
         enabled=yes
     sudo: yes
 
+-   stat: path="{{shelfzilla_base_path}}/init/"
+    register: st
+
 -   name: delete init directory
-    file: path={{items}} state=absent recurse=no
-    sudo: yes
+    file: path="{{item}}" state=absent
     with_items:
-        - {{shelfzilla_base_path}}/init/shelfzilla
-        - {{shelfzilla_base_path}}/init
+        - "{{shelfzilla_base_path}}/init/"
+    sudo: yes
+    when: st.stat.exists

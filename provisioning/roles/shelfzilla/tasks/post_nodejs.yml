@@ -1,0 +1,14 @@
+-   name: Install NPM global resources
+    npm: name="{{item}}" global=yes
+    sudo: yes
+    with_items:
+        - grunt
+        - bower
+
+-   name: Install NPM deps
+    npm: path="{{shelfzilla_base_path}}" production=yes
+    sudo: yes
+
+-   name: Bower Install 
+    command: /usr/bin/bower install --allow-root chdir="{{shelfzilla_base_path}}"
+    sudo: yes

@@ -2,3 +2,18 @@
 -   name: restart postgresql
     service: name=postgresql state=restarted
     sudo: yes
+
+-   name: ensure database is created
+    postgresql_db: name={{dbname}}
+    sudo: yes
+    sudo_user: postgres
+
+-   name: ensure user has access to database
+    postgresql_user: db={{dbname}} name={{dbuser}} priv=ALL
+    sudo_user: postgres
+    sudo: yes
+
+-   name: ensure user does not have unnecessary privilege
+    postgresql_user: name={{dbuser}} role_attr_flags=NOSUPERUSER,NOCREATEDB
+    sudo_user: postgres
+    sudo: yes
