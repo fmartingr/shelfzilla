@@ -55,26 +55,26 @@ cp -r %{_gitdir}/rpm/scripts/shelfzilla $RPM_BUILD_ROOT%{_app_dir}/init/
 # -------------------------------------------------------------------------------------------- #
 %post
 ## Install init script
-mv %{_app_dir}/init/shelfzilla %{_init_path}/
-chmod 775 %{_init_path}/shelfzilla
-chkconfig --add shelfzilla
-rmdir %{_app_dir}/init/
+#mv %{_app_dir}/init/shelfzilla %{_init_path}/
+#chmod 775 %{_init_path}/shelfzilla
+#chkconfig --add shelfzilla
+#rmdir %{_app_dir}/init/
 
 ## Npm install
-cd %{_app_dir} && npm install --production
+#cd %{_app_dir} && npm install --production
 
 ## pip install
-pip install -r %{_app_dir}/config/production/requirements.txt
+#pip install -r %{_app_dir}/config/production/requirements.txt
 
 ## Migrate
-python2.7 %{_app_dir}/manage.py migrate --no-initial-data
+#python2.7 %{_app_dir}/manage.py migrate --no-initial-data
 
 ## Bower
-cd %{_app_dir}
-bower install --allow-root
+#cd %{_app_dir}
+#bower install --allow-root
 
 ## Collect static
-python2.7 manage.py collectstatic --clear --noinput
+#python2.7 manage.py collectstatic --clear --noinput
 
 # -------------------------------------------------------------------------------------------- #
 # pre-uninstall section:
