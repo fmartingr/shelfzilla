@@ -1,6 +1,7 @@
 ---
 -   debug: msg="Starting Shelfzilla module"
 -   include: shelfzilla.yml
+-   include: nginx.yml
 -   include: post_nodejs.yml
-#-   include: post_python.yml
+-   include: post_python.yml
 #-   include: postgre.yml

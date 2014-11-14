@@ -1,1 +1,12 @@
 local_environment: True
+filer_base_url: "https://media.shelfzilla.com/"
+logpath: "/var/log/shelfzilla"
+logfile: "{{ logpath }}/django.log"
+debug: "false"
+template_debug: "false"
+static_root: "/opt/shelfzilla/shelfzilla/static"
+static_url: "https://static.shelfzilla.com/"
+media_root: "/opt/media"
+media_url: "https://media.shelfzilla.com/"
+secret_key: "d279ffd2f5b0e3b825ad3ec2362210da"
+

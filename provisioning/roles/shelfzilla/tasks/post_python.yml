@@ -3,9 +3,17 @@
         executable="/usr/bin/pip2"
     sudo: yes
 
--   name: Python Migrate 
-    shell: /usr/bin/python2.7 {{shelfzilla_base_path}}/manage.py migrate install --no-initial-data --settings=shelfzilla.settings.configfile 
+-   lineinfile: dest="{{shelfzilla_base_path}}/shelfzilla/settings/configfile.py"  
+        regexp="^(.*)os\.environ\[\'APP\_CONFIGFILE\'\](.*)$"
+        state=present 
+        line="\'\1{{ shelfzillla_config_file }}\2\'"
+        backrefs=yes
     sudo: yes
+
+-   name: Python Migrate 
+    shell: /usr/bin/python2.7 {{shelfzilla_base_path}}/manage.py migrate --no-initial-data --settings=shelfzilla.settings.configfile 
+    sudo: yes
+    sudo_user: postgres
 
 -   name: Python Collectstatic
     shell: /usr/bin/python2.7 {{shelfzilla_base_path}}/manage.py collectstatic --clear --noinput --settings=shelfzilla.settings.configfile

@@ -1,2 +1,3 @@
 shelfzilla_base_path: /opt/shelfzilla
+shelfzillla_config_file: "{{ shelfzilla_base_path }}/shelfzilla.toml"
 system_init_path: /etc/init.d

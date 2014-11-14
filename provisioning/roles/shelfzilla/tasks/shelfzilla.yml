@@ -1,4 +1,16 @@
 ---
+-   name: Group Shelfzilla
+    group: name=shelfzilla state=present
+    sudo: yes
+
+-   name: User Shelfzilla
+    user: name=shelfzilla comment="Shelfzilla" groups=shelfzilla,nginx,postgres
+    sudo: yes
+
+-   name: Modify Nginx user
+    user: name=nginx groups=shelfzilla,nginx,postgres
+    sudo: yes
+
 -   name: Install shelfzilla RPM
     yum: pkg=shelfzilla state=installed
     sudo: yes
@@ -34,3 +46,43 @@
         - "{{shelfzilla_base_path}}/init/"
     sudo: yes
     when: st.stat.exists
+
+-   name: Install Shelfzilla config file
+    template: src=shelfzilla.toml 
+        dest="{{shelfzilla_base_path}}/shelfzilla.toml"
+        owner=root
+        group=root
+        mode=0755
+    sudo: yes
+
+-   name: Create necessary folders
+    file: path="{{ item }}"
+        owner=shelfzilla
+        group=shelfzilla
+        mode=0775
+        state=directory
+    sudo: yes
+    with_items:
+        - "{{ logpath }}"
+        - "{{ static_root }}"
+        - "{{ media_root }}"
+
+-   stat: path="{{ logfile }}"
+    register: st
+
+-   name: Create Logfile
+    file: path="{{ logfile }}"
+        owner=root
+        group=root
+        mode=0666
+        state=file
+    sudo: yes
+    when: not st.stat.exists
+
+-   name: Create Static base path
+    file: path="{{ logpath }}"
+        owner=root
+        group=root
+        mode=0755
+        state=directory
+    sudo: yes

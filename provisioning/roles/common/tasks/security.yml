@@ -14,7 +14,7 @@
     register: st
 
 -   name: Install Iptables statements
-    file: 
+    copy: 
         src=iptables
         dest=/etc/sysconfig/iptables
     sudo: yes

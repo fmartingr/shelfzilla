@@ -1,6 +1,7 @@
 ---
 -   debug: msg="Starting Shelfzilla Base module"
 -   include: yum_repository.yml
+-   include: nginx.yml
 -   include: python.yml
 -   include: nodejs.yml
 -   include: postgre.yml

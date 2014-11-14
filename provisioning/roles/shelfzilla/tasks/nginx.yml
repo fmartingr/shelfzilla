@@ -1,0 +1,28 @@
+---
+-   name: Install Shelfzilla vhost for Nginx
+    template: src=shelfzilla.conf 
+        dest="/etc/nginx/conf.d/shelfzilla.conf"
+        owner=root
+        group=root
+        mode=0755
+    sudo: yes
+
+-   name: Create nginx ssl folder
+    file: path='/etc/nginx/ssl'
+        owner=nginx
+        group=nginx
+        mode=0775
+        state=directory
+    sudo: yes
+
+-   name: Install Shelfzilla SSL 
+    copy: src="{{ item }}"
+        dest="/etc/nginx/ssl/{{ item }}"
+        owner=nginx
+        group=nginx
+        mode=0644
+    sudo: yes
+    with_items:
+        - shelfzilla.pem
+        - shelfzilla.key
+

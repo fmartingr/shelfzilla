@@ -1,0 +1,28 @@
+[global]
+database_url = "postgres:///shelfzilla"
+installed_apps = [
+    "gunicorn",
+]
+
+[filer]
+base_url = "{{ filer_base_url }}"
+
+[log]
+logfile = "{{ logfile }}"
+
+[overwrite]
+debug = {{ debug }}
+template_debug = {{template_debug}}
+
+site_id = 1
+
+static_root = "{{ static_root }}"
+static_url = "{{ static_url }}"
+
+media_root = "{{ media_root }}"
+media_url = "{{ media_url }}"
+
+secret_key = "{{ secret_key }}"
+
+internal_ips = ["127.0.0.1"]
+allowed_hosts = ["shelfzilla.com"]

@@ -1,0 +1,11 @@
+---
+-   name: Install Nginx
+    yum: pkg=nginx state=installed
+    sudo: yes
+
+-   name: Install Nginx base template
+    template: 
+        src=nginx.conf
+        dest=/etc/nginx/nginx.conf
+        backup=yes
+    sudo: yes
