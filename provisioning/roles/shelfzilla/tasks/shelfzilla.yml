@@ -1,0 +1,35 @@
+---
+-   name: Install shelfzilla RPM
+    yum: pkg=shelfzilla state=installed
+    sudo: yes
+
+-   name: Move Shelfzilla init script
+    command: mv {{shelfzilla_base_path}}/init/shelfzilla {{system_init_path}}/shelfzilla
+    sudo: yes
+
+-   name: Change Permission of init script
+    file: path={{system_init_path}}/shelfzilla
+        owner=root
+        group=root
+        mode=0755
+    sudo: yes
+
+-   name: Load Shelfzilla service in boot
+    service: name=shelfzilla 
+        pattern={{system_init_path}}/shelfzilla
+        enabled=yes
+    sudo: yes
+
+-   name: delete init directory
+    file: path={{items}} state=absent recurse=no
+    sudo: yes
+    with_items:
+        - {{shelfzilla_base_path}}/init/shelfzilla
+        - {{shelfzilla_base_path}}/init
+
+
+
+mv %{_app_dir}/init/shelfzilla %{_init_path}/
+chmod 775 %{_init_path}/shelfzilla
+chkconfig --add shelfzilla
+rmdir %{_app_dir}/init/

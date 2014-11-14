@@ -4,6 +4,7 @@
     roles:
         - role: common
         - role: shelfzilla_base
+        - role: shelfzilla
 
 -   name: Production Task
     hosts: production

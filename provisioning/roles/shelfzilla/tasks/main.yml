@@ -1,0 +1,6 @@
+---
+-   debug: msg="Starting Shelfzilla module"
+-   include: shelfzilla.yml
+#-   include: npm_dependencies.yml
+#-   include: pip_dependencies.yml
+#-   include: postgre.yml

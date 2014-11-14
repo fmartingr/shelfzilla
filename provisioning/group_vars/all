@@ -1,1 +1,2 @@
 shelfzilla_base_path: /opt/shelfzilla
+system_init_path: /etc/init.d
