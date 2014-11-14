@@ -26,10 +26,3 @@
     with_items:
         - {{shelfzilla_base_path}}/init/shelfzilla
         - {{shelfzilla_base_path}}/init
-
-
-
-mv %{_app_dir}/init/shelfzilla %{_init_path}/
-chmod 775 %{_init_path}/shelfzilla
-chkconfig --add shelfzilla
-rmdir %{_app_dir}/init/
