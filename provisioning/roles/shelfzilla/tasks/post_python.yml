@@ -6,7 +6,7 @@
 -   lineinfile: dest="{{shelfzilla_base_path}}/shelfzilla/settings/configfile.py"  
         regexp="^(.*)os\.environ\[\'APP\_CONFIGFILE\'\](.*)$"
         state=present 
-        line="\'\1{{ shelfzillla_config_file }}\2\'"
+        line="\1\'{{ shelfzilla_base_path }}/{{ shelfzillla_config_file }}\'\2"
         backrefs=yes
     sudo: yes
 

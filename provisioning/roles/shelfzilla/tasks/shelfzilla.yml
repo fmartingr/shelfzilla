@@ -70,19 +70,21 @@
 -   stat: path="{{ logfile }}"
     register: st
 
--   name: Create Logfile
-    file: path="{{ logfile }}"
-        owner=root
-        group=root
-        mode=0666
-        state=file
-    sudo: yes
-    when: not st.stat.exists
-
--   name: Create Static base path
+-   name: Create LogPath
     file: path="{{ logpath }}"
         owner=root
         group=root
         mode=0755
         state=directory
     sudo: yes
+
+-   name: Create Logfile
+    file: path="{{ logfile }}"
+        owner=root
+        group=root
+        mode=0666
+        state=touch
+    sudo: yes
+    when: not st.stat.exists
+
+
