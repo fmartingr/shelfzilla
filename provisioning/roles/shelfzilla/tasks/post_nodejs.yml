@@ -3,7 +3,10 @@
     sudo: yes
     with_items:
         - grunt
+        - grunt-cli
         - bower
+        - less
+        - coffee-script
 
 -   name: Install NPM deps
     npm: path="{{shelfzilla_base_path}}" production=yes

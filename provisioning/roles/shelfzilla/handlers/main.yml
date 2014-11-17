@@ -1,10 +1,27 @@
 ---
+-   name: restart nginx
+    service: name=nginx state=restarted
+    sudo: yes
+
+-   name: start postgresql
+    service: name=postgresql state=started
+    sudo: yes
+
 -   name: restart postgresql
     service: name=postgresql state=restarted
     sudo: yes
 
+-   name: shelfzilla md5 postgres access
+    lineinfile: "dest=/var/lib/pgsql/data/pg_hba.conf  regexp='^host(.*)md5$' state=present line='host    shelfzilla  shelfzilla  127.0.0.1/32          md5'"
+    sudo: yes
+
+-   name: create root user for postgres
+    postgresql_user: name=root
+    sudo_user: postgres
+    sudo: yes
+
 -   name: ensure database is created
-    postgresql_db: name={{dbname}}
+    postgresql_db: name={{dbname}} owner=root
     sudo: yes
     sudo_user: postgres
 
@@ -16,4 +33,16 @@
 -   name: ensure user does not have unnecessary privilege
     postgresql_user: name={{dbuser}} role_attr_flags=NOSUPERUSER,NOCREATEDB
     sudo_user: postgres
+    sudo: yes
+
+-   name: privs to root from postgres
+    postgresql_privs: db=library
+       privs=ALL
+       type=database
+       role=librarian
+    sudo_user: postgres
+    sudo: yes
+
+-   name: restart shelfzilla
+    service: name=shelfzilla state=restarted
     sudo: yes

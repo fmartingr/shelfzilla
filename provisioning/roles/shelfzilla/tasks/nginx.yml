@@ -25,4 +25,6 @@
     with_items:
         - shelfzilla.pem
         - shelfzilla.key
+    notify:
+        - restart nginx
 

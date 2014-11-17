@@ -13,8 +13,9 @@
 -   name: Python Migrate 
     shell: /usr/bin/python2.7 {{shelfzilla_base_path}}/manage.py migrate --no-initial-data --settings=shelfzilla.settings.configfile 
     sudo: yes
-    sudo_user: postgres
 
 -   name: Python Collectstatic
     shell: /usr/bin/python2.7 {{shelfzilla_base_path}}/manage.py collectstatic --clear --noinput --settings=shelfzilla.settings.configfile
     sudo: yes
+    notify:
+        - restart shelfzilla
