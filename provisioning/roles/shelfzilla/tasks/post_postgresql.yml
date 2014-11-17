@@ -1,0 +1,16 @@
+---
+-   name: Initiate PostgreSQL database
+    action: shell /sbin/service postgresql initdb 
+        creates=/var/lib/pgsql/data/postgresql.conf
+    sudo: yes
+    notify: 
+        - start postgresql
+        - shelfzilla md5 postgres access
+        - create root user for postgres
+        - ensure database is created
+        - ensure user has access to database
+        - ensure user does not have unnecessary privilege
+
+-   meta: flush_handlers
+
+
