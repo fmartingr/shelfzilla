@@ -11,7 +11,7 @@ from django.contrib import messages
 from django.contrib.auth import login
 from django.core.urlresolvers import reverse
 
-from .forms import LoginForm, PasswordChangeForm
+from .forms import LoginForm, PasswordChangeForm, RegistrationForm
 from .models import User
 from shelfzilla.apps.manga.models import (
     UserReadVolume, UserHaveVolume, UserWishlistVolume
@@ -139,4 +139,25 @@ class AccountView(View):
         }
 
         ctx = RequestContext(request, data)
+        return render_to_response(self.template, context_instance=ctx)
+
+
+class RegisterView(View):
+    template = 'account/register.html'
+    form = RegistrationForm
+
+    def get(self, request):
+        data = {
+            'form': self.form
+        }
+
+        ctx = RequestContext(request, data)
+        return render_to_response(self.template, context_instance=ctx)
+
+    def post(self, request):
+        form = self.form(request.POST)
+        if form.is_valid():
+            pass
+
+        ctx = RequestContext(request, { 'form': form })
         return render_to_response(self.template, context_instance=ctx)
