@@ -1,5 +1,5 @@
 # Base
-Django==1.7.1
+Django==1.7.2
 
 # Admin
 django-suit==0.2.11
