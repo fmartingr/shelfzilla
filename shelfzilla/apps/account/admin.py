@@ -103,3 +103,13 @@ class UserAdmin(DjangoUserAdmin):
 # Now register the new UserAdmin...
 admin.site.register(models.User, UserAdmin)
 admin.site.register(Permission)
+
+
+class AccessCodeAdmin(admin.ModelAdmin):
+    list_display = ('code', 'max_uses', 'used_by', 'expiration', 'active', 'usable')
+
+    def usable(self, obj):
+        return obj.usabe
+    usable.boolean = True
+
+admin.site.register(models.AccessCode, AccessCodeAdmin)

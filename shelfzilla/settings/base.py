@@ -255,7 +255,7 @@ SUIT_CONFIG = {
         {
             'label': 'Authorization',
             'icon': 'icon-lock',
-            'models': ('account.user', 'auth.group')
+            'models': ('account.user', 'auth.group', 'account.accesscode', )
         },
         {
             'app': 'config',
