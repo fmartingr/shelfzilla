@@ -65,6 +65,11 @@
                         </li>
                         {% else %}
                         <li>
+                            <a href="{% url "register" %}">
+                                <i class="glyphicon glyphicon-pencil"></i> {% trans "Register" %}
+                            </a>
+                        </li>
+                        <li>
                             <a href="{% url "login" %}">
                                 <i class="glyphicon glyphicon-log-in"></i> {% trans "Log in" %}
                             </a>
