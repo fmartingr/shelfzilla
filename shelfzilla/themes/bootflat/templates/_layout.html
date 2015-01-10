@@ -34,7 +34,6 @@
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="navbar-collapse">
-                    {% if user.is_authenticated %}
                     <ul class="nav navbar-nav">
                         <li data-pjax-nav {% if navigation.section == "series" %}class="active"{% endif %}>
                             <a data-pjax href="{% url "series.list" %}">{% trans "Series" %}</a>
@@ -43,7 +42,6 @@
                             <a data-pjax href="{% url 'publishers.list' %}">{% trans "Publishers" %}</a>
                         </li>
                     </ul>
-                    {% endif %}
                     <ul class="nav navbar-nav navbar-right">
                         {% if user.is_authenticated %}
                         <li><a href="{% url 'profile' user.username %}" title="{% trans "Profile" %}" data-toggle="tooltip" data-placement="bottom">
