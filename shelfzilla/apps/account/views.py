@@ -2,7 +2,7 @@ from itertools import chain
 from django.views.generic import View
 from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404
-from django.contrib.auth import logout
+from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext as _
@@ -13,6 +13,7 @@ from django.core.urlresolvers import reverse
 
 from .forms import LoginForm, PasswordChangeForm, RegistrationForm
 from .models import User
+from .signals import user_registered
 from shelfzilla.apps.manga.models import (
     UserReadVolume, UserHaveVolume, UserWishlistVolume
 )
@@ -144,20 +145,26 @@ class AccountView(View):
 
 class RegisterView(View):
     template = 'account/register.html'
-    form = RegistrationForm
+    form_class = RegistrationForm
 
     def get(self, request):
         data = {
-            'form': self.form
+            'form': self.form_class
         }
 
         ctx = RequestContext(request, data)
         return render_to_response(self.template, context_instance=ctx)
 
     def post(self, request):
-        form = self.form(request.POST)
+        form = self.form_class(request.POST)
         if form.is_valid():
-            pass
+            form.save()
+            user = authenticate(username=request.POST.get('username'),
+                                password=request.POST.get('password1'))
+            login(request, user)
+            messages.success(request, _('Welcome to the community! :)'))
+            user_registered.send(sender=self.__class__, user=user)
+            return HttpResponseRedirect(reverse('homepage'))
 
-        ctx = RequestContext(request, { 'form': form })
+        ctx = RequestContext(request, {'form': form})
         return render_to_response(self.template, context_instance=ctx)
