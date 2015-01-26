@@ -156,6 +156,10 @@ class AccessCode(models.Model):
         return self.code
 
     @property
+    def uses(self):
+        return self.used_by.count()
+
+    @property
     def usable(self):
         # Check if active
         if not self.active:
