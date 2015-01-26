@@ -9,6 +9,9 @@ django-import-export==0.2.6
 
 # Fixes
 
+# Mailing
+django-mailgun==0.2.2
+
 # Statics
 django-compressor==1.4
 
