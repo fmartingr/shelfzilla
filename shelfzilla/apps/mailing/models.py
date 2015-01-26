@@ -17,7 +17,7 @@ class Email(object):
     text = ''
 
     def __init__(self, context={}):
-        self.form_email = getattr(settings, 'FROM_EMAIL', 'root@localhost')
+        self.from_email = getattr(settings, 'FROM_EMAIL', 'root@localhost')
         self.context = context
         self.prepare()
 
