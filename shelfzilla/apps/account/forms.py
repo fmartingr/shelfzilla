@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth import authenticate
+from django.db import transaction
 from django.contrib.auth.forms import (
     PasswordChangeForm as DjangoPasswordChangeForm
 )
@@ -51,7 +52,8 @@ class RegistrationForm(forms.ModelForm):
     """
     Custom for for registering an user
     """
-    password1 = forms.CharField(label=_('Password'), widget=forms.PasswordInput)
+    password1 = forms.CharField(label=_('Password'),
+                                widget=forms.PasswordInput)
     password2 = forms.CharField(label=_('Repeat password'),
                                 widget=forms.PasswordInput)
     access_code = forms.CharField(label=_('Invitation code'), required=True)
@@ -84,10 +86,11 @@ class RegistrationForm(forms.ModelForm):
 
     def save(self, commit=True):
         # Save the provided password in hashed format
-        user = super(UserCreationForm, self).save(commit=False)
-        access_code = self.get_access_code()
-        user.access_code = access_code
-        user.set_password(self.cleaned_data["password1"])
-        if commit:
-            user.save()
-        return user
+        with transaction.atomic():
+            user = super(RegistrationForm, self).save(commit=False)
+            access_code = self.get_access_code()
+            user.access_code = access_code
+            user.set_password(self.cleaned_data["password1"])
+            if commit:
+                user.save()
+            return user
