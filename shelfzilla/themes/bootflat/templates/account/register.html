@@ -31,7 +31,8 @@
                                 <input type="{{ field.field.widget.input_type }}"
                                        class="form-control"
                                        id="input_{{ field.name }}"
-                                       name="{{ field.html_name }}">
+                                       name="{{ field.html_name }}"
+                                       value="{% if field.field.widget.input_type != "password" and field.value %}{{ field.value }}{% endif %}">
                                    {% if field.errors %}
                                    <span class="glyphicon glyphicon-remove form-control-feedback"></span>
                                    {% endif %}
