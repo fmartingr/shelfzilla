@@ -156,13 +156,13 @@ class AccessCode(models.Model):
         return self.code
 
     @property
-    def usabe(self):
+    def usable(self):
         # Check if active
         if not self.active:
             return False
 
         # Check if expired
-        if timezone.now() >= self.expiration:
+        if self.expiration and (timezone.now() >= self.expiration):
             return False
 
         # Check if it someone already used it
