@@ -20,9 +20,6 @@ class Email(object):
         self.from_email = getattr(settings, 'FROM_EMAIL', 'root@localhost')
         self.context = context
         self.recipients = []
-        self.template = ''
-        self.text = ''
-        self.subject = ''
         self.prepare()
 
     def prepare(self):
