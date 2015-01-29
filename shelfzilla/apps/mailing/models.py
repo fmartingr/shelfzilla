@@ -19,6 +19,10 @@ class Email(object):
     def __init__(self, context={}):
         self.from_email = getattr(settings, 'FROM_EMAIL', 'root@localhost')
         self.context = context
+        self.recipients = []
+        self.template = ''
+        self.text = ''
+        self.subject = ''
         self.prepare()
 
     def prepare(self):
@@ -27,9 +31,7 @@ class Email(object):
     def compile_template(self):
         tmpl = get_template(self.template)
         self.html = tmpl.render(Context(self.context))
-        print(self.html.encode('utf-8'))
         self.text = strip_tags(self.html)
-        print(self.text.encode('utf-8'))
 
     def send(self):
         if self.template:
