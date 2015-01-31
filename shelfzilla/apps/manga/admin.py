@@ -34,6 +34,8 @@ class VolumeResource(resources.ModelResource):
 
 
 class PersonResource(resources.ModelResource):
+    search_fields = ('name', )
+
     class Meta:
         model = Person
 
