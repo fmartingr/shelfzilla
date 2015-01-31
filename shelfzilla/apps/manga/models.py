@@ -290,9 +290,9 @@ class UserWishlistVolume(models.Model):
 
     def __unicode__(self):
         return "{} {} {}".format(
-            self.user.username,
+            self.user.username.encode('utf-8'),
             _('wants'),
-            self.volume
+            self.volume.encode('utf-8'),
         )
 
     class Meta:
@@ -318,9 +318,9 @@ class UserReadVolume(models.Model):
 
     def __unicode__(self):
         return "{} {} {}".format(
-            self.user.username,
+            self.user.username.encode('utf-8'),
             _('have read'),
-            self.volume
+            self.volume.encode('utf-8'),
         )
 
     class Meta:
