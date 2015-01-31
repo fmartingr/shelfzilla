@@ -34,8 +34,6 @@ class VolumeResource(resources.ModelResource):
 
 
 class PersonResource(resources.ModelResource):
-    search_fields = ('name', )
-
     class Meta:
         model = Person
 
@@ -200,6 +198,7 @@ admin.site.register(Volume, VolumeAdmin)
 
 class PersonAdmin(ImportExportModelAdmin, reversion.VersionAdmin):
     resource_class = PersonResource
+    search_fields = ('name', )
     suit_form_tabs = (
         ('general', _('General')),
         ('review', _('Review')),
