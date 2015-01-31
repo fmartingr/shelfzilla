@@ -262,9 +262,9 @@ class UserHaveVolume(models.Model):
 
     def __unicode__(self):
         return "{} {} {}".format(
-            self.user.username,
+            self.user.username.encode('utf-8'),
             _('have'),
-            self.volume
+            self.volume.__unicode__().encode('utf-8'),
         )
 
     class Meta:
@@ -292,7 +292,7 @@ class UserWishlistVolume(models.Model):
         return "{} {} {}".format(
             self.user.username.encode('utf-8'),
             _('wants'),
-            self.volume.encode('utf-8'),
+            self.volume.__unicode__().encode('utf-8'),
         )
 
     class Meta:
@@ -320,7 +320,7 @@ class UserReadVolume(models.Model):
         return "{} {} {}".format(
             self.user.username.encode('utf-8'),
             _('have read'),
-            self.volume.encode('utf-8'),
+            self.volume.__unicode__().encode('utf-8'),
         )
 
     class Meta:
