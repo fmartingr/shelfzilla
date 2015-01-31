@@ -386,8 +386,11 @@ def volume_check_filer(sender, instance, created, **kwargs):
 
 
 def series_delete_folder(sender, instance, using, **kwargs):
-    if instance.folder:
-        instance.folder.delete()
+    try:
+        if instance.folder:
+            instance.folder.delete()
+    except:
+        pass
 
 
 def volume_delete_cover(sender, instance, **kwargs):
