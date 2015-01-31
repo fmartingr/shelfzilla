@@ -19,6 +19,9 @@
             {% endif %}
             {% if type == 'slim' %}
             <a href="{{ volume.series.get_absolute_url }}" data-pjax>
+                {% if show_language and volume.language %}
+                <img src="{% static "images/flags/"|add:volume.language.code|add:'.gif' code %}" />
+                {% endif %}
                 <h4 class="media-heading">{{ volume }}</h4>
             </a>
             {% else %}
