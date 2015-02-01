@@ -88,11 +88,13 @@ admin.site.register(Publisher, PublisherAdmin)
 class SeriesSummaryInline(admin.TabularInline):
     model = SeriesSummary
     fields = ('summary', 'language', )
+    suit_classes = 'suit-tab suit-tab-summaries'
 
 
 class SeriesPublisherInline(admin.TabularInline):
     model = SeriesPublisher
     fields = ('publisher', 'status', 'actual_publisher')
+    suit_classes = 'suit-tab suit-tab-publishers'
 
 
 class SeriesAdmin(ImportExportModelAdmin, reversion.VersionAdmin):
@@ -107,7 +109,9 @@ class SeriesAdmin(ImportExportModelAdmin, reversion.VersionAdmin):
 
     suit_form_tabs = (
         ('general', _('General')),
+        ('publishers', _('Publishers')),
         ('volumes', _('Volumes')),
+        ('summaries', _('Summary')),
         ('review', _('Review')),
         ('advanced', _('Advanced')),
     )
