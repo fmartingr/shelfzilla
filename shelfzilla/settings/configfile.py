@@ -20,7 +20,7 @@ if 'middleware_classes' in config['global']:
         MIDDLEWARE_CLASSES = MIDDLEWARE_CLASSES + tuple(
             config['global']['middleware_classes']['prepend']
         )
-    if 'append' in config['glboal']['middleware_classes']:
+    if 'append' in config['global']['middleware_classes']:
         MIDDLEWARE_CLASSES += tuple(
             config['global']['middleware_classes']['append']
         )
