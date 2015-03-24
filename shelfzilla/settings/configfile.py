@@ -14,6 +14,17 @@ with open(os.environ['APP_CONFIGFILE']) as conffile:
 # Installed Apps
 INSTALLED_APPS += tuple(config['global']['installed_apps'])
 
+# Middleware classes
+if 'middleware_classes' in config['global']:
+    if 'prepend' in config['global']['middleware_classes']:
+        MIDDLEWARE_CLASSES = MIDDLEWARE_CLASSES + tuple(
+            config['global']['middleware_classes']['prepend']
+        )
+    if 'append' in config['glboal']['middleware_classes']:
+        MIDDLEWARE_CLASSES += tuple(
+            config['glboal']['middleware_classes']['append']
+        )
+
 # Database
 DATABASES = {
     'default': dj_database_url.parse(config['global']['database_url'])
