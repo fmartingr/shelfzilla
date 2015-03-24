@@ -22,7 +22,7 @@ if 'middleware_classes' in config['global']:
         )
     if 'append' in config['glboal']['middleware_classes']:
         MIDDLEWARE_CLASSES += tuple(
-            config['glboal']['middleware_classes']['append']
+            config['global']['middleware_classes']['append']
         )
 
 # Database
