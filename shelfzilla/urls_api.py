@@ -16,4 +16,6 @@ urlpatterns = patterns(
     url(r'^auth/', include('djoser.urls')),
     # /feed
     url(r'^', include('shelfzilla.apps.account.api.urls')),
+    # /volumes
+    url(r'^', include('shelfzilla.apps.manga.api.urls')),
 )

@@ -325,3 +325,5 @@ DJOSER = {
     'LOGIN_AFTER_ACTIVATION': True,
     'SEND_ACTIVATION_EMAIL': False,
 }
+
+BASE_URL = 'https://shelfzilla.com'

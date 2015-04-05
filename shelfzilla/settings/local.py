@@ -35,3 +35,5 @@ EMAIL_BACKEND = 'django_mailgun.MailgunBackend'
 MAILGUN_ACCESS_KEY = 'key-fdfc57f2bfb35a4ba5f9c1e3c30af373'
 MAILGUN_SERVER_NAME = 'sandbox2dd21e486d144dc59742738b15e494ee.mailgun.org'
 FROM_EMAIL = 'info@shelfzilla.com'
+
+BASE_URL = 'http://localhost:8000'
