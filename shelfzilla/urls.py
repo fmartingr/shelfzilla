@@ -2,7 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.conf import settings
 from django.contrib import admin
 
-from .views import MessagesView, BlockedView
+from .views import MessagesView
 
 
 admin.autodiscover()
@@ -28,8 +28,7 @@ urlpatterns = patterns(
 # API
 urlpatterns += patterns(
     '',
-    url(r'^api/v1/auth/register/', BlockedView.as_view()),
-    url(r'^api/v1/auth/', include('djoser.urls', namespace='api')),
+    url(r'^api/v1/', include('shelfzilla.urls_api', namespace='api')),
 )
 
 if settings.DEBUG:
