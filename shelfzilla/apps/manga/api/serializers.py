@@ -47,10 +47,10 @@ class VolumeSerializer(serializers.ModelSerializer):
 
     def get_cover_thumbnail(self, obj):
         if obj.cover:
-            path = get_thumbnailer(obj.cover).get_thumbnail({
+            url = get_thumbnailer(obj.cover).get_thumbnail({
                 'size': (100, 100), 'crop': 'scale', 'autocrop': True,
             }).url
-            return '{}{}'.format(settings.BASE_URL, path)
+            return url
         return None
 
     class Meta:
