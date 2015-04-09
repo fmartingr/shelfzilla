@@ -69,6 +69,7 @@ INSTALLED_APPS = (
     'shelfzilla.apps.mailing',
     'shelfzilla.apps.manga',
     'shelfzilla.apps.blog',
+    'shelfzilla.apps.faq',
     'shelfzilla.apps.pjax',
 
     # API
