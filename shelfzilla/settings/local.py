@@ -28,8 +28,8 @@ INSTALLED_APPS += (
 FILER_DUMP_PAYLOAD = True
 
 
-MEDIA_URL = 'http://localhost:8000/media/'
-STATIC_URL = 'http://localhost:8000/static/'
+MEDIA_URL = '/media/'
+STATIC_URL = '/static/'
 
 EMAIL_BACKEND = 'django_mailgun.MailgunBackend'
 MAILGUN_ACCESS_KEY = 'key-fdfc57f2bfb35a4ba5f9c1e3c30af373'
