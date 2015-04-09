@@ -148,8 +148,13 @@ class RegisterView(View):
     form_class = RegistrationForm
 
     def get(self, request):
+        form_data = {}
+        
+        if 'code' in request.GET:
+            form_data['access_code'] = request.GET['code']
+
         data = {
-            'form': self.form_class
+            'form': self.form_class(initial=form_data)
         }
 
         ctx = RequestContext(request, data)

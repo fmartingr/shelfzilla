@@ -15,7 +15,7 @@
                     <h1 class="panel-title">{% trans "Register" %}</h1>
                 </div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="post">
+                    <form class="form-horizontal" role="form" method="post" action=".">
                         {% csrf_token %}
                         {% for field in form %}
                         <div class="has-error text-right">
