@@ -1,0 +1,20 @@
+{% extends "faq/layout.html" %}
+
+{% block main_content %}
+<div class="container">
+    <h1>FAQs</h1>
+    {% for cat in categories %}
+    <h3>{{ cat.name }}</h3>
+    <ul class="media-list">
+        {% for item in cat.questions.all %}
+        <li class="media well">
+            <div class="media-body">
+                <h2 class="media-heading">{{ item.title }}</h2>
+                <p>{{ item.answer|linebreaks }}</p>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -14,6 +14,7 @@ urlpatterns = patterns(
     url(r'^$', include('shelfzilla.apps.homepage.urls')),
     url(r'^', include('shelfzilla.apps.landing.urls')),
     url(r'^', include('shelfzilla.apps.account.urls')),
+    url(r'^faqs/', include('shelfzilla.apps.faq.urls')),
     url(r'^blog/', include('shelfzilla.apps.blog.urls', namespace='blog')),
     url(r'^series/', include('shelfzilla.apps.manga.urls.series')),
     url(r'^volumes/', include('shelfzilla.apps.manga.urls.volumes')),

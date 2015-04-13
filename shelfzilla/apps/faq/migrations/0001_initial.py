@@ -11,24 +11,31 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Question',
+            name='QuestionAnswer',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('ord', models.PositiveIntegerField(default=1)),
+                ('title_es', models.CharField(max_length=256)),
+                ('answer_es', models.TextField()),
             ],
             options={
             },
             bases=(models.Model,),
         ),
         migrations.CreateModel(
-            name='TranslatedQuestion',
+            name='QuestionAnswerCategory',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('title', models.CharField(max_length=256)),
-                ('answer', models.TextField()),
-                ('question', models.ForeignKey(to='faq.Question')),
+                ('name_es', models.CharField(max_length=32)),
             ],
             options={
             },
             bases=(models.Model,),
+        ),
+        migrations.AddField(
+            model_name='questionanswer',
+            name='category',
+            field=models.ForeignKey(to='faq.QuestionAnswerCategory'),
+            preserve_default=True,
         ),
     ]

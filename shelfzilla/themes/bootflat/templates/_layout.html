@@ -41,6 +41,11 @@
                         <li data-pjax-nav {% if navigation.section == "publishers" %}class="active"{% endif %}>
                             <a data-pjax href="{% url 'publishers.list' %}">{% trans "Publishers" %}</a>
                         </li>
+                        <!--
+                        <li data-pjax-nav {% if navigation.section == "faqs" %}class="active"{% endif %}>
+                            <a data-pjax href="{% url 'faq.list' %}">{% trans "Faq" %}</a>
+                        </li>
+                        -->
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         {% if user.is_authenticated %}

@@ -4,14 +4,14 @@
 from django.contrib import admin
 
 # app
-from .models import Question, TranslatedQuestion
+from .models import QuestionAnswerCategory, QuestionAnswer
 
 
-class TranslatedQuestionInline(admin.TabularInline):
-    model = TranslatedQuestion
+class QuestionAnswerInline(admin.TabularInline):
+    model = QuestionAnswer
 
-class QuestionAdmin(admin.ModelAdmin):
-    inlines = (TranslatedQuestionInline, )
+class QuestionAnswerCategoryAdmin(admin.ModelAdmin):
+    inlines = (QuestionAnswerInline, )
 
 
-admin.site.register(Question, QuestionAdmin)
+admin.site.register(QuestionAnswerCategory, QuestionAnswerCategoryAdmin)

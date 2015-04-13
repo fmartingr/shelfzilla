@@ -282,6 +282,11 @@ SUIT_CONFIG = {
             'icon': 'icon-book',
         },
         {
+            'app': 'faq',
+            'label': 'FAQs',
+            'icon': 'icon-book',
+        },
+        {
             'label': 'Files',
             'icon': 'icon-file',
             'app': 'filer',
