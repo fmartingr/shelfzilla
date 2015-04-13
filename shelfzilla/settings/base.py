@@ -33,8 +33,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = (
     # Auth
-    'shelfzilla.apps.account',
     'django.contrib.auth',
+    'shelfzilla.apps.account',
 
     # Admin
     'suit',

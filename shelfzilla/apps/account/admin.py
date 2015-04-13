@@ -84,19 +84,21 @@ class UserAdmin(DjangoUserAdmin):
         (None, {'fields': ('username', 'email', 'password')}),
         (_('Personal info'), {'fields': (
             'first_name', 'last_name', 'birthdate', 'gender', )}),
-        (_('Permissions'), {'fields': ('is_staff',)}),
+        (_('Permissions'), {'fields': ('is_staff', 'user_permissions')}),
+        (_('Information'), {'fields': ('date_joined', 'last_login', )})
     )
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
     # overrides get_fieldsets to use this attribute when creating a user.
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'birthdate', 'password1', 'password2')
+            'fields': ('username', 'email', 'password1', 'password2')
         }),
     )
     search_fields = ('email',)
     ordering = ('email',)
-    filter_horizontal = ()
+    filter_horizontal = ('user_permissions', )
+    readonly_fields = ('date_joined', 'last_login', )
 
 # Now register the new UserAdmin...
 admin.site.register(models.User, UserAdmin)

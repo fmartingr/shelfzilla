@@ -7,7 +7,7 @@
 <div class="row">
     {% for wishlisted_volume in item.wishlisted_volumes.all %}
     <div class="col-sm-4">
-        {% include "manga/series/includes/volume.html" with volume=wishlisted_volume.volume user=item show_publisher=True %}
+        {% include "manga/series/includes/volume.html" with volume=wishlisted_volume.volume user=item show_publisher=True show_name=True %}
     </div>
     {% if forloop.counter|divisibleby:3 %}
     </div>
