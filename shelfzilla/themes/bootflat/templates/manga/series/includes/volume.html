@@ -18,7 +18,7 @@
             <div><strong><a href="{{ volume.series.get_absolute_url }}">{{ volume.series.name }}</a></strong></div>
             {% endif %}
             {% if type == 'slim' %}
-            <a href="{{ volume.series.get_absolute_url }}" data-pjax>
+            <a href="{{ volume.series.get_absolute_url }}">
                 <h4 class="media-heading">
                   {% if show_language and volume.language %}
                   <img src="{% static "images/flags/"|add:volume.language.code|add:'.gif' code %}" />
@@ -39,7 +39,7 @@
             <div><span class="label label-primary">{{ volume.collection.name }}</span></div>
             {% endif %}
             {% if show_publisher %}
-            <div><a href="{{ volume.publisher.get_absolute_url }}" data-pjax>{{ volume.publisher }}</a></div>
+            <div><a href="{{ volume.publisher.get_absolute_url }}">{{ volume.publisher }}</a></div>
             {% endif %}
             {% if volume.release_date %}
             <div>{{ volume.release_date|date:"F Y" }}</div>
