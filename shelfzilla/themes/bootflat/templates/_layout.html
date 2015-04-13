@@ -32,21 +32,21 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a data-pjax-unnav class="navbar-brand" data-pjax href="{% url "homepage" %}">Shelfzilla</a>
+                    <a class="navbar-brand"href="{% url "homepage" %}">Shelfzilla</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li data-pjax-nav {% if navigation.section == "series" %}class="active"{% endif %}>
-                            <a data-pjax href="{% url "series.list" %}">{% trans "Series" %}</a>
+                        <li {% if navigation.section == "series" %}class="active"{% endif %}>
+                            <a href="{% url "series.list" %}">{% trans "Series" %}</a>
                         </li>
-                        <li data-pjax-nav {% if navigation.section == "publishers" %}class="active"{% endif %}>
-                            <a data-pjax href="{% url 'publishers.list' %}">{% trans "Publishers" %}</a>
+                        <li {% if navigation.section == "publishers" %}class="active"{% endif %}>
+                            <a href="{% url 'publishers.list' %}">{% trans "Publishers" %}</a>
                         </li>
                         <!--
-                        <li data-pjax-nav {% if navigation.section == "faqs" %}class="active"{% endif %}>
-                            <a data-pjax href="{% url 'faq.list' %}">{% trans "Faq" %}</a>
+                        <li {% if navigation.section == "faqs" %}class="active"{% endif %}>
+                            <a href="{% url 'faq.list' %}">{% trans "Faq" %}</a>
                         </li>
                         -->
                     </ul>
@@ -57,14 +57,14 @@
                              &nbsp;{{ user.username }}</a>
                          </li>
                         {% if user.is_superuser %}
-                        <li><a data-pjax-unnav href="/admin/" title="Admin" data-toggle="tooltip" data-placement="bottom"><i class="glyphicon glyphicon-tower"></i></a></li>
+                        <li><a  href="/admin/" title="Admin" data-toggle="tooltip" data-placement="bottom"><i class="glyphicon glyphicon-tower"></i></a></li>
                         {% endif %}
-<!--                         <li><a data-pjax-unnav href="{% url 'profile' user.username %}" data-pjax
+<!--                         <li><a href="{% url 'profile' user.username %}"
                                title="{% trans "Profile" %}" data-toggle="tooltip" data-placement="bottom">
                                <i class="glyphicon glyphicon-user"></i>
                             </a>
                         </li> -->
-                        <li><a data-pjax-unnav href="{% url "logout" %}"
+                        <li><a  href="{% url "logout" %}"
                                title="{% trans "Logout" %}" data-toggle="tooltip" data-placement="bottom">
                                <i class="glyphicon glyphicon-off"></i>
                             </a>
@@ -84,7 +84,7 @@
                     </ul>
                     {% if user.is_authenticated %}
                     <form class="navbar-form navbar-right" role="search"
-                          method="post" action="{% url "search" %}" data-pjax>
+                          method="post" action="{% url "search" %}">
                         {% csrf_token %}
                         <div class="form-search search-only">
                             <i class="search-icon glyphicon glyphicon-search"></i>

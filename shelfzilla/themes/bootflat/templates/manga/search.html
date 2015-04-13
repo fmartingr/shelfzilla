@@ -11,9 +11,9 @@
             {% for item in items %}
             <li class="list-group-item">
                 {% if item.slug %}
-                <a href="{% url "series.detail" item.pk item.slug %}" data-pjax>{{ item.name }}</a>
+                <a href="{% url "series.detail" item.pk item.slug %}">{{ item.name }}</a>
                 {% else %}
-                <a href="{% url "series.detail" item.pk %}" data-pjax>{{ item.name }}</a>
+                <a href="{% url "series.detail" item.pk %}">{{ item.name }}</a>
                 {% endif %}
             </li>
             {% empty %}
