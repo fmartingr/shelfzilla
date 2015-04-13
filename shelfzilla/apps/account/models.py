@@ -92,6 +92,11 @@ class User(AbstractBaseUser,
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ('email',)
 
+    # Access codes / Invitations
+    access_code = models.ForeignKey('account.AccessCode',
+                                    null=True, blank=True,
+                                    related_name='used_by')
+
     objects = UserManager()
 
     class Meta:
@@ -132,3 +137,40 @@ class User(AbstractBaseUser,
             return today.year - birthdate.year - (
                 (today.month, today.day) < (birthdate.month, birthdate_day)
             )
+
+
+class AccessCode(models.Model):
+    code = models.CharField(_('Code'), max_length=128)
+    max_uses = models.IntegerField(_('Number of uses'), default=1)
+    user = models.ForeignKey(User, null=True, blank=True,
+                             related_name='access_codes')
+    expiration = models.DateTimeField(_('Expires'), null=True, blank=True,
+                                      default=None)
+    active = models.BooleanField(_('Active'), default=True)
+
+    class Meta:
+        verbose_name = _('Access code')
+        verbose_name_plural = _('Access codes')
+
+    def __unicode__(self):
+        return self.code
+
+    @property
+    def uses(self):
+        return self.used_by.count()
+
+    @property
+    def usable(self):
+        # Check if active
+        if not self.active:
+            return False
+
+        # Check if expired
+        if self.expiration and (timezone.now() >= self.expiration):
+            return False
+
+        # Check if it someone already used it
+        if self.used_by.count() == self.max_uses:
+            return False
+
+        return True

@@ -29,7 +29,7 @@ function validations() {
     PID_PATH=/var/run/shelfzilla
     PID_FILE=${PID_PATH}/${INSTANCE}.pid
     P_USER="shelfzilla"
-    LOG_PATH=/var/log/shefzilla
+    LOG_PATH=/var/log/shelfzilla
     LOG_FILE=shelfzilla.log
     FCGI_PORT=8000
     FCGI_IP=127.0.0.1

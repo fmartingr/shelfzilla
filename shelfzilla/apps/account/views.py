@@ -2,7 +2,7 @@ from itertools import chain
 from django.views.generic import View
 from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404
-from django.contrib.auth import logout
+from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext as _
@@ -11,8 +11,9 @@ from django.contrib import messages
 from django.contrib.auth import login
 from django.core.urlresolvers import reverse
 
-from .forms import LoginForm, PasswordChangeForm
+from .forms import LoginForm, PasswordChangeForm, RegistrationForm
 from .models import User
+from .signals import user_registered
 from shelfzilla.apps.manga.models import (
     UserReadVolume, UserHaveVolume, UserWishlistVolume
 )
@@ -139,4 +140,36 @@ class AccountView(View):
         }
 
         ctx = RequestContext(request, data)
+        return render_to_response(self.template, context_instance=ctx)
+
+
+class RegisterView(View):
+    template = 'account/register.html'
+    form_class = RegistrationForm
+
+    def get(self, request):
+        form_data = {}
+        
+        if 'code' in request.GET:
+            form_data['access_code'] = request.GET['code']
+
+        data = {
+            'form': self.form_class(initial=form_data)
+        }
+
+        ctx = RequestContext(request, data)
+        return render_to_response(self.template, context_instance=ctx)
+
+    def post(self, request):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            form.save()
+            user = authenticate(username=request.POST.get('username'),
+                                password=request.POST.get('password1'))
+            login(request, user)
+            messages.success(request, _('Welcome to the community! :)'))
+            user_registered.send(sender=self.__class__, user=user)
+            return HttpResponseRedirect(reverse('homepage'))
+
+        ctx = RequestContext(request, {'form': form})
         return render_to_response(self.template, context_instance=ctx)

@@ -1,9 +1,15 @@
+# coding: utf-8
+
+# python
 import json
+
+# django
 from django.views.generic import View as DjangoView
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.http import HttpResponse
 from django.contrib import messages
+from django.core.exceptions import PermissionDenied
 
 
 class View(DjangoView):
@@ -46,3 +52,8 @@ class MessagesView(View):
             )
 
         return result
+
+
+class BlockedView(View):
+    def dispatch(self, *args, **kwargs):
+        raise PermissionDenied

@@ -1,5 +1,5 @@
 shelfzilla
-==========
+===========
 
 ## Prepare environment for local development
 
@@ -21,3 +21,4 @@ fab runserver
 - grunt-cli installed as global resource
 - bower installed as a global resource
 
+Enjoy!

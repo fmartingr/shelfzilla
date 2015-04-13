@@ -1,7 +1,6 @@
 {% extends '_layout.html' %}
 {% load i18n %}
 
-{% block navigation_bar %}{% endblock %}
 {% block page_title %}{{ block.super }} | Login{% endblock %}
 
 {% block extra_js %}
@@ -19,27 +18,40 @@ $(function(){
 {% endblock %}
 
 {% block main_content %}
-<div class="panel panel-primary panel-login">
-    <div class="panel-heading">
-        <h3 class="panel-title">{% trans "Access the site" %}</h3>
-    </div>
-    <div class="panel-body">
-        <form method="post" class="form">
-            {% csrf_token %}
-            {% for field in login_form %}
-                {% for error in field.errors %}
-                <p><span class="label label-danger">{{ error|striptags }}</span></p>
-                {% endfor %}
-                <div class="form-group {% if field.errors %}has-error has-feedback{% endif %}">
-                    <label class="control-label">{{ field.label }}</label>
-                    <input type="{{ field.field.widget.input_type }}" name="{{ field.html_name }}" class="form-control {{ field.classes }}" />
-                    {% if field.errors %}
-                    <span class="glyphicon glyphicon-remove form-control-feedback"></span>
-                    {% endif %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{% trans "Access the site" %}</h3>
                 </div>
-            {% endfor %}
-            <button class="btn btn-primary" type="submit">{% trans "Login" %}</button>
-        </form>
+                <div class="panel-body">
+                    <form method="post" class="form">
+                        {% csrf_token %}
+                        {% for field in login_form %}
+                            {% for error in field.errors %}
+                            <p><span class="label label-danger">{{ error|striptags }}</span></p>
+                            {% endfor %}
+                            <div class="form-group {% if field.errors %}has-error has-feedback{% endif %}">
+                                <label class="control-label">{{ field.label }}</label>
+                                <input type="{{ field.field.widget.input_type }}" name="{{ field.html_name }}" class="form-control {{ field.classes }}" />
+                                {% if field.errors %}
+                                <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                        <div class="text-center">
+                            <button class="btn btn-primary" type="submit">{% trans "Login" %}</button>
+                        </div>
+                    </form>
+                    <hr />
+                    <div class="text-center">
+                        <a href="{% url 'register' %}">¿No tienes cuenta? Regístrate aquí</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

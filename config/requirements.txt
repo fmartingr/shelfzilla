@@ -1,5 +1,5 @@
 # Base
-Django==1.7.1
+Django==1.7.2
 
 # Admin
 django-suit==0.2.11
@@ -9,6 +9,9 @@ django-import-export==0.2.6
 
 # Fixes
 
+# Mailing
+django-mailgun==0.2.2
+
 # Statics
 django-compressor==1.4
 
@@ -17,7 +20,13 @@ dj-database-url==0.3.0
 psycopg2==2.5.4
 
 # Files
+django-mptt==0.6.1
 django-filer==0.9.8
 
 # Blog
 django-ckeditor-updated==4.4.4
+
+# API
+djoser==0.2.1
+djangorestframework==3.1.1
+django-cors-headers==1.0.0

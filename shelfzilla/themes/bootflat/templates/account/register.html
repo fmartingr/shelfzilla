@@ -1,0 +1,55 @@
+{% extends "_layout.html" %}
+{% load i18n %}
+
+{% block main_content %}
+<div class="container">
+    <div class="alert alert-info text-center">
+        Para registrarte en Shelfzilla necesitarás un <strong>código de invitación</strong>. Los registros abiertos no están disponibles por el momento.<br />
+        Permanece atento a nuestras redes sociales, ¡pronto empezaremos a repatir!
+    </div>
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6" >
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h1 class="panel-title">{% trans "Register" %}</h1>
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal" role="form" method="post" action=".">
+                        {% csrf_token %}
+                        {% for field in form %}
+                        <div class="has-error text-right">
+                            {% for error in field.errors %}
+                                <span class="badge badge-danger">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        <div class="form-group {% if field.errors %}has-error has-feedback{% endif %}">
+                            <label for="input_{{ field.name }}" class="col-sm-4 control-label">
+                                {{ field.label }}
+                            </label>
+                            <div class="col-sm-8">
+                                <input type="{{ field.field.widget.input_type }}"
+                                       class="form-control"
+                                       id="input_{{ field.name }}"
+                                       name="{{ field.html_name }}"
+                                       value="{% if field.field.widget.input_type != "password" and field.value %}{{ field.value }}{% endif %}">
+                                   {% if field.errors %}
+                                   <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                                   {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                        <div class="form-group">
+                            <div class="col-sm-12 text-right">
+                                <button type="submit"
+                                        class="btn btn-primary">
+                                        {% trans "Register" %}</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

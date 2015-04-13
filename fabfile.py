@@ -54,7 +54,7 @@ def setup_virtualenv():
     Creates or updates a virtualenv
     """
     print(yellow('Create virtualenv'))
-    local('virtualenv-2.7 .virtualenv')
+    local('virtualenv .virtualenv')
 
     with virtualenv():
         print(yellow('Installing requirements'))

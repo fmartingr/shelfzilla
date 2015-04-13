@@ -14,6 +14,7 @@ urlpatterns = patterns(
     url(r'^$', include('shelfzilla.apps.homepage.urls')),
     url(r'^', include('shelfzilla.apps.landing.urls')),
     url(r'^', include('shelfzilla.apps.account.urls')),
+    url(r'^faqs/', include('shelfzilla.apps.faq.urls')),
     url(r'^blog/', include('shelfzilla.apps.blog.urls', namespace='blog')),
     url(r'^series/', include('shelfzilla.apps.manga.urls.series')),
     url(r'^volumes/', include('shelfzilla.apps.manga.urls.volumes')),
@@ -21,6 +22,14 @@ urlpatterns = patterns(
     url(r'^search/', include('shelfzilla.apps.manga.urls.search')),
     url(r'^_admin/', include('shelfzilla.apps._admin.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    # url(r'^feedback/',
+    #     include('object_feedback.urls', namespace="object_feedback")),
+)
+
+# API
+urlpatterns += patterns(
+    '',
+    url(r'^api/v1/', include('shelfzilla.urls_api', namespace='api')),
 )
 
 if settings.DEBUG:

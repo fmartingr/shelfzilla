@@ -1,4 +1,9 @@
 {% load i18n %}
+
+{% if original %}
+<a class="btn btn-info pull-right" href="{% url "admin:manga_volume_add" %}?series={{ original.pk }}">{% trans "Add" %} {% trans "Volume" %}</a>
+<br />
+<br />
 <table class="table table-striped table-bordered table-hover table-condensed">
 <thead>
     <th>&nbsp;</th>
@@ -15,4 +20,4 @@
     {% endfor %}
 </tbody>
 </table>
-
+{% endif %}

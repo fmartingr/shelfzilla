@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-09 01:10+0200\n"
-"PO-Revision-Date: 2014-09-09 01:11+0200\n"
-"Last-Translator: Felipe Martin <fmartingr@me.com>\n"
+"POT-Creation-Date: 2015-01-26 14:45+0100\n"
+"PO-Revision-Date: 2015-01-26 14:45+0100\n"
+"Last-Translator:   <admin@admin.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,18 +18,6 @@ msgstr ""
 "Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.7.4\n"
-
-#: models.py:7
-msgid "For review"
-msgstr "Para revisión"
-
-#: models.py:9
-msgid "Review comment"
-msgstr "Comentario de revisión"
-
-#: models.py:11
-msgid "Hidden"
-msgstr "Oculto"
 
 #: apps/_admin/views.py:44 apps/_admin/views.py:81
 msgid "Volume series changed"
@@ -43,6 +31,160 @@ msgstr "No se encontró la URL de la carátula para actualizar."
 msgid "Volume not found."
 msgstr "Volumen no encontrado."
 
+#: apps/account/admin.py:85
+#, fuzzy
+#| msgid "Person"
+msgid "Personal info"
+msgstr "Persona"
+
+#: apps/account/admin.py:87
+msgid "Permissions"
+msgstr "Permisos"
+
+#: apps/account/admin.py:88
+msgid "Information"
+msgstr "Información"
+
+#: apps/account/forms.py:13 apps/account/models.py:40
+msgid "Username"
+msgstr "Usuario"
+
+#: apps/account/forms.py:15 apps/account/forms.py:55
+msgid "Password"
+msgstr "Contraseña"
+
+#: apps/account/forms.py:37
+msgid "This account is disabled."
+msgstr "Esta cuenta está desactivada."
+
+#: apps/account/forms.py:41
+msgid "User with those credentials was not found."
+msgstr "No se ha encontrado un usuario con esos credenciales."
+
+#: apps/account/forms.py:57
+msgid "Repeat password"
+msgstr "Repetir contraseña"
+
+#: apps/account/forms.py:59
+msgid "Invitation code"
+msgstr "Código de invitacion"
+
+#: apps/account/forms.py:75
+msgid "Invitation code is not valid"
+msgstr "El código de invitación no es válido"
+
+#: apps/account/models.py:19
+msgid "Male"
+msgstr "Hombre"
+
+#: apps/account/models.py:20
+msgid "Female"
+msgstr "Mujer"
+
+#: apps/account/models.py:32
+msgid "Email address"
+msgstr "Correo electrónico"
+
+#: apps/account/models.py:36
+msgid "An user email that should be verified."
+msgstr "Una dirección de correo electrónico que será verificada"
+
+#: apps/account/models.py:48
+msgid "First name"
+msgstr "Nombre"
+
+#: apps/account/models.py:53
+msgid "Last name"
+msgstr "Apellidos"
+
+#: apps/account/models.py:58
+msgid "Birthdate"
+msgstr "Fecha de nacimiento"
+
+#: apps/account/models.py:65
+msgid "Gender"
+msgstr "Sexo"
+
+#: apps/account/models.py:73
+msgid "Date joined"
+msgstr "Fecha de registro"
+
+#: apps/account/models.py:79
+msgid "Active status"
+msgstr ""
+
+#: apps/account/models.py:81
+msgid ""
+"Designates whether this user should be treated as active. Unselect this "
+"instead of deleting accounts."
+msgstr ""
+
+#: apps/account/models.py:86
+msgid "Staff status"
+msgstr ""
+
+#: apps/account/models.py:88
+msgid "Designates whether the user can log into this admin site."
+msgstr ""
+
+#: apps/account/models.py:103
+msgid "User"
+msgstr "Usuario"
+
+#: apps/account/models.py:143 apps/manga/models.py:232
+msgid "Code"
+msgstr "Código"
+
+#: apps/account/models.py:144
+msgid "Number of uses"
+msgstr "Número de usos"
+
+#: apps/account/models.py:147
+msgid "Expires"
+msgstr "Expira"
+
+#: apps/account/models.py:149
+msgid "Active"
+msgstr "Activo"
+
+#: apps/account/models.py:152
+msgid "Access code"
+msgstr "Código de acceso"
+
+#: apps/account/models.py:153
+msgid "Access codes"
+msgstr "Códigos de acceso"
+
+#: apps/account/views.py:48
+msgid "Logged in successfully."
+msgstr "Has accedido correctamente."
+
+#: apps/account/views.py:67
+msgid "Logged out successfully"
+msgstr "Sesión finalizada."
+
+#: apps/account/views.py:134
+msgid "Password changed."
+msgstr "Contraseña cambiada."
+
+#: apps/account/views.py:165
+msgid "Welcome to the community! :)"
+msgstr "¡Bienvenido a la comunidad! :)"
+
+#: apps/blog/admin.py:24 apps/manga/admin.py:61 apps/manga/admin.py:109
+#: apps/manga/admin.py:154 apps/manga/admin.py:202 apps/manga/admin.py:229
+#: apps/manga/admin.py:254
+msgid "General"
+msgstr "General"
+
+#: apps/blog/admin.py:25
+msgid "Content"
+msgstr "Contenido"
+
+#: apps/blog/templatetags/datetime.py:17
+msgid "%B %e, %Y"
+msgstr ""
+
 #: apps/config/models.py:13 apps/config/models.py:16 apps/config/models.py:17
 msgid "Site Configuration"
 msgstr "Configuración del sitio"
@@ -51,6 +193,10 @@ msgstr "Configuración del sitio"
 msgid "Social Configuration"
 msgstr "Configuración social"
 
+#: apps/mailing/emails.py:10
+msgid "Bienvenido a Shelfzilla"
+msgstr ""
+
 #: apps/manga/admin.py:44
 msgid "Items marked for review"
 msgstr "Marcar items para revisión"
@@ -58,11 +204,6 @@ msgstr "Marcar items para revisión"
 #: apps/manga/admin.py:49
 msgid "Items unmarked for review"
 msgstr "Desmarcar items para revisión"
-
-#: apps/manga/admin.py:61 apps/manga/admin.py:109 apps/manga/admin.py:154
-#: apps/manga/admin.py:202 apps/manga/admin.py:229 apps/manga/admin.py:254
-msgid "General"
-msgstr "General"
 
 #: apps/manga/admin.py:62 apps/manga/admin.py:111 apps/manga/admin.py:156
 #: apps/manga/admin.py:203 apps/manga/admin.py:255
@@ -75,7 +216,7 @@ msgid "Advanced"
 msgstr "Avanzado"
 
 #: apps/manga/admin.py:83 apps/manga/models.py:134 apps/manga/models.py:135
-#: themes/bootflat/templates/_layout.html:40
+#: themes/bootflat/templates/_layout.html:39
 #: themes/bootflat/templates/homepage/home.html:72
 #: themes/bootflat/templates/manga/publishers/detail.html:19
 #: themes/bootflat/templates/manga/series/list.html:4
@@ -120,7 +261,7 @@ msgstr "URL"
 msgid "Publisher"
 msgstr "Editorial"
 
-#: apps/manga/models.py:54 themes/bootflat/templates/_layout.html:43
+#: apps/manga/models.py:54 themes/bootflat/templates/_layout.html:42
 #: themes/bootflat/templates/manga/publishers/list.html:4
 #: themes/bootflat/templates/manga/series/detail.html:55
 msgid "Publishers"
@@ -206,10 +347,6 @@ msgstr "Persona"
 msgid "Persons"
 msgstr "Personas"
 
-#: apps/manga/models.py:232
-msgid "Code"
-msgstr "Código"
-
 #: apps/manga/models.py:239
 #: themes/bootflat/templates/manga/series/detail.html:106
 msgid "Language"
@@ -219,7 +356,7 @@ msgstr "Idioma"
 msgid "Languages"
 msgstr "Idiomas"
 
-#: apps/manga/models.py:250 apps/manga/models.py:273 apps/manga/models.py:296
+#: apps/manga/models.py:250 apps/manga/models.py:278 apps/manga/models.py:306
 msgid "Date"
 msgstr "Fecha"
 
@@ -228,32 +365,32 @@ msgstr "Fecha"
 msgid "%(volume)s added to collection"
 msgstr "%(volume)s añadido a la colección"
 
-#: apps/manga/models.py:261
+#: apps/manga/models.py:266
 msgid "have"
 msgstr "tiene"
 
-#: apps/manga/models.py:275
+#: apps/manga/models.py:280
 #, python-format
 msgid "%(volume)s wishlisted"
 msgstr "%(volume)s añadido a deseados"
 
-#: apps/manga/models.py:284
+#: apps/manga/models.py:294
 msgid "wants"
 msgstr "quiere"
 
-#: apps/manga/models.py:298
+#: apps/manga/models.py:308
 #, python-format
 msgid "%(volume)s marked as read"
 msgstr "%(volume)s marcado como leído"
 
-#: apps/manga/models.py:307
+#: apps/manga/models.py:322
 msgid "have read"
 msgstr "ha leído"
 
 #: apps/manga/views/search.py:11 apps/manga/views/search.py:13
-#: themes/bootflat/templates/_layout.html:80
 #: themes/bootflat/templates/_admin/volumes/includes/cover.html:6
 #: themes/bootflat/templates/_admin/volumes/includes/cover.html:15
+#: themes/bootflat/templates/_layout.html:83
 msgid "Search"
 msgstr "Buscar"
 
@@ -285,31 +422,19 @@ msgstr "{} marcado como no leído"
 msgid "{} marked as read!"
 msgstr "¡{} marcado como leído!"
 
-#: apps/users/forms.py:7
-msgid "Username"
-msgstr "Usuario"
+#: models.py:7
+msgid "For review"
+msgstr "Para revisión"
 
-#: apps/users/forms.py:9
-msgid "Password"
-msgstr "Contraseña"
+#: models.py:9
+msgid "Review comment"
+msgstr "Comentario de revisión"
 
-#: apps/users/forms.py:31
-msgid "This account is disabled."
-msgstr "Esta cuenta está desactivada."
+#: models.py:11
+msgid "Hidden"
+msgstr "Oculto"
 
-#: apps/users/forms.py:35
-msgid "User with those credentials was not found."
-msgstr "No se ha encontrado un usuario con esos credenciales."
-
-#: apps/users/views.py:44
-msgid "Logged in successfully."
-msgstr "Has accedido correctamente."
-
-#: apps/users/views.py:63
-msgid "Logged out successfully"
-msgstr "Sesión finalizada."
-
-#: settings/base.py:128
+#: settings/base.py:131
 msgid "Spanish"
 msgstr "Español"
 
@@ -329,25 +454,6 @@ msgstr ""
 "Hubo un error interno del servidor. Puede ser temporal, pero si el problema "
 "persiste, contacta con nosotros."
 
-#: themes/bootflat/templates/_layout.html:27
-msgid "Toggle navigation"
-msgstr "Mostrar/Ocultar navegación"
-
-#: themes/bootflat/templates/_layout.html:49
-#: themes/bootflat/templates/_layout.html:57
-#: themes/bootflat/templates/users/profile-pjax.html:4
-#: themes/bootflat/templates/users/profile.html:4
-msgid "Profile"
-msgstr "Perfil"
-
-#: themes/bootflat/templates/_layout.html:62
-msgid "Logout"
-msgstr "Cerrar sesión"
-
-#: themes/bootflat/templates/_layout.html:69
-msgid "Log in"
-msgstr "Entrar"
-
 #: themes/bootflat/templates/_admin/manga/series/includes/volumes.html:13
 msgid "Edit"
 msgstr "Editar"
@@ -361,6 +467,7 @@ msgid "Change to: "
 msgstr "Cambiar a:"
 
 #: themes/bootflat/templates/_admin/volumes/change_series.html:28
+#: themes/bootflat/templates/account/main.html:61
 msgid "Change"
 msgstr "Cambiar"
 
@@ -371,6 +478,41 @@ msgstr "Carátula actual:"
 #: themes/bootflat/templates/_admin/volumes/includes/cover.html:65
 msgid "Update with this"
 msgstr "Actualizar con esta"
+
+#: themes/bootflat/templates/_layout.html:27
+msgid "Toggle navigation"
+msgstr "Mostrar/Ocultar navegación"
+
+#: themes/bootflat/templates/_layout.html:47
+#: themes/bootflat/templates/_layout.html:55
+#: themes/bootflat/templates/users/profile-pjax.html:4
+#: themes/bootflat/templates/users/profile.html:4
+msgid "Profile"
+msgstr "Perfil"
+
+#: themes/bootflat/templates/_layout.html:60
+msgid "Logout"
+msgstr "Cerrar sesión"
+
+#: themes/bootflat/templates/_layout.html:67
+#: themes/bootflat/templates/account/register.html:15
+#: themes/bootflat/templates/account/register.html:46
+msgid "Register"
+msgstr "Registrarse"
+
+#: themes/bootflat/templates/_layout.html:72
+msgid "Log in"
+msgstr "Entrar"
+
+#: themes/bootflat/templates/account/_layout.html:4
+msgid "Account"
+msgstr ""
+
+#: themes/bootflat/templates/account/main.html:31
+#, fuzzy
+#| msgid "Change to: "
+msgid "Change password"
+msgstr "Cambiar a:"
 
 #: themes/bootflat/templates/homepage/home.html:10
 msgid "Upcoming volumes"
@@ -397,6 +539,16 @@ msgstr "Estadísticas"
 msgid "Users"
 msgstr "Usuarios"
 
+#: themes/bootflat/templates/manga/publishers/detail.html:10
+#: themes/bootflat/templates/manga/series/detail.html:10
+#: themes/bootflat/templates/manga/series/includes/volume.html:52
+msgid "Edit in admin"
+msgstr "Editar en el admin"
+
+#: themes/bootflat/templates/manga/publishers/detail.html:26
+msgid "Homepage"
+msgstr "Página principal"
+
 #: themes/bootflat/templates/manga/search.html:8
 msgid "Looking for..."
 msgstr "Buscando..."
@@ -406,16 +558,6 @@ msgstr "Buscando..."
 #: themes/bootflat/templates/manga/series/list.html:58
 msgid "No results"
 msgstr "Sin resultados"
-
-#: themes/bootflat/templates/manga/publishers/detail.html:10
-#: themes/bootflat/templates/manga/series/detail.html:10
-#: themes/bootflat/templates/manga/series/includes/volume.html:47
-msgid "Edit in admin"
-msgstr "Editar en el admin"
-
-#: themes/bootflat/templates/manga/publishers/detail.html:26
-msgid "Homepage"
-msgstr "Página principal"
 
 #: themes/bootflat/templates/manga/series/detail.html:26
 msgid "Art"
@@ -443,20 +585,20 @@ msgstr "Todos"
 msgid "Filter"
 msgstr "Filtrar"
 
-#: themes/bootflat/templates/manga/series/list.html:17
-msgid "other"
-msgstr "otros"
-
-#: themes/bootflat/templates/manga/series/includes/volume.html:39
+#: themes/bootflat/templates/manga/series/includes/volume.html:44
 #, python-format
 msgid "%(pages)s pages"
 msgstr "%(pages)s páginas"
 
-#: themes/bootflat/templates/users/login.html:24
+#: themes/bootflat/templates/manga/series/list.html:17
+msgid "other"
+msgstr "otros"
+
+#: themes/bootflat/templates/users/login.html:27
 msgid "Access the site"
 msgstr "Accede al sitio"
 
-#: themes/bootflat/templates/users/login.html:41
+#: themes/bootflat/templates/users/login.html:45
 msgid "Login"
 msgstr "Entrar"
 
@@ -468,10 +610,6 @@ msgstr "Lista de deseados"
 #: themes/bootflat/templates/users/profile.html:46
 msgid "Edit my profile"
 msgstr "Editar mi perfil"
-
-#: themes/bootflat/templates/users/profile.html:50
-msgid "My preferences"
-msgstr "Mis preferencias"
 
 #: themes/bootflat/templates/users/profile/achievements.html:4
 msgid "Achievements"
@@ -493,6 +631,9 @@ msgstr "Volúmenes"
 #: themes/bootflat/templates/users/profile/summary.html:26
 msgid "Volumes wishlisted"
 msgstr "Deseados"
+
+#~ msgid "My preferences"
+#~ msgstr "Mis preferencias"
 
 #~ msgid "Requires review"
 #~ msgstr "Requiere revisión"

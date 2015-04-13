@@ -15,6 +15,9 @@
     {% endblock %}
     {% endcompress %}
     <title>{% block page_title %}ShelfZilla{% endblock %}</title>
+    {% if social_config.google_analytics %}
+    {% include "_includes/google_analytics.html" %}
+    {% endif %}
 </head>
 <body>
     {% block navigation_bar %}
@@ -34,7 +37,6 @@
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="navbar-collapse">
-                    {% if user.is_authenticated %}
                     <ul class="nav navbar-nav">
                         <li data-pjax-nav {% if navigation.section == "series" %}class="active"{% endif %}>
                             <a data-pjax href="{% url "series.list" %}">{% trans "Series" %}</a>
@@ -42,8 +44,12 @@
                         <li data-pjax-nav {% if navigation.section == "publishers" %}class="active"{% endif %}>
                             <a data-pjax href="{% url 'publishers.list' %}">{% trans "Publishers" %}</a>
                         </li>
+                        <!--
+                        <li data-pjax-nav {% if navigation.section == "faqs" %}class="active"{% endif %}>
+                            <a data-pjax href="{% url 'faq.list' %}">{% trans "Faq" %}</a>
+                        </li>
+                        -->
                     </ul>
-                    {% endif %}
                     <ul class="nav navbar-nav navbar-right">
                         {% if user.is_authenticated %}
                         <li><a href="{% url 'profile' user.username %}" title="{% trans "Profile" %}" data-toggle="tooltip" data-placement="bottom">
@@ -64,6 +70,11 @@
                             </a>
                         </li>
                         {% else %}
+                        <li>
+                            <a href="{% url "register" %}">
+                                <i class="glyphicon glyphicon-pencil"></i> {% trans "Register" %}
+                            </a>
+                        </li>
                         <li>
                             <a href="{% url "login" %}">
                                 <i class="glyphicon glyphicon-log-in"></i> {% trans "Log in" %}
@@ -100,7 +111,7 @@
     var USE_PJAX = {{ site_config.use_pjax|lower }};
     </script>
     <script type="text/javascript" src="{% static "bower/jquery/dist/jquery.js" %}"></script>
-    <script type="text/javascript" src="{% static "bower/Bootflat/js/bootstrap.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "bower/bootflatv2/js/bootstrap.min.js" %}"></script>
     <script type="text/javascript" src="{% static "bower/jquery-pjax/jquery.pjax.js" %}"></script>
     <script type="text/javascript" src="{% static "bower/nprogress/nprogress.js" %}"></script>
     <script type="text/javascript" src="{% static "bower/toastr/toastr.js" %}"></script>
@@ -112,10 +123,6 @@
     {% endcompress %}
     {% if not USER_CONFIG.use_pjax %}
     <script type="text/javascript">$(function() { window.updateMessages(); });</script>
-    {% endif %}
-
-    {% if social_config.google_analytics %}
-    {% include "_includes/google_analytics.html" %}
     {% endif %}
 </body>
 </html>

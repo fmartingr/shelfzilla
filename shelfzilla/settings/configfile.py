@@ -14,6 +14,17 @@ with open(os.environ['APP_CONFIGFILE']) as conffile:
 # Installed Apps
 INSTALLED_APPS += tuple(config['global']['installed_apps'])
 
+# Middleware classes
+if 'middleware_classes' in config['global']:
+    if 'prepend' in config['global']['middleware_classes']:
+        MIDDLEWARE_CLASSES = MIDDLEWARE_CLASSES + tuple(
+            config['global']['middleware_classes']['prepend']
+        )
+    if 'append' in config['global']['middleware_classes']:
+        MIDDLEWARE_CLASSES += tuple(
+            config['global']['middleware_classes']['append']
+        )
+
 # Database
 DATABASES = {
     'default': dj_database_url.parse(config['global']['database_url'])
@@ -75,19 +86,49 @@ FILER_STORAGES = {
 # Logging
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': False,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+    },
     'handlers': {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
             'filename': config['log']['logfile'],
         },
+        'opbeat': {
+            'level': 'WARNING',
+            'class': 'opbeat.contrib.django.handlers.OpbeatHandler',
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        }
     },
     'loggers': {
         'django.request': {
             'handlers': ['file'],
             'level': 'DEBUG',
             'propagate': True,
+        },
+        'django.db.backends': {
+            'level': 'ERROR',
+            'handlers': ['console'],
+            'propagate': False,
+        },
+        'shelfzilla': {
+            'level': 'WARNING',
+            'handlers': ['opbeat'],
+            'propagate': False,
+        },
+        # Log errors from the Opbeat module to the console (recommended)
+        'opbeat.errors': {
+            'level': 'ERROR',
+            'handlers': ['console'],
+            'propagate': False,
         },
     },
 }

@@ -65,10 +65,18 @@ INSTALLED_APPS = (
     'shelfzilla.apps._admin',
     'shelfzilla.apps.config',
     'shelfzilla.apps.homepage',
-    'shelfzilla.apps.landing',
+    # 'shelfzilla.apps.landing',
+    'shelfzilla.apps.mailing',
     'shelfzilla.apps.manga',
     'shelfzilla.apps.blog',
+    'shelfzilla.apps.faq',
     'shelfzilla.apps.pjax',
+
+    # API
+    'corsheaders',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'djoser',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -93,6 +101,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 MIDDLEWARE_CLASSES = (
     'reversion.middleware.RevisionMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -255,7 +264,7 @@ SUIT_CONFIG = {
         {
             'label': 'Authorization',
             'icon': 'icon-lock',
-            'models': ('account.user', 'auth.group')
+            'models': ('account.user', 'auth.group', 'account.accesscode', )
         },
         {
             'app': 'config',
@@ -270,6 +279,11 @@ SUIT_CONFIG = {
         {
             'app': 'manga',
             'label': 'Manga',
+            'icon': 'icon-book',
+        },
+        {
+            'app': 'faq',
+            'label': 'FAQs',
             'icon': 'icon-book',
         },
         {
@@ -296,3 +310,24 @@ CKEDITOR_CONFIGS = {
 #   AUTH
 #
 AUTH_USER_MODEL = 'account.User'
+
+
+#
+#   API
+#
+CORS_ORIGIN_ALLOW_ALL = True
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+}
+
+DJOSER = {
+    'DOMAIN': 'shelfzilla.com',
+    'SITE_NAME': 'Shelfzilla',
+    'PASSWORD_RESET_CONFIRM_URL': '#/password/reset/confirm/{uid}/{token}',
+    'ACTIVATION_URL': '#/activate/{uid}/{token}',
+    'LOGIN_AFTER_ACTIVATION': True,
+    'SEND_ACTIVATION_EMAIL': False,
+}
