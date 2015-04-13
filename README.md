@@ -1,5 +1,5 @@
 shelfzilla
-==========
+===========
 
 ## Prepare environment for local development
 
