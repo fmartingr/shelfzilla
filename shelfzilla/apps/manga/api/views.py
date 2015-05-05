@@ -5,8 +5,18 @@ from rest_framework import viewsets, filters
 from rest_framework.permissions import IsAuthenticated
 
 # own
-from .serializers import VolumeSerializer
+from .serializers import VolumeSerializer, PublisherSerializer
 from ..models import Volume
+
+
+class PublishersViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    """
+    serializer_class = PublisherSerializer
+    paginate_by = 20
+
+    filter_backends = (filters.SearchFilter, )
+    search_fields = ('name', )
 
 
 class VolumesViewSet(viewsets.ReadOnlyModelViewSet):
