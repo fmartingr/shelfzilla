@@ -1,0 +1,136 @@
+{% extends '_layout.html'|pjax:request %}
+{% load i18n staticfiles field_tags %}
+
+{% block page_title %}{{ block.super }} | {{ item.name }}{% endblock %}
+
+{% block javascript %}
+{{ block.super }}
+<script type="text/javascript" src="{% static "bower/select2/dist/js/select2.js" %}"></script>
+<script type="text/javascript">
+    $(function() {
+        $('select').select2();
+    });
+</script>
+{% endblock %}
+
+{% block stylesheets %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static "bower/select2/dist/css/select2.css" %}" media="screen" title="no title" charset="utf-8">
+{% endblock %}
+
+{% block main_content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="panel panel-warning">
+                {% if item.last_volume_cover %}
+                <div class="panel-body text-center">
+                    <img src="{{ item.last_volume_cover.url }}" class="max-width-80" />
+                </div>
+                {% endif %}
+            </div>
+            {% if item.art.count %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title text-center">{% trans "Art" %}</h2>
+                </div>
+                <ul class="list-group">
+                    {% for person in item.art.all %}
+                    <li class="list-group-item">
+                        {{ person.name }}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            {% if item.story.count %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title text-center">{% trans "Story" %}</h2>
+                </div>
+                <ul class="list-group">
+                    {% for person in item.story.all %}
+                    <li class="list-group-item">
+                        {{ person.name }}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title text-center">{% trans "Publishers" %}</h2>
+                </div>
+                <ul class="list-group">
+                    {% if item.original_publisher %}
+                    <li class="list-group-item">
+                        <strong>{% trans "Original publisher" %}:</strong>
+                        {% comment %}
+                        <a href="{{ publisher.get_absolute_url }}" data-pajax>{{ item.original_publisher.name }}</a>
+                        {% endcomment %}
+                        <span class="pull-right"><i>{{ item.original_publisher.name }}</i></span>
+                    </li>
+                    {% endif %}
+                    {% if item.publishers.count > 0 %}
+                        {% for publisher in item.publishers.all %}
+                        <li class="list-group-item">
+                            <h4 class="list-group-item-heading">{{ publisher.publisher.name }}</h4>
+                            <!--<span class="badge badge-default">{{ publisher.volumes.count }}</span> -->
+                            <span class="badge badge-{{ publisher.get_status_display_class }}">{{ publisher.get_status_display }}</span>
+                            <div><a href="{{ publisher.publisher.get_absolute_url }}" data-pajax>{% trans "More info" %} &raquo;</a></div>
+                        </li>
+                        {% endfor %}
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h1 class="panel-title panel-title-alt text-center">{{ item.name }}</h1>
+                </div>
+            </div>
+
+
+            {% if not success %}
+            <div>
+                <div class="alert alert-info">
+                    <p>¡Oooops! ¡Parece que hay un tomo que tú tienes y nosotros no tenemos registrado!</p>
+                    <p>Nos harías un gran favor si introduces la información que poseas de dicho tomo aquí para así poder
+                        ayudar a otras personas de la comunidad.</p>
+                </div>
+                <div class="well">
+                    <form method="post" class="form">
+                        {% csrf_token %}
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                            <p><span class="label label-danger">{{ error|striptags }}</span></p>
+                            {% endfor %}
+                            <div class="form-group {% if field.errors %}has-error has-feedback{% endif %}">
+                                <label class="control-label">{{ field.label }}</label>
+                                {{ field|add_class:'form-control' }}
+                                {% if field.errors %}
+                                <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                        <div class="text-center">
+                            <button class="btn btn-primary" type="submit">{% trans "Submit for review" %}</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            {% else %}
+            <div class="alert alert-success text-center">
+                <h4>¡Muchas gracias por colaborar con Shelfzilla!</h4>
+                <p>Tu tomo será revisado por nuestro staff para comprobar que los datos son correctos y una vez
+                   sea aceptado aparecerá en la web, y como es natural, ¡en tu colección!</p>
+                <a class="btn btn-success" href="{% url 'series.detail' item.pk item.slug %}">Volver a {{ item.name }}</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

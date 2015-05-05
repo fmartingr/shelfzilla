@@ -171,7 +171,7 @@ class VolumeAdmin(ImportExportModelAdmin, reversion.VersionAdmin):
         }),
         (None, {
             'classes': ('suit-tab suit-tab-review',),
-            'fields': ('for_review', 'for_review_comment')
+            'fields': ('for_review', 'added_by', 'for_review_comment')
         }),
         (None, {
             'classes': ('suit-tab suit-tab-advanced',),

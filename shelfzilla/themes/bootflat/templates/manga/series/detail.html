@@ -5,12 +5,15 @@
 
 {% block main_content %}
 <div class="container">
-    {% if USER_IS_STAFF and USER_CONFIG.show_admin_links %}
     <div class="text-right">
+    {% if USER_IS_STAFF and USER_CONFIG.show_admin_links %}
         <a class="btn btn-info" href="{% url 'admin:manga_series_change' item.pk %}">{% trans "Edit in admin" %}</a>
+    {% endif %}
+    {% if user.is_authenticated %}
+        <p>¿No encuentras el tomo que tienes? <a class="btn btn-info" href="{% url 'series.suggest-volume' item.pk item.slug %}">Añádelo a Shelfzila</a></p>
+    {% endif %}
     </div>
     <br />
-    {% endif %}
     <div class="row">
         <div class="col-md-3">
             <div class="panel panel-warning">
