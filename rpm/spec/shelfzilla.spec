@@ -38,6 +38,7 @@ find %{_gitdir} -depth -name .git -exec rm -rf {} \;
 # Make structure
 [ -d $RPM_BUILD_ROOT%{_app_dir} ] || mkdir -p $RPM_BUILD_ROOT%{_app_dir}
 [ -d $RPM_BUILD_ROOT%{_app_dir}/config ] || mkdir -p $RPM_BUILD_ROOT%{_app_dir}/config
+echo $RPM_BUILD_ROOT%{_init_path}
 [ -d $RPM_BUILD_ROOT%{_init_path} ] || mkdir -p $RPM_BUILD_ROOT%{_init_path}
 
 # Copy Source Code
