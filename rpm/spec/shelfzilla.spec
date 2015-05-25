@@ -38,7 +38,7 @@ find %{_gitdir} -depth -name .git -exec rm -rf {} \;
 # Make structure
 [ -d $RPM_BUILD_ROOT%{_app_dir} ] || mkdir -p $RPM_BUILD_ROOT%{_app_dir}
 [ -d $RPM_BUILD_ROOT%{_app_dir}/config ] || mkdir -p $RPM_BUILD_ROOT%{_app_dir}/config
-[ -d $RPM_BUILD_ROOTetc/init.d ] || mkdir -p $RPM_BUILD_ROOTetc/init.d
+[ -d $RPM_BUILD_ROOT%{_init_path} ] || mkdir -p $RPM_BUILD_ROOT%{_init_path}
 
 # Copy Source Code
 cp -r %{_gitdir}/shelfzilla $RPM_BUILD_ROOT%{_app_dir}
@@ -48,7 +48,7 @@ cp -r %{_gitdir}/*.json $RPM_BUILD_ROOT%{_app_dir}/
 cp -r %{_gitdir}/*.py $RPM_BUILD_ROOT%{_app_dir}/
 cp -f %{_gitdir}/.bowerrc $RPM_BUILD_ROOT%{_app_dir}/
 cp -r %{_gitdir}/gruntfile.coffee $RPM_BUILD_ROOT%{_app_dir}/
-cp -r %{_gitdir}/rpm/scripts/shelfzilla $RPM_BUILD_ROOTetc/init.d/
+cp -r %{_gitdir}/rpm/scripts/shelfzilla $RPM_BUILD_ROOT%{_init_path}
 
 # -------------------------------------------------------------------------------------------- #
 # post-install section:
