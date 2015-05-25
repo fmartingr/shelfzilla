@@ -55,6 +55,11 @@ cp -r %{_gitdir}/rpm/scripts/shelfzilla $RPM_BUILD_ROOT%{_init_path}
 # post-install section:
 # -------------------------------------------------------------------------------------------- #
 %post
+## Modify Init Script
+chmod 775 %{_init_path}/shelfzilla
+chkconfig --add shelfzilla
+chkconfig shelfzilla on
+
 ## Npm install
 cd %{_app_dir} && npm install --production
 
