@@ -56,25 +56,10 @@ class RegistrationForm(forms.ModelForm):
                                 widget=forms.PasswordInput)
     password2 = forms.CharField(label=_('Repeat password'),
                                 widget=forms.PasswordInput)
-    access_code = forms.CharField(label=_('Invitation code'), required=True)
 
     class Meta:
         model = models.User
         fields = ('email', 'username', )
-
-    def get_access_code(self):
-        try:
-            return models.AccessCode.objects.get(
-                code=self.cleaned_data['access_code'])
-        except models.AccessCode.DoesNotExist:
-            return False
-
-    def clean_access_code(self):
-        code = self.get_access_code()
-        if not code or (code and not code.usable):
-            raise forms.ValidationError(_('Invitation code is not valid'))
-
-        return self.cleaned_data['access_code']
 
     def clean_password2(self):
         # Check that the two password entries match
@@ -88,8 +73,6 @@ class RegistrationForm(forms.ModelForm):
         # Save the provided password in hashed format
         with transaction.atomic():
             user = super(RegistrationForm, self).save(commit=False)
-            access_code = self.get_access_code()
-            user.access_code = access_code
             user.set_password(self.cleaned_data["password1"])
             if commit:
                 user.save()
