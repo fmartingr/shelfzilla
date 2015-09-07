@@ -15,7 +15,7 @@ class HomepageView(View):
         # TOP 5
         data['TOP_5_COLLECTORS'] = get_user_model().objects.filter(pk__gt=1)\
             .annotate(num_volumes=Count('have_volumes'))\
-            .order_by('-num_volumes')[:5]
+            .order_by('-num_volumes')[:10]
 
         # Latest manga
         data['LATEST_MANGA_ADDED'] = Volume.objects\
